@@ -7,10 +7,6 @@
     {
       "path": "parkitect",
       "name": "server"
-    },
-    {
-      "name": "parkitect",
-      "path": "."
     }
   ],
   "settings": {
@@ -40,9 +36,6 @@
     },
     "files.associations": {
       "*.vue": "vue"
-    },
-    "[vue]": {
-      "editor.defaultFormatter": "Vue.volar"
     }
   }
 }
