@@ -1,0 +1,16 @@
+
+  {
+    "name": "parkitect",
+    "version": "1.0.0",
+    "scripts": {
+      "build": "npm run setup:server",
+      "setup:app": "npm run setup:server && npm run setup:client",
+      "setup:client": "cd parkitect.client && npm i",
+      "setup:server": "cd parkitect && npm i",
+      "start": "node parkitect/index.js"
+    },
+    "engines": {
+      "node": "^18.12.1"
+    }
+  }
+  
