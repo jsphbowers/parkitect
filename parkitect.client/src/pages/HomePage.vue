@@ -1,4 +1,21 @@
-<template></template>
+<template>
+  <div class="container-fluid">
+    <!-- SECTION search bar -->
+    <section class="row">
+      <div class="col"></div>
+    </section>
+
+    <!-- SECTION park cards -->
+    <section class="row">
+      <div class="col-4"></div>
+      <div class="col-4"></div>
+      <div class="col-4"></div>
+    </section>
+
+    <!-- SECTION about us -->
+    <section class="row"></section>
+  </div>
+</template>
 
 <script>
 import { onMounted } from "vue";
