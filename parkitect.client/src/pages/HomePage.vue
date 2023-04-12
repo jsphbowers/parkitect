@@ -58,6 +58,7 @@ export default {
 
     onMounted(() => {
       getParks()
+      getParkByParkCode('yell')
     })
     return {
       coverImages,
