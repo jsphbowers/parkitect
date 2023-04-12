@@ -85,35 +85,39 @@
         <div class="text-center p-2">
           <img class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-            alt="">
+            alt="water">
           <h5 class="py-2">Water</h5>
         </div>
         <div class="text-center p-2">
           <img class="filter-img selectable elevation-3"
-            src="https://images.unsplash.com/photo-1440993443326-9e9f5aea703a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVjcmVhdGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-            alt="water">
+            src="https://images.unsplash.com/photo-1532015917327-c7c46aa1d930?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGZpc2hpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+            alt="fishing">
           <h5 class="py-2">Fishing</h5>
         </div>
         <div class="text-center p-2">
           <img class="filter-img selectable elevation-3"
-            src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-            alt="">
+            src="https://images.unsplash.com/photo-1504807959081-3dafd3871909?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Z3VpZGV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+            alt="guided">
           <h5 class="py-2">Guided</h5>
         </div>
         <div class="text-center p-2">
           <img class="filter-img selectable elevation-3"
-            src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-            alt="">
+            src="https://images.unsplash.com/photo-1504851149312-7a075b496cc7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=405&q=80"
+            alt="camping">
           <h5 class="py-2">Camping</h5>
         </div>
         <div class="text-center p-2">
           <img class="filter-img selectable elevation-3"
-            src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-            alt="">
+            src="https://images.unsplash.com/photo-1607550295261-851fa60d8ed2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8eWVsbG93c3RvbmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+            alt="other">
           <h5 class="py-2">Other</h5>
         </div>
       </div>
+    </section>
 
+    <!-- SECTION Filtered ToDos -->
+
+    <section class="row">
 
     </section>
     <!-- SECTION footer -->
@@ -132,6 +136,7 @@ import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
 import { onMounted, computed, ref, watchEffect } from "vue";
 import { parksService } from "../services/ParksServices.js";
+import { AppState } from "../AppState.js";
 
 
 export default {
@@ -153,6 +158,7 @@ export default {
       getThingsToDo()
     })
     return {
+      parkToDo: computed(() => AppState.)
     }
   }
 }

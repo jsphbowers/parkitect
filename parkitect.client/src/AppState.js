@@ -12,5 +12,5 @@ export const AppState = reactive({
   /** @type {import('./models/ThingToDo.js').ThingToDo[]} */
   thingsToDo: [],
   /** @type {import('./models/ThingToDo.js').ThingToDo|null} */
-  thingToDo: null,
+  activeThingToDo: null,
 });
