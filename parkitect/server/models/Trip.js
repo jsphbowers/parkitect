@@ -8,4 +8,4 @@ export const TripSchema = new Schema({
   description: { type: String, maxLength: 1000 },
   coverImg: { type: String, maxLength: 1000 },
   joinCode: { type: String, required: true, minLength: 6, maxLength: 6 }
-})
+}, { timestamps: true, toJSON: { virtuals: true } })

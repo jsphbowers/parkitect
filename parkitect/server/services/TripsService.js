@@ -16,6 +16,11 @@ class TripsService {
     return trip
   }
 
+  async addTripPark(tripParkData) {
+    const tripPark = await dbContext.TripParks.create(tripParkData)
+    return tripPark
+  }
+
 }
 
 export const tripsService = new TripsService()

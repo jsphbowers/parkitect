@@ -7,4 +7,5 @@ export const TripThingToDoSchema = new Schema({
   tripId: { type: Schema.Types.ObjectId, required: true, ref: "Trip" },
   title: { type: String, required: true, minLength: 0, maxLength: 100 },
   activities: { type: Array, max: 500 }
-})
+}, { timestamps: true, toJSON: { virtuals: true } }
+)

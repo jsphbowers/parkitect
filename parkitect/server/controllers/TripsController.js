@@ -9,6 +9,7 @@ export class TripsController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createTrip)
       .get('/:tripId', this.getTripById)
+      .post('/:tripId/tripParks', this.addTripPark)
   }
 
   async createTrip(req, res, next) {
@@ -28,6 +29,18 @@ export class TripsController extends BaseController {
       const tripId = req.params.tripId
       const trip = await tripsService.getTripById(tripId)
       res.send(trip)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+
+  async addTripPark(req, res, next) {
+    try {
+      const tripParkData = req.body
+      tripParkData.tripId = req.params.tripId
+      const tripPark = await tripsService.addTripPark(tripParkData)
+      res.send(tripPark)
     } catch (error) {
       next(error)
     }
