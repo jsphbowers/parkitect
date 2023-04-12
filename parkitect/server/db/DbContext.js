@@ -9,7 +9,7 @@ class DbContext {
   Account = mongoose.model('Account', AccountSchema);
 
   TripThingToDo = mongoose.model('TripThingToDo', TripThingToDoSchema);
-  Trip = mongoose.model('Trip', TripSchema);
+  Trips = mongoose.model('Trip', TripSchema);
 }
 
 export const dbContext = new DbContext()
