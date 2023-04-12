@@ -2,7 +2,9 @@
   <div class="container-fluid">
     <!-- SECTION search bar -->
     <section class="row">
-      <div class="col"></div>
+      <div class="col p-0">
+        <img class="coverImg" :src="selectedImg" alt="nature">
+      </div>
     </section>
 
     <!-- SECTION park cards -->
@@ -18,13 +20,17 @@
 </template>
 
 <script>
-import { onMounted } from "vue";
+import { computed, onMounted } from "vue";
 import { parksService } from "../services/ParksServices.js";
 import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
 
 export default {
+  
   setup() {
+    const coverImages = ['src/assets/img/HomePagePics/picture1.jpg', 'src/assets/img/HomePagePics/picture2.jpg', 'src/assets/img/HomePagePics/picture3.jpg', 'src/assets/img/HomePagePics/picture4.jpg', 'src/assets/img/HomePagePics/picture5.jpg', 'src/assets/img/HomePagePics/picture6.jpg', 'src/assets/img/HomePagePics/picture7.jpg']
+
+
 
     async function getParks() {
       try {
@@ -53,7 +59,13 @@ export default {
     onMounted(() => {
       getParks()
     })
-    return {};
+    return {
+      coverImages,
+      selectedImg: computed(() => {
+        const randomIndex = Math.floor(Math.random()*coverImages.length)
+        return coverImages[randomIndex]
+      })
+    };
   },
 };
 </script>
@@ -65,17 +77,13 @@ export default {
   place-content: center;
   text-align: center;
   user-select: none;
-
-  .home-card {
-    width: 50vw;
-
-    > img {
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
-  }
 }
+
+
+  .coverImg {
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+    object-position: center;
+  }
 </style>
