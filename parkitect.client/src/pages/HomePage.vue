@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <!-- {{ parks }} -->
+</template>
 
 <script>
 import { onMounted } from "vue";
@@ -35,6 +37,7 @@ export default {
 
     onMounted(() => {
       getParks()
+      getParkByParkCode('yell')
     })
     return {};
   },
@@ -52,7 +55,7 @@ export default {
   .home-card {
     width: 50vw;
 
-    > img {
+    >img {
       height: 200px;
       max-width: 200px;
       width: 100%;

@@ -1,5 +1,6 @@
 import { AppState } from "../AppState.js";
 import { Park } from "../models/Park.js";
+import { ThingToDo } from "../models/ThingToDo.js";
 import { logger } from "../utils/Logger.js";
 import { npsApi } from "./AxiosService.js";
 
@@ -15,9 +16,16 @@ export class ParksService {
 
   async getParkByParkCode(parkCode) {
     const res = await npsApi.get(`/parks?parkCode=${parkCode}`);
-    // logger.log("Getting park by park code", res.data);
-    AppState.activePark =  res.data.data.map((ap) => new Park(ap))
-    // logger.log("getting park by park code from appState", AppState.activePark);
+    logger.log("Getting park by park code", res.data);
+    AppState.activePark = res.data.data.map((ap) => new Park(ap))
+    logger.log("getting park by park code from appState", AppState.activePark);
+  }
+
+  async getThingsToDo(parkCode) {
+    const res = await npsApi.get(`/thingstodo?parkCode=${parkCode}`)
+    logger.log('[THE THINGS TO DO FROM npsAPI]', res.data)
+    AppState.thingsToDo = res.data.data.map((th) => new ThingToDo(th))
+    logger.log('[THIS IS THE THINGS TO DO IN THE APPSTATE]', AppState.thingsToDo)
   }
 }
 

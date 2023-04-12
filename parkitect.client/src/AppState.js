@@ -9,4 +9,8 @@ export const AppState = reactive({
   parks: [],
   /** @type {import('./models/Park.js').Park|null} */
   activePark: null,
+  /** @type {import('./models/ThingToDo.js').ThingToDo[]} */
+  thingsToDo: [],
+  /** @type {import('./models/ThingToDo.js').ThingToDo|null} */
+  thingToDo: null,
 });
