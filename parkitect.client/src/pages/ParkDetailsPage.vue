@@ -62,12 +62,65 @@
     </section>
     <!-- SECTION Popular Activities with filter bar or buttons-->
     <section class="row">
-      <div class="col-12">
-        <h4>Popular Activities</h4>
+      <h4>Popular Activities</h4>
+      <div class="col-12 d-flex justify-content-evenly">
+        <div class="text-center p-2">
+          <img class="filter-img selectable elevation-3"
+            src="https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0aW9uYWwlMjBwYXJrfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+            alt="all">
+          <h5 class="py-2">All</h5>
+        </div>
+        <div class="text-center p-2">
+          <img class="filter-img selectable elevation-3"
+            src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+            alt="">
+          <h5 class="py-2">Hiking</h5>
+        </div>
+        <div class="text-center p-2">
+          <img class="filter-img selectable elevation-3"
+            src="https://images.unsplash.com/photo-1616429553002-faf23468952d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHNraWluZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+            alt="hiking">
+          <h5 class="py-2">Snow</h5>
+        </div>
+        <div class="text-center p-2">
+          <img class="filter-img selectable elevation-3"
+            src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+            alt="">
+          <h5 class="py-2">Water</h5>
+        </div>
+        <div class="text-center p-2">
+          <img class="filter-img selectable elevation-3"
+            src="https://images.unsplash.com/photo-1440993443326-9e9f5aea703a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVjcmVhdGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+            alt="water">
+          <h5 class="py-2">Fishing</h5>
+        </div>
+        <div class="text-center p-2">
+          <img class="filter-img selectable elevation-3"
+            src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+            alt="">
+          <h5 class="py-2">Guided</h5>
+        </div>
+        <div class="text-center p-2">
+          <img class="filter-img selectable elevation-3"
+            src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+            alt="">
+          <h5 class="py-2">Camping</h5>
+        </div>
+        <div class="text-center p-2">
+          <img class="filter-img selectable elevation-3"
+            src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+            alt="">
+          <h5 class="py-2">Other</h5>
+        </div>
       </div>
+
 
     </section>
     <!-- SECTION footer -->
+    <section class="row justify-content-between text-center">
+      <div class="col-4">Link to national Park</div>
+      <div class="col-4">Operating Hours and Seasons</div>
+    </section>
   </div>
 </template>
 
@@ -106,4 +159,10 @@ export default {
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.filter-img {
+  height: 15vh;
+  width: 15vh;
+  border-radius: 50%;
+}
+</style>
