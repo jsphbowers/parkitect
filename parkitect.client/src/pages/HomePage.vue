@@ -4,17 +4,18 @@
     <section class="row justify-content-center align-items-center search-bg">
       <div class="col p-0 text-light text-center txt-shadow">
         <h1>Build your next National Park Journey!</h1>
-        <div class="input-group mt-4">
-          <input type="text" class="form-control" placeholder="Search by State">
+        <form @submit.prevent="searchPark()" class="input-group mt-4">
+          <input v-model="editable" type="text" class="form-control" placeholder="Search by park or state" />
           <button type="submit" class="input-group-text btn">Search</button>
-        </div>
+        </form>
+        <button class="btn btn-create selectable">Create a Trip</button>
       </div>
     </section>
 
     <!-- SECTION park cards -->
-    <section class="row ">
+    <section class="row">
       <div class="col-12 text-center my-4">
-        <h2>Choose your National Park</h2>
+        <h2>Where do you want to go?</h2>
       </div>
       <div v-for="p in parks" :key="p.nativeId" class="col-md-4">
         <ParkCard :park="p" />
@@ -27,7 +28,7 @@
 </template>
 
 <script>
-import { computed, onMounted } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { parksService } from "../services/ParksServices.js";
 import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
@@ -36,6 +37,8 @@ import { AppState } from "../AppState.js";
 
 export default {
   setup() {
+    const editable = ref('');
+
     const coverImages = [
       "src/assets/img/HomePagePics/picture1.jpg",
       "src/assets/img/HomePagePics/picture2.jpg",
@@ -62,21 +65,29 @@ export default {
         logger.log(error);
       }
     }
-    // TODO finish fn for search
-    // async function searchParks() {
-    //   const query
-    // }
+
     onMounted(() => {
       getParks();
       getParkByParkCode("yell");
     });
     return {
+      editable,
       coverImages,
       selectedImg: computed(() => {
         const randomIndex = Math.floor(Math.random() * coverImages.length);
         return `url(${coverImages[randomIndex]})`;
       }),
       parks: computed(() => AppState.parks),
+
+      async searchPark() {
+        try {
+          const query = editable.value;
+          // logger.log(query);
+          await parksService.searchPark(query)
+        } catch (error) {
+          logger.log(error.message);
+        }
+      },
     };
   },
   components: { ParkCard },
@@ -100,9 +111,7 @@ export default {
 }
 
 .txt-shadow {
-  text-shadow: 1px 1px black,
-    1px 1px 2px #0970a3,
-    -3px 1px 5px #009dff40;
+  text-shadow: 1px 1px black, 1px 1px 2px #0970a3, -3px 1px 5px #009dff40;
 }
 
 .input-group {
@@ -131,6 +140,21 @@ export default {
   box-shadow: none;
   border-top-left-radius: 30px !important;
   border-bottom-left-radius: 30px !important;
+}
 
+.btn-create {
+  border: none;
+  color: #ffff;
+  margin-top: 0.5em;
+  font-weight: bolder;
+  font-size: 1.25em;
+  text-decoration: underline;
+  text-shadow: 1px 1px black, 1px 1px 2px #1e4254, -3px 1px 5px #5f91b040;
+}
+
+@media screen and (max-width: 480px) {
+  .search-bg {
+    min-height: 40vh;
+  }
 }
 </style>

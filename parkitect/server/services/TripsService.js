@@ -1,5 +1,5 @@
 import { dbContext } from "../db/DbContext.js"
-import { BadRequest } from "../utils/Errors.js"
+import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 class TripsService {
 
@@ -13,6 +13,21 @@ class TripsService {
     if (!trip) {
       throw new BadRequest('Invalid tripId')
     }
+    return trip
+  }
+
+  async editTrip(tripId, tripEdits, userId) {
+    const trip = await this.getTripById(tripId)
+    if (trip.isArchived) {
+      throw new BadRequest('Cannot edit an archived trip')
+    }
+    if (trip.creatorId != userId) {
+      throw new Forbidden("You are not authorized to edit another user's trip")
+    }
+    trip.name = tripEdits.name ? tripEdits.name : trip.name
+    trip.description = tripEdits.description ? tripEdits.description : trip.description
+    trip.coverImg = tripEdits.coverImg ? tripEdits.coverImg : trip.coverImg
+    await trip.save()
     return trip
   }
 

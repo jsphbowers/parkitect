@@ -12,6 +12,7 @@ export class TripsController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createTrip)
       .get('/:tripId', this.getTripById)
+      .put('/:tripId', this.editTrip)
       .post('/:tripId/tripParks', this.addTripPark)
       .get('/:tripId/tripParks', this.getTripParks)
       .post('/:tripId/tripThingsToDo', this.addTripThingToDo)
@@ -42,6 +43,18 @@ export class TripsController extends BaseController {
     try {
       const tripId = req.params.tripId
       const trip = await tripsService.getTripById(tripId)
+      res.send(trip)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async editTrip(req, res, next) {
+    try {
+      const tripId = req.params.tripId
+      const tripEdits = req.body
+      const userId = req.userInfo.id
+      const trip = await tripsService.editTrip(tripId, tripEdits, userId)
       res.send(trip)
     } catch (error) {
       next(error)

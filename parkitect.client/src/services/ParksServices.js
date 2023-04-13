@@ -19,17 +19,25 @@ export class ParksService {
     logger.log("Getting park by park code", res.data);
     // AppState.activePark = res.data.data.map((ap) => new Park(ap))
     AppState.activePark = new Park(res.data.data[0])
-    logger.log("getting park by park code from appState", AppState.activePark);
+    // logger.log("getting park by park code from appState", AppState.activePark);
     // logger.log("active park name", AppState.activePark[0].name)
+  }
+
+  async searchPark(query) {
+    const res = await npsApi.get(
+      `/parks?parkcode=acad,npsa,arch,badl,bibe,bisc,blca,brca,cany,care,cave,chis,cong,crla,cuva,deva,dena,drto,ever,gaar,jeff,glac,glba,grca,grte,grba,grsa,grsm,gumo,hale,havo,hosp,indu,isro,jotr,katm,kefj,seki,kova,lacl,lavo,maca,meve,mora,neri,noca,olym,pefo,pinn,redw,romo,sagu,shen,thro,viis,voya,whsa,wica,wrst,yell,yose,zion&limit=62&q=${query}`
+    );
+    logger.log("[search park]", res.data);
+    AppState.parks = res.data.data.map(p => new Park(p))
   }
 
   async getThingsToDo(parkCode) {
     const res = await npsApi.get(`/thingstodo?parkCode=${parkCode}`)
-    logger.log('[THE THINGS TO DO FROM npsAPI]', res.data)
+    // logger.log('[THE THINGS TO DO FROM npsAPI]', res.data)
     AppState.thingsToDo = res.data.data.map((th) => new ThingToDo(th))
     const newe = AppState.thingsToDo.filter(thing => thing.activities[0].name.toLowerCase().includes('snow'))
 
-    logger.log(newe)
+    // logger.log(newe)
   }
 }
 
