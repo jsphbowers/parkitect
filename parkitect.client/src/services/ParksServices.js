@@ -9,16 +9,18 @@ export class ParksService {
     const res = await npsApi.get(
       `/parks?parkcode=acad,npsa,arch,badl,bibe,bisc,blca,brca,cany,care,cave,chis,cong,crla,cuva,deva,dena,drto,ever,gaar,jeff,glac,glba,grca,grte,grba,grsa,grsm,gumo,hale,havo,hosp,indu,isro,jotr,katm,kefj,seki,kova,lacl,lavo,maca,meve,mora,neri,noca,olym,pefo,pinn,redw,romo,sagu,shen,thro,viis,voya,whsa,wica,wrst,yell,yose,zion&limit=62`
     );
-    // logger.log("Getting parks from NPS api", res.data);
+    logger.log("Getting parks from NPS api", res.data);
     AppState.parks = res.data.data.map((p) => new Park(p));
-    // logger.log("getting parks from appState", AppState.parks);
+    logger.log("getting parks from appState", AppState.parks);
   }
 
   async getParkByParkCode(parkCode) {
     const res = await npsApi.get(`/parks?parkCode=${parkCode}`);
     logger.log("Getting park by park code", res.data);
-    AppState.activePark = res.data.data.map((ap) => new Park(ap))
+    // AppState.activePark = res.data.data.map((ap) => new Park(ap))
+    AppState.activePark = new Park(res.data.data[0])
     logger.log("getting park by park code from appState", AppState.activePark);
+    // logger.log("active park name", AppState.activePark[0].name)
   }
 
   async getThingsToDo(parkCode) {
