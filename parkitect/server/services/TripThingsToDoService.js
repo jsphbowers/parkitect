@@ -6,6 +6,11 @@ class TripThingsToDoService {
     return tripThingToDo
   }
 
+  async getTripThingsToDo(tripId) {
+    const tripThingsToDo = await dbContext.TripThingsToDo.find({ tripId })
+    return tripThingsToDo
+  }
+
 }
 
 export const tripThingsToDoService = new TripThingsToDoService()

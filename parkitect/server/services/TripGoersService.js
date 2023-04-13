@@ -15,6 +15,14 @@ class TripGoersService {
       throw new BadRequest('You are already a member of this trip')
     }
   }
+
+  async getTripGoers(tripId) {
+    const tripGoers = await dbContext.TripGoers.find({ tripId }).populate('account', 'name picture').populate('trip')
+    if (!tripGoers) {
+      throw new BadRequest('Invalid tripId')
+    }
+    return tripGoers
+  }
 }
 
 export const tripGoersService = new TripGoersService()

@@ -16,6 +16,8 @@ export class TripsController extends BaseController {
       .post('/:tripId/tripGoers', this.addTripGoer)
       .get('/:tripId', this.getTripById)
       .get('/:tripId/tripParks', this.getTripParks)
+      .get('/:tripId/tripThingsToDo', this.getTripThingsToDo)
+      .get('/:tripId/tripGoers', this.getTripGoers)
   }
 
   async createTrip(req, res, next) {
@@ -80,6 +82,26 @@ export class TripsController extends BaseController {
       const tripId = req.params.tripId
       const tripParks = await tripParksService.getTripParks(tripId)
       res.send(tripParks)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getTripThingsToDo(req, res, next) {
+    try {
+      const tripId = req.params.tripId
+      const tripThingsToDo = await tripThingsToDoService.getTripThingsToDo(tripId)
+      res.send(tripThingsToDo)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getTripGoers(req, res, next) {
+    try {
+      const tripId = req.params.tripId
+      const tripGoers = await tripGoersService.getTripGoers(tripId)
+      res.send(tripGoers)
     } catch (error) {
       next(error)
     }
