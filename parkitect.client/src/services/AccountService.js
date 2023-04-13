@@ -12,6 +12,12 @@ class AccountService {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }
   }
+  async visitPark(parkCode) {
+    const res = await api.post('/account', parkCode)
+    logger.log('[Visit park raw Data]', res.data)
+  }
+
 }
+
 
 export const accountService = new AccountService()

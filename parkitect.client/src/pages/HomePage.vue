@@ -3,11 +3,11 @@
     <!-- SECTION search bar -->
     <section class="row justify-content-center align-items-center search-bg">
       <div class="col p-0 text-light text-center txt-shadow">
-      <h1>Build your next National Park Journey!</h1>
-      <div class="input-group mt-4">
-        <input type="text" class="form-control" placeholder="Search by State">
+        <h1>Build your next National Park Journey!</h1>
+        <div class="input-group mt-4">
+          <input type="text" class="form-control" placeholder="Search by State">
           <button type="submit" class="input-group-text btn">Search</button>
-      </div>
+        </div>
       </div>
     </section>
 
