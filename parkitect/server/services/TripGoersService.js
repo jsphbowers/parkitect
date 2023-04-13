@@ -3,6 +3,10 @@ import { BadRequest } from "../utils/Errors.js"
 
 class TripGoersService {
   async addTripGoer(tripGoerData) {
+    const trip = await dbContext.Trips.findById(tripGoerData.tripId)
+    if (trip.isArchived == true) {
+      throw new BadRequest('You cannot alter a trip that has been archived.')
+    }
     const tripGoer = await dbContext.TripGoers.create(tripGoerData)
     await tripGoer.populate('account')
     await tripGoer.populate('trip')
