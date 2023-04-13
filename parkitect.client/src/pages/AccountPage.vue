@@ -1,11 +1,9 @@
 <template>
   <div class="container-fluid">
     <!-- SECTION Cover Images and Account Image -->
-
     <section class="row">
       <div class="p-0 col-12 account-img-cont">
         <div class="account-img-cont p-0">
-          <!-- <h1>test</h1> -->
           <img class="account-img" :src="account.picture" alt="">
         </div>
       </div>
@@ -25,53 +23,59 @@
       </div>
       <div class="col-12">
         <div>
-          <img @click="visitPark('npsa')" class="icon-style selectable"
-            src="src\assets\img\NationalParksIcons\American Samoa National Park Icon.png" alt="">
+          <img v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style selectable"
+            :src="`/icons/${parkCode}.png`" alt="" :class="hasVisited(parkCode)">
         </div>
       </div>
     </section>
 
   </div>
-
-
-
-
-
-  <!-- <div class="about text-center">
-    <h1>Welcome {{ account.name }}</h1>
-    <img class="rounded" :src="account.picture" alt="" />
-    <p>{{ account.email }}</p>
-  </div> -->
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { AppState } from '../AppState'
 import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
-import { accountService } from "../services/AccountService.js"
-
 
 export default {
   setup() {
     const coverImages = ['src/assets/img/HomePagePics/picture1.jpg', 'src/assets/img/HomePagePics/picture2.jpg', 'src/assets/img/HomePagePics/picture3.jpg', 'src/assets/img/HomePagePics/picture4.jpg', 'src/assets/img/HomePagePics/picture5.jpg', 'src/assets/img/HomePagePics/picture6.jpg', 'src/assets/img/HomePagePics/picture7.jpg']
 
+    const icons = ref([
+      2,
+      1134
+    ])
+
+    const visited = ref([1134])
+
     return {
       coverImages,
+      icons,
+      visited,
       account: computed(() => AppState.account),
       selectedImg: computed(() => {
         const randomIndex = Math.floor(Math.random() * coverImages.length)
         return `url(${coverImages[randomIndex]})`
       }),
-
+      hasVisited(parkCode) {
+        return visited.value.includes(parkCode) ? '' : 'grayscale'
+      },
       async visitPark(parkCode) {
         try {
-          await accountService.visitPark(parkCode)
+          if (visited.value.includes(parkCode)) {
+            // visited.splice(parkCode)
+          } else {
+            visited.value.push(parkCode)
+          }
+          // await accountService.visitPark(parkCode)
         } catch (error) {
           Pop.error(error.message)
           logger.error(error)
         }
       }
+
+
     }
   }
 }
@@ -107,6 +111,14 @@ export default {
   width: 15vh;
 }
 
+.noGrayscale {
+  filter: grayscale(0) !important;
+}
+
+.grayscale {
+  filter: grayscale(1);
+}
+
 @media(max-width:992px) {
   .account-img {
     height: 15vh;
@@ -136,6 +148,8 @@ export default {
     left: 45vw;
     position: absolute;
   }
+
+
 
   .account-img-cont {
     position: relative;
