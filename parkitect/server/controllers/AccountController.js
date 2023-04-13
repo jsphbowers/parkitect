@@ -10,6 +10,7 @@ export class AccountController extends BaseController {
       .get('', this.getUserAccount)
       .post('', this.addParkVisited)
       .put('', this.updateAccount)
+      .delete('', this.removeParkVisited)
   }
 
   async getUserAccount(req, res, next) {
@@ -38,6 +39,17 @@ export class AccountController extends BaseController {
       const account = req.userInfo
       const editedAccount = await accountService.updateAccount(account, accountEdits)
       res.send(editedAccount)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async removeParkVisited(req, res, next) {
+    try {
+      const parkCode = req.body.parkCode
+      const userId = req.userInfo.id
+      const account = await accountService.removeParkVisited(parkCode, userId)
+      res.send(account)
     } catch (error) {
       next(error)
     }

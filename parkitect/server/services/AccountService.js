@@ -53,6 +53,13 @@ class AccountService {
     return account
   }
 
+  async removeParkVisited(parkCode, userId) {
+    const account = await dbContext.Account.findOne({ _id: userId })
+    account.parksVisited = account.parksVisited.filter(pc => pc != parkCode)
+    await account.save()
+    return account
+  }
+
   /**
    * Returns a user account from the Auth0 user object
    *
