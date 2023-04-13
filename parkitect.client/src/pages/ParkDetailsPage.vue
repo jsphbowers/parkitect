@@ -65,49 +65,49 @@
       <h4>Popular Activities</h4>
       <div class="col-12 d-flex justify-content-evenly">
         <div class="text-center p-2">
-          <img class="filter-img selectable elevation-3"
+          <img @click="changeActivityType('')" class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0aW9uYWwlMjBwYXJrfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
             alt="all">
           <h5 class="py-2">All</h5>
         </div>
         <div class="text-center p-2">
-          <img class="filter-img selectable elevation-3"
+          <img @click="changeActivityType('hiking')" class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
             alt="">
           <h5 class="py-2">Hiking</h5>
         </div>
         <div class="text-center p-2">
-          <img class="filter-img selectable elevation-3"
+          <img @click="changeActivityType('snow')" class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/photo-1616429553002-faf23468952d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHNraWluZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
             alt="hiking">
           <h5 class="py-2">Snow</h5>
         </div>
         <div class="text-center p-2">
-          <img class="filter-img selectable elevation-3"
+          <img @click="changeActivityType('water')" class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
             alt="">
           <h5 class="py-2">Water</h5>
         </div>
         <div class="text-center p-2">
-          <img class="filter-img selectable elevation-3"
+          <img @click="changeActivityType('fishing')" class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/photo-1440993443326-9e9f5aea703a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVjcmVhdGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
             alt="water">
           <h5 class="py-2">Fishing</h5>
         </div>
         <div class="text-center p-2">
-          <img class="filter-img selectable elevation-3"
+          <img @click="changeActivityType('guided')" class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
             alt="">
           <h5 class="py-2">Guided</h5>
         </div>
         <div class="text-center p-2">
-          <img class="filter-img selectable elevation-3"
+          <img @click="changeActivityType('camping')" class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
             alt="">
           <h5 class="py-2">Camping</h5>
         </div>
         <div class="text-center p-2">
-          <img class="filter-img selectable elevation-3"
+          <img @click="changeActivityType('other')" class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
             alt="">
           <h5 class="py-2">Other</h5>
@@ -117,6 +117,10 @@
 
     </section>
     <!-- SECTION footer -->
+    <section class="temp  justify-content-center" v-for="a in activities">
+      <h4>{{ a.title }}</h4>
+      <p>{{ a.shortDescription }}</p>
+    </section>
     <section class="row justify-content-between text-center">
       <div class="col-4">Link to national Park</div>
       <div class="col-4">Operating Hours and Seasons</div>
@@ -132,18 +136,26 @@ import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
 import { onMounted, computed, ref, watchEffect } from "vue";
 import { parksService } from "../services/ParksServices.js";
+import { AppState } from "../AppState.js";
 
 
 export default {
+
+
+
   setup() {
     const route = useRoute()
+
+    const filterType = ref('')
+
+    const keywords = { hiking: ['hiking', 'walking'], snow: ['skiing', 'snow'], water: ['water', 'kayaking', 'boat', 'paddling'], fishing: ['fishing', 'fish'], guided: ['tour', 'program'], camping: ['camp'], other: ['driving', 'flying', 'watching', 'trekking', 'biking'] }
 
     async function getThingsToDo() {
       try {
         // NOTE used parkId here 
         const parkCode = route.params.parkCode
         await parksService.getThingsToDo(parkCode)
-        console.log('Test')
+        console.log()
       } catch (error) {
         logger.error(error)
         Pop.error(error.message)
@@ -152,7 +164,28 @@ export default {
     onMounted(() => {
       getThingsToDo()
     })
+
     return {
+      activities: computed(() => {
+        if (!filterType.value) {
+          return AppState.thingsToDo
+        } else {
+          // debugger
+          return AppState.thingsToDo.filter(thing => {
+            // NOTE This filter will got through all the thingToDo and for every one it will run this for loop(the number of times that it needs to check each array string from keywords) to check if it contains the keyword. If it does contain one of the keywords then it will return/add the "thing" to the filtered thingsToDo.
+            for (let i = 0; i < keywords[filterType.value].length; i++) {
+              let newArray = keywords[filterType.value]
+              if (thing.activities[0].name.toLowerCase().includes(newArray[i])) {
+                return thing
+              }
+            }
+          })
+        }
+      }),
+
+      changeActivityType(type) {
+        filterType.value = type
+      }
     }
   }
 }
