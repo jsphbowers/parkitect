@@ -5,7 +5,7 @@
   <main>
     <router-view />
   </main>
-   <footer class="bg-warning text-light">
+   <footer class="bg-info text-light">
     Made with 🥾 by Park Rangers
   </footer>
 </template>

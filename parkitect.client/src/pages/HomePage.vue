@@ -13,14 +13,17 @@
           />
           <button type="submit" class="input-group-text btn">Search</button>
         </form>
-        <button class="btn btn-create selectable">Create a Trip</button>
+        <button v-if="account.id" class="btn btn-create selectable">Create a Trip</button>
       </div>
     </section>
 
     <!-- SECTION park cards -->
     <section class="row">
       <div class="col-12 text-center my-4">
-        <h2>Where do you want to go?</h2>
+        <h2>{{ parks.length!=0 ?'Where do you want to go?' : "We are sorry, but there are no search results" }} </h2>
+      </div>
+      <div v-if="parks.length == 0" class="text-center" >
+        <h1>¯\_(ツ)_/¯</h1>
       </div>
       <div v-for="p in parks" :key="p.nativeId" class="col-md-4">
         <ParkCard :park="p" />
@@ -83,6 +86,7 @@ export default {
         return `url(${coverImages[randomIndex]})`;
       }),
       parks: computed(() => AppState.parks),
+      account: computed(() => AppState.account),
 
       async searchPark() {
         try {
