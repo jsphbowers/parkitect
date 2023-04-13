@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <!-- SECTION Cover Photo with title  -->
     <section class="row px-0">
-      <div class="col-12">
+      <div class="col-12 px-0">
         <div id="carouselExampleCaptions" class="carousel slide">
           <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
@@ -14,27 +14,21 @@
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img
-                src="https://images.unsplash.com/photo-1606859309981-270838d57ed8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0aW9uYWwlMjBwYXJrc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-                class="carousel-img d-block w-100" alt="...">
+              <img :src="park?.images[0].url" class="carousel-img d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
-                <h5>Park Name</h5>
+                <h5 class="txt-shadow">{{ park?.name }}</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img
-                src="https://images.unsplash.com/photo-1502856755506-d8626589ef19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bmF0aW9uYWwlMjBwYXJrc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-                class="carousel-img d-block w-100" alt="...">
-              <div class=" carousel-caption d-none d-md-block">
-                <h5>Second slide label</h5>
+              <img :src="park?.images[1].url" class="carousel-img d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5 class="txt-shadow">{{ park?.name }}</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img
-                src="https://images.unsplash.com/photo-1526008625783-ddfc11a3a962?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fG5hdGlvbmFsJTIwcGFya3N8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
-                class="carousel-img d-block w-100" alt="...">
+              <img :src="park?.images[2].url" class="carousel-img d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
-                <h5>Third slide label</h5>
+                <h5 class="txt-shadow">{{ park?.name }}</h5>
               </div>
             </div>
           </div>
@@ -53,11 +47,8 @@
     </section>
     <!-- SECTION Description -->
     <section class="row p-2">
-      <div class="col-12 bg-primary p-3">
-        <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, odit nostrum voluptate ducimus doloribus
-          laborum. Quam libero voluptate repellat quaerat, impedit cum, animi soluta eius, fuga iste reprehenderit
-          officiis nulla. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione eos aut quis nostrum quas cum
-          earum voluptates distinctio totam error, beatae repudiandae minus incidunt quae quod modi in officia ex?</h6>
+      <div class="col-12 bg-primary p-3 about">
+        <h6 class="txt-shadow">{{ park?.description }}</h6>
       </div>
     </section>
     <!-- SECTION Popular Activities with filter bar or buttons-->
@@ -84,31 +75,31 @@
         </div>
         <div class="text-center p-2">
           <img @click="changeActivityType('water')" class="filter-img selectable elevation-3"
-            src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+            src="https://images.unsplash.com/photo-1440993443326-9e9f5aea703a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVjcmVhdGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
             alt="water">
           <h5 class="py-2">Water</h5>
         </div>
         <div class="text-center p-2">
           <img @click="changeActivityType('fishing')" class="filter-img selectable elevation-3"
-            src="https://images.unsplash.com/photo-1440993443326-9e9f5aea703a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVjcmVhdGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-            alt="water">
+            src="https://images.unsplash.com/photo-1532015917327-c7c46aa1d930?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=853&q=80"
+            alt="fishing">
           <h5 class="py-2">Fishing</h5>
         </div>
         <div class="text-center p-2">
           <img @click="changeActivityType('guided')" class="filter-img selectable elevation-3"
-            src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-            alt="">
+            src="https://images.unsplash.com/photo-1504807959081-3dafd3871909?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Z3VpZGV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+            alt="guided">
           <h5 class="py-2">Guided</h5>
         </div>
         <div class="text-center p-2">
           <img @click="changeActivityType('camping')" class="filter-img selectable elevation-3"
-            src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+            src="https://images.unsplash.com/photo-1504851149312-7a075b496cc7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2FtcGluZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
             alt="">
           <h5 class="py-2">Camping</h5>
         </div>
         <div class="text-center p-2">
           <img @click="changeActivityType('other')" class="filter-img selectable elevation-3"
-            src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+            src="https://images.unsplash.com/photo-1594976382948-12e3439721b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8eWVsbG93c3RvbmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
             alt="">
           <h5 class="py-2">Other</h5>
         </div>
@@ -121,9 +112,10 @@
       <div class="col-3"></div>
     </section>
     <!-- SECTION footer -->
-    <section class="temp  justify-content-center" v-for="a in activities">
-      <h4>{{ a.title }}</h4>
-      <p>{{ a.shortDescription }}</p>
+    <section class="temp row justify-content-center">
+      <div class="col-md-6 px-0" v-for="a in activities" :key="a.nativeId">
+        <ActivityCard :activity="a" />
+      </div>
     </section>
     <section class="row justify-content-between text-center">
       <div class="col-4">Link to national Park</div>
@@ -165,11 +157,22 @@ export default {
         Pop.error(error.message)
       }
     }
+    async function getActivePark() {
+      try {
+        const parkCode = route.params.parkCode
+        await parksService.getParkByParkCode(parkCode)
+      } catch (error) {
+        Pop.error(error.message)
+        logger.error(error.message)
+      }
+    }
     onMounted(() => {
       getThingsToDo()
+      getActivePark()
     })
 
     return {
+      park: computed(() => AppState.activePark),
       activities: computed(() => {
         if (!filterType.value) {
           return AppState.thingsToDo
@@ -208,5 +211,20 @@ export default {
   height: 75vh;
   object-fit: cover;
 
+}
+
+.txt-shadow {
+  text-shadow: 1px 1px black,
+    1px 1px 2px #0970a3,
+    -3px 1px 5px #009dff40;
+}
+
+.about {
+  background-image: linear-gradient(#009dff40 0%, #065177 100%);
+  border: 0;
+  color: #ffff;
+  padding: 0 25px;
+  border-radius: 5px;
+  box-shadow: none;
 }
 </style>
