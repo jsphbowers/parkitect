@@ -5,12 +5,7 @@
       <div class="col p-0 text-light text-center txt-shadow">
         <h1>Build your next National Park Journey!</h1>
         <form @submit.prevent="searchPark()" class="input-group mt-4">
-          <input
-            v-model="editable"
-            type="text"
-            class="form-control"
-            placeholder="Search by park or state"
-          />
+          <input v-model="editable" type="text" class="form-control" placeholder="Search by park or state" />
           <button type="submit" class="input-group-text btn">Search</button>
         </form>
         <button v-if="account.id" class="btn btn-create selectable">Create a Trip</button>

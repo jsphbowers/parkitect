@@ -8,25 +8,13 @@ export class AccountController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getUserAccount)
-      .post('', this.addParkVisited)
       .put('', this.updateAccount)
-      .delete('', this.removeParkVisited)
+
   }
 
   async getUserAccount(req, res, next) {
     try {
       const account = await accountService.getAccount(req.userInfo)
-      res.send(account)
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  async addParkVisited(req, res, next) {
-    try {
-      const parkCode = req.body.parkCode
-      const userId = req.userInfo.id
-      const account = await accountService.addParkVisited(parkCode, userId)
       res.send(account)
     } catch (error) {
       next(error)
@@ -44,14 +32,5 @@ export class AccountController extends BaseController {
     }
   }
 
-  async removeParkVisited(req, res, next) {
-    try {
-      const parkCode = req.body.parkCode
-      const userId = req.userInfo.id
-      const account = await accountService.removeParkVisited(parkCode, userId)
-      res.send(account)
-    } catch (error) {
-      next(error)
-    }
-  }
+
 }
