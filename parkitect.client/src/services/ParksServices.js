@@ -33,11 +33,17 @@ export class ParksService {
 
   async getThingsToDo(parkCode) {
     const res = await npsApi.get(`/thingstodo?parkCode=${parkCode}`)
-    // logger.log('[THE THINGS TO DO FROM npsAPI]', res.data)
+    logger.log('[THE THINGS TO DO FROM npsAPI]', res.data)
     AppState.thingsToDo = res.data.data.map((th) => new ThingToDo(th))
     const newe = AppState.thingsToDo.filter(thing => thing.activities[0].name.toLowerCase().includes('snow'))
 
-    // logger.log(newe)
+    logger.log(newe)
+  }
+
+  async setActiveActivity(activityId) {
+    const activeActivity = AppState.thingsToDo.find(t => t.id == activityId)
+    AppState.activeThingToDo = activeActivity
+    logger.log('[THIS IS THE ACTIVE THING TO DO]', AppState.activeThingToDo)
   }
 }
 
