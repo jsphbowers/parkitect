@@ -16,7 +16,7 @@
             <div class="carousel-item active">
               <img
                 src="https://images.unsplash.com/photo-1606859309981-270838d57ed8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0aW9uYWwlMjBwYXJrc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-                class="d-block w-100" alt="...">
+                class="carousel-img d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Park Name</h5>
               </div>
@@ -24,15 +24,15 @@
             <div class="carousel-item">
               <img
                 src="https://images.unsplash.com/photo-1502856755506-d8626589ef19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bmF0aW9uYWwlMjBwYXJrc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-                class="d-block w-100" alt="...">
-              <div class="carousel-caption d-none d-md-block">
+                class="carousel-img d-block w-100" alt="...">
+              <div class=" carousel-caption d-none d-md-block">
                 <h5>Second slide label</h5>
               </div>
             </div>
             <div class="carousel-item">
               <img
                 src="https://images.unsplash.com/photo-1526008625783-ddfc11a3a962?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fG5hdGlvbmFsJTIwcGFya3N8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
-                class="d-block w-100" alt="...">
+                class="carousel-img d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Third slide label</h5>
               </div>
@@ -118,7 +118,7 @@
     <!-- SECTION Filtered ToDos -->
 
     <section class="row">
-
+      <div class="col-3"></div>
     </section>
     <!-- SECTION footer -->
     <section class="temp  justify-content-center" v-for="a in activities">
@@ -201,5 +201,12 @@ export default {
   height: 15vh;
   width: 15vh;
   border-radius: 50%;
+}
+
+.carousel-img {
+  width: 100%;
+  height: 75vh;
+  object-fit: cover;
+
 }
 </style>
