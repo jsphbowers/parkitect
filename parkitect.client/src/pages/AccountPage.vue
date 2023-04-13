@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid" v-if="account">
     <!-- SECTION Cover Images and Account Image -->
     <section class="row">
       <div class="p-0 col-12 account-img-cont">
@@ -35,6 +35,7 @@
 <script>
 import { computed, ref } from 'vue'
 import { AppState } from '../AppState'
+import { accountService } from "../services/AccountService.js"
 import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
 
@@ -43,32 +44,32 @@ export default {
     const coverImages = ['src/assets/img/HomePagePics/picture1.jpg', 'src/assets/img/HomePagePics/picture2.jpg', 'src/assets/img/HomePagePics/picture3.jpg', 'src/assets/img/HomePagePics/picture4.jpg', 'src/assets/img/HomePagePics/picture5.jpg', 'src/assets/img/HomePagePics/picture6.jpg', 'src/assets/img/HomePagePics/picture7.jpg']
 
     const icons = ref([
-      2,
-      1134
+      "2",
+      "1134"
     ])
 
-    const visited = ref([1134])
+
 
     return {
       coverImages,
       icons,
-      visited,
       account: computed(() => AppState.account),
       selectedImg: computed(() => {
         const randomIndex = Math.floor(Math.random() * coverImages.length)
         return `url(${coverImages[randomIndex]})`
       }),
       hasVisited(parkCode) {
-        return visited.value.includes(parkCode) ? '' : 'grayscale'
+        return AppState.account.parksVisited?.includes(parkCode) ? '' : 'grayscale'
       },
       async visitPark(parkCode) {
         try {
-          if (visited.value.includes(parkCode)) {
-            // visited.splice(parkCode)
+          if (AppState.account.parksVisited.includes(parkCode)) {
+            // AppState.account.parksVisited.pop()
+            // Add splice
           } else {
-            visited.value.push(parkCode)
+            AppState.account.parksVisited.push(parkCode)
           }
-          // await accountService.visitPark(parkCode)
+          await accountService.editAccount()
         } catch (error) {
           Pop.error(error.message)
           logger.error(error)
