@@ -1,5 +1,6 @@
 <template>
-  <div class="m-2 mx-4 selectable activityCard elevation-2">
+  <div class="m-2 mx-4 selectable activityCard elevation-2" data-bs-toggle="modal" data-bs-target="#exampleModal"
+    @click="setActiveActivity(activity.id)">
     <div class="card">
       <div class="row g-0">
         <div class="col-md-6">
@@ -38,23 +39,36 @@
         </div>
       </div>
     </div>
-
-
-
   </div>
+  <ActiveCardModal />
 </template>
 
 
 <script>
 import { ThingToDo } from "../models/ThingToDo.js";
+import { parksService } from "../services/ParksServices.js";
+import { logger } from "../utils/Logger.js";
+import Pop from "../utils/Pop.js";
+import ActiveCardModal from "./ActiveCardModal.vue";
 
 export default {
   props: {
     activity: { type: ThingToDo, required: true }
   },
   setup() {
-    return {}
-  }
+    return {
+
+      async setActiveActivity(activityId) {
+        try {
+          await parksService.setActiveActivity(activityId)
+        } catch (error) {
+          Pop.error(error.message)
+          logger.error(error.message)
+        }
+      }
+    };
+  },
+  components: { ActiveCardModal }
 }
 </script>
 

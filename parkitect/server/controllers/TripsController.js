@@ -13,6 +13,7 @@ export class TripsController extends BaseController {
       .post('', this.createTrip)
       .get('/:tripId', this.getTripById)
       .put('/:tripId', this.editTrip)
+      .delete('/:tripId', this.toggleArchiveTrip)
       .post('/:tripId/tripParks', this.addTripPark)
       .get('/:tripId/tripParks', this.getTripParks)
       .post('/:tripId/tripThingsToDo', this.addTripThingToDo)
@@ -55,6 +56,17 @@ export class TripsController extends BaseController {
       const tripEdits = req.body
       const userId = req.userInfo.id
       const trip = await tripsService.editTrip(tripId, tripEdits, userId)
+      res.send(trip)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async toggleArchiveTrip(req, res, next) {
+    try {
+      const tripId = req.params.tripId
+      const userId = req.userInfo.id
+      const trip = await tripsService.toggleArchiveTrip(tripId, userId)
       res.send(trip)
     } catch (error) {
       next(error)

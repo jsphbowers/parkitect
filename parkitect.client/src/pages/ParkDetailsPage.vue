@@ -118,10 +118,36 @@
       </div>
     </section>
     <section class="row justify-content-between text-center">
-      <div class="col-4">Link to national Park</div>
+      <div class="col-4">{{ park?.url }}</div>
       <div class="col-4">Operating Hours and Seasons</div>
     </section>
   </div>
+
+  <!-- SECTION THE BIG MODAL -->
+
+  <!-- Button trigger modal -->
+  <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button> -->
+
+  <!-- Modal -->
+  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
 </template>
 
 
@@ -169,6 +195,7 @@ export default {
     onMounted(() => {
       getThingsToDo()
       getActivePark()
+      window.scrollTo(0, 0);
     })
 
     return {

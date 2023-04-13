@@ -31,6 +31,16 @@ class TripsService {
     return trip
   }
 
+  async toggleArchiveTrip(tripId, userId) {
+    const trip = await this.getTripById(tripId)
+    if (trip.creatorId != userId) {
+      throw new Forbidden("You are not authorized to edit another user's trip")
+    }
+    trip.isArchived = !trip.isArchived
+    await trip.save()
+    return trip
+  }
+
 
 }
 
