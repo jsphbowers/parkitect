@@ -17,8 +17,10 @@ export class ParksService {
   async getParkByParkCode(parkCode) {
     const res = await npsApi.get(`/parks?parkCode=${parkCode}`);
     logger.log("Getting park by park code", res.data);
-    AppState.activePark = res.data.data.map((ap) => new Park(ap))
+    // AppState.activePark = res.data.data.map((ap) => new Park(ap))
+    AppState.activePark = new Park(res.data.data[0])
     logger.log("getting park by park code from appState", AppState.activePark);
+    // logger.log("active park name", AppState.activePark[0].name)
   }
 
   async getThingsToDo(parkCode) {
