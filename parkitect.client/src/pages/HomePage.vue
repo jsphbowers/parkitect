@@ -8,13 +8,14 @@
         <input type="text" class="form-control" placeholder="Search by State">
           <button type="submit" class="input-group-text btn">Search</button>
       </div>
+      <button class="btn btn-create selectable">Create a Trip</button>
       </div>
     </section>
 
     <!-- SECTION park cards -->
     <section class="row ">
       <div class="col-12 text-center my-4">
-        <h2>Choose your National Park</h2>
+        <h2>Where do you want to go?</h2>
       </div>
       <div v-for="p in parks" :key="p.nativeId" class="col-md-4">
         <ParkCard :park="p" />
@@ -131,6 +132,24 @@ export default {
   box-shadow: none;
   border-top-left-radius: 30px !important;
   border-bottom-left-radius: 30px !important;
+}
 
+.btn-create {
+  border: none;
+  color: #ffff;
+  margin-top: .5em;
+  font-weight: bolder;
+  font-size: 1.25em;
+  text-decoration: underline;
+  text-shadow: 1px 1px black,
+    1px 1px 2px #1e4254,
+    -3px 1px 5px #5f91b040;
+}
+
+
+@media screen and (max-width: 480px) {
+  .search-bg {
+  min-height: 40vh;
+  }
 }
 </style>

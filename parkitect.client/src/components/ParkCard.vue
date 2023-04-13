@@ -1,26 +1,33 @@
 <template>
+  <router-link :to="{ name: 'ParkDetails', params: {parkCode: park.parkCode}}">
   <div class="card mb-3 elevation-4">
-    <img class="cardImg rounded-top" :src="park.images[0].url" :alt="park.name">
+    <img
+      class="cardImg rounded-top"
+      :src="park.images[0].url"
+      :alt="park.name"
+    />
     <div class="p-2">
-    <h6 class="m-0">{{ park.name }}</h6>
+      <h6 class="m-0">{{ park.name }}</h6>
+      <h6>{{ park.states }}</h6>
+    </div>
   </div>
-  </div>
+  </router-link>
 </template>
 
-
 <script>
+import { computed } from "vue";
 import { Park } from "../models/Park.js";
+import { AppState } from "../AppState.js";
 
 export default {
-  props: {
-    park: {type: Park, required: true}
-  },
-  setup(){
-    return {}
-  }
-}
+    props: {
+        park: { type: Park, required: true },
+    },
+    setup() {
+        return {};
+    },
+};
 </script>
-
 
 <style lang="scss" scoped>
 .cardImg {
@@ -29,5 +36,4 @@ export default {
   object-fit: cover;
   object-position: center;
 }
-
 </style>
