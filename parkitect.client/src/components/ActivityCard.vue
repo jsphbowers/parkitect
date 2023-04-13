@@ -1,17 +1,17 @@
 <template>
-  <div class="m-2 selectable activityCard elevation-2">
+  <div class="m-2 mx-4 selectable activityCard elevation-2">
     <div class="card">
       <div class="row g-0">
-        <div class="col-md-4">
+        <div class="col-md-6">
           <img class="cardImg px-0 activityImgBorder" :src="activity.images[0].url" alt="">
         </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <div class="p-2">
+        <div class="col-md-6">
+          <div class="row h-100 justify-content-center align-items-end">
+            <div class="p-2 col-11">
               <h4>{{ activity.title }}</h4>
               <h6>{{ activity.shortDescription }}</h6>
             </div>
-            <div class="d-flex">
+            <div class="d-flex col-11 p-2">
               <h5 class="iconbg mx-2" v-if="activity.arePetsPermitted == 'true'" title="Pets permitted">
                 <img
                   src="https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/pets-off-leash-black-22.svg"
@@ -68,14 +68,13 @@ export default {
 }
 
 .activityCard {
-  border: 2px solid #006838;
-  border-radius: 10px;
+  // border: 4px solid #006838;
+  // border-radius: 10px;
 }
 
 .activityImgBorder {
-  border-bottom-left-radius: 10px;
-  border-top-left-radius: 10px;
-
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
 }
 
 .iconbg {
@@ -84,5 +83,10 @@ export default {
   color: #ffff;
   border-radius: 10px;
   padding: 1vh;
+  margin-bottom: 0%;
+}
+
+.card {
+  --bs-card-border-width: 0px !important
 }
 </style>
