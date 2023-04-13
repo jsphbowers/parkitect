@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-warning bg-warning px-3 align-content-center">
+  <nav class="navbar navbar-expand-lg navbar-primary bg-primary px-3 align-content-center">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex">
-        <img alt="logo" src="../assets/img/Logo__1_-removebg-preview.png" height="50" />
+        <img alt="logo" src="../assets/img/Logo.png" height="55" />
       </div>
     </router-link>
     <button
@@ -18,11 +18,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
-        <li>
+        <!-- <li>
           <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
             About
           </router-link>
-        </li>
+        </li> -->
       </ul>
       <!-- LOGIN COMPONENT HERE -->
       <Login />
