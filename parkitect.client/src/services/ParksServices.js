@@ -25,7 +25,9 @@ export class ParksService {
     const res = await npsApi.get(`/thingstodo?parkCode=${parkCode}`)
     logger.log('[THE THINGS TO DO FROM npsAPI]', res.data)
     AppState.thingsToDo = res.data.data.map((th) => new ThingToDo(th))
-    logger.log('[THIS IS THE THINGS TO DO IN THE APPSTATE]', AppState.thingsToDo)
+    const newe = AppState.thingsToDo.filter(thing => thing.activities[0].name.toLowerCase().includes('snow'))
+
+    logger.log(newe)
   }
 }
 
