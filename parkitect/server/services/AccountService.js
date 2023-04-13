@@ -10,7 +10,7 @@ import { dbContext } from '../db/DbContext'
 async function createAccountIfNeeded(account, user) {
   if (!account) {
     user._id = user.id
-    if(typeof user.name == 'string' && user.name.includes('@')){
+    if (typeof user.name == 'string' && user.name.includes('@')) {
       user.name = user.nickname
     }
     account = await dbContext.Account.create({
@@ -46,6 +46,13 @@ function sanitizeBody(body) {
 }
 
 class AccountService {
+  async addParkVisited(parkCode, userId) {
+    const account = await dbContext.Account.findOne({ _id: userId })
+    account.parksVisited.push(parkCode)
+    await account.save()
+    return account
+  }
+
   /**
    * Returns a user account from the Auth0 user object
    *
