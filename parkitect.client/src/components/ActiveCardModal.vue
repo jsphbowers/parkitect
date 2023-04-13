@@ -16,8 +16,9 @@
             <div class="col-4">
               <h5>Type: {{ activity?.activities[0].name }}</h5>
             </div>
-            <div class="col-8" :inner-h-t-m-l="activity?.longDescription">
-
+            <div class="col-8">
+              <h6>
+              </h6>
             </div>
           </section>
         </div>
