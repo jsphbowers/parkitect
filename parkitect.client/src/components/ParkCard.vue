@@ -15,15 +15,18 @@
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { Park } from "../models/Park.js";
-import { AppState } from "../AppState.js";
 
 export default {
     props: {
         park: { type: Park, required: true },
-    },
-    setup() {
+  },
+
+  setup() {
+    onMounted(() => {
+      window.scrollTo(0, 0);
+    });
         return {};
     },
 };
