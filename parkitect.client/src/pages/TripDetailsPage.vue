@@ -37,7 +37,8 @@ export default {
       }
     })
     return {
-      trip: computed(() => AppState.activeTrip)
+      trip: computed(() => AppState.activeTrip),
+      myTrips: computed(() => AppState.trips)
     }
   }
 }
