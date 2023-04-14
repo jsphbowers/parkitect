@@ -169,6 +169,7 @@ import Pop from "../utils/Pop.js";
 import { onMounted, computed, ref, watchEffect } from "vue";
 import { parksService } from "../services/ParksServices.js";
 import { AppState } from "../AppState.js";
+import { tripsService } from "../services/TripsService.js"
 
 
 export default {
@@ -225,7 +226,7 @@ export default {
 
     return {
       park: computed(() => AppState.activePark),
-      myTrips: computed(() => AppState.myTrips),
+      myTrips: computed(() => AppState.trips),
       activities: computed(() => {
         if (!filterType.value) {
           return AppState.thingsToDo

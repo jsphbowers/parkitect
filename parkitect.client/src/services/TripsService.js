@@ -17,8 +17,9 @@ export class TripsService {
     AppState.activeTrip = new Trip(res.data)
   }
 
-  async getMyCreatedTrips(accountId) {
-    logger.log(accountId)
+  async getMyCreatedTrips() {
+    const res = await api.get(`account/trips`)
+    logger.log(res.data)
   }
 
   async addActivity(activityId) {
