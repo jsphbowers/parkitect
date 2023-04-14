@@ -45,24 +45,24 @@
 
     <!-- SECTION pagination -->
 
-    <section class="row">
+    <section class="row justify-content-between">
       <div class="col-3">
         <button
-          class="btn btn-outline-dark"
-          :disabled="previousPage === null"
+          class="btn btn-underline"
           @click="changePage(previousPage)"
-        >
+          >
           Previous
         </button>
+        <!-- :disabled="previousPage === null" -->
       </div>
-      <div class="col-3">
+      <div class="col-3 text-end">
         <button
-          class="btn btn-outline-dark"
-          :disabled="nextPage === null"
+          class="btn btn-underline"
           @click="changePage(nextPage)"
-        >
+          >
           Next
         </button>
+        <!-- :disabled="nextPage === null" -->
       </div>
     </section>
 
@@ -137,6 +137,8 @@ export default {
       parks: computed(() => AppState.parks),
       account: computed(() => AppState.account),
       loading: computed(() => AppState.loading),
+      previousPage: computed(() => AppState.previousPage),
+      nextPage: computed(() => AppState.nextPage),
 
       async searchPark() {
         try {
@@ -147,6 +149,14 @@ export default {
           logger.log(error.message);
         }
       },
+
+      async changePage() {
+        try {
+          logger.log('change page')
+        } catch (error) {
+          logger.log(error.message);
+        }
+      }
     };
   },
   components: { ParkCard, SmallModalVue, CreateTripForm },
@@ -209,6 +219,10 @@ export default {
   font-size: 1.25em;
   text-decoration: underline;
   text-shadow: 1px 1px black, 1px 1px 2px #1e4254, -3px 1px 5px #5f91b040;
+}
+
+.btn-underline {
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 480px) {
