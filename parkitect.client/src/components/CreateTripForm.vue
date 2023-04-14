@@ -38,7 +38,7 @@ export default {
         try { 
           const tripData = editable.value
           const trip = await tripsService.createTrip(tripData)
-          router.push({ name: "TripDetails", params: { tripId: trip.id} })
+          router.push({ name: "TripDetails", params: {tripId:  trip.id } })
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
