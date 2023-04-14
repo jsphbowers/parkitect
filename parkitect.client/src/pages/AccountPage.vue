@@ -12,13 +12,14 @@
     <!-- SECTION My trips -->
     <h1 class="ms-2 trip-margin">My Trips</h1>
     <section class="my-5 row">
-      <div class=" col-xl-3 col-md-6 trip-sizing d-flex justify-content-center" v-for="t in tripGoers" :key="t.id">
+      <div class=" col-xl-3 col-md-6 col-lg-4 trip-sizing d-flex justify-content-center" v-for="t in tripGoers"
+        :key="t.id">
 
 
 
         <MyTripCard :tripGoer="t" />
       </div>
-      <div class="col-xl-3 trip-sizing d-flex justify-content-center">
+      <div class="col-xl-3 col-md-6 col-lg-4 trip-sizing d-flex justify-content-center">
         <div class="create-trip justify-content-center align-items-center d-flex selectable" data-bs-toggle="modal"
           data-bs-target="#tripModal">
           <i class="mdi mdi-plus"></i>

@@ -1,7 +1,8 @@
 <template>
   <router-link :to="{ name: 'TripDetails', params: { tripId: tripGoer.tripId } }">
     <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable"
-      :style="{ backgroundImage: `url(${tripGoer.trip.coverImg})` }" :title="tripGoer.trip.description">
+      :style="{ backgroundImage: `url(${tripGoer.trip.coverImg})`, backgroundPosition: 'center', backgroundSize: 'cover' }"
+      :title="tripGoer.trip.description">
       <h3 class="ms-2 mt-2 trip-text">{{ tripGoer.trip.name }}</h3>
     </div>
   </router-link>
