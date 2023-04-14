@@ -13,25 +13,25 @@
     <h1 class="ms-2 trip-margin">My Trips</h1>
     <section class="my-5 row">
       <div class="col-md-3 trip-sizing d-flex justify-content-center">
-        <div class="create-trip test-trip justify-content-center align-items-center d-flex">
+        <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable">
           <h3 class="ms-2 mt-2 trip-text">Family vacay</h3>
         </div>
       </div>
 
       <div class="col-md-3 trip-sizing d-flex justify-content-center">
-        <div class="create-trip test-trip justify-content-center align-items-center d-flex">
+        <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable">
           <h3 class="ms-2 mt-2 trip-text">Boys Trip</h3>
         </div>
       </div>
 
       <div class="col-md-3 trip-sizing d-flex justify-content-center">
-        <div class="create-trip test-trip justify-content-center align-items-center d-flex">
+        <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable">
           <h3 class="ms-2 mt-2 trip-text">Fishing the Parks</h3>
         </div>
       </div>
 
       <div class="col-md-3 trip-sizing d-flex justify-content-center">
-        <div class="create-trip justify-content-center align-items-center d-flex">
+        <div class="create-trip justify-content-center align-items-center d-flex selectable">
           <i class="mdi mdi-plus"></i>
         </div>
       </div>
