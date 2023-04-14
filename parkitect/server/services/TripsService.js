@@ -19,7 +19,7 @@ class TripsService {
   async editTrip(tripId, tripEdits, userId) {
     const trip = await this.getTripById(tripId)
     if (trip.isArchived) {
-      throw new BadRequest('Cannot edit an archived trip')
+      throw new BadRequest('You cannot edit an archived trip')
     }
     if (trip.creatorId != userId) {
       throw new Forbidden("You are not authorized to edit another user's trip")

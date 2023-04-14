@@ -5,22 +5,35 @@
       <div class="col p-0 text-light text-center txt-shadow">
         <h1>Build your next National Park Journey!</h1>
         <form @submit.prevent="searchPark()" class="input-group mt-4">
-          <input v-model="editable" type="text" class="form-control" placeholder="Search by park or state" />
+          <input
+            v-model="editable"
+            type="text"
+            class="form-control"
+            placeholder="Search by park or state"
+          />
           <button type="submit" class="input-group-text btn">Search</button>
         </form>
-        <button v-if="account.id" class="btn btn-create selectable">Create a Trip</button>
+        <button v-if="account.id" class="btn btn-create selectable">
+          Create a Trip
+        </button>
       </div>
     </section>
 
     <!-- SECTION park cards -->
-    <section class="row">
+    <section class="row justify-content-center px-5">
       <div class="col-12 text-center my-4">
-        <h2>{{ parks.length != 0 ? 'Where do you want to go?' : "We are sorry, but there are no search results" }} </h2>
+        <h2>
+          {{
+            parks.length != 0
+              ? "Where do you want to go?"
+              : "We are sorry, but there are no search results"
+          }}
+        </h2>
       </div>
       <div v-if="parks.length == 0" class="text-center">
         <h1>¯\_(ツ)_/¯</h1>
       </div>
-      <div v-for="p in parks" :key="p.nativeId" class="col-md-4">
+      <div v-for="p in parks" :key="p.nativeId" class="col-md-4 ">
         <ParkCard :park="p" />
       </div>
     </section>
@@ -40,7 +53,7 @@ import { AppState } from "../AppState.js";
 
 export default {
   setup() {
-    const editable = ref('');
+    const editable = ref("");
 
     const coverImages = [
       "src/assets/img/HomePagePics/picture1.jpg",
@@ -87,7 +100,7 @@ export default {
         try {
           const query = editable.value;
           // logger.log(query);
-          await parksService.searchPark(query)
+          await parksService.searchPark(query);
         } catch (error) {
           logger.log(error.message);
         }
@@ -161,4 +174,6 @@ export default {
     min-height: 40vh;
   }
 }
+
+
 </style>
