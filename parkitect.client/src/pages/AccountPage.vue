@@ -76,6 +76,7 @@ import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
 import SmallModalVue from "../components/SmallModal.vue";
 import CreateTripForm from "../components/CreateTripForm.vue";
+import { api } from "../services/AxiosService.js"
 
 export default {
   setup() {
@@ -93,6 +94,11 @@ export default {
         Pop.error(error.message)
       }
     }
+
+    // async getTripGoerByAccountId(){
+    //   const res = await api.get('/account/tripGoers')
+    //   AppState.tripGoers = res.data.map(t => new TripGoer(t))
+    // }
 
     onMounted(() => {
       getTripGoerByAccountId()
