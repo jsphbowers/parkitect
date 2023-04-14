@@ -20,6 +20,12 @@ export class TripsService {
   async addActivity(activityId) {
     logger.log(activityId, 'from service')
   }
+  async getTripGoerByAccountId() {
+    const res = await api.get('/account/tripGoers')
+    AppState.tripGoers = res.data.map(t => new TripGoer(t))
+  }
+
+
 }
 
 export const tripsService = new TripsService();

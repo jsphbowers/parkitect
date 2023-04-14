@@ -34,7 +34,8 @@
     </section>
     <section class="row">
       <div class="col-md-3 trip-sizing d-flex justify-content-center">
-        <div class="create-trip justify-content-center align-items-center d-flex selectable" @click="createEvent()">
+        <div class="create-trip justify-content-center align-items-center d-flex selectable" data-bs-toggle="modal"
+          data-bs-target="#tripModal">
           <i class="mdi mdi-plus"></i>
         </div>
       </div>
@@ -54,15 +55,27 @@
     </section>
 
   </div>
+
+
+  <SmallModalVue id="tripModal">
+    <template #header>
+      <div>Create Your Trip!</div>
+    </template>
+    <template #body>
+      <CreateTripForm />
+    </template>
+  </SmallModalVue>
 </template>
 
 <script>
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { AppState } from '../AppState'
 import { accountService } from "../services/AccountService.js"
 import { tripsService } from "../services/TripsService.js"
 import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
+import SmallModalVue from "../components/SmallModal.vue";
+import CreateTripForm from "../components/CreateTripForm.vue";
 
 export default {
   setup() {
@@ -72,7 +85,18 @@ export default {
       "acad", "arch", "badl", "bibe", "bisc", "blca", "brca", "cany", "care", "cave", "chis", "cong", "crla", "cuva", "dena", "deva", "drto", "ever", "gaar", "glac", "glba", "grba", "grca", "grsa", "grsm", "grte", "gumo", "hale", "havo", "hosp", "indu", "isro", "jeff", "jotr", "katm", "kefj", "kica", "kova", "lacl", "lavo", "maca", "meve", "mora", "neri", "noca", "npsa", "olym", "pefo", "pinn", "redw", "romo", "sagu", "seqa", "shen", "thro", "viis", "voya", "whsa", "wica", "wrst", "yell", "yose", "zion",
     ])
 
+    async function getTripGoerByAccountId() {
+      try {
+        await tripsService.getTripGoerByAccountId()
+      } catch (error) {
+        logger.error(error)
+        Pop.error(error.message)
+      }
+    }
 
+    onMounted(() => {
+      getTripGoerByAccountId()
+    })
 
     return {
       coverImages,
@@ -86,14 +110,14 @@ export default {
         return AppState.account.parksVisited?.includes(parkCode) ? '' : 'grayscale'
       },
 
-      async createTrip() {
-        try {
-          await tripsService.createTrip
-        } catch (error) {
-          logger.error(error)
-          Pop.error(error.message)
-        }
-      },
+      // async createTrip() {
+      //   try {
+      //     await tripsService.createTrip
+      //   } catch (error) {
+      //     logger.error(error)
+      //     Pop.error(error.message)
+      //   }
+      // },
       async visitPark(parkCode) {
         try {
           if (AppState.account.parksVisited.includes(parkCode)) {
@@ -113,7 +137,8 @@ export default {
 
 
     }
-  }
+  },
+  components: { SmallModalVue, CreateTripForm },
 }
 </script>
 
