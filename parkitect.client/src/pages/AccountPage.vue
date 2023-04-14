@@ -11,12 +11,13 @@
 
     <!-- SECTION My trips -->
     <h1 class="ms-2 trip-margin">My Trips</h1>
-    <section class="my-5 row">
-      <div class="col-md-3 trip-sizing d-flex justify-content-center">
+    <section class="my-5 row" v-for="t in trips" :key="t.id">
+      <!-- <div class="col-md-3 trip-sizing d-flex justify-content-center">
         <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable">
           <h3 class="ms-2 mt-2 trip-text">Family vacay</h3>
         </div>
-      </div>
+      </div> -->
+      <!-- <MyTripCard :trip="t" /> -->
 
       <div class="col-md-3 trip-sizing d-flex justify-content-center">
         <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable">
@@ -31,7 +32,7 @@
       </div>
 
       <div class="col-md-3 trip-sizing d-flex justify-content-center">
-        <div class="create-trip justify-content-center align-items-center d-flex selectable">
+        <div class="create-trip justify-content-center align-items-center d-flex selectable" @click="createEvent()">
           <i class="mdi mdi-plus"></i>
         </div>
       </div>
@@ -40,11 +41,11 @@
 
     <!-- SECTION Places Ive been to -->
     <section class=" mt-3 row">
-      <div class="col-12 my-5 text-center title-bg">
+      <div class="col-12 mt-5 text-center title-bg">
         <h2 class="ms-2"><b>Build your National Park passport!</b></h2>
       </div>
-      <div class="col-12">
-        <div class="justify-content-evenly d-flex flex-wrap my-2">
+      <div class="col-12 icon-bg">
+        <div class="justify-content-evenly d-flex flex-wrap my-2 py-5">
           <img v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style mb-3 selectable"
             :src="`/icons/${parkCode}.png`" alt="" :class="hasVisited(parkCode)">
         </div>
@@ -58,6 +59,7 @@
 import { computed, ref } from 'vue'
 import { AppState } from '../AppState'
 import { accountService } from "../services/AccountService.js"
+import { tripsService } from "../services/TripsService.js"
 import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
 
@@ -81,6 +83,15 @@ export default {
       }),
       hasVisited(parkCode) {
         return AppState.account.parksVisited?.includes(parkCode) ? '' : 'grayscale'
+      },
+
+      async createTrip() {
+        try {
+          await tripsService.createTrip
+        } catch (error) {
+          logger.error(error)
+          Pop.error(error.message)
+        }
       },
       async visitPark(parkCode) {
         try {
