@@ -53,7 +53,17 @@
     </section>
     <!-- SECTION Popular Activities with filter bar or buttons-->
     <section class="row">
-      <h4>Popular Activities</h4>
+      <div class="col-12 d-flex justify-content-between my-3 px-4">
+        <h4>Popular Activities</h4>
+        <div class="dropdown">
+          <button class="btn addParkBtn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Add Park To Trip
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+          </ul>
+        </div>
+      </div>
       <div class="col-12 d-flex justify-content-evenly">
         <div class="text-center p-2">
           <img @click="changeActivityType('')" class="filter-img selectable elevation-3"
@@ -159,6 +169,7 @@ import Pop from "../utils/Pop.js";
 import { onMounted, computed, ref, watchEffect } from "vue";
 import { parksService } from "../services/ParksServices.js";
 import { AppState } from "../AppState.js";
+import { tripsService } from "../services/TripsService.js"
 
 
 export default {
@@ -183,6 +194,15 @@ export default {
         Pop.error(error.message)
       }
     }
+    async function getMyCreatedTrips() {
+      try {
+        await tripsService.getMyCreatedTrips()
+      } catch (error) {
+        Pop.error(error.message)
+        logger.error(error.message)
+      }
+    }
+
     async function getActivePark() {
       try {
         const parkCode = route.params.parkCode
@@ -198,8 +218,15 @@ export default {
       window.scrollTo(0, 0);
     })
 
+    watchEffect(() => {
+      if (AppState.account?.id) {
+        getMyCreatedTrips()
+      }
+    })
+
     return {
       park: computed(() => AppState.activePark),
+      myTrips: computed(() => AppState.trips),
       activities: computed(() => {
         if (!filterType.value) {
           return AppState.thingsToDo
@@ -253,5 +280,16 @@ export default {
   padding: 0 25px;
   border-radius: 5px;
   box-shadow: none;
+}
+
+.addParkBtn {
+  background-image: linear-gradient(rgb(150, 207, 36) 0%, rgb(0, 104, 56) 100%);
+  border: 0;
+  color: #ffff;
+  padding: 0 25px;
+  border-radius: 30px;
+  box-shadow: none;
+  border-top-left-radius: 30px !important;
+  border-bottom-left-radius: 30px !important;
 }
 </style>

@@ -41,7 +41,10 @@ class TripsService {
     return trip
   }
 
-
+  async getMyTrips(userId) {
+    const trips = await dbContext.Trips.find({ creatorId: userId })
+    return trips
+  }
 }
 
 export const tripsService = new TripsService()
