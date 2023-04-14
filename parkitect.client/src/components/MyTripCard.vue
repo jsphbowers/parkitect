@@ -9,6 +9,9 @@
 
 <script>
 export default {
+  props: {
+    trip: { type: ThingToDo, required: true }
+  },
   setup() {
     return {}
   }
