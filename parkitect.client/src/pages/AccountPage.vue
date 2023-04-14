@@ -11,12 +11,12 @@
 
     <!-- SECTION My trips -->
     <h1 class="ms-2 trip-margin">My Trips</h1>
-    <section class="my-5 row" v-for="t in trips" :key="t.id">
-      <!-- <div class="col-md-3 trip-sizing d-flex justify-content-center">
+    <section class="my-5 row">
+      <div class="col-md-3 trip-sizing d-flex justify-content-center">
         <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable">
           <h3 class="ms-2 mt-2 trip-text">Family vacay</h3>
         </div>
-      </div> -->
+      </div>
       <!-- <MyTripCard :trip="t" /> -->
 
       <div class="col-md-3 trip-sizing d-flex justify-content-center">
@@ -31,12 +31,13 @@
         </div>
       </div>
 
+    </section>
+    <section class="row">
       <div class="col-md-3 trip-sizing d-flex justify-content-center">
         <div class="create-trip justify-content-center align-items-center d-flex selectable" @click="createEvent()">
           <i class="mdi mdi-plus"></i>
         </div>
       </div>
-
     </section>
 
     <!-- SECTION Places Ive been to -->

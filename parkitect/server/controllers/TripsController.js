@@ -7,108 +7,115 @@ import { tripGoersService } from "../services/TripGoersService.js";
 
 export class TripsController extends BaseController {
   constructor() {
-    super('/trips')
+    super("/trips");
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createTrip)
+      .post('/:tripId/tripParks', this.addTripPark)
+      .post('/:tripId/tripThingsToDo', this.addTripThingToDo)
+      .post('/:tripId/tripGoers', this.addTripGoer)
       .get('/:tripId', this.getTripById)
+      .get('/:tripId/tripParks', this.getTripParks)
+      .get('/:tripId/tripThingsToDo', this.getTripThingsToDo)
+      .get('/:tripId/tripGoers', this.getTripGoers)
       .put('/:tripId', this.editTrip)
       .delete('/:tripId', this.toggleArchiveTrip)
-      .post('/:tripId/tripParks', this.addTripPark)
-      .get('/:tripId/tripParks', this.getTripParks)
       .delete('/:tripId/tripParks/:tripParkId', this.deleteTripPark)
-      .post('/:tripId/tripThingsToDo', this.addTripThingToDo)
-      .get('/:tripId/tripThingsToDo', this.getTripThingsToDo)
       .delete('/:tripId/tripThingsToDo/:tripThingToDoId', this.deleteTripThingToDo)
-      .post('/:tripId/tripGoers', this.addTripGoer)
-      .get('/:tripId/tripGoers', this.getTripGoers)
       .delete('/:tripId/tripGoers/:tripGoerId', this.deleteTripGoer)
   }
 
   // SECTION trips
-  //#region 
+  //#region
   async createTrip(req, res, next) {
     try {
-      const tripData = req.body
-      tripData.creatorId = req.userInfo.id
-      tripData.joinCode = Math.ceil(Math.random() * 1000000)
-      const trip = await tripsService.createTrip(tripData)
-      const tripGoerData = {}
-      tripGoerData.accountId = req.userInfo.id
-      tripGoerData.tripId = trip.id
-      const tripGoer = await tripGoersService.addTripGoer(tripGoerData)
-      res.send(trip)
+      const tripData = req.body;
+      tripData.creatorId = req.userInfo.id;
+      tripData.joinCode = Math.ceil(Math.random() * 1000000);
+      if (tripData.joinCode.length < 6) {
+        tripData.joinCode = Math.ceil(Math.random() * 1000000);
+      }
+      const trip = await tripsService.createTrip(tripData);
+      const tripGoerData = {};
+      tripGoerData.accountId = req.userInfo.id;
+      tripGoerData.tripId = trip.id;
+      const tripGoer = await tripGoersService.addTripGoer(tripGoerData);
+      res.send(trip);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 
   async getTripById(req, res, next) {
     try {
-      const tripId = req.params.tripId
-      const trip = await tripsService.getTripById(tripId)
-      res.send(trip)
+      const tripId = req.params.tripId;
+      const trip = await tripsService.getTripById(tripId);
+      res.send(trip);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 
   async editTrip(req, res, next) {
     try {
-      const tripId = req.params.tripId
-      const tripEdits = req.body
-      const userId = req.userInfo.id
-      const trip = await tripsService.editTrip(tripId, tripEdits, userId)
-      res.send(trip)
+      const tripId = req.params.tripId;
+      const tripEdits = req.body;
+      const userId = req.userInfo.id;
+      const trip = await tripsService.editTrip(tripId, tripEdits, userId);
+      res.send(trip);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 
   async toggleArchiveTrip(req, res, next) {
     try {
-      const tripId = req.params.tripId
-      const userId = req.userInfo.id
-      const trip = await tripsService.toggleArchiveTrip(tripId, userId)
-      res.send(trip)
+      const tripId = req.params.tripId;
+      const userId = req.userInfo.id;
+      const trip = await tripsService.toggleArchiveTrip(tripId, userId);
+      res.send(trip);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
   //#endregion
 
   // SECTION tripParks
-  //#region 
+  //#region
   async addTripPark(req, res, next) {
     try {
-      const tripParkData = req.body
-      tripParkData.tripId = req.params.tripId
-      const tripPark = await tripParksService.addTripPark(tripParkData)
-      res.send(tripPark)
+      const tripParkData = req.body;
+      tripParkData.tripId = req.params.tripId;
+      const tripPark = await tripParksService.addTripPark(tripParkData);
+      res.send(tripPark);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 
   async getTripParks(req, res, next) {
     try {
-      const tripId = req.params.tripId
-      const tripParks = await tripParksService.getTripParks(tripId)
-      res.send(tripParks)
+      const tripId = req.params.tripId;
+      const tripParks = await tripParksService.getTripParks(tripId);
+      res.send(tripParks);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 
   async deleteTripPark(req, res, next) {
     try {
-      const tripParkId = req.params.tripParkId
-      const userId = req.userInfo.id
-      const tripId = req.params.tripId
-      const message = await tripParksService.deleteTripPark(tripParkId, userId, tripId)
-      res.send(message)
+      const tripParkId = req.params.tripParkId;
+      const userId = req.userInfo.id;
+      const tripId = req.params.tripId;
+      const message = await tripParksService.deleteTripPark(
+        tripParkId,
+        userId,
+        tripId
+      );
+      res.send(message);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
   //#endregion
@@ -117,71 +124,83 @@ export class TripsController extends BaseController {
   // #region
   async addTripThingToDo(req, res, next) {
     try {
-      const tripThingToDoData = req.body
-      tripThingToDoData.tripId = req.params.tripId
-      const tripThingToDo = await tripThingsToDoService.addTripThingToDo(tripThingToDoData)
-      res.send(tripThingToDo)
+      const tripThingToDoData = req.body;
+      tripThingToDoData.tripId = req.params.tripId;
+      const tripThingToDo = await tripThingsToDoService.addTripThingToDo(
+        tripThingToDoData
+      );
+      res.send(tripThingToDo);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 
   async getTripThingsToDo(req, res, next) {
     try {
-      const tripId = req.params.tripId
-      const tripThingsToDo = await tripThingsToDoService.getTripThingsToDo(tripId)
-      res.send(tripThingsToDo)
+      const tripId = req.params.tripId;
+      const tripThingsToDo = await tripThingsToDoService.getTripThingsToDo(
+        tripId
+      );
+      res.send(tripThingsToDo);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 
   async deleteTripThingToDo(req, res, next) {
     try {
-      const tripId = req.params.tripId
-      const userId = req.userInfo.id
-      const tripThingToDoId = req.params.tripThingToDoId
-      const message = await tripThingsToDoService.deleteTripThingToDo(tripId, userId, tripThingToDoId)
-      res.send(message)
+      const tripId = req.params.tripId;
+      const userId = req.userInfo.id;
+      const tripThingToDoId = req.params.tripThingToDoId;
+      const message = await tripThingsToDoService.deleteTripThingToDo(
+        tripId,
+        userId,
+        tripThingToDoId
+      );
+      res.send(message);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
   //#endregion
 
   // SECTION tripGoers
-  //#region 
+  //#region
   async addTripGoer(req, res, next) {
     try {
-      const tripGoerData = req.body
-      tripGoerData.accountId = req.userInfo.id
-      tripGoerData.tripId = req.params.tripId
-      const tripGoer = await tripGoersService.addTripGoer(tripGoerData)
-      res.send(tripGoer)
+      const tripGoerData = req.body;
+      tripGoerData.accountId = req.userInfo.id;
+      tripGoerData.tripId = req.params.tripId;
+      const tripGoer = await tripGoersService.addTripGoer(tripGoerData);
+      res.send(tripGoer);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 
   async getTripGoers(req, res, next) {
     try {
-      const tripId = req.params.tripId
-      const tripGoers = await tripGoersService.getTripGoers(tripId)
-      res.send(tripGoers)
+      const tripId = req.params.tripId;
+      const tripGoers = await tripGoersService.getTripGoers(tripId);
+      res.send(tripGoers);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 
   async deleteTripGoer(req, res, next) {
     try {
-      const tripGoerId = req.params.tripGoerId
-      const userId = req.userInfo.id
-      const tripId = req.params.tripId
-      const message = await tripGoersService.deleteTripGoer(tripId, userId, tripGoerId)
-      res.send(message)
+      const tripGoerId = req.params.tripGoerId;
+      const userId = req.userInfo.id;
+      const tripId = req.params.tripId;
+      const message = await tripGoersService.deleteTripGoer(
+        tripId,
+        userId,
+        tripGoerId
+      );
+      res.send(message);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
   //#endregion

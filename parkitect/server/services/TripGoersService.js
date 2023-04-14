@@ -39,6 +39,11 @@ class TripGoersService {
     tripGoer.remove()
     return `tripGoer with id ${tripGoer.id} has successfully been removed from ${trip.name}`
   }
+
+  async getMyTripGoers(userId) {
+    const tripGoers = await dbContext.TripGoers.find({ accountId: userId }).populate('account').populate('trip')
+    return tripGoers
+  }
 }
 
 export const tripGoersService = new TripGoersService()
