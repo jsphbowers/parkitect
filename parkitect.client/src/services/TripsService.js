@@ -8,6 +8,8 @@ export class TripsService {
     // logger.log(tripData)
     const res = await api.post('/trips', tripData)
     logger.log('creating trip', res.data)
+    AppState.trips.push(new Trip(res.data));
+    return new Trip(res.data);
   }
 
   async getMyTrip(tripId) {
