@@ -41,6 +41,7 @@ export default {
     return {
       hasPark: computed(() => AppState.tripParks.find(tp => tp.nativeParkId == AppState.activePark.nativeId)),
       parkExists,
+
       async addParkToTrip(tripId) {
         try {
           logger.log('[THIS IS THE TRIP ID]', tripId)

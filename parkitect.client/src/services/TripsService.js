@@ -30,7 +30,9 @@ export class TripsService {
     // logger.log('[WE BE ADDING A PARK]', tripId, nativeParkId)
     const parkData = {
       fullName: parkName,
-      nativeParkId: nativeParkId
+      nativeParkId: nativeParkId,
+      image: AppState.activePark.images[0].url,
+      parkCode: AppState.activePark.parkCode
     }
     const res = await api.post(`/trips/${tripId}/tripParks`, parkData)
     logger.log('[THIS IS THE RETURNED PARK ADDED TO TRIP]', res.data)
