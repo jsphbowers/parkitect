@@ -1,5 +1,6 @@
 import { AppState } from "../AppState.js";
 import { Trip } from "../models/Trip.js";
+import { TripGoer } from "../models/TripGoer.js";
 import { logger } from "../utils/Logger";
 import { api } from "./AxiosService";
 
@@ -15,6 +16,7 @@ export class TripsService {
   async getMyTrip(tripId) {
     const res = await api.get(`/trips/${tripId}`)
     AppState.activeTrip = new Trip(res.data)
+    logger.log('[ACTIVE TRIP]', AppState.activeTrip)
   }
 
   async getMyCreatedTrips() {
@@ -37,6 +39,9 @@ export class TripsService {
   async addActivity(activityId) {
     logger.log(activityId, 'from service')
   }
+
+
+
 }
 
 export const tripsService = new TripsService();

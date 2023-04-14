@@ -11,15 +11,16 @@
 
     <!-- SECTION My trips -->
     <h1 class="ms-2 trip-margin">My Trips</h1>
-    <section class="my-5 row">
+    <section class="my-5 row" v-for="t in tripGoers" :key="t.id">
+      <!-- 
       <div class="col-md-3 trip-sizing d-flex justify-content-center">
         <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable">
           <h3 class="ms-2 mt-2 trip-text">Family vacay</h3>
         </div>
-      </div>
-      <!-- <MyTripCard :trip="t" /> -->
+      </div> -->
+      <MyTripCard :tripGoer="t" />
 
-      <div class="col-md-3 trip-sizing d-flex justify-content-center">
+      <!-- <div class="col-md-3 trip-sizing d-flex justify-content-center">
         <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable">
           <h3 class="ms-2 mt-2 trip-text">Boys Trip</h3>
         </div>
@@ -29,12 +30,13 @@
         <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable">
           <h3 class="ms-2 mt-2 trip-text">Fishing the Parks</h3>
         </div>
-      </div>
+      </div> -->
 
     </section>
     <section class="row">
       <div class="col-md-3 trip-sizing d-flex justify-content-center">
-        <div class="create-trip justify-content-center align-items-center d-flex selectable" @click="createEvent()">
+        <div class="create-trip justify-content-center align-items-center d-flex selectable" data-bs-toggle="modal"
+          data-bs-target="#tripModal">
           <i class="mdi mdi-plus"></i>
         </div>
       </div>
@@ -54,15 +56,29 @@
     </section>
 
   </div>
+
+
+  <SmallModalVue id="tripModal">
+    <template #header>
+      <div>Create Your Trip!</div>
+    </template>
+    <template #body>
+      <CreateTripForm />
+    </template>
+  </SmallModalVue>
 </template>
 
 <script>
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { AppState } from '../AppState'
 import { accountService } from "../services/AccountService.js"
-import { tripsService } from "../services/TripsService.js"
+import { tripGoersService } from "../services/TripGoersService.js"
 import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
+import SmallModalVue from "../components/SmallModal.vue";
+import CreateTripForm from "../components/CreateTripForm.vue";
+import MyTripCard from "../components/MyTripCard.vue"
+
 
 export default {
   setup() {
@@ -72,12 +88,29 @@ export default {
       "acad", "arch", "badl", "bibe", "bisc", "blca", "brca", "cany", "care", "cave", "chis", "cong", "crla", "cuva", "dena", "deva", "drto", "ever", "gaar", "glac", "glba", "grba", "grca", "grsa", "grsm", "grte", "gumo", "hale", "havo", "hosp", "indu", "isro", "jeff", "jotr", "katm", "kefj", "kica", "kova", "lacl", "lavo", "maca", "meve", "mora", "neri", "noca", "npsa", "olym", "pefo", "pinn", "redw", "romo", "sagu", "seqa", "shen", "thro", "viis", "voya", "whsa", "wica", "wrst", "yell", "yose", "zion",
     ])
 
+    async function getTripGoerByAccountId() {
+      try {
+        await tripGoersService.getTripGoerByAccountId()
+      } catch (error) {
+        logger.error(error)
+        Pop.error(error.message)
+      }
+    }
 
+    // async getTripGoerByAccountId(){
+    //   const res = await api.get('/account/tripGoers')
+    //   AppState.tripGoers = res.data.map(t => new TripGoer(t))
+    // }
+
+    onMounted(() => {
+      getTripGoerByAccountId()
+    })
 
     return {
       coverImages,
       icons,
       account: computed(() => AppState.account),
+      tripGoers: computed(() => AppState.tripGoers),
       selectedImg: computed(() => {
         const randomIndex = Math.floor(Math.random() * coverImages.length)
         return `url(${coverImages[randomIndex]})`
@@ -86,14 +119,14 @@ export default {
         return AppState.account.parksVisited?.includes(parkCode) ? '' : 'grayscale'
       },
 
-      async createTrip() {
-        try {
-          await tripsService.createTrip
-        } catch (error) {
-          logger.error(error)
-          Pop.error(error.message)
-        }
-      },
+      // async createTrip() {
+      //   try {
+      //     await tripsService.createTrip
+      //   } catch (error) {
+      //     logger.error(error)
+      //     Pop.error(error.message)
+      //   }
+      // },
       async visitPark(parkCode) {
         try {
           if (AppState.account.parksVisited.includes(parkCode)) {
@@ -113,7 +146,8 @@ export default {
 
 
     }
-  }
+  },
+  components: { SmallModalVue, CreateTripForm, MyTripCard },
 }
 </script>
 
