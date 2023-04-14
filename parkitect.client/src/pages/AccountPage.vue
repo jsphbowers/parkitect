@@ -40,11 +40,11 @@
 
     <!-- SECTION Places Ive been to -->
     <section class=" mt-3 row">
-      <div class="col-12 my-5 text-center title-bg">
+      <div class="col-12 mt-5 text-center title-bg">
         <h2 class="ms-2"><b>Build your National Park passport!</b></h2>
       </div>
-      <div class="col-12">
-        <div class="justify-content-evenly d-flex flex-wrap my-2">
+      <div class="col-12 icon-bg">
+        <div class="justify-content-evenly d-flex flex-wrap my-2 py-5">
           <img v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style mb-3 selectable"
             :src="`/icons/${parkCode}.png`" alt="" :class="hasVisited(parkCode)">
         </div>
