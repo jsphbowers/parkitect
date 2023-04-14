@@ -48,21 +48,19 @@
     <section class="row justify-content-between">
       <div class="col-3">
         <button
-          class="btn btn-underline"
+          class="btn btn-underline" :disabled="currentPage == 0"
           @click="changePage('decrease')"
           >
           Previous Page
         </button>
-        <!-- :disabled="currentPage == 1" -->
       </div>
       <div class="col-3 text-end">
         <button
-          class="btn btn-underline"
+          class="btn btn-underline" :disabled="currentPage == totalPages"
           @click="changePage('increase')"
           >
           Next Page
         </button>
-        <!-- :disabled="currentPage == total" -->
       </div>
     </section>
 
@@ -155,11 +153,12 @@ export default {
           // logger.log('change page')
           if (pageChange == 'increase' ) {
             AppState.currentPage++
+            await parksService.changePage(pageChange)
           }
           if (pageChange == 'decrease' ) {
             AppState.currentPage--
+            await parksService.changePage(pageChange)
           }
-          await parksService.changePage()
         } catch (error) {
           logger.log(error.message);
         }
@@ -230,6 +229,7 @@ export default {
 
 .btn-underline {
   text-decoration: underline;
+  border: none;
 }
 
 @media screen and (max-width: 480px) {
