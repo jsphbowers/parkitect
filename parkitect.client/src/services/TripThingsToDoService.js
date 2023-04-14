@@ -17,8 +17,8 @@ class TripThingsToDoService {
         dictionary[AppState.tripThingsToDo[i].parkCode].push(AppState.tripThingsToDo[i])
       }
     }
-    logger.log('[APPSTATE TRIPTHINGSTODO]', AppState.tripThingsToDo)
-    logger.log('[DICTIONARY]', dictionary)
+    // logger.log('[APPSTATE TRIPTHINGSTODO]', AppState.tripThingsToDo)
+    // logger.log('[DICTIONARY]', dictionary)
     AppState.dictionary = dictionary
   }
 

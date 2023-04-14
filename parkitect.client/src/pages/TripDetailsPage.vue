@@ -36,6 +36,8 @@
   </div>
 </template>
 
+<!-- FIXME add ActivityCardModal onto each thingToDo. It originates in ActivityCard.vue -->
+
 
 <script>
 import { useRoute } from "vue-router";
