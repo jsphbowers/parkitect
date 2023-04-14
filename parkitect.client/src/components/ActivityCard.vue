@@ -1,5 +1,5 @@
 <template>
-  <div class="m-2 mx-4 selectable activityCard elevation-2" data-bs-toggle="modal" data-bs-target="#exampleModal"
+  <div class="m-2 mx-4 selectable elevation-2" data-bs-toggle="modal" data-bs-target="#exampleModal"
     @click="setActiveActivity(activity?.nativeId)">
     <div class="card">
       <div class="row g-0">
@@ -82,10 +82,7 @@ export default {
   object-position: center;
 }
 
-.activityCard {
-  // border: 4px solid #006838;
-  // border-radius: 10px;
-}
+
 
 .activityImgBorder {
   border-bottom-left-radius: 5px;

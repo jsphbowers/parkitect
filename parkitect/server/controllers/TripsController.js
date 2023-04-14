@@ -10,22 +10,19 @@ export class TripsController extends BaseController {
     super("/trips");
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .post("", this.createTrip)
-      .get("/:tripId", this.getTripById)
-      .put("/:tripId", this.editTrip)
-      .delete("/:tripId", this.toggleArchiveTrip)
-      .post("/:tripId/tripParks", this.addTripPark)
-      .get("/:tripId/tripParks", this.getTripParks)
-      .delete("/:tripId/tripParks/:tripParkId", this.deleteTripPark)
-      .post("/:tripId/tripThingsToDo", this.addTripThingToDo)
-      .get("/:tripId/tripThingsToDo", this.getTripThingsToDo)
-      .delete(
-        "/:tripId/tripThingsToDo/:tripThingToDoId",
-        this.deleteTripThingToDo
-      )
-      .post("/:tripId/tripGoers", this.addTripGoer)
-      .get("/:tripId/tripGoers", this.getTripGoers)
-      .delete("/:tripId/tripGoers/:tripGoerId", this.deleteTripGoer);
+      .post('', this.createTrip)
+      .post('/:tripId/tripParks', this.addTripPark)
+      .post('/:tripId/tripThingsToDo', this.addTripThingToDo)
+      .post('/:tripId/tripGoers', this.addTripGoer)
+      .get('/:tripId', this.getTripById)
+      .get('/:tripId/tripParks', this.getTripParks)
+      .get('/:tripId/tripThingsToDo', this.getTripThingsToDo)
+      .get('/:tripId/tripGoers', this.getTripGoers)
+      .put('/:tripId', this.editTrip)
+      .delete('/:tripId', this.toggleArchiveTrip)
+      .delete('/:tripId/tripParks/:tripParkId', this.deleteTripPark)
+      .delete('/:tripId/tripThingsToDo/:tripThingToDoId', this.deleteTripThingToDo)
+      .delete('/:tripId/tripGoers/:tripGoerId', this.deleteTripGoer)
   }
 
   // SECTION trips

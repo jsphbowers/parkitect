@@ -59,6 +59,9 @@
       "statusBar.debuggingBackground": "#794377",
       "statusBar.debuggingForeground": "#e7e7e7"
     },
-    "peacock.color": "#437945"
+    "peacock.color": "#437945",
+    "cSpell.words": [
+      "iconbg"
+    ]
   }
 }
