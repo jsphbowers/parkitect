@@ -5,5 +5,6 @@ export class TripThingToDo {
     this.nativeThingToDoId = data.nativeThingToDoId
     this.title = data.title
     this.tripId = data.tripId
+    this.parkCode = data.parkCode
   }
 }

@@ -1,20 +1,36 @@
 <template>
   <div class="container-fluid">
     <section class="row justify-content-center">
+      <!-- cover photo -->
+      <div class="col-12 p-0">
+        <img :src="trip?.coverImg" :alt="'cover image for ' + trip?.name" class="cover-img">
+      </div>
       <!-- trip details card -->
-      <div class="col-10 text-center trip-details-card">
+      <div class="col-md-11 text-center trip-details-card">
         <h1>{{ trip?.name }}</h1>
         <h2>{{ trip?.description }}</h2>
       </div>
       <!-- tripGoers photos -->
-      <div class="col-10 d-flex">
+      <div class="col-md-11 d-flex">
         <div v-for="t in tripGoers" :key="t.id">
           <img :src="t.account.picture" :alt="'a photo of ' + t.account.name" :title="t.account.name" class="profile-pic">
         </div>
       </div>
       <!-- tripParks and tripThingsToDo -->
-      <div class="col-10">
-        <h1 v-for="t in tripParks" :key="t.id">{{ t.fullName }}</h1>
+      <div class="col-md-11">
+        <section class="row mb-4" v-for="t in tripParks" :key="t.id">
+          <div class="col-md-7">
+            <h1>{{ t.fullName }}</h1>
+            <img :src="t.image" :alt="'a photo of ' + t.fullName" class="park-img">
+          </div>
+          <div class="col-md-5">
+            <h3 class="mt-5">Activities</h3>
+            <ul v-if="tripThingsToDo.length" v-for="ttd in tripThingsToDo" :key="ttd.id">
+              <li v-if="ttd.parkCode == t.parkCode">{{ ttd.title }}</li>
+            </ul>
+            <h6 v-if="!tripThingsToDo.length">No activities have been added for this park</h6>
+          </div>
+        </section>
       </div>
     </section>
   </div>
@@ -29,7 +45,7 @@ import { tripsService } from "../services/TripsService.js";
 import { tripGoersService } from "../services/TripGoersService.js";
 import { tripParksService } from "../services/TripParksService.js";
 import { tripThingsToDoService } from "../services/TripThingsToDoService.js";
-import { computed, onMounted, watchEffect } from "vue";
+import { computed, watchEffect } from "vue";
 import { AppState } from "../AppState.js";
 
 export default {
@@ -65,10 +81,10 @@ export default {
       }
     }
 
-    async function getTripParkByTripId() {
+    async function getTripParksByTripId() {
       try {
         const tripId = route.params.tripId
-        await tripParksService.getTripParkByTripId(tripId)
+        await tripParksService.getTripParksByTripId(tripId)
       } catch (error) {
         logger.log(error)
         Pop.error(error.message)
@@ -80,7 +96,7 @@ export default {
         getMyTrip()
         getTripGoersByTripId()
         getTripThingsToDoByTripId()
-        getTripParkByTripId()
+        getTripParksByTripId()
       }
     })
     return {
@@ -111,5 +127,19 @@ export default {
   width: 10vh;
   object-fit: cover;
   object-position: center
+}
+
+.cover-img {
+  width: 100%;
+  height: 45vh;
+  object-fit: cover;
+  object-position: center
+}
+
+.park-img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 45vh
 }
 </style>

@@ -11,35 +11,23 @@
 
     <!-- SECTION My trips -->
     <h1 class="ms-2 trip-margin">My Trips</h1>
-    <section class="my-5 row" v-for="t in tripGoers" :key="t.id">
-      <!-- 
-      <div class="col-md-3 trip-sizing d-flex justify-content-center">
-        <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable">
-          <h3 class="ms-2 mt-2 trip-text">Family vacay</h3>
-        </div>
-      </div> -->
-      <MyTripCard :tripGoer="t" />
+    <section class="my-5 row">
+      <div class=" col-xl-3 col-md-6 col-lg-4 trip-sizing d-flex justify-content-center" v-for="t in tripGoers"
+        :key="t.id">
 
-      <!-- <div class="col-md-3 trip-sizing d-flex justify-content-center">
-        <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable">
-          <h3 class="ms-2 mt-2 trip-text">Boys Trip</h3>
-        </div>
+
+
+        <MyTripCard :tripGoer="t" />
       </div>
-
-      <div class="col-md-3 trip-sizing d-flex justify-content-center">
-        <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable">
-          <h3 class="ms-2 mt-2 trip-text">Fishing the Parks</h3>
-        </div>
-      </div> -->
-
-    </section>
-    <section class="row">
-      <div class="col-md-3 trip-sizing d-flex justify-content-center">
+      <div class="col-xl-3 col-md-6 col-lg-4 trip-sizing d-flex justify-content-center">
         <div class="create-trip justify-content-center align-items-center d-flex selectable" data-bs-toggle="modal"
           data-bs-target="#tripModal">
           <i class="mdi mdi-plus"></i>
         </div>
       </div>
+    </section>
+    <section class="row">
+
     </section>
 
     <!-- SECTION Places Ive been to -->
@@ -153,8 +141,10 @@ export default {
 
 <style scoped>
 .account-img {
-  height: 25vh;
-  width: 25vh;
+  height: 30vh;
+  width: 30vh;
+  object-fit: cover;
+  object-position: center;
   border-radius: 50%;
   bottom: -7vh;
   left: 46vw;
@@ -170,7 +160,7 @@ export default {
 
 /* NOTE Remove test Trip */
 .test-trip {
-  background-image: url("https://images.unsplash.com/photo-1543858393-d5307eb2cdc7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Z2xhY2llciUyMG5hdGlvbmFsJTIwcGFya3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60");
+
   background-position: center;
   background-size: cover;
 }
@@ -217,6 +207,12 @@ export default {
 .trip-margin {
   margin-top: 10vh;
 
+}
+
+.trip-sizing {
+  justify-content: center;
+  display: flex;
+  margin-bottom: 5vh;
 }
 
 .grayscale {

@@ -5,7 +5,7 @@
         <img alt="logo" src="../assets/img/Logo.png" height="55" />
       </div>
     </router-link>
-    <button
+    <!-- <button
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
@@ -17,16 +17,16 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav me-auto"> -->
         <!-- <li>
           <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
             About
           </router-link>
         </li> -->
-      </ul>
+      <!-- </ul> -->
       <!-- LOGIN COMPONENT HERE -->
       <Login />
-    </div>
+    <!-- </div> -->
   </nav>
 </template>
 

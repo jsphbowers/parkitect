@@ -8,12 +8,14 @@ export class ParksService {
   async getParks() {
     AppState.loading.parks = true;
     const res = await npsApi.get(
-      `/parks?parkcode=acad,npsa,arch,badl,bibe,bisc,blca,brca,cany,care,cave,chis,cong,crla,cuva,deva,dena,drto,ever,gaar,jeff,glac,glba,grca,grte,grba,grsa,grsm,gumo,hale,havo,hosp,indu,isro,jotr,katm,kefj,seki,kova,lacl,lavo,maca,meve,mora,neri,noca,olym,pefo,pinn,redw,romo,sagu,shen,thro,viis,voya,whsa,wica,wrst,yell,yose,zion&limit=62`
+      `/parks?parkcode=acad,npsa,arch,badl,bibe,bisc,blca,brca,cany,care,cave,chis,cong,crla,cuva,deva,dena,drto,ever,gaar,jeff,glac,glba,grca,grte,grba,grsa,grsm,gumo,hale,havo,hosp,indu,isro,jotr,katm,kefj,seki,kova,lacl,lavo,maca,meve,mora,neri,noca,olym,pefo,pinn,redw,romo,sagu,shen,thro,viis,voya,whsa,wica,wrst,yell,yose,zion&limit=9`
     );
-    // logger.log("Getting parks from NPS api", res.data);
+    logger.log("Getting parks from NPS api", res.data);
     AppState.parks = res.data.data.map((p) => new Park(p));
     // logger.log("getting parks from appState", AppState.parks);
     AppState.loading.parks = false;
+    AppState.currentPage = res.data.start
+    AppState.totalPages = res.data.total
   }
 
   async getParkByParkCode(parkCode) {
@@ -48,6 +50,21 @@ export class ParksService {
     const activeActivity = AppState.thingsToDo.find(t => t.nativeId == activityId)
     AppState.activeThingToDo = activeActivity
     logger.log('[THIS IS THE ACTIVE THING TO DO]', AppState.activeThingToDo)
+  }
+
+  async changePage(pageChange) {
+    const currentPage = AppState.currentPage;
+    if (pageChange=='increase') {
+      AppState.start += 9
+    } else {
+      AppState.start -= 9
+    } 
+    const res = await npsApi.get(
+      `/parks?parkcode=acad,npsa,arch,badl,bibe,bisc,blca,brca,cany,care,cave,chis,cong,crla,cuva,deva,dena,drto,ever,gaar,jeff,glac,glba,grca,grte,grba,grsa,grsm,gumo,hale,havo,hosp,indu,isro,jotr,katm,kefj,seki,kova,lacl,lavo,maca,meve,mora,neri,noca,olym,pefo,pinn,redw,romo,sagu,shen,thro,viis,voya,whsa,wica,wrst,yell,yose,zion&start=${AppState.start}&limit=9`
+    );
+    AppState.parks = res.data.data.map((p) => new Park(p));
+    logger.log('next page parks', AppState.parks)
+    AppState.totalPages = res.data.total;
   }
 }
 

@@ -4,5 +4,7 @@ export class TripPark {
     this.fullName = data.fullName
     this.tripId = data.tripId
     this.nativeParkId = data.nativeParkId
+    this.image = data.image
+    this.parkCode = data.parkCode
   }
 }

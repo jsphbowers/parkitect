@@ -48,21 +48,19 @@
     <section class="row justify-content-between">
       <div class="col-3">
         <button
-          class="btn btn-underline"
-          @click="changePage(previousPage)"
+          class="btn btn-underline" :disabled="currentPage == 0"
+          @click="changePage('decrease')"
           >
-          Previous
+          Previous Page
         </button>
-        <!-- :disabled="previousPage === null" -->
       </div>
       <div class="col-3 text-end">
         <button
-          class="btn btn-underline"
-          @click="changePage(nextPage)"
+          class="btn btn-underline" :disabled="currentPage == totalPages"
+          @click="changePage('increase')"
           >
-          Next
+          Next Page
         </button>
-        <!-- :disabled="nextPage === null" -->
       </div>
     </section>
 
@@ -125,7 +123,7 @@ export default {
 
     onMounted(() => {
       getParks();
-      getParkByParkCode("yell");
+      // getParkByParkCode();
     });
     return {
       editable,
@@ -137,8 +135,8 @@ export default {
       parks: computed(() => AppState.parks),
       account: computed(() => AppState.account),
       loading: computed(() => AppState.loading),
-      previousPage: computed(() => AppState.previousPage),
-      nextPage: computed(() => AppState.nextPage),
+      currentPage: computed(() => AppState.currentPage),
+      totalPages: computed(() => AppState.totalPages),
 
       async searchPark() {
         try {
@@ -150,9 +148,17 @@ export default {
         }
       },
 
-      async changePage() {
+      async changePage(pageChange) {
         try {
-          logger.log('change page')
+          // logger.log('change page')
+          if (pageChange == 'increase' ) {
+            AppState.currentPage++
+            await parksService.changePage(pageChange)
+          }
+          if (pageChange == 'decrease' ) {
+            AppState.currentPage--
+            await parksService.changePage(pageChange)
+          }
         } catch (error) {
           logger.log(error.message);
         }
@@ -223,6 +229,7 @@ export default {
 
 .btn-underline {
   text-decoration: underline;
+  border: none;
 }
 
 @media screen and (max-width: 480px) {
