@@ -45,9 +45,9 @@ export class ParksService {
   }
 
   async setActiveActivity(activityId) {
-    const activeActivity = AppState.thingsToDo.find((t) => t.id == activityId);
-    AppState.activeThingToDo = activeActivity;
-    logger.log("[THIS IS THE ACTIVE THING TO DO]", AppState.activeThingToDo);
+    const activeActivity = AppState.thingsToDo.find(t => t.nativeId == activityId)
+    AppState.activeThingToDo = activeActivity
+    logger.log('[THIS IS THE ACTIVE THING TO DO]', AppState.activeThingToDo)
   }
 }
 
