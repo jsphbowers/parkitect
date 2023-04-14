@@ -25,7 +25,7 @@
     </section>
 
     <!-- SECTION park cards -->
-    <section class="row justify-content-center px-5">
+    <section class="row justify-content-center px-md-5">
       <div class="col-12 text-center my-4">
         <h2>
           {{ parks.length != 0 ? "Where do you want to go?" : "" }}
@@ -46,7 +46,7 @@
     <!-- SECTION pagination -->
 
     <section class="row justify-content-between">
-      <div class="col-3">
+      <div class="col-md-3 col-6">
         <button
           class="btn btn-underline" :disabled="currentPage == 0"
           @click="changePage('decrease')"
@@ -54,7 +54,7 @@
           Previous Page
         </button>
       </div>
-      <div class="col-3 text-end">
+      <div class="col-md-3 col-6 text-end">
         <button
           class="btn btn-underline" :disabled="currentPage == totalPages"
           @click="changePage('increase')"
