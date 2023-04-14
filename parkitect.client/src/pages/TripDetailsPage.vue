@@ -6,24 +6,24 @@
         <img :src="trip?.coverImg" :alt="'cover image for ' + trip?.name" class="cover-img">
       </div>
       <!-- trip details card -->
-      <div class="col-11 text-center trip-details-card">
+      <div class="col-md-11 text-center trip-details-card">
         <h1>{{ trip?.name }}</h1>
         <h2>{{ trip?.description }}</h2>
       </div>
       <!-- tripGoers photos -->
-      <div class="col-11 d-flex">
+      <div class="col-md-11 d-flex">
         <div v-for="t in tripGoers" :key="t.id">
           <img :src="t.account.picture" :alt="'a photo of ' + t.account.name" :title="t.account.name" class="profile-pic">
         </div>
       </div>
       <!-- tripParks and tripThingsToDo -->
-      <div class="col-11">
+      <div class="col-md-11">
         <section class="row mb-4" v-for="t in tripParks" :key="t.id">
-          <div class="col-7">
+          <div class="col-md-7">
             <h1>{{ t.fullName }}</h1>
             <img :src="t.image" :alt="'a photo of ' + t.fullName" class="park-img">
           </div>
-          <div class="col-5">
+          <div class="col-md-5">
             <h3 class="mt-5">Activities</h3>
             <ul v-if="tripThingsToDo.length" v-for="ttd in tripThingsToDo" :key="ttd.id">
               <li v-if="ttd.parkCode == t.parkCode">{{ ttd.title }}</li>
