@@ -9,7 +9,7 @@ class TripParksService {
     logger.log('[GETTING TRIPPARKS]', res.data)
     let parkExists = false
     res.data.forEach(tp => {
-      if (tp.nativeParkId == AppState.activePark.nativeId) {
+      if (tp.nativeParkId == AppState.activePark?.nativeId) {
         parkExists = true
       }
     })
