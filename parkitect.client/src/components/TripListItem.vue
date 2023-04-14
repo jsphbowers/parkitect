@@ -1,6 +1,7 @@
 <template>
-  <li v-if="!hasPark"><a class="dropdown-item selectable" @click="addParkToTrip(tripName.id)">{{ tripName.name }}{{
-    hasPark }}</a></li>
+  <div v-if="!parkExists">
+    <li><a class="dropdown-item selectable" @click="addParkToTrip(tripName.id)">{{ tripName.name }}</a></li>
+  </div>
   <!-- <li><a class="dropdown-item selectable" @click="addParkToTrip(tripName.id)">{{ tripName.name }}</a></li> -->
 </template>
 
@@ -14,7 +15,7 @@ import Pop from "../utils/Pop.js";
 import { parksService } from "../services/ParksServices.js";
 import { computed } from "@vue/reactivity";
 import { AppState } from "../AppState.js";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { tripParksService } from "../services/TripParksService.js"
 
 export default {
@@ -26,19 +27,20 @@ export default {
     async function getTripParks() {
       try {
         const tripId = props.tripName.id
-        await tripParksService.getTripParksByTripId(tripId)
+        parkExists.value = await tripParksService.getTripParksByTripId(tripId)
       } catch (error) {
         Pop.error(error.message)
         logger.error(error.message)
       }
     }
+    const parkExists = ref(false)
 
     onMounted(() =>
       getTripParks()
     )
     return {
       hasPark: computed(() => AppState.tripParks.find(tp => tp.nativeParkId == AppState.activePark.nativeId)),
-
+      parkExists,
       async addParkToTrip(tripId) {
         try {
           logger.log('[THIS IS THE TRIP ID]', tripId)
