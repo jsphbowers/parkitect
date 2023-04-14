@@ -6,6 +6,10 @@ export class TripsService {
     const res = await api.post('/trips', tripData)
     logger.log('creating trip', res.data)
   }
+
+  async addActivity(activityId) {
+    logger.log(activityId, 'from service')
+  }
 }
 
 export const tripsService = new TripsService();

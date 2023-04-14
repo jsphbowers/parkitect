@@ -4,7 +4,7 @@
     <div class="card">
       <div class="row g-0">
         <div class="col-md-6">
-          <img class="cardImg px-0 activityImgBorder" :src="activity.images[0].url" alt="">
+          <img class="cardImg px-0 activityImgBorder" :src="activity?.images[0].url" alt="">
         </div>
         <div class="col-md-6">
           <div class="row h-100 justify-content-center align-items-end">
