@@ -1,12 +1,10 @@
 <template>
-  <div class="col-md-3 trip-sizing d-flex justify-content-center">
-    <router-link :to="{ name: 'TripDetails', params: { tripId: tripGoer.tripId } }">
-      <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable"
-        :style="{ backgroundImage: `url(${tripGoer.trip.coverImg})` }">
-        <h3 class="ms-2 mt-2 trip-text">{{ tripGoer.trip.name }}</h3>
-      </div>
-    </router-link>
-  </div>
+  <router-link :to="{ name: 'TripDetails', params: { tripId: tripGoer.tripId } }">
+    <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable"
+      :style="{ backgroundImage: `url(${tripGoer.trip.coverImg})` }" :title="tripGoer.trip.description">
+      <h3 class="ms-2 mt-2 trip-text">{{ tripGoer.trip.name }}</h3>
+    </div>
+  </router-link>
 </template>
 
 
@@ -49,6 +47,16 @@ export default {
 }
 
 @media(max-width:992px) {
+
+  .trip-text {
+    color: white;
+    text-shadow: 3px 3px 1px black;
+    /* backdrop-filter: invert(100%); */
+    backdrop-filter: blur(4px);
+    padding: 1vh;
+    font-size: 20px;
+
+  }
 
   .trip-sizing {
     justify-content: center;
