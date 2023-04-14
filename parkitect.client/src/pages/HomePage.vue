@@ -49,20 +49,20 @@
       <div class="col-3">
         <button
           class="btn btn-underline"
-          @click="changePage(previousPage)"
+          @click="changePage('decrease')"
           >
-          Previous
+          Previous Page
         </button>
-        <!-- :disabled="previousPage === null" -->
+        <!-- :disabled="currentPage == 1" -->
       </div>
       <div class="col-3 text-end">
         <button
           class="btn btn-underline"
-          @click="changePage(nextPage)"
+          @click="changePage('increase')"
           >
-          Next
+          Next Page
         </button>
-        <!-- :disabled="nextPage === null" -->
+        <!-- :disabled="currentPage == total" -->
       </div>
     </section>
 
@@ -125,7 +125,7 @@ export default {
 
     onMounted(() => {
       getParks();
-      getParkByParkCode("yell");
+      // getParkByParkCode();
     });
     return {
       editable,
@@ -137,8 +137,8 @@ export default {
       parks: computed(() => AppState.parks),
       account: computed(() => AppState.account),
       loading: computed(() => AppState.loading),
-      previousPage: computed(() => AppState.previousPage),
-      nextPage: computed(() => AppState.nextPage),
+      currentPage: computed(() => AppState.currentPage),
+      totalPages: computed(() => AppState.totalPages),
 
       async searchPark() {
         try {
@@ -150,9 +150,16 @@ export default {
         }
       },
 
-      async changePage() {
+      async changePage(pageChange) {
         try {
-          logger.log('change page')
+          // logger.log('change page')
+          if (pageChange == 'increase' ) {
+            AppState.currentPage++
+          }
+          if (pageChange == 'decrease' ) {
+            AppState.currentPage--
+          }
+          await parksService.changePage()
         } catch (error) {
           logger.log(error.message);
         }

@@ -21,6 +21,7 @@ export const AppState = reactive({
   activeTrip: null,
   /** @type {import('./models/TripGoer.js').TripGoer[]} */
   tripGoers: [],
-  previousPage: null,
-  nextPage: null,
+  currentPage: null,
+  totalPages: null,
+  start: 0,
 });
