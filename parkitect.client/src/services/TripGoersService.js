@@ -9,6 +9,11 @@ class TripGoersService {
     logger.log('[tripgoers data]', res.data)
     AppState.tripGoers = res.data.map(t => new TripGoer(t))
   }
+
+  async getTripGoersByTripId(tripId) {
+    const res = await api.get(`/trips/${tripId}/tripGoers`)
+    AppState.tripGoers = res.data.map(tg => new TripGoer(tg))
+  }
 }
 
 
