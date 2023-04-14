@@ -15,6 +15,10 @@ export class TripsService {
     AppState.activeTrip = new Trip(res.data)
   }
 
+  async getMyCreatedTrips(accountId) {
+    logger.log(accountId)
+  }
+
   async addActivity(activityId) {
     logger.log(activityId, 'from service')
   }
