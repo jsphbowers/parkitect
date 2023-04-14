@@ -1,8 +1,9 @@
 <template>
   <div class="container-fluid">
-    <section class="row">
-      <div class="col-12">
+    <section class="row justify-content-center">
+      <div class="col-10 text-center">
         <h1>{{ trip?.name }}</h1>
+        <h2>{{ trip?.description }}</h2>
       </div>
     </section>
   </div>
