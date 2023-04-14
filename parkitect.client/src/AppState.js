@@ -12,6 +12,8 @@ export const AppState = reactive({
   query: [],
   /** @type {import('./models/ThingToDo.js').ThingToDo[]} */
   thingsToDo: [],
+  /** @type {import('./models/TripThingToDo.js').TripThingToDo[]} */
+  tripThingsToDo: [],
   /** @type {import('./models/ThingToDo.js').ThingToDo|null} */
   activeThingToDo: null,
   loading: {},
@@ -21,7 +23,6 @@ export const AppState = reactive({
   activeTrip: null,
   /** @type {import('./models/TripGoer.js').TripGoer[]} */
   tripGoers: [],
-  currentPage: null,
-  totalPages: null,
-  start: 0,
+  /** @type {import('./models/TripPark.js').TripPark[]} */
+  tripParks: []
 });

@@ -60,7 +60,10 @@
             Add Park To Trip
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
+            <div v-for="trip in myTrips" :key="trip.id">
+              <TripListItem :tripName="trip" />
+            </div>
+            <li><a class="dropdown-item" href="#">Create Trip</a></li>
           </ul>
         </div>
       </div>
