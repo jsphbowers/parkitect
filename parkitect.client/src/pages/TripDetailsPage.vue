@@ -25,8 +25,8 @@
           </div>
           <div class="col-5">
             <h3 class="mt-5">Activities</h3>
-            <ul v-if="tripThingsToDo.length">
-              <li v-for="ttd in tripThingsToDo" :key="ttd.id">{{ ttd.title }}</li>
+            <ul v-if="tripThingsToDo.length" v-for="ttd in tripThingsToDo" :key="ttd.id">
+              <li v-if="ttd.parkCode == t.parkCode">{{ ttd.title }}</li>
             </ul>
             <h6 v-if="!tripThingsToDo.length">No activities have been added for this park</h6>
           </div>

@@ -5,5 +5,6 @@ export class TripPark {
     this.tripId = data.tripId
     this.nativeParkId = data.nativeParkId
     this.image = data.image
+    this.parkCode = data.parkCode
   }
 }
