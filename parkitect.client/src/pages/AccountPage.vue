@@ -12,7 +12,7 @@
     <!-- SECTION My trips -->
     <h1 class="ms-2 trip-margin">My Trips</h1>
     <section class="my-5 row">
-      <div class=" col-xl-3 trip-sizing d-flex justify-content-center" v-for="t in tripGoers" :key="t.id">
+      <div class=" col-xl-3 col-md-6 trip-sizing d-flex justify-content-center" v-for="t in tripGoers" :key="t.id">
 
 
 
@@ -140,8 +140,10 @@ export default {
 
 <style scoped>
 .account-img {
-  height: 25vh;
-  width: 25vh;
+  height: 30vh;
+  width: 30vh;
+  object-fit: cover;
+  object-position: center;
   border-radius: 50%;
   bottom: -7vh;
   left: 46vw;
@@ -157,7 +159,7 @@ export default {
 
 /* NOTE Remove test Trip */
 .test-trip {
-  background-image: url("https://images.unsplash.com/photo-1543858393-d5307eb2cdc7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Z2xhY2llciUyMG5hdGlvbmFsJTIwcGFya3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60");
+
   background-position: center;
   background-size: cover;
 }
