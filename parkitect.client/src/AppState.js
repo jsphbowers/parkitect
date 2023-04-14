@@ -20,4 +20,5 @@ export const AppState = reactive({
   trips: [],
   /** @type {import('./models/Trip.js').Trip|null} */
   activeTrip: null
+  myTrips: [],
 });

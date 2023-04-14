@@ -5,6 +5,7 @@ import { api } from "./AxiosService";
 
 export class TripsService {
   async createTrip(tripData) {
+    // logger.log(tripData)
     const res = await api.post('/trips', tripData)
     logger.log('creating trip', res.data)
   }
