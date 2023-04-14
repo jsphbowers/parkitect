@@ -15,9 +15,29 @@
           <section class="row">
             <div class="col-4">
               <h5>Type: {{ activity?.activities[0].name }}</h5>
+              <h6> Typically takes {{ activity?.duration }}:</h6>
+              <h6>{{ activity?.durationDescription }}</h6>
+              <h5>Seasons:</h5>
+              <h6>
+                <img v-if="activity?.season[0] == 'Winter'"
+                  src="https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/winter-recreation-area-black-22.svg"
+                  alt="Winter">
+                <img v-if="activity?.season[1] == 'Spring'"
+                  src="https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/flower-viewing-black-22.svg"
+                  alt="Spring">
+                <img v-if="activity?.season[3] == 'Summer'"
+                  src="https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/sunny-black-22.svg"
+                  alt="Summer">
+                <img v-if="activity?.season[4] == 'Fall'"
+                  src="https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/wilderness-black-22.svg"
+                  alt="Fall">
+              </h6>
+              <h5>Times of Day:</h5>
+              <h6>{{ activity?.timeOfDay }}</h6>
             </div>
             <div class="col-8">
-              <h6>
+              <h4>Description:</h4>
+              <h6>{{ activity?.longDescription }}
               </h6>
             </div>
           </section>
