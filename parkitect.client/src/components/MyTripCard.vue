@@ -8,10 +8,12 @@
 
 
 <script>
+import { Trip } from "../models/Trip.js";
+
 export default {
-  props: {
-    trip: { type: ThingToDo, required: true }
-  },
+  // props: {
+  //   trip: { type: Trip, required: true }
+  // },
   setup() {
     return {}
   }
