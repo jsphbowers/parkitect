@@ -9,6 +9,8 @@
         name="name"
         required
         v-model="editable.name"
+        minlength="3"
+        maxlength="25"
       />
       <label for="name">Name</label>
     </div>
@@ -24,7 +26,7 @@
         @input="previewImage"
       />
       <label for="imgUrl">ImgUrl</label>
-      <br>
+      <br />
       <img :src="imagePreview" v-if="imagePreview" style="max-width: 100%" />
     </div>
     <div class="form-floating mb-3">
@@ -36,6 +38,8 @@
         required
         style="height: 100px"
         v-model="editable.description"
+        minlength="5"
+        maxlength="1000"
       ></textarea>
       <label for="description">Description</label>
     </div>
@@ -60,7 +64,6 @@ export default {
     const editable = ref({});
     const imagePreview = ref(null);
 
-    
     return {
       editable,
       imagePreview,
@@ -75,8 +78,8 @@ export default {
         }
       },
       previewImage() {
-      imagePreview.value = editable.value.coverImg;
-    }
+        imagePreview.value = editable.value.coverImg;
+      },
     };
   },
 };

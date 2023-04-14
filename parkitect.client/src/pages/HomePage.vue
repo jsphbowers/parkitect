@@ -43,6 +43,29 @@
       </div>
     </section>
 
+    <!-- SECTION pagination -->
+
+    <section class="row">
+      <div class="col-3">
+        <button
+          class="btn btn-outline-dark"
+          :disabled="previousPage === null"
+          @click="changePage(previousPage)"
+        >
+          Previous
+        </button>
+      </div>
+      <div class="col-3">
+        <button
+          class="btn btn-outline-dark"
+          :disabled="nextPage === null"
+          @click="changePage(nextPage)"
+        >
+          Next
+        </button>
+      </div>
+    </section>
+
     <!-- SECTION about us -->
     <section class="row"></section>
   </div>
