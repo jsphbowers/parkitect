@@ -16,14 +16,17 @@ export class TripsController extends BaseController {
       .delete('/:tripId', this.toggleArchiveTrip)
       .post('/:tripId/tripParks', this.addTripPark)
       .get('/:tripId/tripParks', this.getTripParks)
+      .delete('/:tripId/tripParks/:tripParkId', this.deleteTripPark)
       .post('/:tripId/tripThingsToDo', this.addTripThingToDo)
       .get('/:tripId/tripThingsToDo', this.getTripThingsToDo)
+      .delete('/:tripId/tripThingsToDo/:tripThingToDoId', this.deleteTripThingToDo)
       .post('/:tripId/tripGoers', this.addTripGoer)
       .get('/:tripId/tripGoers', this.getTripGoers)
+      .delete('/:tripId/tripGoers/:tripGoerId', this.deleteTripGoer)
   }
 
-
   // SECTION trips
+  //#region 
   async createTrip(req, res, next) {
     try {
       const tripData = req.body
@@ -72,8 +75,10 @@ export class TripsController extends BaseController {
       next(error)
     }
   }
+  //#endregion
 
   // SECTION tripParks
+  //#region 
   async addTripPark(req, res, next) {
     try {
       const tripParkData = req.body
@@ -95,7 +100,21 @@ export class TripsController extends BaseController {
     }
   }
 
+  async deleteTripPark(req, res, next) {
+    try {
+      const tripParkId = req.params.tripParkId
+      const userId = req.userInfo.id
+      const tripId = req.params.tripId
+      const message = await tripParksService.deleteTripPark(tripParkId, userId, tripId)
+      res.send(message)
+    } catch (error) {
+      next(error)
+    }
+  }
+  //#endregion
+
   // SECTION tripThingsToDo
+  // #region
   async addTripThingToDo(req, res, next) {
     try {
       const tripThingToDoData = req.body
@@ -117,7 +136,21 @@ export class TripsController extends BaseController {
     }
   }
 
+  async deleteTripThingToDo(req, res, next) {
+    try {
+      const tripId = req.params.tripId
+      const userId = req.userInfo.id
+      const tripThingToDoId = req.params.tripThingToDoId
+      const message = await tripThingsToDoService.deleteTripThingToDo(tripId, userId, tripThingToDoId)
+      res.send(message)
+    } catch (error) {
+      next(error)
+    }
+  }
+  //#endregion
+
   // SECTION tripGoers
+  //#region 
   async addTripGoer(req, res, next) {
     try {
       const tripGoerData = req.body
@@ -139,4 +172,17 @@ export class TripsController extends BaseController {
       next(error)
     }
   }
+
+  async deleteTripGoer(req, res, next) {
+    try {
+      const tripGoerId = req.params.tripGoerId
+      const userId = req.userInfo.id
+      const tripId = req.params.tripId
+      const message = await tripGoersService.deleteTripGoer(tripId, userId, tripGoerId)
+      res.send(message)
+    } catch (error) {
+      next(error)
+    }
+  }
+  //#endregion
 }
