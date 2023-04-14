@@ -11,15 +11,16 @@
 
     <!-- SECTION My trips -->
     <h1 class="ms-2 trip-margin">My Trips</h1>
-    <section class="my-5 row">
+    <section class="my-5 row" v-for="t in tripGoers" :key="t.id">
+      <!-- 
       <div class="col-md-3 trip-sizing d-flex justify-content-center">
         <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable">
           <h3 class="ms-2 mt-2 trip-text">Family vacay</h3>
         </div>
-      </div>
-      <!-- <MyTripCard :trip="t" /> -->
+      </div> -->
+      <MyTripCard :tripGoer="t" />
 
-      <div class="col-md-3 trip-sizing d-flex justify-content-center">
+      <!-- <div class="col-md-3 trip-sizing d-flex justify-content-center">
         <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable">
           <h3 class="ms-2 mt-2 trip-text">Boys Trip</h3>
         </div>
@@ -29,7 +30,7 @@
         <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable">
           <h3 class="ms-2 mt-2 trip-text">Fishing the Parks</h3>
         </div>
-      </div>
+      </div> -->
 
     </section>
     <section class="row">
@@ -71,12 +72,13 @@
 import { computed, ref, onMounted } from 'vue'
 import { AppState } from '../AppState'
 import { accountService } from "../services/AccountService.js"
-import { tripsService } from "../services/TripsService.js"
+import { tripGoersService } from "../services/TripGoersService.js"
 import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
 import SmallModalVue from "../components/SmallModal.vue";
 import CreateTripForm from "../components/CreateTripForm.vue";
-import { api } from "../services/AxiosService.js"
+import MyTripCard from "../components/MyTripCard.vue"
+
 
 export default {
   setup() {
@@ -88,7 +90,7 @@ export default {
 
     async function getTripGoerByAccountId() {
       try {
-        await tripsService.getTripGoerByAccountId()
+        await tripGoersService.getTripGoerByAccountId()
       } catch (error) {
         logger.error(error)
         Pop.error(error.message)
@@ -108,6 +110,7 @@ export default {
       coverImages,
       icons,
       account: computed(() => AppState.account),
+      tripGoers: computed(() => AppState.tripGoers),
       selectedImg: computed(() => {
         const randomIndex = Math.floor(Math.random() * coverImages.length)
         return `url(${coverImages[randomIndex]})`
@@ -144,7 +147,7 @@ export default {
 
     }
   },
-  components: { SmallModalVue, CreateTripForm },
+  components: { SmallModalVue, CreateTripForm, MyTripCard },
 }
 </script>
 
