@@ -1,5 +1,6 @@
 <template>
-  <li><a class="dropdown-item selectable" @click="addParkToTrip(tripName.id)">{{ tripName.name }}</a></li>
+  <li v-if="!hasPark"><a class="dropdown-item selectable" @click="addParkToTrip(tripName.id)">{{ tripName.name }}{{
+    hasPark }}</a></li>
   <!-- <li><a class="dropdown-item selectable" @click="addParkToTrip(tripName.id)">{{ tripName.name }}</a></li> -->
 </template>
 
@@ -14,29 +15,33 @@ import { parksService } from "../services/ParksServices.js";
 import { computed } from "@vue/reactivity";
 import { AppState } from "../AppState.js";
 import { onMounted } from "vue";
+import { tripParksService } from "../services/TripParksService.js"
 
 export default {
   props: {
     tripName: { type: Trip, required: true }
   },
-  setup() {
+  setup(props) {
 
     async function getTripParks() {
       try {
-        const nativeParkId = AppState.activePark.nativeId
-        await tripsService.getTripParks(nativeParkId)
+        const tripId = props.tripName.id
+        await tripParksService.getTripParksByTripId(tripId)
       } catch (error) {
         Pop.error(error.message)
         logger.error(error.message)
       }
     }
 
-    onMounted(() => getTripParks())
+    onMounted(() =>
+      getTripParks()
+    )
     return {
-      // parkOnPage: computed(() => AppState.activePark),
+      hasPark: computed(() => AppState.tripParks.find(tp => tp.nativeParkId == AppState.activePark.nativeId)),
 
       async addParkToTrip(tripId) {
         try {
+          logger.log('[THIS IS THE TRIP ID]', tripId)
           const nativeParkId = AppState.activePark.nativeId
           const fullName = AppState.activePark.name
           await tripsService.addParkToTrip(tripId, nativeParkId, fullName)
