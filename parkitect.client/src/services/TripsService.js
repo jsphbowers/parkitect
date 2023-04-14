@@ -16,6 +16,7 @@ export class TripsService {
   async getMyTrip(tripId) {
     const res = await api.get(`/trips/${tripId}`)
     AppState.activeTrip = new Trip(res.data)
+    logger.log('[ACTIVE TRIP]', AppState.activeTrip)
   }
 
   async getMyCreatedTrips() {
