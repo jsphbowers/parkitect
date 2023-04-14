@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid" v-if="account">
     <!-- SECTION Cover Images and Account Image -->
-    <section class="row">
+    <section class="row mb-5">
       <div class="p-0 col-12 account-img-cont">
         <div class="account-img-cont p-0">
           <img class="account-img" :src="account.picture" alt="">
@@ -10,20 +10,38 @@
     </section>
 
     <!-- SECTION My trips -->
-    <section class="mt-3 row">
-      <div class="col-12">
-        <h2 class="ms-2">My Trips</h2>
+    <h2 class="ms-2 trip-margin">My Trips</h2>
+    <section class="my-5 row">
+      <div class="col-md-3 trip-sizing d-flex justify-content-center">
+        <div class="create-trip  justify-content-center align-items-center d-flex">
+          <i class="mdi mdi-plus"></i>
+        </div>
+      </div>
+      <div class="col-md-3 trip-sizing d-flex justify-content-center">
+        <div class="create-trip justify-content-center align-items-center d-flex">
+          <i class="mdi mdi-plus"></i>
+        </div>
+      </div>
+      <div class="col-md-3 trip-sizing d-flex justify-content-center">
+        <div class="create-trip justify-content-center align-items-center d-flex">
+          <i class="mdi mdi-plus"></i>
+        </div>
+      </div>
+      <div class="col-md-3 trip-sizing d-flex justify-content-center">
+        <div class="create-trip justify-content-center align-items-center d-flex">
+          <i class="mdi mdi-plus"></i>
+        </div>
       </div>
     </section>
 
     <!-- SECTION Places Ive been to -->
     <section class=" mt-3 row">
-      <div class="col-12 mb-3">
-        <h2 class="ms-2">Places Ive Been to</h2>
+      <div class="col-12 mb-5 text-center">
+        <h2 class="ms-2"><b>Build your National Park passport!</b></h2>
       </div>
       <div class="col-12">
-        <div>
-          <img v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style selectable"
+        <div class="justify-content-evenly d-flex flex-wrap my-2">
+          <img v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style mb-3 selectable"
             :src="`/icons/${parkCode}.png`" alt="" :class="hasVisited(parkCode)">
         </div>
       </div>
@@ -44,8 +62,7 @@ export default {
     const coverImages = ['src/assets/img/HomePagePics/picture1.jpg', 'src/assets/img/HomePagePics/picture2.jpg', 'src/assets/img/HomePagePics/picture3.jpg', 'src/assets/img/HomePagePics/picture4.jpg', 'src/assets/img/HomePagePics/picture5.jpg', 'src/assets/img/HomePagePics/picture6.jpg', 'src/assets/img/HomePagePics/picture7.jpg']
 
     const icons = ref([
-      "2",
-      "1134"
+      "acad", "arch", "badl", "bibe", "bisc", "blca", "brca", "cany", "care", "cave", "chis", "cong", "crla", "cuva", "dena", "deva", "drto", "ever", "gaar", "glac", "glba", "grba", "grca", "grsa", "grsm", "grte", "gumo", "hale", "havo", "hosp", "indu", "isro", "jeff", "jotr", "katm", "kefj", "kica", "kova", "lacl", "lavo", "maca", "meve", "mora", "neri", "noca", "npsa", "olym", "pefo", "pinn", "redw", "romo", "sagu", "seqa", "shen", "thro", "viis", "voya", "whsa", "wica", "wrst", "yell", "yose", "zion",
     ])
 
 
@@ -65,7 +82,9 @@ export default {
         try {
           if (AppState.account.parksVisited.includes(parkCode)) {
             // AppState.account.parksVisited.pop()
-            // Add splice
+            logger.log(AppState.account.parksVisited)
+            const index = AppState.account.parksVisited.findIndex(p => parkCode == p)
+            AppState.account.parksVisited.splice(index, 1)
           } else {
             AppState.account.parksVisited.push(parkCode)
           }
@@ -92,6 +111,15 @@ export default {
   border: 2px solid white;
 }
 
+.create-trip {
+  height: 30vh;
+  width: 30vh;
+  border: 3px solid black;
+  font-size: 70px;
+  font-weight: 300;
+  box-shadow: 3px 3px 6px black;
+}
+
 .account-img-cont {
   background-image: v-bind(selectedImg);
   width: 100%;
@@ -100,6 +128,8 @@ export default {
   background-size: cover;
 }
 
+
+
 .coverImg {
   width: 100%;
   height: 40vh;
@@ -107,13 +137,8 @@ export default {
   object-position: center;
 }
 
-.icon-style {
-  height: 25vh;
-  width: 15vh;
-}
-
-.noGrayscale {
-  filter: grayscale(0) !important;
+.trip-margin {
+  margin-top: 10vh;
 }
 
 .grayscale {
@@ -128,8 +153,19 @@ export default {
   }
 
   .icon-style {
+    min-height: 18vh;
+    min-width: 10vh;
+    margin-left: .5vw;
+    margin-right: .5vw;
     height: 15vh;
     width: 8vh;
+  }
+
+
+  .trip-sizing {
+    justify-content: center;
+    display: flex;
+    margin-bottom: 5vh;
   }
 
 
@@ -148,6 +184,13 @@ export default {
     bottom: -10vh;
     left: 45vw;
     position: absolute;
+  }
+
+  .icon-style {
+    height: 25vh;
+    width: 15vh;
+    margin-left: 2vh;
+    margin-right: 2vh;
   }
 
 
