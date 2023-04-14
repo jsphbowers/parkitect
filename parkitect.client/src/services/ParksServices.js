@@ -52,14 +52,13 @@ export class ParksService {
     logger.log('[THIS IS THE ACTIVE THING TO DO]', AppState.activeThingToDo)
   }
 
-  async changePage() {
+  async changePage(pageChange) {
     const currentPage = AppState.currentPage;
-    if (currentPage <= AppState.totalPages) {
+    if (pageChange=='increase') {
       AppState.start += 9
-    }
-    if (currentPage > 1) {
+    } else {
       AppState.start -= 9
-    }
+    } 
     const res = await npsApi.get(
       `/parks?parkcode=acad,npsa,arch,badl,bibe,bisc,blca,brca,cany,care,cave,chis,cong,crla,cuva,deva,dena,drto,ever,gaar,jeff,glac,glba,grca,grte,grba,grsa,grsm,gumo,hale,havo,hosp,indu,isro,jotr,katm,kefj,seki,kova,lacl,lavo,maca,meve,mora,neri,noca,olym,pefo,pinn,redw,romo,sagu,shen,thro,viis,voya,whsa,wica,wrst,yell,yose,zion&start=${AppState.start}&limit=9`
     );
