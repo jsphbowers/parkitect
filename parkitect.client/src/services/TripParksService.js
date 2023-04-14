@@ -14,9 +14,9 @@ class TripParksService {
       }
     })
     logger.log(parkExists)
+    AppState.tripParks = res.data.map(tp => new TripPark(tp))
+    logger.log('[CLASSED TRIPPARKS]', AppState.tripParks)
     return parkExists
-    // AppState.tripParks = res.data.map(tp => new TripPark(tp))
-    // logger.log('[CLASSED TRIPPARKS]', AppState.tripParks)
   }
 }
 
