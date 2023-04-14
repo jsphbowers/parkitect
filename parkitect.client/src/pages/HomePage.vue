@@ -5,19 +5,37 @@
       <div class="col p-0 text-light text-center txt-shadow">
         <h1>Build your next National Park Journey!</h1>
         <form @submit.prevent="searchPark()" class="input-group mt-4">
-          <input v-model="editable" type="text" class="form-control" placeholder="Search by park or state" />
+          <input
+            v-model="editable"
+            type="text"
+            class="form-control"
+            placeholder="Search by park or state"
+          />
           <button type="submit" class="input-group-text btn">Search</button>
         </form>
-        <button v-if="account.id" class="btn btn-create selectable">Create a Trip</button>
+        <button
+          v-if="account.id"
+          class="btn btn-create selectable"
+          data-bs-toggle="modal"
+          data-bs-target="#tripModal"
+        >
+          Create a Trip
+        </button>
       </div>
     </section>
 
     <!-- SECTION park cards -->
-    <section class="row">
+    <section class="row justify-content-center px-5">
       <div class="col-12 text-center my-4">
-        <h2>{{ parks.length != 0 ? 'Where do you want to go?' : "We are sorry, but there are no search results" }} </h2>
+        <h2>
+          {{ parks.length != 0 ? "Where do you want to go?" : "" }}
+        </h2>
       </div>
-      <div v-if="parks.length == 0" class="text-center">
+      <div
+        v-if="parks.length == 0 && !loading.parks"
+        class="text-center no-results-guy"
+      >
+        <h2>We are sorry, but there are no search results</h2>
         <h1>¯\_(ツ)_/¯</h1>
       </div>
       <div v-for="p in parks" :key="p.nativeId" class="col-md-4">
@@ -28,6 +46,15 @@
     <!-- SECTION about us -->
     <section class="row"></section>
   </div>
+
+  <SmallModalVue id="tripModal">
+    <template #header>
+      <div>Create Your Trip!</div>
+    </template>
+    <template #body>
+      <CreateTripForm />
+    </template>
+  </SmallModalVue>
 </template>
 
 <script>
@@ -37,10 +64,14 @@ import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
 import ParkCard from "../components/ParkCard.vue";
 import { AppState } from "../AppState.js";
+import { useRoute } from "vue-router";
+import SmallModalVue from "../components/SmallModal.vue";
+import CreateTripForm from "../components/CreateTripForm.vue";
 
 export default {
   setup() {
-    const editable = ref('');
+    const route = useRoute();
+    const editable = ref("");
 
     const coverImages = [
       "src/assets/img/HomePagePics/picture1.jpg",
@@ -82,19 +113,20 @@ export default {
       }),
       parks: computed(() => AppState.parks),
       account: computed(() => AppState.account),
+      loading: computed(() => AppState.loading),
 
       async searchPark() {
         try {
           const query = editable.value;
           // logger.log(query);
-          await parksService.searchPark(query)
+          await parksService.searchPark(query);
         } catch (error) {
           logger.log(error.message);
         }
       },
     };
   },
-  components: { ParkCard },
+  components: { ParkCard, SmallModalVue, CreateTripForm },
 };
 </script>
 
@@ -159,6 +191,20 @@ export default {
 @media screen and (max-width: 480px) {
   .search-bg {
     min-height: 40vh;
+  }
+}
+
+.no-results-guy {
+  opacity: 0;
+  animation: 0.2s 0.2s reveal forwards;
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 </style>

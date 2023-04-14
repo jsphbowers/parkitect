@@ -26,6 +26,11 @@ const routes = [
     path: '/parkDetails/:parkCode',
     name: 'ParkDetails',
     component: loadPage('ParkDetailsPage')
+  }, 
+  {
+    path: '/tripDetails/:tripId',
+    name: 'TripDetails',
+    component: loadPage('TripDetailsPage')
   }
 ]
 

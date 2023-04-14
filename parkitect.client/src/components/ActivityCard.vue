@@ -1,6 +1,6 @@
 <template>
   <div class="m-2 mx-4 selectable activityCard elevation-2" data-bs-toggle="modal" data-bs-target="#exampleModal"
-    @click="setActiveActivity(activity.id)">
+    @click="setActiveActivity(activity?.nativeId)">
     <div class="card">
       <div class="row g-0">
         <div class="col-md-6">
@@ -60,6 +60,7 @@ export default {
 
       async setActiveActivity(activityId) {
         try {
+          // logger.log(activityId)
           await parksService.setActiveActivity(activityId)
         } catch (error) {
           Pop.error(error.message)
