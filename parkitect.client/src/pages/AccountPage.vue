@@ -10,33 +10,37 @@
     </section>
 
     <!-- SECTION My trips -->
-    <h2 class="ms-2 trip-margin">My Trips</h2>
+    <h1 class="ms-2 trip-margin">My Trips</h1>
     <section class="my-5 row">
       <div class="col-md-3 trip-sizing d-flex justify-content-center">
-        <div class="create-trip  justify-content-center align-items-center d-flex">
-          <i class="mdi mdi-plus"></i>
+        <div class="create-trip test-trip justify-content-center align-items-center d-flex">
+          <h3 class="ms-2 mt-2 trip-text">Family vacay</h3>
         </div>
       </div>
+
+      <div class="col-md-3 trip-sizing d-flex justify-content-center">
+        <div class="create-trip test-trip justify-content-center align-items-center d-flex">
+          <h3 class="ms-2 mt-2 trip-text">Boys Trip</h3>
+        </div>
+      </div>
+
+      <div class="col-md-3 trip-sizing d-flex justify-content-center">
+        <div class="create-trip test-trip justify-content-center align-items-center d-flex">
+          <h3 class="ms-2 mt-2 trip-text">Fishing the Parks</h3>
+        </div>
+      </div>
+
       <div class="col-md-3 trip-sizing d-flex justify-content-center">
         <div class="create-trip justify-content-center align-items-center d-flex">
           <i class="mdi mdi-plus"></i>
         </div>
       </div>
-      <div class="col-md-3 trip-sizing d-flex justify-content-center">
-        <div class="create-trip justify-content-center align-items-center d-flex">
-          <i class="mdi mdi-plus"></i>
-        </div>
-      </div>
-      <div class="col-md-3 trip-sizing d-flex justify-content-center">
-        <div class="create-trip justify-content-center align-items-center d-flex">
-          <i class="mdi mdi-plus"></i>
-        </div>
-      </div>
+
     </section>
 
     <!-- SECTION Places Ive been to -->
     <section class=" mt-3 row">
-      <div class="col-12 mb-5 text-center">
+      <div class="col-12 my-5 text-center title-bg">
         <h2 class="ms-2"><b>Build your National Park passport!</b></h2>
       </div>
       <div class="col-12">
@@ -111,13 +115,40 @@ export default {
   border: 2px solid white;
 }
 
+.title-bg {
+  background-color: rgb(224, 224, 224);
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  text-shadow: 1.5px 1.5px 4px rgb(100, 100, 100);
+}
+
+/* NOTE Remove test Trip */
+.test-trip {
+  background-image: url("https://images.unsplash.com/photo-1543858393-d5307eb2cdc7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Z2xhY2llciUyMG5hdGlvbmFsJTIwcGFya3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60");
+  background-position: center;
+  background-size: cover;
+}
+
+.trip-text {
+  color: white;
+  text-shadow: 3px 3px 1px black;
+  /* backdrop-filter: invert(100%); */
+  backdrop-filter: blur(4px);
+  padding: 1vh;
+
+}
+
 .create-trip {
   height: 30vh;
   width: 30vh;
   border: 3px solid black;
   font-size: 70px;
   font-weight: 300;
-  box-shadow: 3px 3px 6px black;
+  /* box-shadow: 3px 3px 6px black; */
+  border-radius: 8px;
+  border: 3px solid rgb(0, 0, 0);
+  /* box-shadow: 10px -10px 0 -3px rgb(230, 230, 230), 10px -10px rgb(0, 0, 0), 20px -20px 0 -3px rgb(230, 230, 230), 20px -20px rgb(0, 0, 0); */
+  box-shadow: 5px -5px 0 -1.5px rgb(230, 230, 230), 5px -5px rgb(0, 0, 0), 10px -10px 0 -1.5px rgb(230, 230, 230), 10px -10px rgb(0, 0, 0);
 }
 
 .account-img-cont {
@@ -139,6 +170,7 @@ export default {
 
 .trip-margin {
   margin-top: 10vh;
+
 }
 
 .grayscale {
