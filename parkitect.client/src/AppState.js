@@ -28,4 +28,5 @@ export const AppState = reactive({
   currentPage: null,
   totalPages: null,
   start: 0,
+  dictionary: {}
 });
