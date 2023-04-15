@@ -45,38 +45,16 @@
   </div>
 
 
-  <div class="modal fade" id="editTripModal" tabindex="-1" aria-labelledby="editTripLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <form>
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="editTripLabel">Edit Your Trip</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="form-floating">
-              <input type="text" id="name" name="name" class="form-control mb-2" minlength="3" maxlength="25"
-                v-model="editable.name">
-              <label for="name">Name</label>
-            </div>
-            <div class="form-floating">
-              <input type="url" name="image url" id="coverImgUrl" class="form-control mb-2" v-model="editable.coverImg">
-              <label for="coverImgUrl">Cover Image URL</label>
-            </div>
-            <div class="form-floating">
-              <textarea class="form-control" id="description" name="description" style="height: 100px" minlength="5"
-                maxlength="1000" v-model="editable.description"></textarea>
-              <label for="description">Description</label>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn addBtn">Save changes</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
+
+
+  <SmallModal id="editTripModal">
+    <template #header>
+      <h5>Edit your Trip!</h5>
+    </template>
+    <template #body>
+      <EditTripForm />
+    </template>
+  </SmallModal>
 
   <ActiveCardModal />
 </template>
@@ -89,15 +67,16 @@ import { tripsService } from "../services/TripsService.js";
 import { tripGoersService } from "../services/TripGoersService.js";
 import { tripParksService } from "../services/TripParksService.js";
 import { tripThingsToDoService } from "../services/TripThingsToDoService.js";
-import { computed, ref, watch, watchEffect } from "vue";
+import { computed, watchEffect } from "vue";
 import { AppState } from "../AppState.js";
 import ActiveCardModal from "../components/ActiveCardModal.vue";
-import { parksService } from "../services/ParksServices.js";
+import SmallModal from "../components/SmallModal.vue";
+import EditTripForm from "../components/EditTripForm.vue";
+
 
 export default {
   setup() {
     const route = useRoute();
-    const editable = ref({});
     async function getMyTrip() {
       try {
         const tripId = route.params.tripId;
@@ -145,15 +124,13 @@ export default {
         getTripGoersByTripId();
         getTripThingsToDoByTripId();
         getTripParksByTripId();
+
       };
-      if (AppState.activeTrip) {
-        editable.value = { ...AppState.activeTrip }
-      }
     });
 
 
+
     return {
-      editable,
       trip: computed(() => AppState.activeTrip),
       tripGoers: computed(() => AppState.tripGoers),
       tripParks: computed(() => AppState.tripParks),
@@ -166,10 +143,12 @@ export default {
           logger.log(error)
           Pop.error(error.message)
         }
-      }
+      },
+
+
     };
   },
-  components: { ActiveCardModal }
+  components: { ActiveCardModal, SmallModal, EditTripForm }
 }
 </script>
 

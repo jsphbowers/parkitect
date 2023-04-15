@@ -42,6 +42,12 @@ export class TripsService {
     logger.log(activityId, 'from service')
   }
 
+  async editTrip(tripData, tripId) {
+    const res = await api.put(`/trips/${tripId}`, tripData)
+    AppState.activeTrip = new Trip(res.data)
+    logger.log('[EDITING TRIP]', res.data)
+  }
+
 
 
 }
