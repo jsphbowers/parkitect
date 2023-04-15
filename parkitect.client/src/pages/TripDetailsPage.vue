@@ -6,7 +6,7 @@
         <img v-if="trip" :src="trip?.coverImg" :alt="'cover image for ' + trip?.name" class="cover-img">
       </div>
       <div class="d-flex justify-content-end mt-2 mb-0">
-        <button class="btn addBtn" data-bs-toggle="modal" data-bs-target="#editTripModal">Edit Trip</button>
+        <button class="btn addBtn" data-bs-toggle="modal" data-bs-target="#editTripModal">Edit Trip Details</button>
       </div>
       <!-- trip details card -->
       <div class="col-md-11 text-center trip-details-card">
