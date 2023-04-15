@@ -24,17 +24,19 @@
             <img :src="t.image" :alt="'a photo of ' + t.fullName" class="park-img">
           </div>
           <div class="col-md-5">
-            <h3 class="mt-5">Activities</h3>
-            <ul v-if="tripThingsToDo.length" v-for="ttd in tripThingsToDo" :key="ttd.id">
+            <h3 class="mt-md-5 mt-2">Activities</h3>
+            <ul v-if="dictionary[t.parkCode]" v-for="ttd in dictionary[t.parkCode]" :key="ttd.id">
               <li v-if="ttd.parkCode == t.parkCode">{{ ttd.title }}</li>
             </ul>
-            <h6 v-if="!tripThingsToDo.length">No activities have been added for this park</h6>
+            <h6 v-else>No activities have been added for this park</h6>
           </div>
         </section>
       </div>
     </section>
   </div>
 </template>
+
+<!-- FIXME add ActivityCardModal onto each thingToDo. It originates in ActivityCard.vue -->
 
 
 <script>
@@ -102,8 +104,8 @@ export default {
     return {
       trip: computed(() => AppState.activeTrip),
       tripGoers: computed(() => AppState.tripGoers),
-      tripThingsToDo: computed(() => AppState.tripThingsToDo),
-      tripParks: computed(() => AppState.tripParks)
+      tripParks: computed(() => AppState.tripParks),
+      dictionary: computed(() => AppState.dictionary)
     }
   }
 }

@@ -3,15 +3,15 @@
     <!-- SECTION Cover Photo with title  -->
     <section class="row px-0">
       <div class="col-12 px-0">
-        <div id="carouselExampleCaptions" class="carousel slide">
-          <div class="carousel-indicators">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+          <!-- <div class="carousel-inner">
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
               aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
               aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
               aria-label="Slide 3"></button>
-          </div>
+          </div> -->
           <div class="carousel-inner">
             <div class="carousel-item active">
               <img :src="park?.images[0].url" class="carousel-img d-block w-100" alt="...">
@@ -63,7 +63,8 @@
             <div v-for="trip in myTrips" :key="trip.id">
               <TripListItem :tripName="trip" />
             </div>
-            <li><a class="dropdown-item" href="#">Create Trip</a></li>
+            <li><a class="dropdown-item selectable" data-bs-toggle="modal" data-bs-target="#tripModal">Create Trip</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -161,6 +162,14 @@
       </div>
     </div>
   </div> -->
+  <SmallModal id="tripModal">
+    <template #header>
+      <div>Create Your Trip!</div>
+    </template>
+    <template #body>
+      <CreateTripForm />
+    </template>
+  </SmallModal>
 </template>
 
 
@@ -173,85 +182,83 @@ import { onMounted, computed, ref, watchEffect } from "vue";
 import { parksService } from "../services/ParksServices.js";
 import { AppState } from "../AppState.js";
 import { tripsService } from "../services/TripsService.js"
+import SmallModal from "../components/SmallModal.vue";
+import CreateTripForm from "../components/CreateTripForm.vue";
+import TripListItem from "../components/TripListItem.vue";
 
 
 export default {
-
-
-
   setup() {
-    const route = useRoute()
-
-    const filterType = ref('')
-
-    const keywords = { hiking: ['hiking', 'walking'], snow: ['skiing', 'snow'], water: ['water', 'kayaking', 'boat', 'paddling'], fishing: ['fishing', 'fish'], guided: ['tour', 'program'], camping: ['camp'], other: ['driving', 'flying', 'watching', 'trekking', 'biking'] }
-
+    const route = useRoute();
+    const filterType = ref("");
+    const keywords = { hiking: ["hiking", "walking"], snow: ["skiing", "snow"], water: ["water", "kayaking", "boat", "paddling"], fishing: ["fishing", "fish"], guided: ["tour", "program"], camping: ["camp"], other: ["driving", "flying", "watching", "trekking", "biking"] };
     async function getThingsToDo() {
       try {
         // NOTE used parkId here 
-        const parkCode = route.params.parkCode
-        await parksService.getThingsToDo(parkCode)
-        console.log()
-      } catch (error) {
-        logger.error(error)
-        Pop.error(error.message)
+        const parkCode = route.params.parkCode;
+        await parksService.getThingsToDo(parkCode);
+        console.log();
+      }
+      catch (error) {
+        logger.error(error);
+        Pop.error(error.message);
       }
     }
     async function getMyCreatedTrips() {
       try {
-        await tripsService.getMyCreatedTrips()
-      } catch (error) {
-        Pop.error(error.message)
-        logger.error(error.message)
+        await tripsService.getMyCreatedTrips();
+      }
+      catch (error) {
+        Pop.error(error.message);
+        logger.error(error.message);
       }
     }
-
     async function getActivePark() {
       try {
-        const parkCode = route.params.parkCode
-        await parksService.getParkByParkCode(parkCode)
-      } catch (error) {
-        Pop.error(error.message)
-        logger.error(error.message)
+        const parkCode = route.params.parkCode;
+        await parksService.getParkByParkCode(parkCode);
+      }
+      catch (error) {
+        Pop.error(error.message);
+        logger.error(error.message);
       }
     }
     onMounted(() => {
-      getThingsToDo()
-      getActivePark()
+      getThingsToDo();
+      getActivePark();
       window.scrollTo(0, 0);
-    })
-
+    });
     watchEffect(() => {
       if (AppState.account?.id) {
-        getMyCreatedTrips()
+        getMyCreatedTrips();
       }
-    })
-
+    });
     return {
       park: computed(() => AppState.activePark),
       myTrips: computed(() => AppState.trips),
       activities: computed(() => {
         if (!filterType.value) {
-          return AppState.thingsToDo
-        } else {
+          return AppState.thingsToDo;
+        }
+        else {
           // debugger
           return AppState.thingsToDo.filter(thing => {
             // NOTE This filter will got through all the thingToDo and for every one it will run this for loop(the number of times that it needs to check each array string from keywords) to check if it contains the keyword. If it does contain one of the keywords then it will return/add the "thing" to the filtered thingsToDo.
             for (let i = 0; i < keywords[filterType.value].length; i++) {
-              let newArray = keywords[filterType.value]
+              let newArray = keywords[filterType.value];
               if (thing.activities[0].name.toLowerCase().includes(newArray[i])) {
-                return thing
+                return thing;
               }
             }
-          })
+          });
         }
       }),
-
       changeActivityType(type) {
-        filterType.value = type
+        filterType.value = type;
       }
-    }
-  }
+    };
+  },
+  components: { SmallModal, CreateTripForm, TripListItem }
 }
 </script>
 

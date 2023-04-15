@@ -26,6 +26,7 @@ export const AppState = reactive({
   /** @type {import('./models/TripPark.js').TripPark[]} */
   tripParks: [],
   currentPage: null,
-  total: null,
-  start: null,
+  totalPages: null,
+  start: 0,
+  dictionary: {}
 });

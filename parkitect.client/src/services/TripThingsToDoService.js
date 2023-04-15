@@ -8,7 +8,18 @@ class TripThingsToDoService {
   async getTripThingsToDoByTripId(tripId) {
     const res = await api.get(`/trips/${tripId}/tripThingsToDo`)
     AppState.tripThingsToDo = res.data.map(ttd => new TripThingToDo(ttd))
-    logger.log('[APPSTATE TRIPTHINGSTODO]', AppState.tripThingsToDo)
+    const dictionary = {}
+    for (let i = 0; i < AppState.tripThingsToDo.length; i++) {
+      if (!dictionary[AppState.tripThingsToDo[i].parkCode]) {
+        dictionary[AppState.tripThingsToDo[i].parkCode] = []
+        dictionary[AppState.tripThingsToDo[i].parkCode].push(AppState.tripThingsToDo[i])
+      } else {
+        dictionary[AppState.tripThingsToDo[i].parkCode].push(AppState.tripThingsToDo[i])
+      }
+    }
+    // logger.log('[APPSTATE TRIPTHINGSTODO]', AppState.tripThingsToDo)
+    // logger.log('[DICTIONARY]', dictionary)
+    AppState.dictionary = dictionary
   }
 
 }
