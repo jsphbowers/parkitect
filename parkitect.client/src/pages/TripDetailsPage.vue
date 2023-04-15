@@ -3,7 +3,7 @@
     <section class="row justify-content-center">
       <!-- cover photo -->
       <div class="col-12 p-0">
-        <img :src="trip?.coverImg" :alt="'cover image for ' + trip?.name" class="cover-img">
+        <img v-if="trip" :src="trip?.coverImg" :alt="'cover image for ' + trip?.name" class="cover-img">
       </div>
       <!-- trip details card -->
       <div class="col-md-11 text-center trip-details-card">
@@ -25,8 +25,11 @@
           </div>
           <div class="col-md-5">
             <h3 class="mt-md-5 mt-2">Activities</h3>
-            <ul v-if="dictionary[t.parkCode]" v-for="ttd in dictionary[t.parkCode]" :key="ttd.id">
-              <li v-if="ttd.parkCode == t.parkCode">{{ ttd.title }}</li>
+            <ul v-if="dictionary[t.parkCode]">
+              <span v-for="ttd in dictionary[t.parkCode]" :key="ttd.id">
+                <li v-if="ttd.parkCode == t.parkCode" class="selectable" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal" @click="setActiveThingToDo(ttd.nativeThingToDoId)">{{ ttd.title }}</li>
+              </span>
             </ul>
             <h6 v-else>No activities have been added for this park</h6>
           </div>
@@ -34,6 +37,7 @@
       </div>
     </section>
   </div>
+  <ActiveCardModal />
 </template>
 
 <!-- FIXME add ActivityCardModal onto each thingToDo. It originates in ActivityCard.vue -->
@@ -49,65 +53,77 @@ import { tripParksService } from "../services/TripParksService.js";
 import { tripThingsToDoService } from "../services/TripThingsToDoService.js";
 import { computed, watchEffect } from "vue";
 import { AppState } from "../AppState.js";
+import ActiveCardModal from "../components/ActiveCardModal.vue";
+import { parksService } from "../services/ParksServices.js";
 
 export default {
   setup() {
-    const route = useRoute()
+    const route = useRoute();
     async function getMyTrip() {
       try {
-        const tripId = route.params.tripId
-        await tripsService.getMyTrip(tripId)
-      } catch (error) {
-        logger.log(error)
-        Pop.error(error.message)
+        const tripId = route.params.tripId;
+        await tripsService.getMyTrip(tripId);
+      }
+      catch (error) {
+        logger.log(error);
+        Pop.error(error.message);
       }
     }
-
     async function getTripGoersByTripId() {
       try {
-        const tripId = route.params.tripId
-        await tripGoersService.getTripGoersByTripId(tripId)
-      } catch (error) {
-        logger.log(error)
-        Pop.error(error.message)
+        const tripId = route.params.tripId;
+        await tripGoersService.getTripGoersByTripId(tripId);
+      }
+      catch (error) {
+        logger.log(error);
+        Pop.error(error.message);
       }
     }
-
     async function getTripThingsToDoByTripId() {
       try {
-        const tripId = route.params.tripId
-        await tripThingsToDoService.getTripThingsToDoByTripId(tripId)
-      } catch (error) {
-        logger.log(error)
-        Pop.error(error.message)
+        const tripId = route.params.tripId;
+        await tripThingsToDoService.getTripThingsToDoByTripId(tripId);
+      }
+      catch (error) {
+        logger.log(error);
+        Pop.error(error.message);
       }
     }
-
     async function getTripParksByTripId() {
       try {
-        const tripId = route.params.tripId
-        await tripParksService.getTripParksByTripId(tripId)
-      } catch (error) {
-        logger.log(error)
-        Pop.error(error.message)
+        const tripId = route.params.tripId;
+        await tripParksService.getTripParksByTripId(tripId);
+      }
+      catch (error) {
+        logger.log(error);
+        Pop.error(error.message);
       }
     }
-
     watchEffect(() => {
       if (AppState.account?.id) {
-        getMyTrip()
-        getTripGoersByTripId()
-        getTripThingsToDoByTripId()
-        getTripParksByTripId()
+        getMyTrip();
+        getTripGoersByTripId();
+        getTripThingsToDoByTripId();
+        getTripParksByTripId();
       }
-    })
+    });
     return {
       trip: computed(() => AppState.activeTrip),
       tripGoers: computed(() => AppState.tripGoers),
       tripParks: computed(() => AppState.tripParks),
-      dictionary: computed(() => AppState.dictionary)
-    }
-  }
+      dictionary: computed(() => AppState.dictionary),
+
+      async setActiveThingToDo(nativeThingToDoId) {
+        try {
+          await tripThingsToDoService.setActiveThingToDo(nativeThingToDoId)
+        } catch (error) {
+          logger.log(error)
+          Pop.error(error.message)
+        }
+      }
+    };
+  },
+  components: { ActiveCardModal }
 }
 </script>
 

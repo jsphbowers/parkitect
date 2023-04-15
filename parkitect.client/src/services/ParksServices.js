@@ -4,7 +4,7 @@ import { ThingToDo } from "../models/ThingToDo.js";
 import { logger } from "../utils/Logger.js";
 import { npsApi } from "./AxiosService.js";
 
-export class ParksService {
+class ParksService {
   async getParks() {
     AppState.loading.parks = true;
     const res = await npsApi.get(
@@ -54,11 +54,11 @@ export class ParksService {
 
   async changePage(pageChange) {
     const currentPage = AppState.currentPage;
-    if (pageChange=='increase') {
+    if (pageChange == 'increase') {
       AppState.start += 9
     } else {
       AppState.start -= 9
-    } 
+    }
     const res = await npsApi.get(
       `/parks?parkcode=acad,npsa,arch,badl,bibe,bisc,blca,brca,cany,care,cave,chis,cong,crla,cuva,deva,dena,drto,ever,gaar,jeff,glac,glba,grca,grte,grba,grsa,grsm,gumo,hale,havo,hosp,indu,isro,jotr,katm,kefj,seki,kova,lacl,lavo,maca,meve,mora,neri,noca,olym,pefo,pinn,redw,romo,sagu,shen,thro,viis,voya,whsa,wica,wrst,yell,yose,zion&start=${AppState.start}&limit=9`
     );
