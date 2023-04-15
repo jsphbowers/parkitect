@@ -15,7 +15,7 @@ export class ParksService {
     // logger.log("getting parks from appState", AppState.parks);
     AppState.loading.parks = false;
     AppState.currentPage = res.data.start
-    AppState.totalPages = res.data.total
+    AppState.total = res.data.total
   }
 
   async getParkByParkCode(parkCode) {
@@ -53,7 +53,6 @@ export class ParksService {
   }
 
   async changePage(pageChange) {
-    const currentPage = AppState.currentPage;
     if (pageChange=='increase') {
       AppState.start += 9
     } else {
@@ -64,7 +63,7 @@ export class ParksService {
     );
     AppState.parks = res.data.data.map((p) => new Park(p));
     logger.log('next page parks', AppState.parks)
-    AppState.totalPages = res.data.total;
+    AppState.total = res.data.total;
   }
 }
 

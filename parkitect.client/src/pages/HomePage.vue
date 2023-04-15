@@ -37,7 +37,10 @@
       >
         <h2>We are sorry, but there are no search results</h2>
         <h1>¯\_(ツ)_/¯</h1>
+        <br>
+        <button @click="getParks()" class="btn btn-back mb-4">Back to all parks</button>
       </div>
+
       <div v-for="p in parks" :key="p.nativeId" class="col-md-4">
         <ParkCard :park="p" />
       </div>
@@ -45,20 +48,23 @@
 
     <!-- SECTION pagination -->
 
-    <section class="row justify-content-between">
+    <section v-if="parks.length != 0" class="row justify-content-between">
       <div class="col-md-3 col-6">
-        <button
-          class="btn btn-underline" :disabled="currentPage == 0"
+        <button 
+          class="btn btn-underline selectable"
+          :disabled="currentPage == 0"
           @click="changePage('decrease')"
-          >
+        >
           Previous Page
         </button>
+
       </div>
       <div class="col-md-3 col-6 text-end">
         <button
-          class="btn btn-underline" :disabled="currentPage == totalPages"
+          class="btn btn-underline selectable"
+          :disabled="parks.length === 8"
           @click="changePage('increase')"
-          >
+        >
           Next Page
         </button>
       </div>
@@ -126,6 +132,7 @@ export default {
       // getParkByParkCode();
     });
     return {
+      getParks,
       editable,
       coverImages,
       selectedImg: computed(() => {
@@ -136,7 +143,7 @@ export default {
       account: computed(() => AppState.account),
       loading: computed(() => AppState.loading),
       currentPage: computed(() => AppState.currentPage),
-      totalPages: computed(() => AppState.totalPages),
+      total: computed(() => AppState.total),
 
       async searchPark() {
         try {
@@ -150,19 +157,18 @@ export default {
 
       async changePage(pageChange) {
         try {
-          // logger.log('change page')
-          if (pageChange == 'increase' ) {
-            AppState.currentPage++
-            await parksService.changePage(pageChange)
+          if (pageChange == "increase") {
+            AppState.currentPage++;
+            await parksService.changePage(pageChange);
           }
-          if (pageChange == 'decrease' ) {
-            AppState.currentPage--
-            await parksService.changePage(pageChange)
+          if (pageChange == "decrease") {
+            AppState.currentPage--;
+            await parksService.changePage(pageChange);
           }
         } catch (error) {
           logger.log(error.message);
         }
-      }
+      },
     };
   },
   components: { ParkCard, SmallModalVue, CreateTripForm },
@@ -230,6 +236,13 @@ export default {
 .btn-underline {
   text-decoration: underline;
   border: none;
+}
+
+.btn-back {
+  background-image: linear-gradient(rgb(150, 207, 36) 0%, rgb(0, 104, 56) 100%);
+  color: white;
+  border: 0;
+
 }
 
 @media screen and (max-width: 480px) {
