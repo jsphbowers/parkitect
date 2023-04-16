@@ -7,6 +7,7 @@
       </div>
       <div class="d-flex justify-content-end mt-2 mb-0">
         <button class="btn addBtn" data-bs-toggle="modal" data-bs-target="#editTripModal">Edit Trip Details</button>
+        <button class="btn addBtn ms-2" data-bs-toggle="modal" data-bs-target="#editParkModal">Edit Travel Plans</button>
       </div>
       <!-- trip details card -->
       <div class="col-md-11 text-center trip-details-card">
@@ -28,8 +29,23 @@
             <h1>{{ t.fullName }}</h1>
             <img :src="t.image" :alt="'a photo of ' + t.fullName" class="park-img">
           </div>
-          <!-- tripThingsToDo -->
           <div class="col-md-5">
+            <!-- dropdown menu -->
+            <!-- <div class="d-flex justify-content-end">
+              <div class="dropdown">
+                <button class="btn btn-outline dropdown-toggle" type="button" id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown" aria-expanded="false" title="Edit Park Dropdown">
+                  ...
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li>
+                    <p class="dropdown-item selectable mb-0" href="#" data-bs-toggle="modal"
+                      data-bs-target="#editParkModal">Edit or Delete This Park</p>
+                  </li>
+                </ul>
+              </div>
+            </div> -->
+            <!-- tripThingsToDo -->
             <h3 class="mt-md-5 mt-2">Activities</h3>
             <ul v-if="dictionary[t.parkCode]">
               <span v-for="ttd in dictionary[t.parkCode]" :key="ttd.id">
@@ -44,15 +60,21 @@
     </section>
   </div>
 
-
-
-
   <SmallModal id="editTripModal">
     <template #header>
-      <h5>Edit your Trip!</h5>
+      <h5>Edit your Trip</h5>
     </template>
     <template #body>
       <EditTripForm />
+    </template>
+  </SmallModal>
+
+  <SmallModal id="editParkModal">
+    <template #header>
+      <h5>Edit Parks and Activities</h5>
+    </template>
+    <template #body>
+      <ParkOptionsMenu />
     </template>
   </SmallModal>
 
@@ -72,6 +94,7 @@ import { AppState } from "../AppState.js";
 import ActiveCardModal from "../components/ActiveCardModal.vue";
 import SmallModal from "../components/SmallModal.vue";
 import EditTripForm from "../components/EditTripForm.vue";
+import ParkOptionsMenu from "../components/ParkOptionsMenu.vue";
 
 
 export default {
@@ -148,7 +171,7 @@ export default {
 
     };
   },
-  components: { ActiveCardModal, SmallModal, EditTripForm }
+  components: { ActiveCardModal, SmallModal, EditTripForm, ParkOptionsMenu }
 }
 </script>
 
