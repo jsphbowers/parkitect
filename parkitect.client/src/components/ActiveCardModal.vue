@@ -48,13 +48,15 @@
           </section>
         </div>
         <div class="modal-footer" v-if="account?.id">
-          <div class="dropdown">
-            <button type="button" class="btn addBtn">Add to Trip</button>
+          <div class="dropdown" v-if="account?.id">
+            <button class="btn addBtn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Add Activity
+            </button>
             <ul class="dropdown-menu">
-              <li>
-                <div v-for="trip in myTrips" :key="trip.id">
-                  <TripListItem :tripName="trip" />
-                </div>
+              <div v-for="trip in myTrips" :key="trip.id">
+                <TripListAddActivity :tripName="trip" />
+              </div>
+              <li><a class="dropdown-item selectable" data-bs-toggle="modal" data-bs-target="#tripModal">Create Trip</a>
               </li>
             </ul>
           </div>
@@ -70,23 +72,27 @@ import { computed } from "@vue/reactivity";
 import { AppState } from "../AppState.js";
 import { logger } from "../utils/Logger.js";
 import { tripsService } from "../services/TripsService.js"
+import TripListAddActivity from "./TripListAddActivity.vue";
 
 export default {
   setup() {
     return {
       activity: computed(() => AppState.activeThingToDo),
-
+      account: computed(() => AppState.account),
+      myTrips: computed(() => AppState.trips),
       async addActivity(activityId) {
         try {
           // logger.log(activityId)
-          await tripsService.addActivity(activityId)
-        } catch (error) {
-          Pop.error(error.message)
-          logger.error(error.message)
+          await tripsService.addActivity(activityId);
+        }
+        catch (error) {
+          Pop.error(error.message);
+          logger.error(error.message);
         }
       }
-    }
-  }
+    };
+  },
+  components: { TripListAddActivity }
 }
 </script>
 
