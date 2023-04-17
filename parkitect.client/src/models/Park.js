@@ -77,6 +77,15 @@ export class Park {
       return "North Carolina";
     } else if (state.includes("FL")) {
       return "Florida";
+    } else if (state.includes("HI")) {
+      return "Hawaii";
+    } else if (state.includes("VI")) {
+      return "Virgin Islands";
+    } else if (state.includes("AS")) {
+      return "American Samoa";
     }
   }
 }
+
+
+
