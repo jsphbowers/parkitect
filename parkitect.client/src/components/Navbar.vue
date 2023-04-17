@@ -1,6 +1,8 @@
 <template>
   <div class="sidebar-nav">
-    <nav class="navbar navbar-primary bg-primary align-content-center shadow">
+    <nav
+      class="navbar navbar-primary bg-primary align-content-center shadow fixed-top p-0"
+    >
       <div class="container-fluid">
         <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
           <div class="d-flex">
@@ -82,13 +84,13 @@
                 </div>
                 <hr />
                 <div @click="closeOffcanvas()">
-                  <li
-                    class="text-decoration-none text-dark selectable py-2"
+                  <button
+                    class="btn create-btn selectable py-2"
                     data-bs-toggle="modal"
                     data-bs-target="#tripModal"
                   >
                     Create a Trip
-                  </li>
+                  </button>
                 </div>
                 <hr />
                 <li class="text-danger selectable py-2" @click="logout">
@@ -137,7 +139,7 @@
 </template>
 
 <script>
-import { computed, watchEffect } from "vue";
+import { computed } from "vue";
 import { AppState } from "../AppState";
 import { AuthService } from "../services/AuthService";
 import SmallModalVue from "../components/SmallModal.vue";
@@ -146,7 +148,6 @@ import CreateTripForm from "../components/CreateTripForm.vue";
 import { Offcanvas } from "bootstrap";
 export default {
   setup() {
-
     return {
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
@@ -197,6 +198,14 @@ a:hover {
 
 .sidebar-nav .offcanvas {
   width: 270px;
+}
+
+.create-btn {
+  background-image: linear-gradient(rgb(150, 207, 36) 0%, #006838 100%);
+  border: 0;
+  color: white;
+  border-radius: 10px;
+  padding: 1vh;
 }
 
 @media screen and (max-width: 768px) {

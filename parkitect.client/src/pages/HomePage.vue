@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <!-- SECTION search bar -->
     <section class="row justify-content-center align-items-center search-bg">
-      <div class="col p-0 text-light text-center txt-shadow">
+      <div class="col pt-5 p-0 text-light text-center txt-shadow">
         <h1>Build your next National Park Journey!</h1>
         <form @submit.prevent="searchPark()" class="input-group mt-4">
           <input
@@ -50,7 +50,7 @@
 
     <!-- SECTION pagination -->
 
-    <section v-if="parks.length != 0" class="row justify-content-between">
+    <section v-if="parks.length != 0" class="row justify-content-between pt-4">
       <div class="col-md-3 col-6">
         <button
           class="btn btn-underline selectable"
@@ -73,11 +73,11 @@
 
     <!-- SECTION about us -->
     <section class="row mt-5">
-      <div class="col-12 px-5 bg-color">
+      <div class="col-12 px-md-5 bg-color">
         <router-link :to="{ name: 'About' }">
           <h2 class="text-center text-dark">About Us</h2>
         </router-link>
-        <p >
+        <p>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo, rem
           reiciendis maxime omnis porro, maiores cupiditate ipsam adipisci
           perspiciatis facere saepe quia, minima iste nisi explicabo aperiam at
@@ -267,7 +267,7 @@ export default {
 
 @media screen and (max-width: 480px) {
   .search-bg {
-    min-height: 40vh;
+    min-height: 50vh;
   }
 }
 

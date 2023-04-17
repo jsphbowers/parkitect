@@ -46,7 +46,7 @@
       </div>
     </section>
     <!-- SECTION Description -->
-    <section class="row p-2">
+    <section class="row p-3">
       <div class="col-12 bg-primary p-3 about">
         <h6 class="txt-shadow">{{ park?.description }}</h6>
       </div>
@@ -306,6 +306,9 @@ export default {
   border-radius: 50%;
 }
 
+.filter-img:hover {
+}
+
 .carousel-img {
   width: 100%;
   height: 75vh;
@@ -313,30 +316,29 @@ export default {
 
 }
 
-.txt-shadow {
-  text-shadow: 1px 1px black,
-    1px 1px 2px #0970a3,
-    -3px 1px 5px #009dff40;
-}
+// .txt-shadow {
+//   text-shadow: 1px 1px black,
+//     1px 1px 2px #0970a3,
+//     -3px 1px 5px #009dff40;
+// }
 
 .about {
-  background-image: linear-gradient(#009dff40 0%, #065177 100%);
-  border: 0;
-  color: #ffff;
-  padding: 0 25px;
-  border-radius: 5px;
-  box-shadow: none;
+  // background-image: linear-gradient(#009dff40 0%, #065177 100%);
+  // border: 0;
+  // color: #ffff;
+  // padding: 0 25px;
+  // border-radius: 5px;
+  // box-shadow: none;
+  background-color: #19875417 !important;
+  border-radius: 5px !important;
 }
 
 .addParkBtn {
-  background-image: linear-gradient(rgb(150, 207, 36) 0%, rgb(0, 104, 56) 100%);
+  background-image: linear-gradient(rgb(150, 207, 36) 0%, #006838 100%);
   border: 0;
-  color: #ffff;
-  padding: 0 25px;
-  border-radius: 30px;
-  box-shadow: none;
-  border-top-left-radius: 30px !important;
-  border-bottom-left-radius: 30px !important;
+  color: white;
+  border-radius: 10px;
+  padding: 1vh;
 }
 
 @media screen and (max-width: 820px) {
