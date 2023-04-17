@@ -9,9 +9,11 @@
       <img :src="p.image" :alt="'a photo of ' + p.fullName" class="park-image">
     </div>
     <div class="col-12 mb-3">
-      <h5 v-if="dictionary[p.parkCode]">Activities - Click to remove from trip</h5>
-      <ul v-if="dictionary[p.parkCode]" class="text-danger">
-        <span v-for="ttd in dictionary[p.parkCode]" :key="ttd.id">
+
+      <h5 v-if="tripThingsToDo.filter(ttd => ttd.parkCode == p.parkCode).length">Activities - Click to remove from trip
+      </h5>
+      <ul v-if="tripThingsToDo.filter(ttd => ttd.parkCode == p.parkCode).length" class="text-danger">
+        <span v-for="ttd in tripThingsToDo.filter(ttd => ttd.parkCode == p.parkCode)" :key="ttd.id">
           <li v-if="ttd.parkCode == p.parkCode" class="selectable" @click="removeThingToDoFromTrip(ttd.id, ttd.parkCode)">
             {{ ttd.title
             }}
@@ -38,7 +40,7 @@ export default {
     const route = useRoute()
     return {
       tripParks: computed(() => AppState.tripParks),
-      dictionary: computed(() => AppState.dictionary),
+      tripThingsToDo: computed(() => AppState.tripThingsToDo),
 
       async removeThingToDoFromTrip(thingToDoId, parkCode) {
         try {

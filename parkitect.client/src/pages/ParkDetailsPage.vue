@@ -226,7 +226,7 @@ export default {
   setup() {
     const route = useRoute();
     const filterType = ref("");
-    const keywords = { hiking: ["hiking", "walking"], snow: ["skiing", "snow"], water: ["water", "kayaking", "boat", "paddling"], fishing: ["fishing", "fish"], guided: ["tour", "program"], camping: ["camp"], other: ["driving", "flying", "watching", "trekking", "biking"] };
+    const keywords = { hiking: ["hiking", "walking", "hike"], snow: ["skiing", "snow", 'sledding'], water: ["water", "kayaking", "boat", "paddling"], fishing: ["fishing", "fish"], guided: ["tour", "program"], camping: ["camp"], other: ["driving", "flying", "watching", "trekking", "biking", "sand", "gather", "astronomy"] };
     async function getThingsToDo() {
       try {
         // NOTE used parkId here 

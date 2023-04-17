@@ -20,14 +20,12 @@ class TripParksService {
 
   async removeParkFromTrip(tripId, tripParkId, parkCode) {
     // Deleting all activities related to park from trip
-    const tripThingsToDoIds = []
-    if (AppState.dictionary[parkCode]) {
-      AppState.dictionary[parkCode].forEach(t => tripThingsToDoIds.push(t.id))
-      const res = []
-      for (let i = 0; i < tripThingsToDoIds.length; i++) {
-        await res.push(api.delete(`/trips/${tripId}/tripThingsToDo/${tripThingsToDoIds[i]}`))
+    const tripThingsToDo = AppState.tripThingsToDo.filter(t => t.parkCode == parkCode)
+    const res = []
+    if (tripThingsToDo.length > 0) {
+      for (let i = 0; i < tripThingsToDo.length; i++) {
+        await res.push(api.delete(`/trips/${tripId}/tripThingsToDo/${tripThingsToDo[i].id}`))
       }
-      delete AppState.dictionary[parkCode]
     }
     // Deleting park itself from trip
     const res2 = await api.delete(`/trips/${tripId}/tripParks/${tripParkId}`)
