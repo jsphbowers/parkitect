@@ -5,6 +5,8 @@ export const AppState = reactive({
   user: {},
   /** @type {import('./models/Account.js').Account} */
   account: {},
+  // NOTE toggle for icon display
+  parksVisited: true,
   /** @type {import('./models/Park.js').Park[]} */
   parks: [],
   /** @type {import('./models/Park.js').Park|null} */
