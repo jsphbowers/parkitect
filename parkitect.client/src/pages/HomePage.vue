@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <!-- SECTION search bar -->
     <section class="row justify-content-center align-items-center search-bg">
-      <div class="col pt-5 p-0 text-light text-center txt-shadow">
+      <div class="col p-0 text-light text-center txt-shadow">
         <h1>Build your next National Park Journey!</h1>
         <form @submit.prevent="searchPark()" class="input-group mt-4">
           <input
