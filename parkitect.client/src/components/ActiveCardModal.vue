@@ -21,18 +21,7 @@
               <div class="py-2" v-if="activity?.season.length != 0">
                 <h5>Seasons:</h5>
                 <h6>
-                  <img class="m-3 iconbg" title="Winter" v-if="activity?.season[0] == 'Winter'"
-                    src="https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/winter-recreation-area-black-22.svg"
-                    alt="Winter">
-                  <img class="m-3 iconbg" title="Spring" v-if="activity?.season[1] == 'Spring'"
-                    src="https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/flower-viewing-black-22.svg"
-                    alt="Spring">
-                  <img class="m-3 iconbg" title="Summer" v-if="activity?.season[2] == 'Summer'"
-                    src="https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/sunny-black-22.svg"
-                    alt="Summer">
-                  <img class="m-3 iconbg" title="Fall" v-if="activity?.season[3] == 'Fall'"
-                    src="https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/wilderness-black-22.svg"
-                    alt="Fall">
+                  <img class="m-3 iconbg" v-for="season in seasons" :src="season" alt="">
                 </h6>
               </div>
               <div class="py-2" v-if="activity?.timeOfDay.length != 0">
@@ -80,6 +69,22 @@ export default {
       activity: computed(() => AppState.activeThingToDo),
       account: computed(() => AppState.account),
       myTrips: computed(() => AppState.trips),
+      seasons: computed(() => AppState.activeThingToDo?.season.filter(at => {
+        for (let i = 0; i < at.length; i++) {
+          if (at[i] == 'Winter') {
+            return ('https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/winter-recreation-area-black-22.svg')
+          }
+          if (at[i] == 'Spring') {
+            return ("https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/flower-viewing-black-22.svg")
+          }
+          if (at[i] == 'Summer') {
+            return ("https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/sunny-black-22.svg")
+          }
+          if (at[i] == 'Fall') {
+            return ("https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/wilderness-black-22.svg")
+          }
+        }
+      })),
       async addActivity(activityId) {
         try {
           // logger.log(activityId)

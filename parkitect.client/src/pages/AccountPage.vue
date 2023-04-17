@@ -10,9 +10,9 @@
     </section>
 
     <!-- SECTION My trips -->
-    <div class="d-flex justify-content-between">
+    <div class="name-cont">
       <h3 class="name-style">{{ account.name }}</h3>
-      <button class="btn addBtn me-3" data-bs-toggle="modal" data-bs-target="#editAccountModal">Edit
+      <button class="btn addBtn noShow me-3" data-bs-toggle="modal" data-bs-target="#editAccountModal">Edit
         Account</button>
     </div>
     <!-- <h3 class="name-style">{{ account.name }}</h3> -->
@@ -58,7 +58,7 @@
             :src="`/icons/${parkCode}.png`" alt="" :class="hasVisited(parkCode)">
         </div>
         <div v-if="!parksVisited" class="justify-content-evenly d-flex flex-wrap my-2 py-5">
-          <img v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style mb-3 selectable"
+          <img v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style grow mb-3 selectable"
             :src="`/icons/${parkCode}.png`" alt="" :class="displayYourParks(parkCode)">
         </div>
       </div>
@@ -297,7 +297,7 @@ export default {
 
   .name-style {
     text-align: center;
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: 500;
   }
 
@@ -318,7 +318,7 @@ export default {
   }
 
   .trip-margin {
-    margin-top: 15vh;
+    margin-top: 2vh;
     margin-bottom: 1vh;
     text-align: center;
 
@@ -334,6 +334,25 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .name-cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .addBtn {
+    //   background-image: linear-gradient(rgb(150, 207, 36) 0%, #006838 100%);
+    //   border: 0;
+    //   color: white;
+    //   border-radius: 10px;
+    //   padding: 1vh;
+    //   max-width: 25vw;
+  }
+
+  .noShow {
+    display: none;
   }
 }
 
@@ -385,16 +404,29 @@ export default {
   }
 
   /* add if not doing the collapse */
-  /* .grow {
+  .grow {
     transition: transform .2s ease-in-out;
   }
 
   .grow:hover {
     transform: scale(1.05);
-  } */
+  }
 
   .account-img-cont {
     position: relative;
+  }
+
+  .name-cont {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .addBtn {
+    background-image: linear-gradient(rgb(150, 207, 36) 0%, #006838 100%);
+    border: 0;
+    color: white;
+    border-radius: 10px;
+    padding: 1vh;
   }
 }
 </style>
