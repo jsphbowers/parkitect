@@ -134,8 +134,41 @@
       </div>
     </section>
     <section class="row justify-content-between text-center">
-      <div class="col-4">{{ park?.url }}</div>
-      <div class="col-4">Operating Hours and Seasons</div>
+      <div class="col-4">
+        <h6>
+          Park Contact Info: {{ park?.contacts.emailAddresses[0].emailAddress }}
+        </h6>
+      </div>
+      <div class="col-4">
+        <div class="dropdown">
+          <button class="btn addParkBtn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Hours of Operation
+          </button>
+          <ul class="dropdown-menu text-center">
+            <li>
+              <p>Sunday: {{ park?.operatingHours[0].standardHours.sunday }}</p>
+            </li>
+            <li>
+              <p>Monday: {{ park?.operatingHours[0].standardHours.monday }}</p>
+            </li>
+            <li>
+              <p>Tuesday: {{ park?.operatingHours[0].standardHours.tuesday }}</p>
+            </li>
+            <li>
+              <p>Wednesday: {{ park?.operatingHours[0].standardHours.wednesday }}</p>
+            </li>
+            <li>
+              <p>Thursday: {{ park?.operatingHours[0].standardHours.thursday }}</p>
+            </li>
+            <li>
+              <p>Friday: {{ park?.operatingHours[0].standardHours.friday }}</p>
+            </li>
+            <li>
+              <p>Saturday: {{ park?.operatingHours[0].standardHours.saturday }}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
   </div>
 
