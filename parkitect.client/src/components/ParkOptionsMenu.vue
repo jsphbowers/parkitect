@@ -3,7 +3,7 @@
     <div class="col-12">
       <div class="d-flex justify-content-between">
         <h4>{{ p.fullName }}</h4>
-        <button class="btn p-0" title="Delete Park from Trip"><i
+        <button class="btn p-0" title="Delete Park from Trip" @click="removeParkFromTrip(p.id, p.parkCode)"><i
             class="mdi mdi-delete-outline text-danger fs-5"></i></button>
       </div>
       <img :src="p.image" :alt="'a photo of ' + p.fullName" class="park-image">
@@ -31,6 +31,7 @@ import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
 import { useRoute } from "vue-router";
 import { tripThingsToDoService } from "../services/TripThingsToDoService.js";
+import { tripParksService } from "../services/TripParksService.js";
 
 export default {
   setup() {
@@ -44,6 +45,18 @@ export default {
           if (await Pop.confirm("Are you sure you want to delete this activity?", "This action cannot be undone", "Yes, I'm sure", "warning")) {
             const tripId = route.params.tripId
             await tripThingsToDoService.removeThingToDoFromTrip(tripId, thingToDoId, parkCode)
+          }
+        } catch (error) {
+          logger.log(error)
+          Pop.error(error.message)
+        }
+      },
+
+      async removeParkFromTrip(tripParkId, parkCode) {
+        try {
+          if (await Pop.confirm("Are you sure you want to delete this park?", "This action cannot be undone", "Yes, I'm sure", "warning")) {
+            const tripId = route.params.tripId
+            await tripParksService.removeParkFromTrip(tripId, tripParkId, parkCode)
           }
         } catch (error) {
           logger.log(error)
