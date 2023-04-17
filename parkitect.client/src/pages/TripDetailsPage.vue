@@ -6,6 +6,7 @@
         <img v-if="trip" :src="trip?.coverImg" :alt="'cover image for ' + trip?.name" class="cover-img">
       </div>
       <div class="d-flex justify-content-end mt-2 mb-0">
+        <button class="btn addBtn me-2" data-bs-toggle="modal" data-bs-target="#">Send Invitation</button>
         <button class="btn addBtn" data-bs-toggle="modal" data-bs-target="#editTripModal">Edit Trip Info</button>
         <button class="btn addBtn ms-2" data-bs-toggle="modal" data-bs-target="#editParkModal">Edit Travel Plans</button>
       </div>
