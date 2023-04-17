@@ -6,7 +6,7 @@
         <img v-if="trip" :src="trip?.coverImg" :alt="'cover image for ' + trip?.name" class="cover-img">
       </div>
       <div class="d-flex justify-content-end mt-2 mb-0">
-        <button class="btn addBtn" data-bs-toggle="modal" data-bs-target="#editTripModal">Edit Trip Details</button>
+        <button class="btn addBtn" data-bs-toggle="modal" data-bs-target="#editTripModal">Edit Trip Info</button>
         <button class="btn addBtn ms-2" data-bs-toggle="modal" data-bs-target="#editParkModal">Edit Travel Plans</button>
       </div>
       <!-- trip details card -->
@@ -17,8 +17,12 @@
       <!-- tripGoers photos -->
       <h3 class="mb-0">Who's coming along...</h3>
       <div class="col-md-11 trip-goers-card">
-        <div v-for="t in tripGoers" :key="t.id">
+        <div v-for="t in tripGoers" :key="t.id" class="position-relative">
           <img :src="t.account.picture" :alt="'a photo of ' + t.account.name" :title="t.account.name" class="profile-pic">
+          <button v-if="t?.accountId != trip?.creatorId" class="btn btn-outline p-0 remove-tripGoer-btn"
+            title="Remove Trip Goer" @click="removeTripGoer(t.id)">
+            <i class="mdi mdi-minus"></i>
+          </button>
         </div>
       </div>
       <!-- tripParks -->
@@ -30,21 +34,6 @@
             <img :src="t.image" :alt="'a photo of ' + t.fullName" class="park-img">
           </div>
           <div class="col-md-5">
-            <!-- dropdown menu -->
-            <!-- <div class="d-flex justify-content-end">
-              <div class="dropdown">
-                <button class="btn btn-outline dropdown-toggle" type="button" id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown" aria-expanded="false" title="Edit Park Dropdown">
-                  ...
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li>
-                    <p class="dropdown-item selectable mb-0" href="#" data-bs-toggle="modal"
-                      data-bs-target="#editParkModal">Edit or Delete This Park</p>
-                  </li>
-                </ul>
-              </div>
-            </div> -->
             <!-- tripThingsToDo -->
             <h3 class="mt-md-5 mt-2">Activities</h3>
             <ul v-if="tripThingsToDo.filter(ttd => ttd.parkCode == t.parkCode).length">
@@ -71,7 +60,7 @@
 
   <SmallModal id="editParkModal">
     <template #header>
-      <h5>Edit Parks and Activities</h5>
+      <h5>Edit Travel Plans</h5>
     </template>
     <template #body>
       <ParkOptionsMenu />
@@ -168,6 +157,18 @@ export default {
         }
       },
 
+      async removeTripGoer(tripGoerId) {
+        try {
+          if (await Pop.confirm("Are you sure you'd like to remove this trip goer?", "This action cannot be undone", "Yes, I'm sure", "warning")) {
+            const tripId = route.params.tripId
+            await tripGoersService.removeTripGoer(tripGoerId, tripId)
+          }
+        } catch (error) {
+          logger.error(error)
+          Pop.error(error.message)
+        }
+      }
+
 
     };
   },
@@ -215,7 +216,7 @@ export default {
   height: 10vh;
   width: 10vh;
   object-fit: cover;
-  object-position: center
+  object-position: center;
 }
 
 .cover-img {
@@ -235,5 +236,23 @@ export default {
   object-position: center;
   width: 100%;
   height: 45vh
+}
+
+.position-relative {
+  position: relative
+}
+
+.remove-tripGoer-btn {
+  background-color: rgba(255, 87, 87, 0.525);
+  height: 1.5em;
+  width: 1.5em;
+  border-radius: 100%;
+  position: absolute;
+  bottom: 72%;
+  left: 70%
+}
+
+.remove-tripGoer-btn:hover {
+  background-color: rgb(255, 87, 87);
 }
 </style>

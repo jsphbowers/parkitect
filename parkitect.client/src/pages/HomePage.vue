@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <!-- SECTION search bar -->
     <section class="row justify-content-center align-items-center search-bg">
-      <div class="col p-0 text-light text-center txt-shadow">
+      <div class="col pt-5 p-0 text-light text-center txt-shadow">
         <h1>Build your next National Park Journey!</h1>
         <form @submit.prevent="searchPark()" class="input-group mt-4">
           <input
@@ -37,8 +37,10 @@
       >
         <h2>We are sorry, but there are no search results</h2>
         <h1>¯\_(ツ)_/¯</h1>
-        <br>
-        <button @click="getParks()" class="btn btn-back mb-4">Back to all parks</button>
+        <br />
+        <button @click="getParks()" class="btn btn-back mb-4">
+          Back to all parks
+        </button>
       </div>
 
       <div v-for="p in parks" :key="p.nativeId" class="col-md-4">
@@ -48,16 +50,15 @@
 
     <!-- SECTION pagination -->
 
-    <section v-if="parks.length != 0" class="row justify-content-between">
+    <section v-if="parks.length != 0" class="row justify-content-between pt-4">
       <div class="col-md-3 col-6">
-        <button 
+        <button
           class="btn btn-underline selectable"
           :disabled="currentPage == 0"
           @click="changePage('decrease')"
         >
           Previous Page
         </button>
-
       </div>
       <div class="col-md-3 col-6 text-end">
         <button
@@ -71,7 +72,22 @@
     </section>
 
     <!-- SECTION about us -->
-    <section class="row"></section>
+    <section class="row mt-5">
+      <div class="col-12 px-md-5 bg-color">
+        <router-link :to="{ name: 'About' }">
+          <h2 class="text-center text-dark">About Us</h2>
+        </router-link>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo, rem
+          reiciendis maxime omnis porro, maiores cupiditate ipsam adipisci
+          perspiciatis facere saepe quia, minima iste nisi explicabo aperiam at
+          mollitia unde! Lorem ipsum dolor sit amet, consectetur adipisicing
+          elit. Nemo magnam voluptatem ex error. Natus harum assumenda adipisci
+          unde perspiciatis nisi aliquam esse ipsa blanditiis obcaecati, maiores
+          modi eius non dolor!
+        </p>
+      </div>
+    </section>
   </div>
 
   <SmallModalVue id="tripModal">
@@ -242,12 +258,16 @@ export default {
   background-image: linear-gradient(rgb(150, 207, 36) 0%, rgb(0, 104, 56) 100%);
   color: white;
   border: 0;
+}
 
+.bg-color {
+  background-color: #19875417;
+  padding: 3em;
 }
 
 @media screen and (max-width: 480px) {
   .search-bg {
-    min-height: 40vh;
+    min-height: 50vh;
   }
 }
 
