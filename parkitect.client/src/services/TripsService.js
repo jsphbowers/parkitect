@@ -16,14 +16,14 @@ export class TripsService {
   async getMyTrip(tripId) {
     const res = await api.get(`/trips/${tripId}`)
     AppState.activeTrip = new Trip(res.data)
-    logger.log('[ACTIVE TRIP]', AppState.activeTrip)
+    // logger.log('[ACTIVE TRIP]', AppState.activeTrip)
   }
 
   async getMyCreatedTrips() {
     const res = await api.get(`/account/trips`)
     // logger.log(res.data)
     AppState.trips = res.data.map(t => new Trip(t))
-    logger.log('[THIS IS THE TRIPS IN THE APPSTATE]', AppState.trips)
+    // logger.log('[THIS IS THE TRIPS IN THE APPSTATE]', AppState.trips)
   }
 
   async addParkToTrip(tripId, nativeParkId, parkName) {
@@ -35,7 +35,20 @@ export class TripsService {
       parkCode: AppState.activePark.parkCode
     }
     const res = await api.post(`/trips/${tripId}/tripParks`, parkData)
-    logger.log('[THIS IS THE RETURNED PARK ADDED TO TRIP]', res.data)
+    // logger.log('[THIS IS THE RETURNED PARK ADDED TO TRIP]', res.data)
+  }
+
+  async addActivityToTrip(tripId, nativeThingToDoId, activityTitle) {
+    logger.log('[WE BE ADDING AN ACTIVITY]', tripId, nativeThingToDoId, activityTitle)
+    const thingToDoData = {
+      title: activityTitle,
+      nativeThingToDoId: nativeThingToDoId,
+      parkCode: AppState.activePark.parkCode,
+      activities: AppState.activeThingToDo.activities
+    }
+    const res = await api.post(`/trips/${tripId}/tripThingsToDo`, thingToDoData)
+    logger.log('[THIS IS THE RETURNED ACTIVITY ADDED TO TRIP]', res.data)
+
   }
 
   async addActivity(activityId) {

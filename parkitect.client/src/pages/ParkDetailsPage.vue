@@ -55,7 +55,7 @@
     <section class="row">
       <div class="col-12 d-flex justify-content-between my-3 px-4">
         <h4>Popular Activities</h4>
-        <div class="dropdown">
+        <div class="dropdown" v-if="account?.id">
           <button class="btn addParkBtn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Add Park To Trip
           </button>
@@ -270,6 +270,7 @@ export default {
     });
     return {
       park: computed(() => AppState.activePark),
+      account: computed(() => AppState.account),
       myTrips: computed(() => AppState.trips),
       activities: computed(() => {
         if (!filterType.value) {

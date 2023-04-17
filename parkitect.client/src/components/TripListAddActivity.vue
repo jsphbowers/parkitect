@@ -1,6 +1,6 @@
 <template>
-  <div v-if="!parkExists">
-    <li><a class="dropdown-item selectable" @click="addParkToTrip(tripName.id)">{{ tripName.name }}</a></li>
+  <div>
+    <li><a class="dropdown-item selectable" @click="addActivityToTrip(tripName.id)">{{ tripName.name }}</a></li>
   </div>
   <!-- <li><a class="dropdown-item selectable" @click="addParkToTrip(tripName.id)">{{ tripName.name }}</a></li> -->
 </template>
@@ -39,15 +39,15 @@ export default {
       getTripParks()
     )
     return {
-      hasPark: computed(() => AppState.tripParks.find(tp => tp.nativeParkId == AppState.activePark.nativeId)),
+      hasThingToDo: computed(() => AppState.tripParks.find(tp => tp.nativeParkId == AppState.activePark.nativeId)),
       parkExists,
 
-      async addParkToTrip(tripId) {
+      async addActivityToTrip(tripId) {
         try {
-          // logger.log('[THIS IS THE TRIP ID]', tripId)
-          const nativeParkId = AppState.activePark.nativeId
-          const fullName = AppState.activePark.name
-          await tripsService.addParkToTrip(tripId, nativeParkId, fullName)
+          logger.log('[THIS IS THE TRIP ID FOR ADDING ACTIVITY]', tripId)
+          const nativeThingToDoId = AppState.activeThingToDo.nativeId
+          const title = AppState.activeThingToDo.title
+          await tripsService.addActivityToTrip(tripId, nativeThingToDoId, title)
         } catch (error) {
           Pop.error(error.message)
           logger.error(error)
