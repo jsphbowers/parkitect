@@ -36,10 +36,10 @@
           <div class="col-md-5">
             <!-- SECTION tripThingsToDo -->
             <h3 class="mt-md-5 mt-2">Activities</h3>
-            <ul v-if="dictionary[t.parkCode]">
-              <span v-for="ttd in dictionary[t.parkCode]" :key="ttd.id">
+            <ul v-if="tripThingsToDo.filter(ttd => ttd.parkCode == t.parkCode).length">
+              <span v-for="ttd in tripThingsToDo.filter(ttd => ttd.parkCode == t.parkCode)" :key="ttd.id">
                 <li v-if="ttd.parkCode == t.parkCode" class="selectable" data-bs-toggle="modal"
-                  data-bs-target="#exampleModal" @click="setActiveThingToDo(ttd.nativeThingToDoId)">{{ ttd.title }}</li>
+                  data-bs-target="#activity-modal" @click="setActiveThingToDo(ttd.nativeThingToDoId)">{{ ttd.title }}</li>
               </span>
             </ul>
             <h6 v-else>No activities have been added for this park</h6>
@@ -67,7 +67,7 @@
     </template>
   </SmallModal>
 
-  <ActiveCardModal />
+  <ActiveCardModal id="activity-modal" />
 </template>
 
 <script>
@@ -146,7 +146,7 @@ export default {
       trip: computed(() => AppState.activeTrip),
       tripGoers: computed(() => AppState.tripGoers),
       tripParks: computed(() => AppState.tripParks),
-      dictionary: computed(() => AppState.dictionary),
+      tripThingsToDo: computed(() => AppState.tripThingsToDo),
 
       async setActiveThingToDo(nativeThingToDoId) {
         try {

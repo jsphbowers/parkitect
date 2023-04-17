@@ -27,20 +27,18 @@ export default {
     async function getTripParks() {
       try {
         const tripId = props.tripName.id
-        parkExists.value = await tripParksService.getTripParksByTripId(tripId)
+        await tripParksService.getListTripParks(tripId)
       } catch (error) {
         Pop.error(error.message)
         logger.error(error.message)
       }
     }
-    const parkExists = ref(false)
 
     onMounted(() =>
       getTripParks()
     )
     return {
-      hasPark: computed(() => AppState.tripParks.find(tp => tp.nativeParkId == AppState.activePark.nativeId)),
-      parkExists,
+      parkExists: computed(() => AppState.dictTripParks[props.tripName.id]?.find(p => p.nativeParkId == AppState.activePark.nativeId)),
 
       async addParkToTrip(tripId) {
         try {
