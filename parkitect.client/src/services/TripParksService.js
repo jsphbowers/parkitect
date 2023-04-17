@@ -7,16 +7,15 @@ class TripParksService {
   async getTripParksByTripId(tripId) {
     const res = await api.get(`trips/${tripId}/tripParks`)
     logger.log('[GETTING TRIPPARKS]', res.data)
-    let parkExists = false
-    res.data.forEach(tp => {
-      if (tp.nativeParkId == AppState.activePark?.nativeId) {
-        parkExists = true
-      }
-    })
-    logger.log(parkExists)
     AppState.tripParks = res.data.map(tp => new TripPark(tp))
     logger.log('[CLASSED TRIPPARKS]', AppState.tripParks)
-    return parkExists
+  }
+
+  async getListTripParks(tripId) {
+    if (!AppState.dictTripParks[tripId]) { // only get trip parks if haven't already gotten them before
+      const res = await api.get(`trips/${tripId}/tripParks`)
+      AppState.dictTripParks[tripId] = res.data.map(tp => new TripPark(tp))
+    }
   }
 
   async removeParkFromTrip(tripId, tripParkId, parkCode) {

@@ -9,16 +9,16 @@ class TripThingsToDoService {
   async getTripThingsToDoByTripId(tripId) {
     const res = await api.get(`/trips/${tripId}/tripThingsToDo`)
     AppState.tripThingsToDo = res.data.map(ttd => new TripThingToDo(ttd))
-    const dictionary = {}
-    for (let i = 0; i < AppState.tripThingsToDo.length; i++) {
-      if (!dictionary[AppState.tripThingsToDo[i].parkCode]) {
-        dictionary[AppState.tripThingsToDo[i].parkCode] = []
-        dictionary[AppState.tripThingsToDo[i].parkCode].push(AppState.tripThingsToDo[i])
-      } else {
-        dictionary[AppState.tripThingsToDo[i].parkCode].push(AppState.tripThingsToDo[i])
-      }
+  }
+
+  async getThingsToDoForActivityList(tripId) {
+    if (!AppState.dictThingsToDo[tripId]) {
+      const dictionary = AppState.dictThingsToDo
+      dictionary[tripId] = []
+
+      const res = await api.get(`trips/${tripId}/tripThingsToDo`)
+      dictionary[tripId] = res.data
     }
-    AppState.dictionary = dictionary
   }
 
   async setActiveThingToDo(nativeThingToDoId) {
