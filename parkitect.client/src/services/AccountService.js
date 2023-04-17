@@ -22,12 +22,9 @@ class AccountService {
     AppState.account = new Account(res.data)
   }
 
-  async showYourParks() {
-    if (AppState.parksVisited == true) {
-      AppState.parksVisited = false
-    } else {
-      AppState.parksVisited = true
-    }
+  async changeAccount(accountData) {
+    const res = await api.put('/account', accountData)
+    AppState.account = new Account(res.data)
   }
 
 }
