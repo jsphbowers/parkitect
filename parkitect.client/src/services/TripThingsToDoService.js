@@ -31,6 +31,9 @@ class TripThingsToDoService {
 
     const foundIndex = AppState.dictionary[parkCode].findIndex(t => t.id == thingToDoId)
     AppState.dictionary[parkCode].splice(foundIndex, 1)
+    if (AppState.dictionary[parkCode].length == 0) {
+      delete AppState.dictionary[parkCode]
+    }
   }
 
 }
