@@ -4,7 +4,7 @@
   </button> -->
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
@@ -14,7 +14,7 @@
         <div class="modal-body container-fluid">
           <img class="img-fluid" :src="activity?.images[0].url" :alt="activity?.images[0].altText">
           <section class="row p-3">
-            <div class="col-4">
+            <div class="col-md-4">
               <h5>Type: {{ activity?.activities[0].name }}</h5>
               <h6 v-if="activity?.duration"> Typically takes {{ activity?.duration }}:</h6>
               <h6>{{ activity?.durationDescription }}</h6>
@@ -29,7 +29,7 @@
                 <h6 v-if="activity?.timeOfDay">{{ activity?.timeOfDay }}</h6>
               </div>
             </div>
-            <div class="col-8">
+            <div class="col-md-8">
               <h4>Description:</h4>
               <h6 v-html="activity?.longDescription">
               </h6>
@@ -38,7 +38,8 @@
         </div>
         <div class="modal-footer" v-if="account?.id">
           <div class="dropdown" v-if="account?.id">
-            <button class="btn addBtn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn addBtn dropdown-toggle" v-if="route.name != 'TripDetails'" type="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
               Add Activity
             </button>
             <ul class="dropdown-menu">
@@ -62,6 +63,8 @@ import { AppState } from "../AppState.js";
 import { logger } from "../utils/Logger.js";
 import { tripsService } from "../services/TripsService.js"
 import TripListAddActivity from "./TripListAddActivity.vue";
+import Pop from "../utils/Pop.js";
+import { useRoute } from "vue-router";
 
 export default {
   setup() {
@@ -85,6 +88,8 @@ export default {
           }
         }
       })),
+
+      route: useRoute(),
       async addActivity(activityId) {
         try {
           // logger.log(activityId)

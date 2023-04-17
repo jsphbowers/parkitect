@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!hasActivity" :class="{ 'text-danger': hasActivity }">
     <li><a class="dropdown-item selectable" @click="addActivityToTrip(tripName.id)">{{ tripName.name }}</a></li>
   </div>
   <!-- <li><a class="dropdown-item selectable" @click="addParkToTrip(tripName.id)">{{ tripName.name }}</a></li> -->
@@ -17,6 +17,7 @@ import { computed } from "@vue/reactivity";
 import { AppState } from "../AppState.js";
 import { onMounted, ref } from "vue";
 import { tripParksService } from "../services/TripParksService.js"
+import { tripThingsToDoService } from "../services/TripThingsToDoService.js";
 
 export default {
   props: {
@@ -24,23 +25,21 @@ export default {
   },
   setup(props) {
 
-    async function getTripParks() {
+    async function getTripThingsToDo() {
       try {
         const tripId = props.tripName.id
-        parkExists.value = await tripParksService.getTripParksByTripId(tripId)
+        await tripThingsToDoService.getThingsToDoForActivityList(tripId)
       } catch (error) {
         Pop.error(error.message)
         logger.error(error.message)
       }
     }
-    const parkExists = ref(false)
 
     onMounted(() =>
-      getTripParks()
+      getTripThingsToDo()
     )
     return {
-      hasThingToDo: computed(() => AppState.tripParks.find(tp => tp.nativeParkId == AppState.activePark.nativeId)),
-      parkExists,
+      hasActivity: computed(() => AppState.dictThingsToDo[props.tripName.id]?.find(a => a.nativeThingToDoId == AppState.activeThingToDo?.nativeId)),
 
       async addActivityToTrip(tripId) {
         try {
