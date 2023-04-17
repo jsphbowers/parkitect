@@ -75,9 +75,6 @@ export default {
   setup() {
     return {
       activity: computed(() => AppState.activeThingToDo),
-      account: computed(() => AppState.account),
-      myTrips: computed(() => AppState.trips),
-
 
       async addActivity(activityId) {
         try {
