@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <section class="row justify-content-center">
-      <!-- cover photo -->
+      <!-- SECTION cover photo -->
       <div class="col-12 p-0">
         <img v-if="trip" :src="trip?.coverImg" :alt="'cover image for ' + trip?.name" class="cover-img">
       </div>
@@ -9,12 +9,12 @@
         <button class="btn addBtn" data-bs-toggle="modal" data-bs-target="#editTripModal">Edit Trip Info</button>
         <button class="btn addBtn ms-2" data-bs-toggle="modal" data-bs-target="#editParkModal">Edit Travel Plans</button>
       </div>
-      <!-- trip details card -->
+      <!-- SECTION trip details card -->
       <div class="col-md-11 text-center trip-details-card">
         <h1>{{ trip?.name }}</h1>
         <h5>{{ trip?.description }}</h5>
       </div>
-      <!-- tripGoers photos -->
+      <!-- SECTION tripGoers photos -->
       <h3 class="mb-0">Who's coming along...</h3>
       <div class="col-md-11 trip-goers-card">
         <div v-for="t in tripGoers" :key="t.id" class="position-relative">
@@ -25,7 +25,7 @@
           </button>
         </div>
       </div>
-      <!-- tripParks -->
+      <!-- SECTION tripParks -->
       <h3 class="mb-0">Sights to see & things to do!</h3>
       <div class="col-md-11 parks-area">
         <section class="row mb-4" v-for="t in tripParks" :key="t.id">
@@ -34,7 +34,7 @@
             <img :src="t.image" :alt="'a photo of ' + t.fullName" class="park-img">
           </div>
           <div class="col-md-5">
-            <!-- tripThingsToDo -->
+            <!-- SECTION tripThingsToDo -->
             <h3 class="mt-md-5 mt-2">Activities</h3>
             <ul v-if="dictionary[t.parkCode]">
               <span v-for="ttd in dictionary[t.parkCode]" :key="ttd.id">
