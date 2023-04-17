@@ -14,6 +14,12 @@ class TripGoersService {
     const res = await api.get(`/trips/${tripId}/tripGoers`)
     AppState.tripGoers = res.data.map(tg => new TripGoer(tg))
   }
+
+  async removeTripGoer(tripGoerId, tripId) {
+    const res = await api.delete(`/trips/${tripId}/tripGoers/${tripGoerId}`)
+    const foundIndex = AppState.tripGoers.findIndex(tg => tg.id == tripGoerId)
+    AppState.tripGoers.splice(foundIndex, 1)
+  }
 }
 
 
