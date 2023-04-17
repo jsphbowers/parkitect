@@ -16,19 +16,19 @@
             <div class="carousel-item active">
               <img :src="park?.images[0].url" class="carousel-img d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
-                <h5 class="txt-shadow">{{ park?.name }}</h5>
+                <h3 class="txt-shadow">{{ park?.name }}</h3>
               </div>
             </div>
             <div class="carousel-item">
               <img :src="park?.images[1].url" class="carousel-img d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
-                <h5 class="txt-shadow">{{ park?.name }}</h5>
+                <h3 class="txt-shadow">{{ park?.name }}</h3>
               </div>
             </div>
             <div class="carousel-item">
               <img :src="park?.images[2].url" class="carousel-img d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
-                <h5 class="txt-shadow">{{ park?.name }}</h5>
+                <h3 class="txt-shadow">{{ park?.name }}</h3>
               </div>
             </div>
           </div>
@@ -68,7 +68,9 @@
           </ul>
         </div>
       </div>
-      <div class="col-12 d-flex justify-content-evenly">
+
+
+      <div class="col-12 d-flex justify-content-evenly media-scroll">
         <div class="text-center p-2">
           <img @click="changeActivityType('')" class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0aW9uYWwlMjBwYXJrfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
@@ -301,5 +303,21 @@ export default {
   box-shadow: none;
   border-top-left-radius: 30px !important;
   border-bottom-left-radius: 30px !important;
+}
+
+@media screen and (max-width: 820px) {
+  .carousel-img {
+  height: 40vh;
+}
+
+.media-scroll {
+  overflow-x: auto;
+  justify-content: flex-start !important; 
+  box-sizing: border-box;
+}
+
+.media-scroll::-webkit-scrollbar {
+  display: none;
+}
 }
 </style>
