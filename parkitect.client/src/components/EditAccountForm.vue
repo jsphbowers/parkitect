@@ -5,7 +5,7 @@
       <label for="picture">Account Image</label>
     </div>
     <div class="form-floating">
-      <input class="form-control" id="name" name="name" minlength="5" maxlength="30" required v-model="editable.name">
+      <input class="form-control" id="name" name="name" minlength="1" maxlength="30" required v-model="editable.name">
       <label for="name">Account Name</label>
     </div>
     <div class="modal-footer">
