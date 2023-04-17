@@ -18,6 +18,23 @@ class TripParksService {
     logger.log('[CLASSED TRIPPARKS]', AppState.tripParks)
     return parkExists
   }
+
+  async removeParkFromTrip(tripId, tripParkId, parkCode) {
+    // Deleting all activities related to park from trip
+    const tripThingsToDoIds = []
+    if (AppState.dictionary[parkCode]) {
+      AppState.dictionary[parkCode].forEach(t => tripThingsToDoIds.push(t.id))
+      const res = []
+      for (let i = 0; i < tripThingsToDoIds.length; i++) {
+        await res.push(api.delete(`/trips/${tripId}/tripThingsToDo/${tripThingsToDoIds[i]}`))
+      }
+      delete AppState.dictionary[parkCode]
+    }
+    // Deleting park itself from trip
+    const res2 = await api.delete(`/trips/${tripId}/tripParks/${tripParkId}`)
+    const foundIndex = AppState.tripParks.findIndex(t => t.id == tripParkId)
+    AppState.tripParks.splice(foundIndex, 1)
+  }
 }
 
 export const tripParksService = new TripParksService()
