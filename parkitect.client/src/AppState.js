@@ -27,6 +27,8 @@ export const AppState = reactive({
   tripGoers: [],
   /** @type {import('./models/TripPark.js').TripPark[]} */
   tripParks: [],
+  dictTripParks: {},
+  dictThingsToDo: {},
   currentPage: null,
   total: null,
   start: null,

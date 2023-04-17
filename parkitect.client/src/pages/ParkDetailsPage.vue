@@ -134,12 +134,12 @@
       </div>
     </section>
     <section class="row justify-content-between text-center">
-      <div class="col-4">
+      <div class="col-md-4 py-2">
         <h6>
           Park Contact Info: {{ park?.contacts.emailAddresses[0].emailAddress }}
         </h6>
       </div>
-      <div class="col-4">
+      <div class="col-md-4 py-2">
         <div class="dropdown">
           <button class="btn addParkBtn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Hours of Operation
@@ -263,11 +263,11 @@ export default {
       getActivePark();
       window.scrollTo(0, 0);
     });
-    watchEffect(() => {
-      if (AppState.account?.id) {
-        getMyCreatedTrips();
-      }
-    });
+    // watchEffect(() => { no longer handled by page, but by AuthService
+    //   if (AppState.account?.id) {
+    //     getMyCreatedTrips();
+    //   }
+    // });
     return {
       park: computed(() => AppState.activePark),
       account: computed(() => AppState.account),
@@ -332,26 +332,25 @@ export default {
   background-image: linear-gradient(rgb(150, 207, 36) 0%, rgb(0, 104, 56) 100%);
   border: 0;
   color: #ffff;
-  padding: 0 25px;
-  border-radius: 30px;
+  padding: 0px 10px;
+  border-radius: 20px;
   box-shadow: none;
-  border-top-left-radius: 30px !important;
-  border-bottom-left-radius: 30px !important;
+  font-size: 16px;
 }
 
 @media screen and (max-width: 820px) {
   .carousel-img {
-  height: 40vh;
-}
+    height: 40vh;
+  }
 
-.media-scroll {
-  overflow-x: auto;
-  justify-content: flex-start !important; 
-  box-sizing: border-box;
-}
+  .media-scroll {
+    overflow-x: auto;
+    justify-content: flex-start !important;
+    box-sizing: border-box;
+  }
 
-.media-scroll::-webkit-scrollbar {
-  display: none;
-}
+  .media-scroll::-webkit-scrollbar {
+    display: none;
+  }
 }
 </style>

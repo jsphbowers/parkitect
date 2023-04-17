@@ -1,5 +1,5 @@
 <template>
-  <div class="m-2 mx-4 selectable elevation-2" data-bs-toggle="modal" data-bs-target="#exampleModal"
+  <div class="m-2 mx-4 selectable elevation-2" data-bs-toggle="modal" data-bs-target="#activity-modal"
     @click="setActiveActivity(activity?.nativeId)">
     <div class="card">
       <div class="row g-0">
@@ -40,7 +40,7 @@
       </div>
     </div>
   </div>
-  <ActiveCardModal />
+  <ActiveCardModal id="activity-modal" />
 </template>
 
 
