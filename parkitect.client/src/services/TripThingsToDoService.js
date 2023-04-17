@@ -28,12 +28,8 @@ class TripThingsToDoService {
 
   async removeThingToDoFromTrip(tripId, thingToDoId, parkCode) {
     const res = await api.delete(`/trips/${tripId}/tripThingsToDo/${thingToDoId}`)
-
-    const foundIndex = AppState.dictionary[parkCode].findIndex(t => t.id == thingToDoId)
-    AppState.dictionary[parkCode].splice(foundIndex, 1)
-    if (AppState.dictionary[parkCode].length == 0) {
-      delete AppState.dictionary[parkCode]
-    }
+    const foundIndex = AppState.tripThingsToDo.findIndex(t => t.id == thingToDoId)
+    AppState.tripThingsToDo.splice(foundIndex, 1)
   }
 
 }
