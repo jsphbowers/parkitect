@@ -18,7 +18,7 @@
               <h5>Type: {{ activity?.activities[0].name }}</h5>
               <h6 v-if="activity?.duration"> Typically takes {{ activity?.duration }}:</h6>
               <h6>{{ activity?.durationDescription }}</h6>
-              <div v-if="activity?.season.length != 0">
+              <div class="py-2" v-if="activity?.season.length != 0">
                 <h5>Seasons:</h5>
                 <h6>
                   <img class="m-3 iconbg" title="Winter" v-if="activity?.season[0] == 'Winter'"
@@ -35,9 +35,9 @@
                     alt="Fall">
                 </h6>
               </div>
-              <div v-if="activity?.timeOfDay.length != 0">
+              <div class="py-2" v-if="activity?.timeOfDay.length != 0">
                 <h5>Times of Day:</h5>
-                <h6>{{ activity?.timeOfDay }}</h6>
+                <h6 v-if="activity?.timeOfDay">{{ activity?.timeOfDay }}</h6>
               </div>
             </div>
             <div class="col-8">
@@ -47,8 +47,17 @@
             </div>
           </section>
         </div>
-        <div class="modal-footer">
-          <button @click="addActivity(activity?.nativeId)" type="button" class="btn addBtn">Add to Trip</button>
+        <div class="modal-footer" v-if="account?.id">
+          <div class="dropdown">
+            <button type="button" class="btn addBtn">Add to Trip</button>
+            <ul class="dropdown-menu">
+              <li>
+                <div v-for="trip in myTrips" :key="trip.id">
+                  <TripListItem :tripName="trip" />
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
