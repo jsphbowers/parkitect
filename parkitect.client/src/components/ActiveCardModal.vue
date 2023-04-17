@@ -72,21 +72,20 @@ export default {
       activity: computed(() => AppState.activeThingToDo),
       account: computed(() => AppState.account),
       myTrips: computed(() => AppState.trips),
-      seasons: computed(() => AppState.activeThingToDo?.season.filter(at => {
-        for (let i = 0; i < at.length; i++) {
-          if (at[i] == 'Winter') {
-            return ('https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/winter-recreation-area-black-22.svg')
-          }
-          if (at[i] == 'Spring') {
-            return ("https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/flower-viewing-black-22.svg")
-          }
-          if (at[i] == 'Summer') {
-            return ("https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/sunny-black-22.svg")
-          }
-          if (at[i] == 'Fall') {
-            return ("https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/wilderness-black-22.svg")
-          }
+      seasons: computed(() => AppState.activeThingToDo?.season.map(at => {
+        if (at == 'Winter') {
+          return ('https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/winter-recreation-area-black-22.svg')
         }
+        if (at == 'Spring') {
+          return ("https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/flower-viewing-black-22.svg")
+        }
+        if (at == 'Summer') {
+          return ("https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/sunny-black-22.svg")
+        }
+        if (at == 'Fall') {
+          return ("https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/wilderness-black-22.svg")
+        }
+
       })),
 
       route: useRoute(),
