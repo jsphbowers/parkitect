@@ -304,10 +304,15 @@ export default {
   height: 15vh;
   width: 15vh;
   border-radius: 50%;
+  transition: all 0.3s ease-in-out;
 }
 
+
 .filter-img:hover {
+  transform: scale(1.1); 
 }
+
+
 
 .carousel-img {
   width: 100%;
