@@ -12,11 +12,15 @@
     <!-- SECTION My trips -->
     <div class="d-flex justify-content-between">
       <h3 class="name-style">{{ account.name }}</h3>
-      <button class="btn btn-outline-success me-3">Edit Account</button>
+      <button class="btn addBtn me-3" data-bs-toggle="modal" data-bs-target="#editAccountModal">Edit
+        Account</button>
     </div>
     <!-- <h3 class="name-style">{{ account.name }}</h3> -->
     <div class="row">
-      <h1 class="trip-margin">My Trips</h1>
+      <div class="col-12">
+        <h1 class="trip-margin">My Trips</h1>
+      </div>
+
 
     </div>
     <section class="my-5 row">
@@ -34,22 +38,23 @@
         </div>
       </div>
     </section>
-    <section class="row">
-
-    </section>
 
     <!-- SECTION Places Ive been to -->
     <section class=" mt-3 row">
       <div class="col-12 mt-5 text-center title-bg">
         <h2 class=""><b>Build your National Park passport!</b></h2>
       </div>
-      <div>
-        <button @click="showYourParks()" class="btn btn-outline-success">Show your parks</button>
-
+      <div v-if="parksVisited">
+        <button @click="showYourParks()" class="btn addBtn icon-button ms-4 mt-3">Show your parks</button>
       </div>
+      <div v-if="!parksVisited">
+        <button @click="showYourParks()" class="btn addBtn icon-button ms-4 mt-3">Show all parks</button>
+      </div>
+
       <div class=" col-12 icon-bg">
+        <!-- add back in below     v-if="parksVisited"  -->
         <div v-if="parksVisited" class="justify-content-evenly d-flex flex-wrap my-2 py-5">
-          <img v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style mb-3 selectable"
+          <img v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style grow mb-3 selectable"
             :src="`/icons/${parkCode}.png`" alt="" :class="hasVisited(parkCode)">
         </div>
         <div v-if="!parksVisited" class="justify-content-evenly d-flex flex-wrap my-2 py-5">
@@ -70,6 +75,14 @@
       <CreateTripForm />
     </template>
   </SmallModalVue>
+  <SmallModalVue id="editAccountModal">
+    <template #header>
+      <div>Edit your Account!</div>
+    </template>
+    <template #body>
+      <EditAccountForm />
+    </template>
+  </SmallModalVue>
 </template>
 
 <script>
@@ -81,6 +94,7 @@ import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
 import SmallModalVue from "../components/SmallModal.vue";
 import CreateTripForm from "../components/CreateTripForm.vue";
+import EditAccountForm from "../components/EditAccountForm.vue";
 import MyTripCard from "../components/MyTripCard.vue"
 
 
@@ -103,10 +117,6 @@ export default {
       }
     }
 
-    // async getTripGoerByAccountId(){
-    //   const res = await api.get('/account/tripGoers')
-    //   AppState.tripGoers = res.data.map(t => new TripGoer(t))
-    // }
 
     onMounted(() => {
       getTripGoerByAccountId()
@@ -149,12 +159,22 @@ export default {
         }
       },
       async showYourParks() {
-        try {
-          await accountService.showYourParks()
-        } catch (error) {
-          logger.error(error)
-          Pop.error(error.message)
+
+        if (AppState.parksVisited == true) {
+          AppState.parksVisited = false
+        } else {
+          AppState.parksVisited = true
         }
+        //   const grayScale = document.querySelectorAll('.grayscale')
+        //   if (AppState.parksVisited == true) {
+        //     grayScale.forEach(g => g.classList.add("no-display"))
+        //     // setTimeout(function () { grayScale.forEach(g => g.classList.add("no-display")) }, 200);
+        //     AppState.parksVisited = false
+        //   } else {
+        //     grayScale.forEach(g => g.classList.remove("no-display"))
+        //     // setTimeout(function () { grayScale.forEach(g => g.classList.remove("no-display")) }, 0);
+        //     AppState.parksVisited = true
+        //   }
       }
     }
   },
@@ -162,7 +182,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+// $card-time: .2s;
+
 .account-img {
   height: 30vh;
   width: 30vh;
@@ -185,6 +207,14 @@ export default {
 
   /* border-top-left-radius: 20px !important;
   border-bottom-left-radius: 20px !important; */
+}
+
+.addBtn {
+  background-image: linear-gradient(rgb(150, 207, 36) 0%, #006838 100%);
+  border: 0;
+  color: white;
+  border-radius: 10px;
+  padding: 1vh;
 }
 
 
@@ -329,13 +359,39 @@ export default {
     width: 15vh;
     margin-left: 2vh;
     margin-right: 2vh;
+    opacity: 1;
+
+    // transition: width $card-time ease, margin-left $card-time ease, margin-right $card-time ease, padding $card-time ease, opacity $card-time ease;
+  }
+
+  .icon-remove {
+    width: 0vh;
+    margin-left: 0vh;
+    margin-right: 0vh;
+    padding: 0;
+    opacity: 0;
+
+    // transition: width $card-time ease, margin-left $card-time ease, margin-right $card-time ease, padding $card-time ease, opacity $card-time ease;
+  }
+
+  .no-display {
+    display: none;
   }
 
   .name-style {
-    margin-left: 24vw;
-    font-size: 3em;
+    margin-left: 23vw;
+    font-size: 2em;
     font-weight: 500;
   }
+
+  /* add if not doing the collapse */
+  /* .grow {
+    transition: transform .2s ease-in-out;
+  }
+
+  .grow:hover {
+    transform: scale(1.05);
+  } */
 
   .account-img-cont {
     position: relative;
