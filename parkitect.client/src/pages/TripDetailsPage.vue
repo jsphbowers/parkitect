@@ -50,6 +50,15 @@
     </section>
   </div>
 
+  <SmallModal id="sendInvitation">
+    <template #header>
+      <h5>Send your Invitation</h5>
+    </template>
+    <template #body>
+      <SendInvitation/>
+    </template>
+  </SmallModal>
+
   <SmallModal id="editTripModal">
     <template #header>
       <h5>Edit your Trip</h5>
@@ -85,6 +94,7 @@ import ActiveCardModal from "../components/ActiveCardModal.vue";
 import SmallModal from "../components/SmallModal.vue";
 import EditTripForm from "../components/EditTripForm.vue";
 import ParkOptionsMenu from "../components/ParkOptionsMenu.vue";
+import SendInvitation from "../components/SendInvitation.vue";
 
 
 export default {
@@ -173,7 +183,7 @@ export default {
 
     };
   },
-  components: { ActiveCardModal, SmallModal, EditTripForm, ParkOptionsMenu }
+  components: { ActiveCardModal, SmallModal, EditTripForm, ParkOptionsMenu, SendInvitation }
 }
 </script>
 
