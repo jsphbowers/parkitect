@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div v-if="trip?.isArchived == false" class="container-fluid">
     <section class="row justify-content-center">
       <!-- SECTION cover photo -->
       <div class="col-12 p-0">
@@ -49,6 +49,7 @@
           </div>
         </section>
       </div>
+
       <!-- SECTION map? -->
       <h3 class="mb-3">Let's see where we're going!</h3>
 
@@ -62,6 +63,82 @@
       </div>
     </section>
   </div>
+
+  <!-- NOTE This region is the archived HTML -->
+  <!-- #region -->
+  <div v-if="trip?.isArchived" class="container-fluid">
+    <section class="row justify-content-center">
+      <!-- SECTION cover photo -->
+      <div class="col-12 p-0">
+        <img v-if="trip" :src="trip?.coverImg" :alt="'cover image for ' + trip?.name" class="archivedCover-img">
+      </div>
+      <div class="d-flex justify-content-end mt-2 mb-0" v-if="trip?.creatorId == account?.id">
+        <button disabled class="btn addBtn me-2" data-bs-toggle="modal" data-bs-target="#sendInvitation">Send
+          Invitation</button>
+        <button disabled class="btn addBtn" data-bs-toggle="modal" data-bs-target="#editTripModal">Edit Trip Info</button>
+        <button disabled class="btn addBtn ms-2" data-bs-toggle="modal" data-bs-target="#editParkModal">Edit Travel
+          Plans</button>
+      </div>
+      <!-- SECTION trip details card -->
+      <div class="col-md-11 px-0 text-center trip-details-card">
+        <h1>{{ trip?.name }}</h1>
+        <h5>{{ trip?.description }}</h5>
+
+        <h6 class="archiveBanner px-0 mx-0">
+          This trip has been archived!
+        </h6>
+
+      </div>
+      <!-- SECTION tripGoers photos -->
+      <h3 class="mb-0">Who's coming along...</h3>
+      <div class="col-md-11 trip-goers-card">
+        <div v-for="t in tripGoers" :key="t.id" class="position-relative">
+          <img :src="t.account.picture" :alt="'a photo of ' + t.account.name" :title="t.account.name"
+            class="archivedProfile-pic">
+          <button disabled v-if="deletePermissions(t.accountId)" class="btn btn-outline p-0 remove-tripGoer-btn"
+            title="Remove Trip Goer" @click="removeTripGoer(t.id)">
+            <i class="mdi mdi-minus"></i>
+          </button>
+        </div>
+      </div>
+      <!-- SECTION tripParks -->
+      <h3 class="mb-0">Sights to see & things to do!</h3>
+      <div class="col-md-11 parks-area draggable">
+        <section class="row mb-4" v-for="t in tripParks" :key="t.id">
+          <div class="col-md-7">
+            <router-link :to="{ name: 'ParkDetails', params: { parkCode: t.parkCode } }">
+              <h1 class="text-dark">{{ t.fullName }}</h1>
+              <img :src="t.image" :alt="'a photo of ' + t.fullName" class="park-img">
+            </router-link>
+          </div>
+          <div class="col-md-5">
+            <!-- SECTION tripThingsToDo -->
+            <h3 class="mt-md-5 mt-2">Activities</h3>
+            <ul v-if="tripThingsToDo.filter(ttd => ttd.parkCode == t.parkCode).length">
+              <span v-for="ttd in tripThingsToDo.filter(ttd => ttd.parkCode == t.parkCode)" :key="ttd.id">
+                <li v-if="ttd.parkCode == t.parkCode" class="selectable" data-bs-toggle="modal"
+                  data-bs-target="#activity-modal" @click="setActiveThingToDo(ttd.nativeThingToDoId)">{{ ttd.title }}</li>
+              </span>
+            </ul>
+            <h6 v-else>No activities have been added for this park</h6>
+          </div>
+        </section>
+      </div>
+
+      <!-- SECTION map? -->
+      <h3 class="mb-3">Let's see where we're going!</h3>
+
+      <div class="col-11">
+        <MapContainer />
+      </div>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-danger mb-2" @click="toggleArchiveTrip()"><span v-if="trip.isArchived == false">Archive
+          </span><span v-else>Un-Archive</span>
+          Trip</button>
+      </div>
+    </section>
+  </div>
+  <!-- #endregion -->
 
   <SmallModal id="sendInvitation">
     <template #header>
@@ -309,4 +386,43 @@ export default {
 .remove-tripGoer-btn:hover {
   background-color: rgb(255, 87, 87);
 }
+
+// NOTE This section is for the archived page styling
+// #region
+
+
+.archivedCover-img {
+  width: 100%;
+  height: 45vh;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(100%);
+}
+
+.archiveBanner {
+  background-color: #ff4646;
+  height: 4vh;
+  font-size: larger;
+  font-weight: bold;
+  padding-top: 1vh;
+}
+
+.archivedProfile-pic {
+  border-radius: 100%;
+  margin-left: .25em;
+  margin-right: .25em;
+  margin-top: .5em;
+  margin-bottom: .5em;
+  height: 10vh;
+  width: 10vh;
+  filter: grayscale(100%);
+  object-fit: cover;
+  object-position: center;
+}
+
+img {
+  filter: grayscale(100%);
+}
+
+// #endregion
 </style>
