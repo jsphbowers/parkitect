@@ -6,7 +6,7 @@
         <img v-if="trip" :src="trip?.coverImg" :alt="'cover image for ' + trip?.name" class="cover-img">
       </div>
       <div class="d-flex justify-content-end mt-2 mb-0">
-        <button class="btn addBtn me-2" data-bs-toggle="modal" data-bs-target="#">Send Invitation</button>
+        <button class="btn addBtn me-2" data-bs-toggle="modal" data-bs-target="#sendInvitation">Send Invitation</button>
         <button class="btn addBtn" data-bs-toggle="modal" data-bs-target="#editTripModal">Edit Trip Info</button>
         <button class="btn addBtn ms-2" data-bs-toggle="modal" data-bs-target="#editParkModal">Edit Travel Plans</button>
       </div>
@@ -47,8 +47,23 @@
           </div>
         </section>
       </div>
+      <!-- SECTION map? -->
+      <h3 class="mb-3">Let's see where we're going!</h3>
+
+      <div class="col-11">
+        <MapContainer />
+      </div>
     </section>
   </div>
+
+  <SmallModal id="sendInvitation">
+    <template #header>
+      <h5>Send your Invitation</h5>
+    </template>
+    <template #body>
+      <SendInvitation />
+    </template>
+  </SmallModal>
 
   <SmallModal id="editTripModal">
     <template #header>
@@ -85,6 +100,8 @@ import ActiveCardModal from "../components/ActiveCardModal.vue";
 import SmallModal from "../components/SmallModal.vue";
 import EditTripForm from "../components/EditTripForm.vue";
 import ParkOptionsMenu from "../components/ParkOptionsMenu.vue";
+import SendInvitation from "../components/SendInvitation.vue";
+import MapContainer from "../components/MapContainer.vue";
 
 
 export default {
@@ -173,7 +190,7 @@ export default {
 
     };
   },
-  components: { ActiveCardModal, SmallModal, EditTripForm, ParkOptionsMenu }
+  components: { ActiveCardModal, SmallModal, EditTripForm, ParkOptionsMenu, SendInvitation, MapContainer }
 }
 </script>
 

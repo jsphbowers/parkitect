@@ -10,6 +10,7 @@
             type="text"
             class="form-control"
             placeholder="Search by park or state"
+            minlength="2"
           />
           <button type="submit" class="input-group-text btn">Search</button>
         </form>
