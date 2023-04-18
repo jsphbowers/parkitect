@@ -56,7 +56,7 @@
         <MapContainer />
       </div>
       <div class="d-flex justify-content-end">
-        <button class="btn btn-danger mb-2" @click="toggleArchiveTrip()"><span v-if="trip.isArchived == false">Archive
+        <button class="btn btn-danger mb-2" @click="toggleArchiveTrip()"><span v-if="trip?.isArchived == false">Archive
           </span><span v-else>Un-Archive</span>
           Trip</button>
       </div>

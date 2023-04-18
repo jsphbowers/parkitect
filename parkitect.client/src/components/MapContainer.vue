@@ -5,6 +5,7 @@
 
 
 <script>
+
 import View from 'ol/View.js'
 import Map from 'ol/Map.js'
 import TileLayer from 'ol/layer/Tile.js'
@@ -13,6 +14,7 @@ import Feature from "ol/Feature.js"
 import VectorTileLayer from "ol/layer/VectorTile.js"
 import VectorSource from "ol/source/Vector.js"
 import { MultiPoint, Point } from "ol/geom.js"
+import GeoJSON from 'ol/format/GeoJSON.js'
 // import 'ol/style/'
 
 const place = [-110, 45];
@@ -33,6 +35,8 @@ export default {
         }),
         // new VectorTileLayer({
         //   source: new VectorSource({
+        //     format: new GeoJSON(),
+        //     url: `../assets/data/map.geojson`,
         //     features: [new Feature(new Point(43.6150, 116.2023))]
         //   })
         // })
