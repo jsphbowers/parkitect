@@ -1,6 +1,11 @@
 <template>
-  <div v-if="!hasActivity" :class="{ 'text-danger': hasActivity }">
-    <li><a class="dropdown-item selectable" @click="addActivityToTrip(tripName.id)">{{ tripName.name }}</a></li>
+  <div v-if="!hasActivity">
+    <li><a class="dropdown-item selectable" title="Add activity to your trip" @click="addActivityToTrip(tripName.id)">{{
+      tripName.name }}</a></li>
+  </div>
+  <div v-else-if="hasActivity">
+    <li><a class="dropdown-item text-danger" title="This activity is already added to this trip">{{ tripName.name }}</a>
+    </li>
   </div>
   <!-- <li><a class="dropdown-item selectable" @click="addParkToTrip(tripName.id)">{{ tripName.name }}</a></li> -->
 </template>
@@ -41,14 +46,27 @@ export default {
     return {
       props,
       hasActivity: computed(() => AppState.dictThingsToDo[props.tripName.id]?.find(a => a.nativeThingToDoId == AppState.activeThingToDo?.nativeId)),
+      parkExists: computed(() => AppState.dictTripParks[props.tripName.id]?.find(p => p.nativeParkId == AppState.activePark.nativeId)),
 
       async addActivityToTrip(tripId) {
         try {
-          logger.log('[THIS IS THE TRIP ID FOR ADDING ACTIVITY]', tripId)
-          const nativeThingToDoId = AppState.activeThingToDo.nativeId
-          const title = AppState.activeThingToDo.title
-          await tripsService.addActivityToTrip(tripId, nativeThingToDoId, title)
-          Pop.success(`Activity Added to ${props.tripName.name}`)
+          if (!this.parkExists && await Pop.confirm('This park is currently not included on this trip do you want to add it?', '')) {
+            const nativeParkId = AppState.activePark.nativeId
+            const fullName = AppState.activePark.name
+            await tripsService.addParkToTrip(tripId, nativeParkId, fullName)
+            logger.log('[THIS IS THE TRIP ID FOR ADDING ACTIVITY]', tripId)
+            logger.log('[THIS IS AFTER THE PARK HAS BEEN ADDED]')
+            const nativeThingToDoId = AppState.activeThingToDo.nativeId
+            const title = AppState.activeThingToDo.title
+            await tripsService.addActivityToTrip(tripId, nativeThingToDoId, title)
+            Pop.success(`Activity Added and Park to ${props.tripName.name}`)
+          } else if (this.parkExists) {
+            logger.log('[THIS IS THE TRIP ID FOR ADDING ACTIVITY]', tripId)
+            const nativeThingToDoId = AppState.activeThingToDo.nativeId
+            const title = AppState.activeThingToDo.title
+            await tripsService.addActivityToTrip(tripId, nativeThingToDoId, title)
+            Pop.success(`Activity Added to ${props.tripName.name}`)
+          }
         } catch (error) {
           Pop.error(error.message)
           logger.error(error)

@@ -226,13 +226,6 @@ export default {
   text-shadow: 1.5px 1.5px 4px rgb(100, 100, 100);
 }
 
-/* NOTE Remove test Trip */
-.test-trip {
-
-  background-position: center;
-  background-size: cover;
-}
-
 .trip-text {
   color: white;
   text-shadow: 3px 3px 1px black;

@@ -13,22 +13,25 @@
               aria-label="Slide 3"></button>
           </div> -->
           <div class="carousel-inner">
-            <div class="carousel-item active">
+            <div class="carousel-item active text-center">
               <img :src="park?.images[0].url" class="carousel-img d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
-                <h3 class="txt-shadow">{{ park?.name }}</h3>
+                <h3 class="parkName-bg mx-5">{{ park?.name }}</h3>
+                <p class="photoCredit-text py-0 my-0">Photo by: {{ park?.images[0].credit }}</p>
               </div>
             </div>
             <div class="carousel-item">
               <img :src="park?.images[1].url" class="carousel-img d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
-                <h3 class="txt-shadow">{{ park?.name }}</h3>
+                <h3 class="parkName-bg mx-5">{{ park?.name }}</h3>
+                <p class="photoCredit-text py-0 my-0">Photo by: {{ park?.images[1].credit }}</p>
               </div>
             </div>
             <div class="carousel-item">
               <img :src="park?.images[2].url" class="carousel-img d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
-                <h3 class="txt-shadow">{{ park?.name }}</h3>
+                <h3 class="parkName-bg mx-5">{{ park?.name }}</h3>
+                <p class="photoCredit-text py-0 my-0">Photo by: {{ park?.images[2].credit }}</p>
               </div>
             </div>
           </div>
@@ -360,5 +363,23 @@ export default {
   .media-scroll::-webkit-scrollbar {
     display: none;
   }
+}
+
+.parkName-bg {
+  color: white;
+  text-shadow: 3px 3px 1px black;
+  /* backdrop-filter: invert(100%); */
+  backdrop-filter: blur(4px);
+  padding: 1vh;
+  margin-left: 6em !important;
+  margin-right: 6em !important;
+}
+
+.photoCredit-text {
+  color: rgba(255, 255, 255, 0.718);
+  text-shadow: 2px 2px 1px black;
+  /* backdrop-filter: invert(100%); */
+  padding: 1vh;
+
 }
 </style>
