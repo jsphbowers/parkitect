@@ -5,21 +5,11 @@
       <div class="col p-0 text-light text-center txt-shadow">
         <h1>Build your next National Park Journey!</h1>
         <form @submit.prevent="searchPark()" class="input-group mt-4">
-          <input
-            v-model="editable"
-            type="text"
-            class="form-control"
-            placeholder="Search by park or state"
-            minlength="2"
-          />
+          <input v-model="editable" type="text" class="form-control" placeholder="Search by park or state"
+            minlength="2" />
           <button type="submit" class="input-group-text btn">Search</button>
         </form>
-        <button
-          v-if="account.id"
-          class="btn btn-create selectable"
-          data-bs-toggle="modal"
-          data-bs-target="#tripModal"
-        >
+        <button v-if="account.id" class="btn btn-create selectable" data-bs-toggle="modal" data-bs-target="#tripModal">
           Create a Trip
         </button>
       </div>
@@ -27,15 +17,33 @@
 
     <!-- SECTION park cards -->
     <section class="row justify-content-center px-md-5">
-      <div class="col-12 text-center my-4">
+      <div class="col-4 text-center my-4">
+        <div class="dropdown">
+          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Filter by region
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" @click="changeByRegion(['WA,OR,ID,MT,WY'])" href="#">NorthWest</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['CA,SW,AZ,NV,NM'])" href="#">SouthWest</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['CO,MO,KY'])" href="#">Center</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['ND,SD,MN,IN,MI,OH'])" href="#">North</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['TX,AR,TN'])" href="#">South</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['ME,WV,VA'])" href="#">NorthEast</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['SC,NC,FL'])" href="#">SouthEast</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['AK'])" href="#">Alaska</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['HI,VI,AS'])" href="#">Islands</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-4 text-center my-4">
         <h2>
           {{ parks.length != 0 ? "Where do you want to go?" : "" }}
         </h2>
       </div>
-      <div
-        v-if="parks.length == 0 && !loading.parks"
-        class="text-center no-results-guy"
-      >
+      <div class="col-4 text-center my-4">
+
+      </div>
+      <div v-if="parks.length == 0 && !loading.parks" class="text-center no-results-guy">
         <h2>We are sorry, but there are no search results</h2>
         <h1>¯\_(ツ)_/¯</h1>
         <br />
@@ -53,20 +61,12 @@
 
     <section v-if="parks.length != 0" class="row justify-content-between pt-4">
       <div class="col-md-3 col-6">
-        <button
-          class="btn btn-underline selectable"
-          :disabled="currentPage == 0"
-          @click="changePage('decrease')"
-        >
+        <button class="btn btn-underline selectable" :disabled="currentPage == 0" @click="changePage('decrease')">
           Previous Page
         </button>
       </div>
       <div class="col-md-3 col-6 text-end">
-        <button
-          class="btn btn-underline selectable"
-          :disabled="parks.length === 8"
-          @click="changePage('increase')"
-        >
+        <button class="btn btn-underline selectable" :disabled="parks.length === 8" @click="changePage('increase')">
           Next Page
         </button>
       </div>
@@ -129,6 +129,9 @@ export default {
     async function getParks() {
       try {
         // logger.log('getting all parks')
+        AppState.allPageChange = true
+        AppState.searchPageChange = false
+        AppState.regionPageChange = false
         await parksService.getParks();
       } catch (error) {
         Pop.error(error);
@@ -164,6 +167,9 @@ export default {
 
       async searchPark() {
         try {
+          AppState.allPageChange = false
+          AppState.searchPageChange = true
+          AppState.regionPageChange = false
           const query = editable.value;
           // logger.log(query);
           await parksService.searchPark(query);
@@ -186,6 +192,17 @@ export default {
           logger.log(error.message);
         }
       },
+
+      async changeByRegion(region) {
+        try {
+          AppState.allPageChange = false
+          AppState.searchPageChange = false
+          AppState.regionPageChange = true
+          await parksService.changeByRegion(region)
+        } catch (error) {
+          logger.error(error)
+        }
+      }
     };
   },
   components: { ParkCard, SmallModalVue, CreateTripForm },
@@ -281,6 +298,7 @@ export default {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }

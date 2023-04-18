@@ -4,7 +4,10 @@ import { ThingToDo } from "../models/ThingToDo.js";
 import { logger } from "../utils/Logger.js";
 import { npsApi } from "./AxiosService.js";
 
+let globalQuery = [];
+let globalRegion = [];
 class ParksService {
+
   async getParks() {
     AppState.loading.parks = true;
     const res = await npsApi.get(
@@ -28,10 +31,20 @@ class ParksService {
   }
 
   async searchPark(query) {
+    globalQuery = query
     const res = await npsApi.get(
-      `/parks?parkcode=acad,npsa,arch,badl,bibe,bisc,blca,brca,cany,care,cave,chis,cong,crla,cuva,deva,dena,drto,ever,gaar,jeff,glac,glba,grca,grte,grba,grsa,grsm,gumo,hale,havo,hosp,indu,isro,jotr,katm,kefj,seki,kova,lacl,lavo,maca,meve,mora,neri,noca,olym,pefo,pinn,redw,romo,sagu,shen,thro,viis,voya,whsa,wica,wrst,yell,yose,zion&limit=62&q=${query}`
+      `/parks?parkcode=acad,npsa,arch,badl,bibe,bisc,blca,brca,cany,care,cave,chis,cong,crla,cuva,deva,dena,drto,ever,gaar,jeff,glac,glba,grca,grte,grba,grsa,grsm,gumo,hale,havo,hosp,indu,isro,jotr,katm,kefj,seki,kova,lacl,lavo,maca,meve,mora,neri,noca,olym,pefo,pinn,redw,romo,sagu,shen,thro,viis,voya,whsa,wica,wrst,yell,yose,zion&limit=9&q=${query}`
     );
     logger.log("[search park]", res.data);
+    AppState.parks = res.data.data.map((p) => new Park(p));
+  }
+
+  async changeByRegion(region) {
+    globalRegion = region
+    const res = await npsApi.get(
+      `/parks?parkcode=acad,npsa,arch,badl,bibe,bisc,blca,brca,cany,care,cave,chis,cong,crla,cuva,deva,dena,drto,ever,gaar,jeff,glac,glba,grca,grte,grba,grsa,grsm,gumo,hale,havo,hosp,indu,isro,jotr,katm,kefj,seki,kova,lacl,lavo,maca,meve,mora,neri,noca,olym,pefo,pinn,redw,romo,sagu,shen,thro,viis,voya,whsa,wica,wrst,yell,yose,zion&limit=9&stateCode=${region}`
+    );
+    logger.log('[Park Data for region]', res.data)
     AppState.parks = res.data.data.map((p) => new Park(p));
   }
 
@@ -59,9 +72,30 @@ class ParksService {
     } else {
       AppState.start -= 9
     }
-    const res = await npsApi.get(
-      `/parks?parkcode=acad,npsa,arch,badl,bibe,bisc,blca,brca,cany,care,cave,chis,cong,crla,cuva,deva,dena,drto,ever,gaar,jeff,glac,glba,grca,grte,grba,grsa,grsm,gumo,hale,havo,hosp,indu,isro,jotr,katm,kefj,seki,kova,lacl,lavo,maca,meve,mora,neri,noca,olym,pefo,pinn,redw,romo,sagu,shen,thro,viis,voya,whsa,wica,wrst,yell,yose,zion&start=${AppState.start}&limit=9`
-    );
+    if (AppState.allPageChange == true) {
+      const res = await npsApi.get(
+        `/parks?parkcode=acad,npsa,arch,badl,bibe,bisc,blca,brca,cany,care,cave,chis,cong,crla,cuva,deva,dena,drto,ever,gaar,jeff,glac,glba,grca,grte,grba,grsa,grsm,gumo,hale,havo,hosp,indu,isro,jotr,katm,kefj,seki,kova,lacl,lavo,maca,meve,mora,neri,noca,olym,pefo,pinn,redw,romo,sagu,shen,thro,viis,voya,whsa,wica,wrst,yell,yose,zion&start=${AppState.start}&limit=9`
+      );
+      AppState.parks = res.data.data.map((p) => new Park(p));
+      logger.log('next page parks', AppState.parks)
+      // AppState.total = res.data.total;
+    }
+    if (AppState.searchPageChange == true) {
+      const res = await npsApi.get(
+        `/parks?parkcode=acad,npsa,arch,badl,bibe,bisc,blca,brca,cany,care,cave,chis,cong,crla,cuva,deva,dena,drto,ever,gaar,jeff,glac,glba,grca,grte,grba,grsa,grsm,gumo,hale,havo,hosp,indu,isro,jotr,katm,kefj,seki,kova,lacl,lavo,maca,meve,mora,neri,noca,olym,pefo,pinn,redw,romo,sagu,shen,thro,viis,voya,whsa,wica,wrst,yell,yose,zion&start=${AppState.start}&limit=9&q=${globalQuery}`
+      );
+      AppState.parks = res.data.data.map((p) => new Park(p));
+    }
+
+    if (AppState.regionPageChange == true) {
+      const res = await npsApi.get(
+        `/parks?parkcode=acad,npsa,arch,badl,bibe,bisc,blca,brca,cany,care,cave,chis,cong,crla,cuva,deva,dena,drto,ever,gaar,jeff,glac,glba,grca,grte,grba,grsa,grsm,gumo,hale,havo,hosp,indu,isro,jotr,katm,kefj,seki,kova,lacl,lavo,maca,meve,mora,neri,noca,olym,pefo,pinn,redw,romo,sagu,shen,thro,viis,voya,whsa,wica,wrst,yell,yose,zion&start=${AppState.start}&limit=9&stateCode=${globalRegion}`
+      );
+      AppState.parks = res.data.data.map((p) => new Park(p));
+    }
+
+
+
     AppState.parks = res.data.data.map((p) => new Park(p));
     logger.log('next page parks', AppState.parks)
     AppState.total = res.data.total;
