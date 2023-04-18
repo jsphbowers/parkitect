@@ -80,6 +80,8 @@ export default {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  max-height: 30vh;
+  min-height: 30vh;
 }
 
 
