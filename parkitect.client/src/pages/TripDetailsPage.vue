@@ -47,6 +47,12 @@
           </div>
         </section>
       </div>
+      <!-- SECTION map? -->
+      <h3 class="mb-3">Let's see where we're going!</h3>
+
+      <div class="col-11">
+        <MapContainer />
+      </div>
     </section>
   </div>
 
@@ -55,7 +61,7 @@
       <h5>Send your Invitation</h5>
     </template>
     <template #body>
-      <SendInvitation/>
+      <SendInvitation />
     </template>
   </SmallModal>
 
@@ -95,6 +101,7 @@ import SmallModal from "../components/SmallModal.vue";
 import EditTripForm from "../components/EditTripForm.vue";
 import ParkOptionsMenu from "../components/ParkOptionsMenu.vue";
 import SendInvitation from "../components/SendInvitation.vue";
+import MapContainer from "../components/MapContainer.vue";
 
 
 export default {
@@ -183,7 +190,7 @@ export default {
 
     };
   },
-  components: { ActiveCardModal, SmallModal, EditTripForm, ParkOptionsMenu, SendInvitation }
+  components: { ActiveCardModal, SmallModal, EditTripForm, ParkOptionsMenu, SendInvitation, MapContainer }
 }
 </script>
 
