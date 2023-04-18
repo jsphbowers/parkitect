@@ -9,6 +9,8 @@ export const AppState = reactive({
   parksVisited: true,
   /** @type {import('./models/Park.js').Park[]} */
   parks: [],
+  /** @type {import('./models/Park.js').Park[]} */
+  searchedParks: [],
   /** @type {import('./models/Park.js').Park|null} */
   activePark: null,
   query: [],
@@ -33,4 +35,7 @@ export const AppState = reactive({
   total: null,
   start: null,
   dictionary: {},
+  allPageChange: false,
+  searchPageChange: false,
+  regionPageChange: false,
 });
