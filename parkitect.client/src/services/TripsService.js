@@ -35,7 +35,9 @@ export class TripsService {
       parkCode: AppState.activePark.parkCode
     }
     const res = await api.post(`/trips/${tripId}/tripParks`, parkData)
-    // logger.log('[THIS IS THE RETURNED PARK ADDED TO TRIP]', res.data)
+    logger.log('[THIS IS BEFORE THE PUSH]', AppState.dictTripParks[tripId])
+    AppState.dictTripParks[tripId].push(res.data)
+    logger.log('[THIS IS THE APPSTATE WITH THE PUSHED ACTIVITY]', AppState.dictTripParks[tripId])
   }
 
   async addActivityToTrip(tripId, nativeThingToDoId, activityTitle) {
