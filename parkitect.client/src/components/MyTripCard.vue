@@ -1,10 +1,21 @@
 <template>
   <router-link :to="{ name: 'TripDetails', params: { tripId: tripGoer.tripId } }">
-    <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable"
-      :style="{ backgroundImage: `url(${tripGoer.trip.coverImg})`, backgroundPosition: 'center', backgroundSize: 'cover' }"
-      :title="tripGoer.trip.description">
-      <h3 class="ms-2 mt-2 trip-text text-center">{{ tripGoer.trip.name }}</h3>
-    </div>
+    <section v-if="tripGoer.trip.isArchived == false">
+      <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable"
+        :style="{ backgroundImage: `url(${tripGoer.trip.coverImg})`, backgroundPosition: 'center', backgroundSize: 'cover' }"
+        :title="tripGoer.trip.description">
+        <h3 class="ms-2 mt-2 trip-text text-center">{{ tripGoer.trip.name }}</h3>
+      </div>
+    </section>
+    <section v-if="tripGoer.trip.isArchived == true" class="positioning">
+      <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable archivedImg"
+        :style="{ backgroundImage: `url(${tripGoer.trip.coverImg})`, backgroundPosition: 'center', backgroundSize: 'cover' }"
+        :title="tripGoer.trip.description">
+        <h3 class="ms-2 mt-2 trip-text text-center">{{ tripGoer.trip.name }}</h3>
+      </div>
+      <img class="archivedStamp"
+        src="src\assets\img\archives-text-on-red-round-grungy-texture-stamp-2F1ER4R-removebg-preview.png" alt="Archived">
+    </section>
   </router-link>
 </template>
 
@@ -47,6 +58,25 @@ export default {
   box-shadow: 5px -5px 0 -1.5px rgb(230, 230, 230), 5px -5px rgb(0, 0, 0), 10px -10px 0 -1.5px rgb(230, 230, 230), 10px -10px rgb(0, 0, 0);
 }
 
+.archivedImg {
+  filter: grayscale(100%);
+}
+
+.positioning {
+  position: relative;
+}
+
+.archivedStamp {
+  height: 9vh;
+  width: 9vh;
+  position: absolute;
+  bottom: 3%;
+  right: 3%;
+  backdrop-filter: blur(4px);
+  background-color: black;
+  border-radius: 50%;
+}
+
 @media(max-width:992px) {
 
   .trip-text {
@@ -64,6 +94,7 @@ export default {
     display: flex;
     margin-bottom: 5vh;
   }
+
 
 }
 </style>

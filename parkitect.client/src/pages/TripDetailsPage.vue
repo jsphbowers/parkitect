@@ -104,7 +104,7 @@
       <!-- SECTION tripParks -->
       <h3 class="mb-0">Sights to see & things to do!</h3>
       <div class="col-md-11 parks-area draggable">
-        <section class="row mb-4" v-for="t in tripParks" :key="t.id">
+        <section class="row mb-4 archivedImg" v-for="t in tripParks" :key="t.id">
           <div class="col-md-7">
             <router-link :to="{ name: 'ParkDetails', params: { parkCode: t.parkCode } }">
               <h1 class="text-dark">{{ t.fullName }}</h1>
@@ -420,7 +420,7 @@ export default {
   object-position: center;
 }
 
-img {
+.archivedImg {
   filter: grayscale(100%);
 }
 
