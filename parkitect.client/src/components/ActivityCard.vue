@@ -77,7 +77,7 @@ export default {
 <style lang="scss" scoped>
 .cardImg {
   width: 100%;
-  height: 30vh;
+  height: 100%;
   object-fit: cover;
   object-position: center;
 }
@@ -90,8 +90,7 @@ export default {
 }
 
 .iconbg {
-  background-image: linear-gradient(rgb(150, 207, 36) 0%, #006838 100%);
-  border: 0;
+  border: 2px solid black;
   color: #ffff;
   border-radius: 10px;
   padding: 1vh;
@@ -100,5 +99,9 @@ export default {
 
 .card {
   --bs-card-border-width: 0px !important
+}
+
+.whiteIcon {
+  color: white;
 }
 </style>

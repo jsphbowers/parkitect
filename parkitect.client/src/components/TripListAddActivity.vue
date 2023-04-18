@@ -39,6 +39,7 @@ export default {
       getTripThingsToDo()
     )
     return {
+      props,
       hasActivity: computed(() => AppState.dictThingsToDo[props.tripName.id]?.find(a => a.nativeThingToDoId == AppState.activeThingToDo?.nativeId)),
 
       async addActivityToTrip(tripId) {
@@ -47,6 +48,7 @@ export default {
           const nativeThingToDoId = AppState.activeThingToDo.nativeId
           const title = AppState.activeThingToDo.title
           await tripsService.addActivityToTrip(tripId, nativeThingToDoId, title)
+          Pop.success(`Activity Added to ${props.tripName.name}`)
         } catch (error) {
           Pop.error(error.message)
           logger.error(error)

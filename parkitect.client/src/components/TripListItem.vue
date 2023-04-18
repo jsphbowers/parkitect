@@ -38,6 +38,7 @@ export default {
       getTripParks()
     )
     return {
+      props,
       parkExists: computed(() => AppState.dictTripParks[props.tripName.id]?.find(p => p.nativeParkId == AppState.activePark.nativeId)),
 
       async addParkToTrip(tripId) {
@@ -46,6 +47,7 @@ export default {
           const nativeParkId = AppState.activePark.nativeId
           const fullName = AppState.activePark.name
           await tripsService.addParkToTrip(tripId, nativeParkId, fullName)
+          Pop.success(`Park Added to Trip ${props.tripName.name}!`)
         } catch (error) {
           Pop.error(error.message)
           logger.error(error)

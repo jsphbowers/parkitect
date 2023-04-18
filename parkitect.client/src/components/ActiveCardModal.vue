@@ -12,7 +12,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body container-fluid">
-          <img class="img-fluid" :src="activity?.images[0].url" :alt="activity?.images[0].altText">
+          <img class="modalCardImg" :src="activity?.images[0].url" :alt="activity?.images[0].altText">
           <section class="row p-3">
             <div class="col-md-4">
               <h5>Type: {{ activity?.activities[0].name }}</h5>
@@ -123,5 +123,12 @@ export default {
   border-radius: 10px;
   padding: 1vh;
   margin-bottom: 0%;
+}
+
+.modalCardImg {
+  width: 100%;
+  height: 80vh;
+  object-fit: cover;
+  object-position: center;
 }
 </style>
