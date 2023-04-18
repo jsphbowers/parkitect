@@ -2,6 +2,7 @@ import { AppState } from "../AppState.js";
 import { Trip } from "../models/Trip.js";
 import { TripGoer } from "../models/TripGoer.js";
 import { logger } from "../utils/Logger";
+import Pop from "../utils/Pop.js";
 import { api } from "./AxiosService";
 
 export class TripsService {
