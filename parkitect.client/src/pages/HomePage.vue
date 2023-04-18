@@ -18,30 +18,30 @@
     <!-- SECTION park cards -->
     <section class="row justify-content-center px-md-5">
       <div class="col-4 text-center my-4">
-        <div class="dropdown">
-          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Filter by region
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" @click="changeByRegion(['WA,OR,ID,MT,WY'])" href="#">NorthWest</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['CA,SW,AZ,NV,NM'])" href="#">SouthWest</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['CO,MO,KY'])" href="#">Center</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['ND,SD,MN,IN,MI,OH'])" href="#">North</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['TX,AR,TN'])" href="#">South</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['ME,WV,VA'])" href="#">NorthEast</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['SC,NC,FL'])" href="#">SouthEast</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['AK'])" href="#">Alaska</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['HI,VI,AS'])" href="#">Islands</a></li>
-          </ul>
-        </div>
+
       </div>
       <div class="col-4 text-center my-4">
         <h2>
           {{ parks.length != 0 ? "Where do you want to go?" : "" }}
         </h2>
       </div>
-      <div class="col-4 text-center my-4">
-
+      <div class="col-4 d-flex justify-content-end my-4">
+        <div class="dropdown">
+          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Filter by region
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" @click="changeByRegion(['WA,OR,ID,MT,WY'])" href="#">Northwest</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['CA,SW,AZ,NV,NM'])" href="#">Southwest</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['CO,MO,KY'])" href="#">Central</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['ND,SD,MN,IN,MI,OH'])" href="#">Northern</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['TX,AR,TN'])" href="#">Southern</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['ME,WV,VA'])" href="#">NorthEast</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['SC,NC,FL'])" href="#">SouthEast</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['AK'])" href="#">Alaska</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['HI,VI,AS'])" href="#">Islands</a></li>
+          </ul>
+        </div>
       </div>
       <div v-if="parks.length == 0 && !loading.parks" class="text-center no-results-guy">
         <h2>We are sorry, but there are no search results</h2>
