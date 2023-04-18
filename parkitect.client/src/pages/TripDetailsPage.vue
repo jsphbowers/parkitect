@@ -5,7 +5,7 @@
       <div class="col-12 p-0">
         <img v-if="trip" :src="trip?.coverImg" :alt="'cover image for ' + trip?.name" class="cover-img">
       </div>
-      <div class="d-flex justify-content-end mt-2 mb-0">
+      <div class="d-flex justify-content-end mt-2 mb-0" v-if="trip?.creatorId == account?.id">
         <button class="btn addBtn me-2" data-bs-toggle="modal" data-bs-target="#sendInvitation">Send Invitation</button>
         <button class="btn addBtn" data-bs-toggle="modal" data-bs-target="#editTripModal">Edit Trip Info</button>
         <button class="btn addBtn ms-2" data-bs-toggle="modal" data-bs-target="#editParkModal">Edit Travel Plans</button>
@@ -20,7 +20,7 @@
       <div class="col-md-11 trip-goers-card">
         <div v-for="t in tripGoers" :key="t.id" class="position-relative">
           <img :src="t.account.picture" :alt="'a photo of ' + t.account.name" :title="t.account.name" class="profile-pic">
-          <button v-if="t?.accountId != trip?.creatorId" class="btn btn-outline p-0 remove-tripGoer-btn"
+          <button v-if="deletePermissions(t.accountId)" class="btn btn-outline p-0 remove-tripGoer-btn"
             title="Remove Trip Goer" @click="removeTripGoer(t.id)">
             <i class="mdi mdi-minus"></i>
           </button>
@@ -28,7 +28,7 @@
       </div>
       <!-- SECTION tripParks -->
       <h3 class="mb-0">Sights to see & things to do!</h3>
-      <div class="col-md-11 parks-area">
+      <div class="col-md-11 parks-area draggable">
         <section class="row mb-4" v-for="t in tripParks" :key="t.id">
           <div class="col-md-7">
             <router-link :to="{ name: 'ParkDetails', params: { parkCode: t.parkCode } }">
@@ -167,6 +167,22 @@ export default {
       tripGoers: computed(() => AppState.tripGoers),
       tripParks: computed(() => AppState.tripParks),
       tripThingsToDo: computed(() => AppState.tripThingsToDo),
+      account: computed(() => AppState.account),
+
+      deletePermissions(tripGoerAccountId) {
+        const userId = AppState.account?.id
+        const tripCreatorId = AppState.activeTrip?.creatorId
+        // tripCreator cannot be removed from their own trip
+        if (tripGoerAccountId == tripCreatorId) {
+          return false
+          // tripCreator can remove any other users from the trip
+        } else if (userId == tripCreatorId) {
+          return true
+          // users other than tripCreator may remove themselves and nobody else
+        } else if (userId != tripCreatorId && userId == tripGoerAccountId) {
+          return true
+        }
+      },
 
       async setActiveThingToDo(nativeThingToDoId) {
         try {
