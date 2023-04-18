@@ -31,8 +31,10 @@
       <div class="col-md-11 parks-area">
         <section class="row mb-4" v-for="t in tripParks" :key="t.id">
           <div class="col-md-7">
-            <h1>{{ t.fullName }}</h1>
-            <img :src="t.image" :alt="'a photo of ' + t.fullName" class="park-img">
+            <router-link :to="{ name: 'ParkDetails', params: { parkCode: t.parkCode } }">
+              <h1 class="text-dark">{{ t.fullName }}</h1>
+              <img :src="t.image" :alt="'a photo of ' + t.fullName" class="park-img">
+            </router-link>
           </div>
           <div class="col-md-5">
             <!-- SECTION tripThingsToDo -->
