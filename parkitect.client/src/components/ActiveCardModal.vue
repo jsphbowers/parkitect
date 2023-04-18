@@ -17,7 +17,7 @@
             <div class="col-md-4">
               <h5>Type: {{ activity?.activities[0].name }}</h5>
               <h6 v-if="activity?.duration"> Typically takes {{ activity?.duration }}:</h6>
-              <h6>{{ activity?.durationDescription }}</h6>
+              <h6 v-html="activity?.durationDescription"></h6>
               <div class="py-2" v-if="activity?.season.length != 0">
                 <h5>Seasons:</h5>
                 <h6>

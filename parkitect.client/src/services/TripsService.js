@@ -51,6 +51,7 @@ class TripsService {
     }
     const res = await api.post(`/trips/${tripId}/tripThingsToDo`, thingToDoData)
     logger.log('[THIS IS THE RETURNED ACTIVITY ADDED TO TRIP]', res.data)
+    AppState.dictThingsToDo[tripId].push(res.data)
 
   }
 
