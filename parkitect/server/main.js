@@ -1,6 +1,7 @@
 import express from 'express'
 import { createServer } from 'http'
 import { DbConnection } from './db/DbConfig'
+import { gCalendar } from "./services/GCalendarService.js"
 import { socketProvider } from './SocketProvider'
 import { Startup } from './Startup'
 import { logger } from './utils/Logger'
@@ -17,6 +18,8 @@ if (process.env.NODE_ENV == 'dev') {
 const httpServer = createServer(app)
 Startup.ConfigureGlobalMiddleware(app)
 Startup.ConfigureRoutes(app)
+
+const calendar = gCalendar
 
 // Establish Socket
 socketProvider.initialize(httpServer)

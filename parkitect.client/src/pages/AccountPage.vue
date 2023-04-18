@@ -38,6 +38,10 @@
         </div>
       </div>
     </section>
+    <section>
+      <h2>Calendar</h2>
+
+    </section>
 
     <!-- SECTION Places Ive been to -->
     <section class=" mt-3 row">

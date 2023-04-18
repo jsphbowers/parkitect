@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+
+VERSION:2.0
+
+PRODID:< { dasj90jds902k }>
+
+{Other header information}
+
+BEGIN:VEVENT
+
+{Event details}
+
+END:VEVENT
+
+BEGIN:VEVENT
+
+{Event details}
+
+END:VEVENT
+
+END:VCALENDAR

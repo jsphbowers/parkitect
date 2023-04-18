@@ -26,7 +26,7 @@
               </div>
               <div class="py-2" v-if="activity?.timeOfDay.length != 0">
                 <h5>Times of Day:</h5>
-                <h6 v-if="activity?.timeOfDay">{{ activity?.timeOfDay }}</h6>
+                <h6 v-for="tod in timeOfDay">{{ tod }}</h6>
               </div>
             </div>
             <div class="col-md-8">
@@ -85,9 +85,8 @@ export default {
         if (at == 'Fall') {
           return ("https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/wilderness-black-22.svg")
         }
-
       })),
-
+      timeOfDay: computed(() => AppState.activeThingToDo?.timeOfDay),
       route: useRoute(),
       async addActivity(activityId) {
         try {
