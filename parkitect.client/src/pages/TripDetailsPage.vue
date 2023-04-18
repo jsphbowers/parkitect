@@ -52,8 +52,16 @@
       <!-- SECTION map? -->
       <h3 class="mb-3">Let's see where we're going!</h3>
 
-      <div class="col-11">
-        <MapContainer />
+      <div class="col-11 d-flex justify-content-center">
+
+        <iframe v-if="parks.length > 0" :src="getIframeURL()" width="600" height="450" style="border:0;"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+        <!-- <iframe
+          src="https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d25360675.473180342!2d-100.68166218757999!3d39.399528282049204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e0!4m5!1s0x8096f09df58aecc5%3A0x2d249c2ced8003fe!2sBiscayne%20National%20Park%2C%20Florida!3m2!1d37.8651011!2d-119.5383294!4m5!1s0x4caebfbebe3482a1%3A0xfeb2b70c758b6ece!2sAcadia%20National%20Park%20Pond%2C%20Bar%20Harbor%2C%20ME!3m2!1d44.3781849!2d-68.2502444!4m5!1s0x80cac2a2ab47ad8b%3A0xcec87a0218d05dc5!2sZion%20National%20Park%2C%20UT%2C%20Springdale%2C%20UT!3m2!1d37.200365999999995!2d-112.98934!5e0!3m2!1sen!2sus!4v1681850729454!5m2!1sen!2sus"
+          width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+        <!-- <MapContainer /> -->
       </div>
       <div class="d-flex justify-content-end">
         <button class="btn btn-danger mb-2" @click="toggleArchiveTrip()"><span v-if="trip?.isArchived == false">Archive
@@ -101,7 +109,7 @@ import { tripsService } from "../services/TripsService.js";
 import { tripGoersService } from "../services/TripGoersService.js";
 import { tripParksService } from "../services/TripParksService.js";
 import { tripThingsToDoService } from "../services/TripThingsToDoService.js";
-import { computed, watchEffect } from "vue";
+import { computed, onMounted, watchEffect } from "vue";
 import { AppState } from "../AppState.js";
 import ActiveCardModal from "../components/ActiveCardModal.vue";
 import SmallModal from "../components/SmallModal.vue";
@@ -109,11 +117,13 @@ import EditTripForm from "../components/EditTripForm.vue";
 import ParkOptionsMenu from "../components/ParkOptionsMenu.vue";
 import SendInvitation from "../components/SendInvitation.vue";
 import MapContainer from "../components/MapContainer.vue";
+import { parksService } from "../services/ParksServices.js";
 
 
 export default {
   setup() {
     const route = useRoute();
+
     async function getMyTrip() {
       try {
         const tripId = route.params.tripId;
@@ -124,6 +134,7 @@ export default {
         Pop.error(error.message);
       }
     }
+
     async function getTripGoersByTripId() {
       try {
         const tripId = route.params.tripId;
@@ -134,6 +145,7 @@ export default {
         Pop.error(error.message);
       }
     }
+
     async function getTripThingsToDoByTripId() {
       try {
         const tripId = route.params.tripId;
@@ -144,6 +156,7 @@ export default {
         Pop.error(error.message);
       }
     }
+
     async function getTripParksByTripId() {
       try {
         const tripId = route.params.tripId;
@@ -155,15 +168,30 @@ export default {
       }
     }
 
+    async function getParksFromTripParks() {
+      try {
+        await parksService.getParksFromTripParks()
+      } catch (error) {
+        logger.error(error)
+        Pop.error(error.message)
+      }
+    }
+
+
     watchEffect(() => {
       if (AppState.account?.id) {
         getMyTrip();
         getTripGoersByTripId();
         getTripThingsToDoByTripId();
         getTripParksByTripId();
-
       };
     });
+
+    watchEffect(() => {
+      if (AppState.tripParks.length != 0) {
+        getParksFromTripParks()
+      }
+    })
 
 
     return {
@@ -172,6 +200,7 @@ export default {
       tripParks: computed(() => AppState.tripParks),
       tripThingsToDo: computed(() => AppState.tripThingsToDo),
       account: computed(() => AppState.account),
+      parks: computed(() => AppState.parks),
 
       deletePermissions(tripGoerAccountId) {
         const userId = AppState.account?.id
@@ -188,6 +217,15 @@ export default {
         }
       },
 
+
+      getIframeURL() {
+        try {
+          // return `https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d25360675.473180342!2d-100.68166218757999!3d39.399528282049204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e0!4m5!1s0x8096f09df58aecc5%3A0x2d249c2ced8003fe!2sBiscayne%20National%20Park%2C%20Florida!3m2!1d${AppState.parks[0].latitude}!2d${AppState.parks[0].longitude}!4m5!1s0x4caebfbebe3482a1%3A0xfeb2b70c758b6ece!2sAcadia%20National%20Park%20Pond%2C%20Bar%20Harbor%2C%20ME!3m2!1d${AppState.parks[1].latitude}!2d${AppState.parks[1].longitude}!4m5!1s0x80cac2a2ab47ad8b%3A0xcec87a0218d05dc5!2sZion%20National%20Park%2C%20UT%2C%20Springdale%2C%20UT!3m2!1d37.200365999999995!2d-112.98934!5e0!3m2!1sen!2sus!4v1681850729454!5m2!1sen!2sus`
+        } catch (error) {
+          logger.error(error)
+          Pop.error(error.message)
+        }
+      },
 
       async setActiveThingToDo(nativeThingToDoId) {
         try {
@@ -222,7 +260,6 @@ export default {
         }
       }
 
-
     };
   },
   components: { ActiveCardModal, SmallModal, EditTripForm, ParkOptionsMenu, SendInvitation, MapContainer }
@@ -248,7 +285,6 @@ export default {
   border-radius: 10px;
   padding: 1vh;
 }
-
 
 .trip-goers-card {
   min-height: 12vh;

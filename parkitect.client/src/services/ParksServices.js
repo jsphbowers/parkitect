@@ -100,6 +100,18 @@ class ParksService {
     logger.log('next page parks', AppState.parks)
     AppState.total = res.data.total;
   }
+
+  async getParksFromTripParks() {
+    const tripParks = AppState.tripParks
+    const res = []
+    for (let i = 0; i < tripParks.length; i++) {
+      res.push(await npsApi.get(`/parks?id=${tripParks[i].nativeParkId}`))
+    }
+    AppState.parks = []
+    for (let i = 0; i < res.length; i++) {
+      AppState.parks.push(new Park(res[i].data.data[0]))
+    }
+  }
 }
 
 export const parksService = new ParksService();
