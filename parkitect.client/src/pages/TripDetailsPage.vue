@@ -170,12 +170,12 @@ export default {
       account: computed(() => AppState.account),
 
       deletePermissions(tripGoerAccountId) {
-        const userId = AppState.account.id
-        const tripCreatorId = AppState.activeTrip.creatorId
+        const userId = AppState.account?.id
+        const tripCreatorId = AppState.activeTrip?.creatorId
         // tripCreator cannot be removed from their own trip
         if (tripGoerAccountId == tripCreatorId) {
           return false
-          // delete button will appear for everyone else when tripCreator is viewing page
+          // tripCreator can remove any other users from the trip
         } else if (userId == tripCreatorId) {
           return true
           // users other than tripCreator may remove themselves and nobody else
