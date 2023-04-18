@@ -5,7 +5,7 @@ import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop.js";
 import { api } from "./AxiosService";
 
-export class TripsService {
+class TripsService {
   async createTrip(tripData) {
     // logger.log(tripData)
     const res = await api.post('/trips', tripData)
@@ -64,6 +64,12 @@ export class TripsService {
     logger.log('[EDITING TRIP]', res.data)
   }
 
+  async toggleArchiveTrip(tripId) {
+    const res = await api.delete(`/trips/${tripId}`)
+    logger.log('[ARCHIVE TRIP RES.DATA]', res.data)
+    AppState.activeTrip.isArchived == !AppState.activeTrip.isArchived
+    logger.log('[APPSTATE TRIP AFTER ARCHIVE]', AppState.activeTrip)
+  }
 
 
 }

@@ -55,6 +55,11 @@
       <div class="col-11">
         <MapContainer />
       </div>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-danger mb-2" @click="toggleArchiveTrip()"><span v-if="trip.isArchived == false">Archive
+          </span><span v-else>Un-Archive</span>
+          Trip</button>
+      </div>
     </section>
   </div>
 
@@ -161,7 +166,6 @@ export default {
     });
 
 
-
     return {
       trip: computed(() => AppState.activeTrip),
       tripGoers: computed(() => AppState.tripGoers),
@@ -184,6 +188,7 @@ export default {
         }
       },
 
+
       async setActiveThingToDo(nativeThingToDoId) {
         try {
           await tripThingsToDoService.setActiveThingToDo(nativeThingToDoId)
@@ -201,6 +206,18 @@ export default {
           }
         } catch (error) {
           logger.error(error)
+          Pop.error(error.message)
+        }
+      },
+
+      async toggleArchiveTrip() {
+        try {
+          if (await Pop.confirm("Are you sure you'd like to archive this trip?", "You'll no longer be able to edit its details", "Yes, I'm sure", "warning")) {
+            const tripId = route.params.tripId
+            await tripsService.toggleArchiveTrip(tripId)
+          }
+        } catch (error) {
+          logger.log(error)
           Pop.error(error.message)
         }
       }
@@ -231,6 +248,7 @@ export default {
   border-radius: 10px;
   padding: 1vh;
 }
+
 
 .trip-goers-card {
   min-height: 12vh;
