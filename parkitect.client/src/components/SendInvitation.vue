@@ -42,7 +42,7 @@
 
       <label for="message">Message</label>
     </div>
-    <div class="my-3 text-center">
+    <div class="my-3 text-end">
       <button data-bs-dismiss="modal" class="btn btn-success" type="submit">
         Send!
       </button>
@@ -63,6 +63,7 @@
 <script>
 export default {
   setup() {
+    // const route =
     return {};
   },
 };
