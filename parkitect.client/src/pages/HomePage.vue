@@ -17,15 +17,15 @@
 
     <!-- SECTION park cards -->
     <section class="row justify-content-center px-md-5">
-      <div class="col-4 text-center my-4">
+      <div class="col-md-4 text-center my-4">
 
       </div>
-      <div class="col-4 text-center my-4">
+      <div class="col-md-4 text-center my-4">
         <h2>
           {{ parks.length != 0 ? "Where do you want to go?" : "" }}
         </h2>
       </div>
-      <div class="col-4 d-flex justify-content-end my-4">
+      <div class="col-md-4 d-flex jc my-4">
         <div class="dropdown">
           <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Filter by region
@@ -283,10 +283,18 @@ export default {
   padding: 3em;
 }
 
+.jc {
+  justify-content: end;
+}
+
 @media screen and (max-width: 480px) {
   .search-bg {
     min-height: 50vh;
   }
+}
+
+.jc {
+  justify-content: center;
 }
 
 .no-results-guy {
