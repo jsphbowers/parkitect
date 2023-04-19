@@ -76,16 +76,19 @@
     <section class="row mt-5">
       <div class="col-12 px-md-5 bg-color">
         <router-link :to="{ name: 'About' }">
-          <h2 class="text-center text-dark">About Us</h2>
+          <h2 class="text-center selectable text-dark">About Us</h2>
         </router-link>
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo, rem
-          reiciendis maxime omnis porro, maiores cupiditate ipsam adipisci
-          perspiciatis facere saepe quia, minima iste nisi explicabo aperiam at
-          mollitia unde! Lorem ipsum dolor sit amet, consectetur adipisicing
-          elit. Nemo magnam voluptatem ex error. Natus harum assumenda adipisci
-          unde perspiciatis nisi aliquam esse ipsa blanditiis obcaecati, maiores
-          modi eius non dolor!
+        <p class="p-2">
+          The Park Rangers: a group dedicated to hard work, powerful insights and a love for the outdoors and adventure.
+          The great outdoors and the incredible national parks inspired us to create an application where users can go to
+          plan out their next epic journey.
+          <br>
+          Creating trips and adding parks and activities to do was an idea that brought us
+          back to our childhoods, loading up in the car with the family and heading out to these incredible destinations.
+          We wanted to create a place where you can take in the beautiful scenery and feel the inspiration we felt to
+          start a new journey.
+          <br>
+          Learn more about this incredible team and our passion for web development.
         </p>
       </div>
     </section>

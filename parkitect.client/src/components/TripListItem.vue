@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!parkExists">
+  <div v-if="!parkExists && tripName.isArchived == false">
     <li><a class="dropdown-item selectable" @click="addParkToTrip(tripName.id)">{{ tripName.name }}</a></li>
   </div>
   <!-- <li><a class="dropdown-item selectable" @click="addParkToTrip(tripName.id)">{{ tripName.name }}</a></li> -->
@@ -47,7 +47,7 @@ export default {
           const nativeParkId = AppState.activePark.nativeId
           const fullName = AppState.activePark.name
           await tripsService.addParkToTrip(tripId, nativeParkId, fullName)
-          Pop.success(`Park Added to Trip ${props.tripName.name}!`)
+          Pop.toast(`Park Added to Trip ${props.tripName.name}!`, 'success', 'top')
         } catch (error) {
           Pop.error(error.message)
           logger.error(error)
