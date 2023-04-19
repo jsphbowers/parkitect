@@ -1,0 +1,16 @@
+{
+  "type": "service_account",
+  "project_id": "parkitect-calendar",
+  "private_key_id": "e2db377ddef4ccd39d21cc3d9bcfb13edfa279f1",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDNiUntKeY5ZzWg\nMo5KnNUhdKGS5BGxVie5qwn4gg9IEjnA9mICq9UYur55gnI4FRQ6M9Lr68T/8aBI\nuTN+EE21ZT0MCzK/OHu7F+Z+FjrSkLO96UynLLugnlLl7pSrmZ8k3uEdIbg8rHc1\n9pU1B6rw7wuI/Gegzpmvb/6WQ4m2PP4s1HfwYZ6z3Tt+zcw+eyKPb0KHQjs327x/\n08r/Vz2Z2iTid1GI66yQQw1eBIWlr0wMVUZ/JaqCh0lpIipb3i7RiALxjiHnskL+\nbLFAtfOhQ2o3G00OynmjYdDRMQs5RxGSkW/2bXmb++qlsyqtSD9Lq0zJdzUKOOwl\nc8H2TvsdAgMBAAECggEABblBVfK8gQHMGXe0qVbl8PLi+/r1Jiyyx5OJFvBtsN8S\nfQOdLL/wm8VwZIjtB2skSIY3SbQagEf90W5YThGEFsH7AvoG/7bdWcof/XWsqQf4\nDo/LP2tDTjLbpFdW1VLwrFrbj+regeLlM2R4QgVCZKNOYeRyXsBsZbTE0JYQ0sui\nCNPkhVKsmEbT10PuzAw5XrORy42//QZYNJreh6DUDD97lnCM7NUK/4ernqNSuZ20\nbKV1a7oHhYSsxPQKlrQXHPM0rKKlBBTK1hwIqf2t+NTklvfCpQqYPKmt7bwNDgjS\nZp3Zi1KabNk9vOXaltmAf8w5tMR72b/Gpayw1z20GQKBgQDoUkgvhgThfxcRiw5F\nfnnZvv0Ns3F1H34TrWaKGT36qzmL174Y97GcLM6VPiLsPSKQHl/iAdq4vMRObaUC\nOGXLJyS3UE91jAHfxAUY5RmLQgcQt/p7kugj8IuWg7vgh2GITx/zc9p1RYrAyyti\nfEVExM96Ne/uWonUer7MzzQ9qQKBgQDifCFv/zAPKA90QgBK+N88MLSqU807Jy7S\nWCZeGcNw3Do7n0LqiGd7B4x0ZOcYE6uiGG1TNcbE45jJ3pWiHDDujGkHc0Vx9/kZ\niM3vSuAg+38uCXyZmoelOzec/Y0P/caOKqKftX9CUHJ5UqUSB96LWZCNLZb4TVYI\n5nM35r+yVQKBgQDUhfDjCIaOgeRod/ymNfzh5IU5c13m9tguyAF1c4HvPZN3CfUs\ngepII/UXMbBgy8xCaobsCSY8uPIbjNHWJiF4pmZAC4ek0F8mg/rluy6S5ePwt1y8\njrctqW8IUZoc27utJjTkUKcXgHZdx334qhXzwtbJxW2nbcuIRIEmeqYfgQKBgQCs\n6LvWd2rHh3wU8/apRkuX9k9X4lbDHG0Apc/U87JkTZ4fur0ptS3bna27hvVvSkU0\noZWFe37e/iu9orN2ajNpS8U7rOON2RVSS0F9uRpX0+oKya9YzcNVgFo6/tBdLxAR\npbc2WyhnBmf++/uOQnfCx4Q2ZGHn+5L9hILeYMplaQKBgQDQkF674jH/Z5rNABRi\nxeXZE7rw12TRJccEIjIzfg43tz1kivLclapmBkpg6iFaFXoDpknzsdb5Z/RzWz4Y\nZcF6MZKBPN9LWpe9XYFTD2d+pqZdqeg+y5btlWBUCs7R4IYdPgTCy3yALic4kkhu\n8DtdBpOBOoUQwISTxEwpA2yUoA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "testing-google-calendar-api@parkitect-calendar.iam.gserviceaccount.com",
+  "client_id": "100201736653996782412",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/testing-google-calendar-api%40parkitect-calendar.iam.gserviceaccount.com",
+  "redirect_uris": [
+    "http://localhost:3000/oauth2callback",
+    "http://localhost:8080/oauth2callback"
+  ]
+}
