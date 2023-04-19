@@ -321,7 +321,6 @@ export default {
   width: 100%;
   height: 75vh;
   object-fit: cover;
-
 }
 
 // .txt-shadow {
