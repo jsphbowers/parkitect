@@ -50,19 +50,10 @@
         </section>
       </div>
 
-      <!-- SECTION map? -->
-      <h3 class="mb-3">Let's see where we're going!</h3>
-
+      <!-- SECTION map -->
+      <h3 class="mb-3" v-if="parks.length > 0">Let's see where we're going!</h3>
       <div class="col-11 d-flex justify-content-center">
-
-        <iframe v-if="parks.length > 0" :src="getIframeURL()" width="600" height="450" style="border:0;"
-          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-        <!-- <iframe
-          src="https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d25360675.473180342!2d-100.68166218757999!3d39.399528282049204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e0!4m5!1s0x8096f09df58aecc5%3A0x2d249c2ced8003fe!2sBiscayne%20National%20Park%2C%20Florida!3m2!1d37.8651011!2d-119.5383294!4m5!1s0x4caebfbebe3482a1%3A0xfeb2b70c758b6ece!2sAcadia%20National%20Park%20Pond%2C%20Bar%20Harbor%2C%20ME!3m2!1d44.3781849!2d-68.2502444!4m5!1s0x80cac2a2ab47ad8b%3A0xcec87a0218d05dc5!2sZion%20National%20Park%2C%20UT%2C%20Springdale%2C%20UT!3m2!1d37.200365999999995!2d-112.98934!5e0!3m2!1sen!2sus!4v1681850729454!5m2!1sen!2sus"
-          width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe> -->
-        <!-- <MapContainer /> -->
+        <img :src="mapURL" alt="a map showing trip locations" v-if="parks.length > 0">
       </div>
       <div class="d-flex justify-content-end">
         <button class="btn btn-danger mb-2" @click="toggleArchiveTrip()"><span v-if="trip?.isArchived == false">Archive
@@ -134,10 +125,10 @@
       </div>
 
       <!-- SECTION map? -->
-      <h3 class="mb-3">Let's see where we're going!</h3>
+      <h3 class="mb-3" v-if="parks.length > 0">Let's see where we're going!</h3>
 
-      <div class="col-11">
-        <MapContainer />
+      <div class="col-11 d-flex justify-content-center">
+        <img :src="mapURL" alt="a map showing trip locations" v-if="parks.length > 0">
       </div>
       <div class="d-flex justify-content-end">
         <button class="btn btn-danger mb-2" @click="toggleArchiveTrip()"><span v-if="trip.isArchived == false">Archive
@@ -186,7 +177,7 @@ import { tripsService } from "../services/TripsService.js";
 import { tripGoersService } from "../services/TripGoersService.js";
 import { tripParksService } from "../services/TripParksService.js";
 import { tripThingsToDoService } from "../services/TripThingsToDoService.js";
-import { computed, onMounted, watchEffect } from "vue";
+import { computed, onBeforeUnmount, onMounted, watchEffect } from "vue";
 import { AppState } from "../AppState.js";
 import ActiveCardModal from "../components/ActiveCardModal.vue";
 import SmallModal from "../components/SmallModal.vue";
@@ -255,6 +246,8 @@ export default {
     }
 
 
+
+
     watchEffect(() => {
       if (AppState.account?.id) {
         getMyTrip();
@@ -270,6 +263,10 @@ export default {
       }
     })
 
+    onBeforeUnmount(() => {
+      AppState.parks = []
+    })
+
 
     return {
       trip: computed(() => AppState.activeTrip),
@@ -278,6 +275,16 @@ export default {
       tripThingsToDo: computed(() => AppState.tripThingsToDo),
       account: computed(() => AppState.account),
       parks: computed(() => AppState.parks),
+      mapURL: computed(() => {
+        let URL = "http://maps.googleapis.com/maps/api/staticmap?key=AIzaSyATZoG7a3Rf97UDfWBnc9wFsuEB5PKkh7Q&size=800x400&center=USA&zoom=3&maptype=terrain"
+        let markers = ``
+        AppState.parks.forEach(p => {
+          markers += `&markers=color:green|size:mid|label:${p.name[0]}|${p.latitude},${p.longitude}`
+        })
+        URL += markers
+        logger.log('[URL]', URL)
+        return URL
+      }),
 
       deletePermissions(tripGoerAccountId) {
         const userId = AppState.account?.id
@@ -291,16 +298,6 @@ export default {
           // users other than tripCreator may remove themselves and nobody else
         } else if (userId != tripCreatorId && userId == tripGoerAccountId) {
           return true
-        }
-      },
-
-
-      getIframeURL() {
-        try {
-          // return `https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d25360675.473180342!2d-100.68166218757999!3d39.399528282049204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e0!4m5!1s0x8096f09df58aecc5%3A0x2d249c2ced8003fe!2sBiscayne%20National%20Park%2C%20Florida!3m2!1d${AppState.parks[0].latitude}!2d${AppState.parks[0].longitude}!4m5!1s0x4caebfbebe3482a1%3A0xfeb2b70c758b6ece!2sAcadia%20National%20Park%20Pond%2C%20Bar%20Harbor%2C%20ME!3m2!1d${AppState.parks[1].latitude}!2d${AppState.parks[1].longitude}!4m5!1s0x80cac2a2ab47ad8b%3A0xcec87a0218d05dc5!2sZion%20National%20Park%2C%20UT%2C%20Springdale%2C%20UT!3m2!1d37.200365999999995!2d-112.98934!5e0!3m2!1sen!2sus!4v1681850729454!5m2!1sen!2sus`
-        } catch (error) {
-          logger.error(error)
-          Pop.error(error.message)
         }
       },
 
