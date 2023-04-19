@@ -1,46 +1,20 @@
 <template>
   <form @submit.prevent="createTrip()">
     <div class="form-floating mb-3">
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        placeholder="Name"
-        name="name"
-        required
-        v-model="editable.name"
-        minlength="3"
-        maxlength="25"
-      />
+      <input type="text" class="form-control" id="name" placeholder="Name" name="name" required v-model="editable.name"
+        minlength="3" maxlength="25" />
       <label for="name">Name</label>
     </div>
     <div class="form-floating mb-3">
-      <input
-        type="url"
-        class="form-control"
-        id="mgUrl"
-        placeholder="ImgUrl"
-        name="imgUrl"
-        required
-        v-model="editable.coverImg"
-        @input="previewImage"
-      />
+      <input type="url" class="form-control" id="mgUrl" placeholder="ImgUrl" name="imgUrl" v-model="editable.coverImg"
+        @input="previewImage" />
       <label for="imgUrl">ImgUrl</label>
       <br />
       <img :src="imagePreview" v-if="imagePreview" style="max-width: 100%" />
     </div>
     <div class="form-floating mb-3">
-      <textarea
-        class="form-control"
-        id="description"
-        placeholder="Description"
-        name="description"
-        required
-        style="height: 100px"
-        v-model="editable.description"
-        minlength="5"
-        maxlength="1000"
-      ></textarea>
+      <textarea class="form-control" id="description" placeholder="Description" name="description" required
+        style="height: 100px" v-model="editable.description" minlength="5" maxlength="1000"></textarea>
       <label for="description">Description</label>
     </div>
     <div class="my-3 text-end">

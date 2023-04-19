@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div v-if="trip?.isArchived == false" class="container-fluid">
     <section class="row justify-content-center">
       <!-- SECTION cover photo -->
       <div class="col-12 p-0">
@@ -49,11 +49,20 @@
           </div>
         </section>
       </div>
+
       <!-- SECTION map? -->
       <h3 class="mb-3">Let's see where we're going!</h3>
 
-      <div class="col-11">
-        <MapContainer />
+      <div class="col-11 d-flex justify-content-center">
+
+        <iframe v-if="parks.length > 0" :src="getIframeURL()" width="600" height="450" style="border:0;"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+        <!-- <iframe
+          src="https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d25360675.473180342!2d-100.68166218757999!3d39.399528282049204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e0!4m5!1s0x8096f09df58aecc5%3A0x2d249c2ced8003fe!2sBiscayne%20National%20Park%2C%20Florida!3m2!1d37.8651011!2d-119.5383294!4m5!1s0x4caebfbebe3482a1%3A0xfeb2b70c758b6ece!2sAcadia%20National%20Park%20Pond%2C%20Bar%20Harbor%2C%20ME!3m2!1d44.3781849!2d-68.2502444!4m5!1s0x80cac2a2ab47ad8b%3A0xcec87a0218d05dc5!2sZion%20National%20Park%2C%20UT%2C%20Springdale%2C%20UT!3m2!1d37.200365999999995!2d-112.98934!5e0!3m2!1sen!2sus!4v1681850729454!5m2!1sen!2sus"
+          width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+        <!-- <MapContainer /> -->
       </div>
       <div class="d-flex justify-content-end">
         <button class="btn btn-danger mb-2" @click="toggleArchiveTrip()"><span v-if="trip?.isArchived == false">Archive
@@ -62,6 +71,82 @@
       </div>
     </section>
   </div>
+
+  <!-- NOTE This region is the archived HTML -->
+  <!-- #region -->
+  <div v-if="trip?.isArchived" class="container-fluid">
+    <section class="row justify-content-center">
+      <!-- SECTION cover photo -->
+      <div class="col-12 p-0">
+        <img v-if="trip" :src="trip?.coverImg" :alt="'cover image for ' + trip?.name" class="archivedCover-img">
+      </div>
+      <div class="d-flex justify-content-end mt-2 mb-0" v-if="trip?.creatorId == account?.id">
+        <button disabled class="btn addBtn me-2" data-bs-toggle="modal" data-bs-target="#sendInvitation">Send
+          Invitation</button>
+        <button disabled class="btn addBtn" data-bs-toggle="modal" data-bs-target="#editTripModal">Edit Trip Info</button>
+        <button disabled class="btn addBtn ms-2" data-bs-toggle="modal" data-bs-target="#editParkModal">Edit Travel
+          Plans</button>
+      </div>
+      <!-- SECTION trip details card -->
+      <div class="col-md-11 px-0 text-center trip-details-card">
+        <h1>{{ trip?.name }}</h1>
+        <h5>{{ trip?.description }}</h5>
+
+        <h6 class="archiveBanner px-0 mx-0">
+          This trip has been archived!
+        </h6>
+
+      </div>
+      <!-- SECTION tripGoers photos -->
+      <h3 class="mb-0">Who's coming along...</h3>
+      <div class="col-md-11 trip-goers-card">
+        <div v-for="t in tripGoers" :key="t.id" class="position-relative">
+          <img :src="t.account.picture" :alt="'a photo of ' + t.account.name" :title="t.account.name"
+            class="archivedProfile-pic">
+          <button disabled v-if="deletePermissions(t.accountId)" class="btn btn-outline p-0 remove-tripGoer-btn"
+            title="Remove Trip Goer" @click="removeTripGoer(t.id)">
+            <i class="mdi mdi-minus"></i>
+          </button>
+        </div>
+      </div>
+      <!-- SECTION tripParks -->
+      <h3 class="mb-0">Sights to see & things to do!</h3>
+      <div class="col-md-11 parks-area draggable">
+        <section class="row mb-4 archivedImg" v-for="t in tripParks" :key="t.id">
+          <div class="col-md-7">
+            <router-link :to="{ name: 'ParkDetails', params: { parkCode: t.parkCode } }">
+              <h1 class="text-dark">{{ t.fullName }}</h1>
+              <img :src="t.image" :alt="'a photo of ' + t.fullName" class="park-img">
+            </router-link>
+          </div>
+          <div class="col-md-5">
+            <!-- SECTION tripThingsToDo -->
+            <h3 class="mt-md-5 mt-2">Activities</h3>
+            <ul v-if="tripThingsToDo.filter(ttd => ttd.parkCode == t.parkCode).length">
+              <span v-for="ttd in tripThingsToDo.filter(ttd => ttd.parkCode == t.parkCode)" :key="ttd.id">
+                <li v-if="ttd.parkCode == t.parkCode" class="selectable" data-bs-toggle="modal"
+                  data-bs-target="#activity-modal" @click="setActiveThingToDo(ttd.nativeThingToDoId)">{{ ttd.title }}</li>
+              </span>
+            </ul>
+            <h6 v-else>No activities have been added for this park</h6>
+          </div>
+        </section>
+      </div>
+
+      <!-- SECTION map? -->
+      <h3 class="mb-3">Let's see where we're going!</h3>
+
+      <div class="col-11">
+        <MapContainer />
+      </div>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-danger mb-2" @click="toggleArchiveTrip()"><span v-if="trip.isArchived == false">Archive
+          </span><span v-else>Un-Archive</span>
+          Trip</button>
+      </div>
+    </section>
+  </div>
+  <!-- #endregion -->
 
   <SmallModal id="sendInvitation">
     <template #header>
@@ -101,7 +186,7 @@ import { tripsService } from "../services/TripsService.js";
 import { tripGoersService } from "../services/TripGoersService.js";
 import { tripParksService } from "../services/TripParksService.js";
 import { tripThingsToDoService } from "../services/TripThingsToDoService.js";
-import { computed, watchEffect } from "vue";
+import { computed, onMounted, watchEffect } from "vue";
 import { AppState } from "../AppState.js";
 import ActiveCardModal from "../components/ActiveCardModal.vue";
 import SmallModal from "../components/SmallModal.vue";
@@ -109,11 +194,13 @@ import EditTripForm from "../components/EditTripForm.vue";
 import ParkOptionsMenu from "../components/ParkOptionsMenu.vue";
 import SendInvitation from "../components/SendInvitation.vue";
 import MapContainer from "../components/MapContainer.vue";
+import { parksService } from "../services/ParksServices.js";
 
 
 export default {
   setup() {
     const route = useRoute();
+
     async function getMyTrip() {
       try {
         const tripId = route.params.tripId;
@@ -124,6 +211,7 @@ export default {
         Pop.error(error.message);
       }
     }
+
     async function getTripGoersByTripId() {
       try {
         const tripId = route.params.tripId;
@@ -134,6 +222,7 @@ export default {
         Pop.error(error.message);
       }
     }
+
     async function getTripThingsToDoByTripId() {
       try {
         const tripId = route.params.tripId;
@@ -144,6 +233,7 @@ export default {
         Pop.error(error.message);
       }
     }
+
     async function getTripParksByTripId() {
       try {
         const tripId = route.params.tripId;
@@ -155,15 +245,30 @@ export default {
       }
     }
 
+    async function getParksFromTripParks() {
+      try {
+        await parksService.getParksFromTripParks()
+      } catch (error) {
+        logger.error(error)
+        Pop.error(error.message)
+      }
+    }
+
+
     watchEffect(() => {
       if (AppState.account?.id) {
         getMyTrip();
         getTripGoersByTripId();
         getTripThingsToDoByTripId();
         getTripParksByTripId();
-
       };
     });
+
+    watchEffect(() => {
+      if (AppState.tripParks.length != 0) {
+        getParksFromTripParks()
+      }
+    })
 
 
     return {
@@ -172,6 +277,7 @@ export default {
       tripParks: computed(() => AppState.tripParks),
       tripThingsToDo: computed(() => AppState.tripThingsToDo),
       account: computed(() => AppState.account),
+      parks: computed(() => AppState.parks),
 
       deletePermissions(tripGoerAccountId) {
         const userId = AppState.account?.id
@@ -188,6 +294,15 @@ export default {
         }
       },
 
+
+      getIframeURL() {
+        try {
+          // return `https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d25360675.473180342!2d-100.68166218757999!3d39.399528282049204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e0!4m5!1s0x8096f09df58aecc5%3A0x2d249c2ced8003fe!2sBiscayne%20National%20Park%2C%20Florida!3m2!1d${AppState.parks[0].latitude}!2d${AppState.parks[0].longitude}!4m5!1s0x4caebfbebe3482a1%3A0xfeb2b70c758b6ece!2sAcadia%20National%20Park%20Pond%2C%20Bar%20Harbor%2C%20ME!3m2!1d${AppState.parks[1].latitude}!2d${AppState.parks[1].longitude}!4m5!1s0x80cac2a2ab47ad8b%3A0xcec87a0218d05dc5!2sZion%20National%20Park%2C%20UT%2C%20Springdale%2C%20UT!3m2!1d37.200365999999995!2d-112.98934!5e0!3m2!1sen!2sus!4v1681850729454!5m2!1sen!2sus`
+        } catch (error) {
+          logger.error(error)
+          Pop.error(error.message)
+        }
+      },
 
       async setActiveThingToDo(nativeThingToDoId) {
         try {
@@ -222,7 +337,6 @@ export default {
         }
       }
 
-
     };
   },
   components: { ActiveCardModal, SmallModal, EditTripForm, ParkOptionsMenu, SendInvitation, MapContainer }
@@ -248,7 +362,6 @@ export default {
   border-radius: 10px;
   padding: 1vh;
 }
-
 
 .trip-goers-card {
   min-height: 12vh;
@@ -309,4 +422,43 @@ export default {
 .remove-tripGoer-btn:hover {
   background-color: rgb(255, 87, 87);
 }
+
+// NOTE This section is for the archived page styling
+// #region
+
+
+.archivedCover-img {
+  width: 100%;
+  height: 45vh;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(100%);
+}
+
+.archiveBanner {
+  background-color: #ff4646;
+  height: 4vh;
+  font-size: larger;
+  font-weight: bold;
+  padding-top: 1vh;
+}
+
+.archivedProfile-pic {
+  border-radius: 100%;
+  margin-left: .25em;
+  margin-right: .25em;
+  margin-top: .5em;
+  margin-bottom: .5em;
+  height: 10vh;
+  width: 10vh;
+  filter: grayscale(100%);
+  object-fit: cover;
+  object-position: center;
+}
+
+.archivedImg {
+  filter: grayscale(100%);
+}
+
+// #endregion
 </style>
