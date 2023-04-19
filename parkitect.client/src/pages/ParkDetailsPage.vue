@@ -73,7 +73,7 @@
       </div>
 
 
-      <div class="col-12 d-flex justify-content-evenly media-scroll" v-for="a in activities">
+      <div class="col-12 d-flex justify-content-evenly media-scroll">
         <div class="text-center p-2">
           <img @click="changeActivityType('')" class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0aW9uYWwlMjBwYXJrfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
