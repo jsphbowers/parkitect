@@ -123,12 +123,13 @@ import { Offcanvas } from "bootstrap";
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
 import { tripGoersService } from "../services/TripGoersService";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 export default {
   setup() {
     const router = useRouter();
     const editable = ref("");
+    const route = useRoute()
 
     return {
       editable,
@@ -150,8 +151,14 @@ export default {
       },
 
       pushToPassport() {
-        AppState.clickedMyPassport = true
-        router.push({ name: 'Account' })
+        if (route.path != '/account') {
+          AppState.clickedMyPassport = true
+          router.push({ name: 'Account' })
+          logger.log(route.path)
+        }
+        if (route.path == '/account') {
+          window.scrollTo(0, 2300)
+        }
       },
 
       async joinTrip() {
