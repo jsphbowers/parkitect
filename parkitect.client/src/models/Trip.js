@@ -10,6 +10,6 @@ export class Trip {
     this.start = data.start
     this.end = data.end
     this.allDay = data.allDay
-    this.event = data.event
+    this.display = data.display
   }
 }

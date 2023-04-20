@@ -30,8 +30,8 @@
       </div>
 
       <div class="col-xl-3 col-md-6 col-lg-4 trip-sizing d-flex justify-content-center">
-        <div title="Create a Trip" class="create-trip justify-content-center align-items-center d-flex selectable" data-bs-toggle="modal"
-          data-bs-target="#tripModal">
+        <div title="Create a Trip" class="create-trip justify-content-center align-items-center d-flex selectable"
+          data-bs-toggle="modal" data-bs-target="#tripModal">
           <i class="mdi mdi-plus"></i>
         </div>
       </div>
@@ -40,7 +40,7 @@
     <!-- SECTION Calendar -->
     <section class="row justify-content-center">
       <div class="col-10">
-        <Calendar />
+        <Calendar :trips="myTrips" />
       </div>
     </section>
 
@@ -60,11 +60,11 @@
       <div class=" col-12 icon-bg">
         <!-- add back in below     v-if="parksVisited"  -->
         <div v-if="parksVisited" class="justify-content-evenly d-flex flex-wrap my-2 py-5">
-          <img  v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style grow mb-3 selectable"
+          <img v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style grow mb-3 selectable"
             :src="`/icons/${parkCode}.png`" alt="" :class="hasVisited(parkCode)">
         </div>
         <div v-if="!parksVisited" class="justify-content-evenly d-flex flex-wrap my-2 py-5">
-          <img  v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style grow mb-3 selectable"
+          <img v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style grow mb-3 selectable"
             :src="`/icons/${parkCode}.png`" alt="" :class="displayYourParks(parkCode)">
         </div>
       </div>
@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref, onMounted, watchEffect } from 'vue'
 import { AppState } from '../AppState'
 import { accountService } from "../services/AccountService.js"
 import { tripGoersService } from "../services/TripGoersService.js"
@@ -129,6 +129,7 @@ export default {
     return {
       coverImages,
       icons,
+      myTrips: computed(() => AppState.trips),
       account: computed(() => AppState.account),
       tripGoers: computed(() => AppState.tripGoers),
       parksVisited: computed(() => AppState.parksVisited),

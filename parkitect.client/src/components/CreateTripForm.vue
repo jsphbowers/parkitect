@@ -5,6 +5,18 @@
         minlength="3" maxlength="25" />
       <label for="name">Name</label>
     </div>
+
+    <div class="form-floating mb-3">
+      <!-- FIXME add required back to date inputs and set minimum date to current date -->
+      <input type="date" class="form-control" id="start" placeholder="Start Date" name="start" v-model="editable.start"
+        min="2023-04-20" />
+      <label for="start">Start Date</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="date" class="form-control" id="end" placeholder="End Date" name="end" v-model="editable.end" />
+      <label for="end">End Date</label>
+    </div>
+
     <div class="form-floating mb-3">
       <input type="url" class="form-control" id="mgUrl" placeholder="ImgUrl" name="imgUrl" v-model="editable.coverImg"
         @input="previewImage" />
@@ -44,6 +56,7 @@ export default {
       async createTrip() {
         try {
           const tripData = editable.value;
+          logger.log('[TRIP DATA CALENDAR TEST]', editable.value)
           const trip = await tripsService.createTrip(tripData);
           // router.push({ name: "TripDetails", params: { tripId: trip.id } });
           Pop.toast('Successfully created a trip', 'success', 'top')
