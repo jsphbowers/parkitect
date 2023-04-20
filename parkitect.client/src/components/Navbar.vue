@@ -47,7 +47,7 @@
                   :src="account.picture || user.picture"
                   alt="account photo"
                   height="100"
-                  class="rounded mb-3"
+                  class="rounded mb-3 avatar"
                 />
               </div>
               <ul class="navbar-nav">
@@ -135,7 +135,7 @@ import { Offcanvas } from "bootstrap";
 export default {
   setup() {
 
-    
+
     return {
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
@@ -195,6 +195,11 @@ a:hover {
 .inline-btn {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px
+}
+
+.avatar {
+  object-fit: cover;
+  object-position: center;
 }
 
 @media screen and (max-width: 768px) {
