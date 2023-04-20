@@ -21,55 +21,57 @@
               <button title="Close" type="button" class="btn-close" data-bs-dismiss="offcanvas"
                 aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body text-center d-flex flex-column">
-              <div v-if="account.picture || user.picture">
-                <img :src="account.picture || user.picture" alt="account photo" height="100"
-                  class="rounded mb-3 avatar" />
+            <div class="offcanvas-body text-center d-flex flex-column justify-content-between">
+              <div>
+                <div v-if="account.picture || user.picture">
+                  <img :src="account.picture || user.picture" alt="account photo" height="100"
+                    class="rounded mb-3 avatar" />
+                </div>
+
+
+                <ul class="navbar-nav">
+                  <div @click="closeOffcanvas()">
+                    <router-link :to="{ name: 'Account' }">
+                      <li class="text-decoration-none text-dark selectable py-2">
+                        My Trips
+                      </li>
+                    </router-link>
+                  </div>
+                  <hr />
+                  <div @click="closeOffcanvas()">
+                    <button class="btn create-btn selectable py-2" data-bs-toggle="modal" data-bs-target="#tripModal">
+                      Create a Trip
+                    </button>
+                  </div>
+                  <hr />
+                  <div>
+                    <button class="btn btn-underline selectable w-75" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                      Join Code
+                    </button>
+                    <div class="collapse" id="collapseExample">
+
+                      <form @submit.prevent="joinTrip()">
+                        <div class="d-flex">
+                          <input v-model="editable" type="text" name="code" class="form-control inline-input" id="code"
+                            placeholder="Your join trip code here" />
+                          <button title="Join trip" class="btn btn-success inline-btn" type="submit">
+                            <i class="mdi mdi-plus"></i>
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <hr />
+                  <li class="text-danger selectable py-2" @click="logout">
+                    <i class="mdi mdi-logout"></i>
+                    logout
+                  </li>
+                  <hr>
+                </ul>
               </div>
 
-
-              <ul class="navbar-nav">
-                <div @click="closeOffcanvas()">
-                  <router-link :to="{ name: 'Account' }">
-                    <li class="text-decoration-none text-dark selectable py-2">
-                      My Trips
-                    </li>
-                  </router-link>
-                </div>
-                <hr />
-                <div @click="closeOffcanvas()">
-                  <button class="btn create-btn selectable py-2" data-bs-toggle="modal" data-bs-target="#tripModal">
-                    Create a Trip
-                  </button>
-                </div>
-                <hr />
-                <div>
-                  <button class="btn btn-underline selectable w-75" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                    Join Code
-                  </button>
-                  <div class="collapse" id="collapseExample">
-
-                    <form @submit.prevent="joinTrip()">
-                      <div class="d-flex">
-                        <input v-model="editable" type="text" name="code" class="form-control inline-input" id="code"
-                          placeholder="Your join trip code here" />
-                        <button title="Join trip" class="btn btn-success inline-btn" type="submit">
-                          <i class="mdi mdi-plus"></i>
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-                <hr />
-                <li class="text-danger selectable py-2" @click="logout">
-                  <i class="mdi mdi-logout"></i>
-                  logout
-                </li>
-                <hr>
-              </ul>
-
-              <div class="aboutUs" @click="closeOffcanvas()">
+              <div @click="closeOffcanvas()">
                 <router-link :to="{ name: 'About' }">
 
                   <h6 class="text-center text-dark" title="Click here to see more"><span class="selectable">About
@@ -192,10 +194,6 @@ a:hover {
 .avatar {
   object-fit: cover;
   object-position: center;
-}
-
-.aboutUs {
-  justify-content: end;
 }
 
 @media screen and (max-width: 768px) {
