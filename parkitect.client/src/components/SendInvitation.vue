@@ -56,7 +56,6 @@
       <label for="code">Join Trip Code</label>
     </div>
     <div class="my-3 text-end">
-      <!-- <input type="submit" value="Send"> -->
       <button data-bs-dismiss="modal" class="btn btn-success" type="submit">
         Send!
       </button>
