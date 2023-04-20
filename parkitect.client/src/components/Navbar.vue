@@ -36,6 +36,7 @@
           >
             <div class="offcanvas-header justify-content-end">
               <button
+              title="Close"
                 type="button"
                 class="btn-close"
                 data-bs-dismiss="offcanvas"
