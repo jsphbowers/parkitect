@@ -11,14 +11,15 @@
           Login
         </button>
         <div v-else>
-          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar">
+          <button title="Option menu" class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="bg-light offcanvas offcanvas-end shadow" tabindex="-1" id="offcanvasNavbar"
             aria-labelledby="offcanvasNavbarLabel" ref="offcanvasNavbar">
             <div class="offcanvas-header justify-content-end">
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              <button title="Close" type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
             </div>
             <div class="offcanvas-body text-center">
               <div v-if="account.picture || user.picture">
@@ -51,7 +52,7 @@
                       <div class="d-flex">
                         <input v-model="editable" type="text" name="code" class="form-control inline-input" id="code"
                           placeholder="Your join trip code here" />
-                        <button class="btn btn-success inline-btn" type="submit">
+                        <button title="Join trip" class="btn btn-success inline-btn" type="submit">
                           <i class="mdi mdi-plus"></i>
                         </button>
                       </div>

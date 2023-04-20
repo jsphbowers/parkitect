@@ -15,7 +15,7 @@
             <slot name='header'></slot>
           </h1>
 
-          <button type="button" class="btn-close btn-light" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button title="Close" type="button" class="btn-close btn-light" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
         <!-- SECTION MODAL BODY -->
