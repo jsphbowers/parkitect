@@ -135,7 +135,6 @@ export default {
         try {
           const joinCode = editable.value
           await tripGoersService.joinTrip(joinCode)
-          Pop.toast('Successfully joined the trip!', 'success', 'top')
           const tripId = AppState.activeTrip.id
           router.push({ name: 'TripDetails', params: { tripId: tripId } })
           // logger.log(tripGoer)

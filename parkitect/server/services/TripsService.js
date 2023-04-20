@@ -32,8 +32,8 @@ class TripsService {
     return trip;
   }
 
-  async getTripByTripCode(joinCode) {
-    const trip = await dbContext.Trips.findOne({joinCode: joinCode})
+  async getTripByJoinCode(joinCode) {
+    const trip = await dbContext.Trips.findOne({ joinCode: joinCode })
     if (!trip) {
       throw new BadRequest("Invalid join code");
     }

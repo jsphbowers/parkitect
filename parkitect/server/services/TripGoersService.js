@@ -22,19 +22,19 @@ class TripGoersService {
   }
 
   async deleteTripGoer(tripId, userId, tripGoerId) {
+    const tripGoer = await dbContext.TripGoers.findById(tripGoerId)
+    if (!tripGoer) {
+      throw new BadRequest("Invalid tripGoerId")
+    }
     const trip = await dbContext.Trips.findById(tripId)
     if (!trip) {
       throw new BadRequest("Invalid tripId")
     }
-    if (trip.creatorId != userId) {
+    if (trip.creatorId != userId && tripGoer.accountId != userId) {
       throw new Forbidden("You are not authorized to edit another user's trip")
     }
     if (trip.isArchived == true) {
       throw new BadRequest("You cannot edit an archived trip")
-    }
-    const tripGoer = await dbContext.TripGoers.findById(tripGoerId)
-    if (!tripGoer) {
-      throw new BadRequest("Invalid tripGoerId")
     }
     tripGoer.remove()
     return `tripGoer with id ${tripGoer.id} has successfully been removed from ${trip.name}`
