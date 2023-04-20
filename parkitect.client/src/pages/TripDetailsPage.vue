@@ -13,7 +13,7 @@
         <button v-if="!archived" class="btn addBtn" data-bs-toggle="modal" data-bs-target="#editTripModal">Edit Trip
           Info</button>
         <button v-if="archived" class="btn addBtn" disabled>Edit Trip Info</button>
-        <button v-if="!archived" class="btn addBtn ms-2" data-bs-toggle="modal" data-bs-target="#editParkModal">Edit
+        <button v-if="!archived && tripParks.length != 0" class="btn addBtn ms-2" data-bs-toggle="modal" data-bs-target="#editParkModal">Edit
           Travel Plans</button>
         <button v-if="archived" class="btn addBtn ms-2" disabled>Edit Travel Plans</button>
       </div>
@@ -120,7 +120,7 @@ import { tripsService } from "../services/TripsService.js";
 import { tripGoersService } from "../services/TripGoersService.js";
 import { tripParksService } from "../services/TripParksService.js";
 import { tripThingsToDoService } from "../services/TripThingsToDoService.js";
-import { computed, onBeforeUnmount, onMounted, watchEffect } from "vue";
+import { computed, onBeforeUnmount, onMounted, popScopeId, watchEffect } from "vue";
 import { AppState } from "../AppState.js";
 import ActiveCardModal from "../components/ActiveCardModal.vue";
 import SmallModal from "../components/SmallModal.vue";
