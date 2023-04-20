@@ -91,9 +91,7 @@
 
               <div @click="closeOffcanvas()">
                 <router-link :to="{ name: 'About' }">
-                  <h6 class="text-center text-dark" title="Click here to see more">
-                    <span class="selectable">About Us</span>
-                  </h6>
+                  <h6 class="text-center text-dark selectable" title="Click here to see more">About Us</h6>
                 </router-link>
               </div>
             </div>

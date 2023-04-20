@@ -22,7 +22,7 @@ class ParksService {
   }
 
   async getParkByParkCode(parkCode) {
-
+    AppState.activePark = null
     const res = await npsApi.get(`/parks?parkCode=${parkCode}`);
     logger.log("Getting park by park code", res.data);
     // AppState.activePark = res.data.data.map((ap) => new Park(ap))
