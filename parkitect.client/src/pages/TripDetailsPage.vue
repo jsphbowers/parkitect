@@ -68,8 +68,8 @@
 
       <!-- SECTION map -->
       <h3 class="mb-3" v-if="parks.length > 0">Let's see where we're going!</h3>
-      <div class="col-11 d-flex justify-content-center">
-        <img :src="mapURL" alt="a map showing trip locations" v-if="parks.length > 0"
+      <div class="col-12 d-flex justify-content-center">
+        <img :src="mapURL" alt="a map showing trip locations" class="map" v-if="parks.length > 0"
           :class="{ 'archivedImg': archived }">
       </div>
       <div class="d-flex justify-content-end">
@@ -237,10 +237,6 @@ export default {
         return URL
       }),
 
-      // async getMap() {
-      //   await mapsService.getMap()
-      // },
-
       deletePermissions(tripGoerAccountId) {
         const userId = AppState.account?.id
         const tripCreatorId = AppState.activeTrip?.creatorId
@@ -390,6 +386,13 @@ export default {
 
 .remove-tripGoer-btn:hover {
   background-color: rgb(255, 87, 87);
+}
+
+@media (max-width: 768px) {
+  .map {
+    width: 100%;
+    margin-bottom: .5em;
+  }
 }
 
 // NOTE This section is for the archived page styling
