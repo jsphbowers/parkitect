@@ -347,14 +347,14 @@ export default {
     justify-content: center;
   }
 
-  .addBtn {
+  // .addBtn {
     //   background-image: linear-gradient(rgb(150, 207, 36) 0%, #006838 100%);
     //   border: 0;
     //   color: white;
     //   border-radius: 10px;
     //   padding: 1vh;
     //   max-width: 25vw;
-  }
+  // }
 
   .noShow {
     display: none;
