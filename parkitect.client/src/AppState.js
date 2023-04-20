@@ -38,5 +38,6 @@ export const AppState = reactive({
   allPageChange: false,
   searchPageChange: false,
   regionPageChange: false,
+  clickedMyPassport: false,
   locations: []
 });

@@ -37,6 +37,14 @@
       </div>
     </section>
 
+    <!-- SECTION Calendar -->
+    <section class="row justify-content-center">
+      <div class="col-10">
+        <Calendar />
+      </div>
+    </section>
+
+
     <!-- SECTION Places Ive been to -->
     <section class=" mt-3 row">
       <div class="col-12 mt-5 text-center title-bg">
@@ -51,7 +59,7 @@
 
       <div class=" col-12 icon-bg">
         <!-- add back in below     v-if="parksVisited"  -->
-        <div v-if="parksVisited" class="justify-content-evenly d-flex flex-wrap my-2 py-5">
+        <div v-if="parksVisited" class="justify-content-evenly d-flex flex-wrap my-2 py-5" id="myPassport">
           <img v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style grow mb-3 selectable"
             :src="`/icons/${parkCode}.png`" alt="" :class="hasVisited(parkCode)">
         </div>
@@ -94,6 +102,7 @@ import SmallModalVue from "../components/SmallModal.vue";
 import CreateTripForm from "../components/CreateTripForm.vue";
 import EditAccountForm from "../components/EditAccountForm.vue";
 import MyTripCard from "../components/MyTripCard.vue"
+import Calendar from "../components/Calendar.vue";
 
 
 export default {
@@ -104,8 +113,6 @@ export default {
       "acad", "arch", "badl", "bibe", "bisc", "blca", "brca", "cany", "care", "cave", "chis", "cong", "crla", "cuva", "dena", "deva", "drto", "ever", "gaar", "glac", "glba", "grba", "grca", "grsa", "grsm", "grte", "gumo", "hale", "havo", "hosp", "indu", "isro", "jeff", "jotr", "katm", "kefj", "kica", "kova", "lacl", "lavo", "maca", "meve", "mora", "neri", "noca", "npsa", "olym", "pefo", "pinn", "redw", "romo", "sagu", "seqa", "shen", "thro", "viis", "voya", "whsa", "wica", "wrst", "yell", "yose", "zion",
     ])
 
-    const showParks = false
-
     async function getTripGoerByAccountId() {
       try {
         await tripGoersService.getTripGoerByAccountId()
@@ -115,9 +122,15 @@ export default {
       }
     }
 
-
     onMounted(() => {
       getTripGoerByAccountId()
+    })
+
+    onMounted(() => {
+      if (AppState.clickedMyPassport == true) {
+        window.scrollTo(0, 2300)
+      }
+      AppState.clickedMyPassport = false
     })
 
     return {
