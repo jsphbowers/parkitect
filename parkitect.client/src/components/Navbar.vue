@@ -28,7 +28,6 @@
                     class="rounded mb-3 avatar" />
                 </div>
 
-
                 <ul class="navbar-nav">
                   <div @click="closeOffcanvas()">
                     <router-link :to="{ name: 'Account' }">
@@ -58,7 +57,18 @@
                       Join Code
                     </button>
                     <div class="collapse" id="collapseExample">
-
+                      <form @submit.prevent="joinTrip()">
+                        <div class="d-flex">
+                          <input v-model="editable" type="text" name="code" class="form-control inline-input" id="code"
+                            placeholder="Input join code here" />
+                          <div @click="closeOffcanvas()">
+                            <button title="Join trip" class="btn btn-success inline-btn" type="submit">
+                              <i class="mdi mdi-plus"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                      <!-- 
                       <form @submit.prevent="joinTrip()">
                         <div class="d-flex">
                           <input v-model="editable" type="text" name="code" class="form-control inline-input" id="code"
@@ -67,7 +77,7 @@
                             <i class="mdi mdi-plus"></i>
                           </button>
                         </div>
-                      </form>
+                      </form> -->
                     </div>
                   </div>
                   <hr />
@@ -75,19 +85,17 @@
                     <i class="mdi mdi-logout"></i>
                     logout
                   </li>
-                  <hr>
+                  <hr />
                 </ul>
               </div>
 
               <div @click="closeOffcanvas()">
                 <router-link :to="{ name: 'About' }">
-
-                  <h6 class="text-center text-dark" title="Click here to see more"><span class="selectable">About
-                      Us</span></h6>
-
+                  <h6 class="text-center text-dark" title="Click here to see more">
+                    <span class="selectable">About Us</span>
+                  </h6>
                 </router-link>
               </div>
-
             </div>
           </div>
         </div>
@@ -119,8 +127,8 @@ import { useRouter } from "vue-router";
 
 export default {
   setup() {
-    const router = useRouter()
-    const editable = ref('')
+    const router = useRouter();
+    const editable = ref("");
 
     return {
       editable,
@@ -143,16 +151,17 @@ export default {
 
       async joinTrip() {
         try {
-          const joinCode = editable.value
-          await tripGoersService.joinTrip(joinCode)
-          const tripId = AppState.activeTrip.id
-          router.push({ name: 'TripDetails', params: { tripId: tripId } })
+          const joinCode = editable.value;
+          await tripGoersService.joinTrip(joinCode);
+          const tripId = AppState.activeTrip.id;
+          router.push({ name: "TripDetails", params: { tripId: tripId } });
+          editable.value = " ";
           // logger.log(tripGoer)
         } catch (error) {
           logger.error(error);
-          Pop.toast(error.message, "error");
+          Pop.toast("Invalid join code", "warning", "top");
         }
-      }
+      },
     };
   },
   components: { SmallModalVue, CreateTripForm },
@@ -191,12 +200,12 @@ a:hover {
 
 .inline-input {
   border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px
+  border-bottom-right-radius: 0px;
 }
 
 .inline-btn {
   border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px
+  border-bottom-left-radius: 0px;
 }
 
 .avatar {

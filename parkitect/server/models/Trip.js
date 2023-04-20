@@ -8,5 +8,9 @@ export const TripSchema = new Schema({
   description: { type: String, maxLength: 1000 },
   coverImg: { type: String, maxLength: 1000 },
   joinCode: { type: String, required: true, minLength: 6, maxLength: 6 },
-  isArchived: { type: Boolean, required: true, default: false }
+  isArchived: { type: Boolean, required: true, default: false },
+  start: { type: Date, required: true, },
+  end: { type: Date, required: true },
+  allDay: { type: Boolean, required: true, default: true },
+  display: { type: String, required: true, default: 'auto' }
 }, { timestamps: true, toJSON: { virtuals: true } })
