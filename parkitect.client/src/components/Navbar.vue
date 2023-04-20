@@ -85,6 +85,7 @@
                     <form @submit.prevent="joinTrip()">
                       <div class="d-flex">
                       <input
+                      v-model="editable"
                         type="text"
                         name="code"
                         class="form-control inline-input"
@@ -125,18 +126,24 @@
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { AppState } from "../AppState";
 import { AuthService } from "../services/AuthService";
 import SmallModalVue from "../components/SmallModal.vue";
 import CreateTripForm from "../components/CreateTripForm.vue";
 import { Offcanvas } from "bootstrap";
+import { logger } from "../utils/Logger";
+import Pop from "../utils/Pop";
+import { tripGoersService } from "../services/TripGoersService";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
-
+    const router = useRouter()
+    const editable = ref('')
 
     return {
+      editable,
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
       async login() {
@@ -153,6 +160,20 @@ export default {
           offcanvas.hide();
         }
       },
+
+      async joinTrip() {
+        try {
+          const joinCode = editable.value
+          await tripGoersService.joinTrip(joinCode)
+          Pop.toast('Successfully joined the trip!', 'success', 'top')
+          const tripId = AppState.activeTrip.id
+          router.push({ name: 'TripDetails', params: { tripId: tripId } })
+          // logger.log(tripGoer)
+        } catch (error) {
+          logger.error(error);
+          Pop.toast(error.message, "error");
+        }
+      }
     };
   },
   components: { SmallModalVue, CreateTripForm },
