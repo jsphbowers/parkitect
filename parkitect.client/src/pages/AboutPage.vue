@@ -166,12 +166,12 @@ export default {
 
 @media screen and (max-width: 480px) {
   .our-picture {
-    height: 40vh;
+    height: 30vh;
   }
 
   .our-picture-jump {
     width: 100%;
-    height: 40vh;
+    height: 30vh;
     object-fit: cover;
     object-position: center;
   }

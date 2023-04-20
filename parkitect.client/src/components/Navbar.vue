@@ -1,112 +1,85 @@
 <template>
   <div class="sidebar-nav">
-    <nav
-      class="navbar navbar-primary bg-primary align-content-center shadow fixed-top p-0"
-    >
+    <nav class="navbar navbar-primary bg-primary align-content-center shadow fixed-top p-0">
       <div class="container-fluid">
         <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
           <div class="d-flex">
             <img alt="logo" src="../assets/img/Logo.png" height="55" />
           </div>
         </router-link>
-        <button
-          class="btn selectable text-dark text-uppercase my-2 my-lg-0"
-          @click="login"
-          v-if="!user.isAuthenticated"
-        >
+        <button class="btn selectable text-dark text-uppercase my-2 my-lg-0" @click="login" v-if="!user.isAuthenticated">
           Login
         </button>
         <div v-else>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar"
-          >
+          <button title="Option menu" class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div
-            class="bg-light offcanvas offcanvas-end shadow"
-            tabindex="-1"
-            id="offcanvasNavbar"
-            aria-labelledby="offcanvasNavbarLabel"
-            ref="offcanvasNavbar"
-          >
+          <div class="bg-light offcanvas offcanvas-end shadow" tabindex="-1" id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel" ref="offcanvasNavbar">
             <div class="offcanvas-header justify-content-end">
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              ></button>
+              <button title="Close" type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body text-center">
-              <div v-if="account.picture || user.picture">
-                <img
-                  :src="account.picture || user.picture"
-                  alt="account photo"
-                  height="100"
-                  class="rounded mb-3"
-                />
-              </div>
-              <ul class="navbar-nav">
-                <div @click="closeOffcanvas()">
-                  <router-link :to="{ name: 'Account' }">
-                    <li class="text-decoration-none text-dark selectable py-2">
-                      My Trips
-                    </li>
-                  </router-link>
+            <div class="offcanvas-body text-center d-flex flex-column justify-content-between">
+              <div>
+                <div v-if="account.picture || user.picture">
+                  <img :src="account.picture || user.picture" alt="account photo" height="100"
+                    class="rounded mb-3 avatar" />
                 </div>
-                <hr />
-                <div @click="closeOffcanvas()">
-                  <button
-                    class="btn create-btn selectable py-2"
-                    data-bs-toggle="modal"
-                    data-bs-target="#tripModal"
-                  >
-                    Create a Trip
-                  </button>
-                </div>
-                <hr />
-                <div>
-                  <button
-                    class="btn btn-underline selectable w-75"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseExample"
-                    aria-expanded="false"
-                    aria-controls="collapseExample"
-                  >
-                    Join Code
-                  </button>
-                  <div class="collapse" id="collapseExample">
 
-                    <form @submit.prevent="joinTrip()">
-                      <div class="d-flex">
-                      <input
-                        type="text"
-                        name="code"
-                        class="form-control inline-input"
-                        id="code"
-                        placeholder="Your join trip code here"
-                      />
-                        <button
-                          class="btn btn-success inline-btn"
-                          type="submit"
-                        >
-                          <i class="mdi mdi-plus"></i>
-                        </button>
-                      </div>
-                    </form>
+
+                <ul class="navbar-nav">
+                  <div @click="closeOffcanvas()">
+                    <router-link :to="{ name: 'Account' }">
+                      <li class="text-decoration-none text-dark selectable py-2">
+                        My Trips
+                      </li>
+                    </router-link>
                   </div>
-                </div>
-                <hr />
-                <li class="text-danger selectable py-2" @click="logout">
-                  <i class="mdi mdi-logout"></i>
-                  logout
-                </li>
-              </ul>
+                  <hr />
+                  <div @click="closeOffcanvas()">
+                    <button class="btn create-btn selectable py-2" data-bs-toggle="modal" data-bs-target="#tripModal">
+                      Create a Trip
+                    </button>
+                  </div>
+                  <hr />
+                  <div>
+                    <button class="btn btn-underline selectable w-75" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                      Join Code
+                    </button>
+                    <div class="collapse" id="collapseExample">
+
+                      <form @submit.prevent="joinTrip()">
+                        <div class="d-flex">
+                          <input v-model="editable" type="text" name="code" class="form-control inline-input" id="code"
+                            placeholder="Your join trip code here" />
+                          <button title="Join trip" class="btn btn-success inline-btn" type="submit">
+                            <i class="mdi mdi-plus"></i>
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <hr />
+                  <li class="text-danger selectable py-2" @click="logout">
+                    <i class="mdi mdi-logout"></i>
+                    logout
+                  </li>
+                  <hr>
+                </ul>
+              </div>
+
+              <div @click="closeOffcanvas()">
+                <router-link :to="{ name: 'About' }">
+
+                  <h6 class="text-center text-dark" title="Click here to see more"><span class="selectable">About
+                      Us</span></h6>
+
+                </router-link>
+              </div>
+
             </div>
           </div>
         </div>
@@ -125,18 +98,24 @@
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { AppState } from "../AppState";
 import { AuthService } from "../services/AuthService";
 import SmallModalVue from "../components/SmallModal.vue";
 import CreateTripForm from "../components/CreateTripForm.vue";
 import { Offcanvas } from "bootstrap";
+import { logger } from "../utils/Logger";
+import Pop from "../utils/Pop";
+import { tripGoersService } from "../services/TripGoersService";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
+    const router = useRouter()
+    const editable = ref('')
 
-    
     return {
+      editable,
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
       async login() {
@@ -153,6 +132,19 @@ export default {
           offcanvas.hide();
         }
       },
+
+      async joinTrip() {
+        try {
+          const joinCode = editable.value
+          await tripGoersService.joinTrip(joinCode)
+          const tripId = AppState.activeTrip.id
+          router.push({ name: 'TripDetails', params: { tripId: tripId } })
+          // logger.log(tripGoer)
+        } catch (error) {
+          logger.error(error);
+          Pop.toast(error.message, "error");
+        }
+      }
     };
   },
   components: { SmallModalVue, CreateTripForm },
@@ -167,6 +159,7 @@ a:hover {
 .nav-link {
   text-transform: uppercase;
 }
+
 .offcanvas-body li {
   font-size: 18px;
 }
@@ -192,9 +185,15 @@ a:hover {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px
 }
+
 .inline-btn {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px
+}
+
+.avatar {
+  object-fit: cover;
+  object-position: center;
 }
 
 @media screen and (max-width: 768px) {

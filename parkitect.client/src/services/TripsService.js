@@ -4,6 +4,7 @@ import { TripGoer } from "../models/TripGoer.js";
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop.js";
 import { api } from "./AxiosService";
+import { tripGoersService } from "./TripGoersService.js";
 
 class TripsService {
   async createTrip(tripData) {
@@ -11,6 +12,7 @@ class TripsService {
     const res = await api.post('/trips', tripData)
     logger.log('creating trip', res.data)
     AppState.trips.push(new Trip(res.data));
+    await tripGoersService.getTripGoerByAccountId()
     return new Trip(res.data);
   }
 
