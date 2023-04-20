@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import { computed, onMounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { parksService } from "../services/ParksServices.js";
 import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
@@ -150,13 +150,14 @@ export default {
       }
     }
 
-    onBeforeUnmount(() => {
-      AppState.parks = []
-    })
-
     onMounted(() => {
       getParks();
       // getParkByParkCode();
+
+      onBeforeUnmount(() => {
+        AppState.parks = []
+      })
+
     });
     return {
       getParks,
