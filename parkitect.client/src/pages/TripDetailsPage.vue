@@ -14,6 +14,7 @@
       <div class="col-md-11 text-center trip-details-card">
         <h1>{{ trip?.name }}</h1>
         <h5>{{ trip?.description }}</h5>
+        <h5>Join Code: <span class="text-info">{{ trip?.joinCode }}</span></h5>
       </div>
       <!-- SECTION tripGoers photos -->
       <h3 class="mb-0">Who's coming along...</h3>
