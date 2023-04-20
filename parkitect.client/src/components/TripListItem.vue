@@ -39,12 +39,12 @@ export default {
     )
     return {
       props,
-      parkExists: computed(() => AppState.dictTripParks[props.tripName.id]?.find(p => p.nativeParkId == AppState.activePark.nativeId)),
+      parkExists: computed(() => AppState.dictTripParks[props.tripName.id]?.find(p => p.nativeParkId == AppState.activePark?.nativeId)),
 
       async addParkToTrip(tripId) {
         try {
           // logger.log('[THIS IS THE TRIP ID]', tripId)
-          const nativeParkId = AppState.activePark.nativeId
+          const nativeParkId = AppState.activePark?.nativeId
           const fullName = AppState.activePark.name
           await tripsService.addParkToTrip(tripId, nativeParkId, fullName)
           Pop.toast(`Park Added to Trip ${props.tripName.name}!`, 'success', 'top')

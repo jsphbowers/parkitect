@@ -59,7 +59,7 @@
 
       <div class=" col-12 icon-bg">
         <!-- add back in below     v-if="parksVisited"  -->
-        <div v-if="parksVisited" class="justify-content-evenly d-flex flex-wrap my-2 py-5">
+        <div v-if="parksVisited" class="justify-content-evenly d-flex flex-wrap my-2 py-5" id="myPassport">
           <img v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style grow mb-3 selectable"
             :src="`/icons/${parkCode}.png`" alt="" :class="hasVisited(parkCode)">
         </div>
@@ -124,6 +124,13 @@ export default {
 
     onMounted(() => {
       getTripGoerByAccountId()
+    })
+
+    onMounted(() => {
+      if (AppState.clickedMyPassport == true) {
+        window.scrollTo(0, 2300)
+      }
+      AppState.clickedMyPassport = false
     })
 
     return {

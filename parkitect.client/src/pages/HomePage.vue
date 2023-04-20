@@ -82,7 +82,7 @@
           The Park Rangers: a group dedicated to hard work, powerful insights and a love for the outdoors and adventure.
           The great outdoors and the incredible national parks inspired us to create an application where users can go to
           plan out their next epic journey.
-          <br>
+          <br><br>
           Creating trips and adding parks and activities to do was an idea that brought us
           back to our childhoods, loading up in the car with the family and heading out to these incredible destinations.
           We wanted to create a place where you can take in the beautiful scenery and feel the inspiration we felt to
