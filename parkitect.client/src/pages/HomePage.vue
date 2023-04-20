@@ -87,8 +87,11 @@
           back to our childhoods, loading up in the car with the family and heading out to these incredible destinations.
           We wanted to create a place where you can take in the beautiful scenery and feel the inspiration we felt to
           start a new journey.
-          <br>
-          Learn more about this incredible team and our passion for web development.
+          <br><br>
+          <router-link :to="{ name: 'About' }">
+            Learn more about this incredible team and our passion for web development.
+          </router-link>
+
         </p>
       </div>
     </section>
