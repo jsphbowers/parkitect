@@ -130,6 +130,7 @@ export default {
       if (AppState.clickedMyPassport == true) {
         window.scrollTo(0, 2300)
       }
+      AppState.clickedMyPassport = false
     })
 
     return {

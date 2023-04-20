@@ -16,7 +16,7 @@
             <div class="carousel-item active text-center">
               <img :src="park?.images[0].url" class="carousel-img d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
-                <h3 class="parkName-bg mx-5">{{ park?.name }}</h3>
+                <h3 class="parkName-bg mx-5"><span class="wordBlur">{{ park?.name }}</span></h3>
                 <p class="photoCredit-text py-0 my-0">Photo by: {{ park?.images[0].credit }}</p>
               </div>
             </div>
@@ -386,6 +386,8 @@ export default {
   margin-left: 6em !important;
   margin-right: 6em !important;
 }
+
+
 
 .photoCredit-text {
   color: rgba(255, 255, 255, 0.718);
