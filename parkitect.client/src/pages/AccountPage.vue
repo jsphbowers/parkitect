@@ -30,7 +30,7 @@
       </div>
 
       <div class="col-xl-3 col-md-6 col-lg-4 trip-sizing d-flex justify-content-center">
-        <div class="create-trip justify-content-center align-items-center d-flex selectable" data-bs-toggle="modal"
+        <div title="Create a Trip" class="create-trip justify-content-center align-items-center d-flex selectable" data-bs-toggle="modal"
           data-bs-target="#tripModal">
           <i class="mdi mdi-plus"></i>
         </div>

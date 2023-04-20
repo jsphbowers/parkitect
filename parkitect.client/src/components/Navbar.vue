@@ -18,6 +18,7 @@
         </button>
         <div v-else>
           <button
+          title="Option menu"
             class="navbar-toggler"
             type="button"
             data-bs-toggle="offcanvas"
