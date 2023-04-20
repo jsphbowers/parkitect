@@ -98,7 +98,8 @@ export default {
 }
 
 .card {
-  --bs-card-border-width: 0px !important
+  --bs-card-border-width: 0px !important;
+  max-height: 40vh;
 }
 
 .whiteIcon {
