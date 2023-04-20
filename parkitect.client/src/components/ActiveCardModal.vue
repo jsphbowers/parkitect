@@ -7,12 +7,27 @@
   <div class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
+
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">{{ activity?.title }}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+
         <div class="modal-body container-fluid">
           <img class="modalCardImg" :src="activity?.images[0].url" :alt="activity?.images[0].altText">
+          <div class="dropdown text-end my-2" v-if="account?.id">
+            <button class="btn addBtn dropdown-toggle" v-if="route.name != 'TripDetails'" type="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Add Activity
+            </button>
+            <ul class="dropdown-menu">
+              <div v-for="trip in myTrips" :key="trip.id">
+                <TripListAddActivity :tripName="trip" />
+              </div>
+              <li><a class="dropdown-item selectable" data-bs-toggle="modal" data-bs-target="#tripModal">Create Trip</a>
+              </li>
+            </ul>
+          </div>
           <section class="row p-3">
             <div class="col-md-4">
               <h5>Type: {{ activity?.activities[0].name }}</h5>
@@ -38,21 +53,7 @@
             </div>
           </section>
         </div>
-        <div class="modal-footer" v-if="account?.id">
-          <div class="dropdown" v-if="account?.id">
-            <button class="btn addBtn dropdown-toggle" v-if="route.name != 'TripDetails'" type="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              Add Activity
-            </button>
-            <ul class="dropdown-menu">
-              <div v-for="trip in myTrips" :key="trip.id">
-                <TripListAddActivity :tripName="trip" />
-              </div>
-              <li><a class="dropdown-item selectable" data-bs-toggle="modal" data-bs-target="#tripModal">Create Trip</a>
-              </li>
-            </ul>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
