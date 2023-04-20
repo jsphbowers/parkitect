@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!hasActivity">
+  <div v-if="!hasActivity && tripName.isArchived == false">
     <li><a class="dropdown-item selectable" title="Add activity to your trip" @click="addActivityToTrip(tripName.id)">{{
       tripName.name }}</a></li>
   </div>
@@ -59,13 +59,13 @@ export default {
             const nativeThingToDoId = AppState.activeThingToDo.nativeId
             const title = AppState.activeThingToDo.title
             await tripsService.addActivityToTrip(tripId, nativeThingToDoId, title)
-            Pop.success(`Activity Added and Park to ${props.tripName.name}`)
+            Pop.toast(`Activity Added and Park to ${props.tripName.name}`, 'success', 'top')
           } else if (this.parkExists) {
             logger.log('[THIS IS THE TRIP ID FOR ADDING ACTIVITY]', tripId)
             const nativeThingToDoId = AppState.activeThingToDo.nativeId
             const title = AppState.activeThingToDo.title
             await tripsService.addActivityToTrip(tripId, nativeThingToDoId, title)
-            Pop.success(`Activity Added to ${props.tripName.name}`)
+            Pop.toast(`Activity Added to ${props.tripName.name}`, 'success', 'top')
           }
         } catch (error) {
           Pop.error(error.message)

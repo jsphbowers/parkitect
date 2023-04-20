@@ -96,7 +96,7 @@ export default {
         }
         catch (error) {
           Pop.error(error.message);
-          logger.error(error.message);
+          logger.error(error);
         }
       }
     };
