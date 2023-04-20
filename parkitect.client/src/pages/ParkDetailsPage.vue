@@ -230,7 +230,6 @@ export default {
   setup() {
     const route = useRoute();
     const filterType = ref("");
-    const filterOptions = ['hiking', 'snow', 'water', 'camping', 'fishing', 'guided', 'other']
     const keywords = { hiking: ["hiking", "walking", "hike"], snow: ["skiing", "snow", 'sledding', 'ice'], water: ["water", "kayaking", "swim", "boat", "paddling", "canoe", "sailing", "scuba", 'rafting', 'snorkeling', 'paddleboarding'], fishing: ["fishing", "fish"], guided: ["tour", "program", 'science', 'demonstrations'], camping: ["camp"], other: ["driving", "flying", "watching", "trekking", "biking", "sand", "gather", "astronomy", "horse", 'geo', 'film', 'climbing', 'food', 'compass', 'star', 'shopping', 'store', 'auto', 'museum', 'shop'] };
     async function getThingsToDo() {
       try {
@@ -278,7 +277,7 @@ export default {
       account: computed(() => AppState.account),
       myTrips: computed(() => AppState.trips),
       filteredActivities: computed(() => {
-        return filterOptions.map(fo => {
+        return Object.keys(keywords).map(fo => {
           for (let i = 0; i < keywords[fo].length; i++) {
             for (let j = 0; j < AppState.thingsToDo.length; j++) {
               let newArray = keywords[fo]
