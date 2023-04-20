@@ -13,7 +13,8 @@
         <button v-if="!archived" class="btn addBtn" data-bs-toggle="modal" data-bs-target="#editTripModal">Edit Trip
           Info</button>
         <button v-if="archived" class="btn addBtn" disabled>Edit Trip Info</button>
-        <button v-if="!archived && tripParks.length != 0" class="btn addBtn ms-2" data-bs-toggle="modal" data-bs-target="#editParkModal">Edit
+        <button v-if="!archived && tripParks.length != 0" class="btn addBtn ms-2" data-bs-toggle="modal"
+          data-bs-target="#editParkModal">Edit
           Travel Plans</button>
         <button v-if="archived" class="btn addBtn ms-2" disabled>Edit Travel Plans</button>
       </div>
@@ -68,9 +69,8 @@
 
       <!-- SECTION map -->
       <h3 class="mb-3" v-if="parks.length > 0">Let's see where we're going!</h3>
-      <div class="col-12 d-flex justify-content-center">
-        <img :src="mapURL" alt="a map showing trip locations" class="map" v-if="parks.length > 0"
-          :class="{ 'archivedImg': archived }">
+      <div class="col-11">
+        <MapContainer />
       </div>
       <div class="d-flex justify-content-end">
         <button v-if="trip?.creatorId == account?.id" class="btn archiveBtn mb-2" @click="toggleArchiveTrip()"><span
@@ -120,7 +120,7 @@ import { tripsService } from "../services/TripsService.js";
 import { tripGoersService } from "../services/TripGoersService.js";
 import { tripParksService } from "../services/TripParksService.js";
 import { tripThingsToDoService } from "../services/TripThingsToDoService.js";
-import { computed, onBeforeUnmount, onMounted, popScopeId, watchEffect } from "vue";
+import { computed, onBeforeUnmount, onMounted, onUnmounted, popScopeId, watchEffect } from "vue";
 import { AppState } from "../AppState.js";
 import ActiveCardModal from "../components/ActiveCardModal.vue";
 import SmallModal from "../components/SmallModal.vue";
@@ -130,7 +130,6 @@ import SendInvitation from "../components/SendInvitation.vue";
 import MapContainer from "../components/MapContainer.vue";
 import { parksService } from "../services/ParksServices.js";
 import { mapsService } from "../services/MapsService.js";
-import { googleApiKey } from "../../.variables"
 
 export default {
   setup() {
@@ -204,12 +203,24 @@ export default {
       }
     })
 
-    onMounted(() => {
-      window.scrollTo(0, 0);
+    watchEffect(() => {
+      logger.log('running watcheffect')
+      if (AppState.parks.length > 0) {
+        mapsService.setLocations()
+      }
     })
 
-    onBeforeUnmount(() => {
+    onMounted(() => {
+      window.scrollTo(0, 0);
+      logger.log('[APPSTATE.PARKS MOUNTED]', AppState.parks)
+
+    })
+
+
+    onUnmounted(() => {
+      AppState.locations = []
       AppState.parks = []
+      logger.log('[APPSTATE.PARKS UNMOUNTED]', AppState.parks)
     })
 
 
@@ -227,15 +238,15 @@ export default {
 
       // I started working on the fix for the above, but even if the call comes from our server side, the image tag in the HTML is still going to be populated with the image URL, which includes the API key. Even if our request going out to Google doesn't show up in the network tab.
 
-      mapURL: computed(() => {
-        let URL = `http://maps.googleapis.com/maps/api/staticmap?key=${googleApiKey}&size=800x400&center=USA&zoom=3&maptype=terrain`
-        let markers = ``
-        AppState.parks.forEach(p => {
-          markers += `&markers=color:green|size:mid|label:${p.name[0]}|${p.latitude},${p.longitude}`
-        })
-        URL += markers
-        return URL
-      }),
+      // mapURL: computed(() => {
+      //   let URL = `http://maps.googleapis.com/maps/api/staticmap?key=${googleApiKey}&size=800x400&center=USA&zoom=3&maptype=terrain`
+      //   let markers = ``
+      //   AppState.parks.forEach(p => {
+      //     markers += `&markers=color:green|size:mid|label:${p.name[0]}|${p.latitude},${p.longitude}`
+      //   })
+      //   URL += markers
+      //   return URL
+      // }),
 
       deletePermissions(tripGoerAccountId) {
         const userId = AppState.account?.id

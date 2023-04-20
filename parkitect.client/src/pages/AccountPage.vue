@@ -30,8 +30,8 @@
       </div>
 
       <div class="col-xl-3 col-md-6 col-lg-4 trip-sizing d-flex justify-content-center">
-        <div title="Create a Trip" class="create-trip justify-content-center align-items-center d-flex selectable" data-bs-toggle="modal"
-          data-bs-target="#tripModal">
+        <div title="Create a Trip" class="create-trip justify-content-center align-items-center d-flex selectable"
+          data-bs-toggle="modal" data-bs-target="#tripModal">
           <i class="mdi mdi-plus"></i>
         </div>
       </div>
@@ -52,11 +52,11 @@
       <div class=" col-12 icon-bg">
         <!-- add back in below     v-if="parksVisited"  -->
         <div v-if="parksVisited" class="justify-content-evenly d-flex flex-wrap my-2 py-5">
-          <img  v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style grow mb-3 selectable"
+          <img v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style grow mb-3 selectable"
             :src="`/icons/${parkCode}.png`" alt="" :class="hasVisited(parkCode)">
         </div>
         <div v-if="!parksVisited" class="justify-content-evenly d-flex flex-wrap my-2 py-5">
-          <img  v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style grow mb-3 selectable"
+          <img v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style grow mb-3 selectable"
             :src="`/icons/${parkCode}.png`" alt="" :class="displayYourParks(parkCode)">
         </div>
       </div>
@@ -333,14 +333,14 @@ export default {
     justify-content: center;
   }
 
-  .addBtn {
-    //   background-image: linear-gradient(rgb(150, 207, 36) 0%, #006838 100%);
-    //   border: 0;
-    //   color: white;
-    //   border-radius: 10px;
-    //   padding: 1vh;
-    //   max-width: 25vw;
-  }
+  // .addBtn {
+  //     background-image: linear-gradient(rgb(150, 207, 36) 0%, #006838 100%);
+  //     border: 0;
+  //     color: white;
+  //     border-radius: 10px;
+  //     padding: 1vh;
+  //     max-width: 25vw;
+  // }
 
   .noShow {
     display: none;

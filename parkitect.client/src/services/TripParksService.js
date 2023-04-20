@@ -5,6 +5,7 @@ import { api } from "./AxiosService.js"
 
 class TripParksService {
   async getTripParksByTripId(tripId) {
+    AppState.tripParks = []
     const res = await api.get(`trips/${tripId}/tripParks`)
     AppState.tripParks = res.data.map(tp => new TripPark(tp))
   }

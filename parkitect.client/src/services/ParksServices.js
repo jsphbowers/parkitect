@@ -111,6 +111,7 @@ class ParksService {
     for (let i = 0; i < res.length; i++) {
       AppState.parks.push(new Park(res[i].data.data[0]))
     }
+    logger.log('[PARKS FROM PARK SERVICE]', AppState.parks)
   }
 }
 
