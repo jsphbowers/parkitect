@@ -14,7 +14,7 @@
       </h5>
       <ul v-if="tripThingsToDo.filter(ttd => ttd.parkCode == p.parkCode).length" class="text-danger">
         <span v-for="ttd in tripThingsToDo.filter(ttd => ttd.parkCode == p.parkCode)" :key="ttd.id">
-          <li v-if="ttd.parkCode == p.parkCode" class="selectable" @click="removeThingToDoFromTrip(ttd.id, ttd.parkCode)">
+          <li title="Remove activity from trip" v-if="ttd.parkCode == p.parkCode" class="selectable" @click="removeThingToDoFromTrip(ttd.id, ttd.parkCode)">
             {{ ttd.title
             }}
           </li>
