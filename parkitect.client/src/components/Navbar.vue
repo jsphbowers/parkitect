@@ -83,23 +83,24 @@
                     Join Code
                   </button>
                   <div class="collapse" id="collapseExample">
-
                     <form @submit.prevent="joinTrip()">
                       <div class="d-flex">
-                      <input
-                      v-model="editable"
+                        <input
+                        v-model="editable"
                         type="text"
                         name="code"
                         class="form-control inline-input"
                         id="code"
-                        placeholder="Your join trip code here"
-                      />
+                        placeholder="Input join code here"
+                        />
+                        <div @click="closeOffcanvas()">
                         <button title="Join trip"
                           class="btn btn-success inline-btn"
                           type="submit"
                         >
                           <i class="mdi mdi-plus"></i>
                         </button>
+                      </div>
                       </div>
                     </form>
                   </div>
@@ -170,13 +171,14 @@ export default {
           Pop.toast('Successfully joined the trip!', 'success', 'top')
           const tripId = AppState.activeTrip.id
           router.push({ name: 'TripDetails', params: { tripId: tripId } })
+          editable.value = ' '
           // logger.log(tripGoer)
         } catch (error) {
           logger.error(error);
-          Pop.toast(error.message, "error");
+          Pop.toast("Invalid join code", 'warning', 'top');
         }
-      }
-    };
+      },
+    }
   },
   components: { SmallModalVue, CreateTripForm },
 };
