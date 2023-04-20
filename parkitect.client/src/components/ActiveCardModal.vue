@@ -26,7 +26,9 @@
               </div>
               <div class="py-2" v-if="activity?.timeOfDay.length != 0">
                 <h5>Times of Day:</h5>
-                <h6 v-if="activity?.timeOfDay">{{ activity?.timeOfDay }}</h6>
+                <ul v-if="activity?.timeOfDay">
+                  <li v-for="time in activity?.timeOfDay">{{ time }}</li>
+                </ul>
               </div>
             </div>
             <div class="col-md-8">

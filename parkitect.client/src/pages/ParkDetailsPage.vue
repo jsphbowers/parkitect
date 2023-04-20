@@ -80,43 +80,44 @@
             alt="all">
           <h5 class="py-2">All</h5>
         </div>
-        <div class="text-center p-2">
+        <div v-if="filteredActivities.includes('hiking')" class="text-center p-2">
           <img @click="changeActivityType('hiking')" class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhpa2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
             alt="">
           <h5 class="py-2">Hiking</h5>
         </div>
-        <div class="text-center p-2">
+        <div v-if="filteredActivities.includes('snow')" class="text-center p-2">
           <img @click="changeActivityType('snow')" class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/photo-1616429553002-faf23468952d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHNraWluZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
             alt="hiking">
           <h5 class="py-2">Snow</h5>
         </div>
-        <div class="text-center p-2">
+        <div v-if="filteredActivities.includes('water')" class="text-center p-2">
           <img @click="changeActivityType('water')" class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/photo-1440993443326-9e9f5aea703a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVjcmVhdGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
             alt="water">
           <h5 class="py-2">Water</h5>
         </div>
-        <div class="text-center p-2">
+        <div v-if="filteredActivities.includes('fishing')" class="text-center p-2">
           <img @click="changeActivityType('fishing')" class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/photo-1532015917327-c7c46aa1d930?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=853&q=80"
             alt="fishing">
           <h5 class="py-2">Fishing</h5>
         </div>
-        <div class="text-center p-2">
-          <img @click="changeActivityType('guided')" class="filter-img selectable elevation-3"
+        <div v-if="filteredActivities.includes('guided')" class="text-center p-2">
+          <img v-if="filteredActivities.includes('guided')" @click="changeActivityType('guided')"
+            class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/photo-1504807959081-3dafd3871909?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Z3VpZGV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
             alt="guided">
           <h5 class="py-2">Guided</h5>
         </div>
-        <div class="text-center p-2">
+        <div v-if="filteredActivities.includes('camping')" class="text-center p-2">
           <img @click="changeActivityType('camping')" class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/photo-1504851149312-7a075b496cc7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2FtcGluZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
             alt="">
           <h5 class="py-2">Camping</h5>
         </div>
-        <div class="text-center p-2">
+        <div v-if="filteredActivities.includes('other')" class="text-center p-2">
           <img @click="changeActivityType('other')" class="filter-img selectable elevation-3"
             src="https://images.unsplash.com/photo-1594976382948-12e3439721b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8eWVsbG93c3RvbmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
             alt="">
@@ -229,6 +230,7 @@ export default {
   setup() {
     const route = useRoute();
     const filterType = ref("");
+    const filterOptions = ['hiking', 'snow', 'water', 'camping', 'fishing', 'guided', 'other']
     const keywords = { hiking: ["hiking", "walking", "hike"], snow: ["skiing", "snow", 'sledding', 'ice'], water: ["water", "kayaking", "swim", "boat", "paddling", "canoe", "sailing", "scuba", 'rafting', 'snorkeling', 'paddleboarding'], fishing: ["fishing", "fish"], guided: ["tour", "program", 'science', 'demonstrations'], camping: ["camp"], other: ["driving", "flying", "watching", "trekking", "biking", "sand", "gather", "astronomy", "horse", 'geo', 'film', 'climbing', 'food', 'compass', 'star', 'shopping', 'store', 'auto', 'museum', 'shop'] };
     async function getThingsToDo() {
       try {
@@ -275,6 +277,18 @@ export default {
       park: computed(() => AppState.activePark),
       account: computed(() => AppState.account),
       myTrips: computed(() => AppState.trips),
+      filteredActivities: computed(() => {
+        return filterOptions.map(fo => {
+          for (let i = 0; i < keywords[fo].length; i++) {
+            for (let j = 0; j < AppState.thingsToDo.length; j++) {
+              let newArray = keywords[fo]
+              if (AppState.thingsToDo[j].activities[0].name.toLowerCase().includes(newArray[i])) {
+                return fo;
+              }
+            }
+          }
+        })
+      }),
       activities: computed(() => {
         if (!filterType.value) {
           return AppState.thingsToDo;

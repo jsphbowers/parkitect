@@ -67,9 +67,7 @@ class TripsService {
 
   async toggleArchiveTrip(tripId) {
     const res = await api.delete(`/trips/${tripId}`)
-    logger.log('[ARCHIVE TRIP RES.DATA]', res.data)
-    AppState.activeTrip.isArchived == !AppState.activeTrip.isArchived
-    logger.log('[APPSTATE TRIP AFTER ARCHIVE]', AppState.activeTrip)
+    AppState.activeTrip.isArchived = !AppState.activeTrip.isArchived
   }
 
 

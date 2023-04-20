@@ -1,28 +1,43 @@
 <template>
-  <div v-if="trip?.isArchived == false" class="container-fluid">
+  <div class="container-fluid">
     <section class="row justify-content-center">
       <!-- SECTION cover photo -->
       <div class="col-12 p-0">
-        <img v-if="trip" :src="trip?.coverImg" :alt="'cover image for ' + trip?.name" class="cover-img">
+        <img v-if="trip" :src="trip?.coverImg" :alt="'cover image for ' + trip?.name" class="cover-img"
+          :class="{ 'archivedCover-img': archived }">
       </div>
       <div class="d-flex justify-content-end mt-2 mb-0" v-if="trip?.creatorId == account?.id">
-        <button class="btn addBtn me-2" data-bs-toggle="modal" data-bs-target="#sendInvitation">Send Invitation</button>
-        <button class="btn addBtn" data-bs-toggle="modal" data-bs-target="#editTripModal">Edit Trip Info</button>
-        <button class="btn addBtn ms-2" data-bs-toggle="modal" data-bs-target="#editParkModal">Edit Travel Plans</button>
+        <button v-if="!archived" class="btn addBtn me-2" data-bs-toggle="modal" data-bs-target="#sendInvitation">Send
+          Invitation</button>
+        <button v-if="archived" class="btn addBtn me-2" disabled>Send Invitation</button>
+        <button v-if="!archived" class="btn addBtn" data-bs-toggle="modal" data-bs-target="#editTripModal">Edit Trip
+          Info</button>
+        <button v-if="archived" class="btn addBtn" disabled>Edit Trip Info</button>
+        <button v-if="!archived" class="btn addBtn ms-2" data-bs-toggle="modal" data-bs-target="#editParkModal">Edit
+          Travel Plans</button>
+        <button v-if="archived" class="btn addBtn ms-2" disabled>Edit Travel Plans</button>
       </div>
       <!-- SECTION trip details card -->
       <div class="col-md-11 text-center trip-details-card">
         <h1>{{ trip?.name }}</h1>
         <h5>{{ trip?.description }}</h5>
-        <h5>Join Code: <span class="text-info">{{ trip?.joinCode }}</span></h5>
+        <h5 v-if="!archived">Join Code: <span class="text-info">{{ trip?.joinCode }}</span></h5>
+        <h6 v-if="archived" class="archiveBanner px-0 mx-0">
+          This trip has been archived!
+        </h6>
       </div>
       <!-- SECTION tripGoers photos -->
       <h3 class="mb-0">Who's coming along...</h3>
       <div class="col-md-11 trip-goers-card">
         <div v-for="t in tripGoers" :key="t.id" class="position-relative">
-          <img :src="t.account.picture" :alt="'a photo of ' + t.account.name" :title="t.account.name" class="profile-pic">
-          <button v-if="deletePermissions(t.accountId)" class="btn btn-outline p-0 remove-tripGoer-btn"
+          <img :src="t.account.picture" :alt="'a photo of ' + t.account.name" :title="t.account.name"
+            :class="archived ? 'archivedProfile-pic' : 'profile-pic'">
+          <button v-if="deletePermissions(t.accountId) && !archived" class="btn btn-outline p-0 remove-tripGoer-btn"
             title="Remove Trip Goer" @click="removeTripGoer(t.id)">
+            <i class="mdi mdi-minus"></i>
+          </button>
+          <button v-if="deletePermissions(t.accountId) && archived" class="btn btn-outline p-0 remove-tripGoer-btn"
+            title="Remove Trip Goer" disabled>
             <i class="mdi mdi-minus"></i>
           </button>
         </div>
@@ -30,7 +45,7 @@
       <!-- SECTION tripParks -->
       <h3 class="mb-0">Sights to see & things to do!</h3>
       <div class="col-md-11 parks-area draggable">
-        <section class="row mb-4" v-for="t in tripParks" :key="t.id">
+        <section class="row mb-4" :class="{ 'archivedImg': archived }" v-for="t in tripParks" :key="t.id">
           <div class="col-md-7">
             <router-link :to="{ name: 'ParkDetails', params: { parkCode: t.parkCode } }">
               <h1 class="text-dark">{{ t.fullName }}</h1>
@@ -54,91 +69,18 @@
       <!-- SECTION map -->
       <h3 class="mb-3" v-if="parks.length > 0">Let's see where we're going!</h3>
       <div class="col-11 d-flex justify-content-center">
-        <img :src="mapURL" alt="a map showing trip locations" v-if="parks.length > 0">
+        <img :src="mapURL" alt="a map showing trip locations" v-if="parks.length > 0"
+          :class="{ 'archivedImg': archived }">
       </div>
       <div class="d-flex justify-content-end">
-        <button class="btn btn-danger mb-2" @click="toggleArchiveTrip()"><span v-if="trip?.isArchived == false">Archive
+        <button v-if="trip?.creatorId == account?.id" class="btn archiveBtn mb-2" @click="toggleArchiveTrip()"><span
+            v-if="trip?.isArchived == false">Archive
           </span><span v-else>Un-Archive</span>
           Trip</button>
       </div>
     </section>
   </div>
 
-  <!-- NOTE This region is the archived HTML -->
-  <!-- #region -->
-  <div v-if="trip?.isArchived" class="container-fluid">
-    <section class="row justify-content-center">
-      <!-- SECTION cover photo -->
-      <div class="col-12 p-0">
-        <img v-if="trip" :src="trip?.coverImg" :alt="'cover image for ' + trip?.name" class="archivedCover-img">
-      </div>
-      <div class="d-flex justify-content-end mt-2 mb-0" v-if="trip?.creatorId == account?.id">
-        <button disabled class="btn addBtn me-2" data-bs-toggle="modal" data-bs-target="#sendInvitation">Send
-          Invitation</button>
-        <button disabled class="btn addBtn" data-bs-toggle="modal" data-bs-target="#editTripModal">Edit Trip Info</button>
-        <button disabled class="btn addBtn ms-2" data-bs-toggle="modal" data-bs-target="#editParkModal">Edit Travel
-          Plans</button>
-      </div>
-      <!-- SECTION trip details card -->
-      <div class="col-md-11 px-0 text-center trip-details-card">
-        <h1>{{ trip?.name }}</h1>
-        <h5>{{ trip?.description }}</h5>
-
-        <h6 class="archiveBanner px-0 mx-0">
-          This trip has been archived!
-        </h6>
-
-      </div>
-      <!-- SECTION tripGoers photos -->
-      <h3 class="mb-0">Who's coming along...</h3>
-      <div class="col-md-11 trip-goers-card">
-        <div v-for="t in tripGoers" :key="t.id" class="position-relative">
-          <img :src="t.account.picture" :alt="'a photo of ' + t.account.name" :title="t.account.name"
-            class="archivedProfile-pic">
-          <button disabled v-if="deletePermissions(t.accountId)" class="btn btn-outline p-0 remove-tripGoer-btn"
-            title="Remove Trip Goer" @click="removeTripGoer(t.id)">
-            <i class="mdi mdi-minus"></i>
-          </button>
-        </div>
-      </div>
-      <!-- SECTION tripParks -->
-      <h3 class="mb-0">Sights to see & things to do!</h3>
-      <div class="col-md-11 parks-area draggable">
-        <section class="row mb-4 archivedImg" v-for="t in tripParks" :key="t.id">
-          <div class="col-md-7">
-            <router-link :to="{ name: 'ParkDetails', params: { parkCode: t.parkCode } }">
-              <h1 class="text-dark">{{ t.fullName }}</h1>
-              <img :src="t.image" :alt="'a photo of ' + t.fullName" class="park-img">
-            </router-link>
-          </div>
-          <div class="col-md-5">
-            <!-- SECTION tripThingsToDo -->
-            <h3 class="mt-md-5 mt-2">Activities</h3>
-            <ul v-if="tripThingsToDo.filter(ttd => ttd.parkCode == t.parkCode).length">
-              <span v-for="ttd in tripThingsToDo.filter(ttd => ttd.parkCode == t.parkCode)" :key="ttd.id">
-                <li v-if="ttd.parkCode == t.parkCode" class="selectable" data-bs-toggle="modal"
-                  data-bs-target="#activity-modal" @click="setActiveThingToDo(ttd.nativeThingToDoId)">{{ ttd.title }}</li>
-              </span>
-            </ul>
-            <h6 v-else>No activities have been added for this park</h6>
-          </div>
-        </section>
-      </div>
-
-      <!-- SECTION map? -->
-      <h3 class="mb-3" v-if="parks.length > 0">Let's see where we're going!</h3>
-
-      <div class="col-11 d-flex justify-content-center">
-        <img :src="mapURL" alt="a map showing trip locations" v-if="parks.length > 0">
-      </div>
-      <div class="d-flex justify-content-end">
-        <button class="btn btn-danger mb-2" @click="toggleArchiveTrip()"><span v-if="trip.isArchived == false">Archive
-          </span><span v-else>Un-Archive</span>
-          Trip</button>
-      </div>
-    </section>
-  </div>
-  <!-- #endregion -->
 
   <SmallModal id="sendInvitation">
     <template #header>
@@ -187,7 +129,8 @@ import ParkOptionsMenu from "../components/ParkOptionsMenu.vue";
 import SendInvitation from "../components/SendInvitation.vue";
 import MapContainer from "../components/MapContainer.vue";
 import { parksService } from "../services/ParksServices.js";
-
+import { mapsService } from "../services/MapsService.js";
+import { googleApiKey } from "../../.variables"
 
 export default {
   setup() {
@@ -246,9 +189,6 @@ export default {
       }
     }
 
-
-
-
     watchEffect(() => {
       if (AppState.account?.id) {
         getMyTrip();
@@ -264,6 +204,10 @@ export default {
       }
     })
 
+    onMounted(() => {
+      window.scrollTo(0, 0);
+    })
+
     onBeforeUnmount(() => {
       AppState.parks = []
     })
@@ -276,16 +220,26 @@ export default {
       tripThingsToDo: computed(() => AppState.tripThingsToDo),
       account: computed(() => AppState.account),
       parks: computed(() => AppState.parks),
+      archived: computed(() => AppState.activeTrip?.isArchived),
+
+
+      // FIXME Need to call to GoogleAPI from the server side so that our API key is protected. Otherwise, it will be accessible to users via the network tab. Should probably also request a new API key.
+
+      // I started working on the fix for the above, but even if the call comes from our server side, the image tag in the HTML is still going to be populated with the image URL, which includes the API key. Even if our request going out to Google doesn't show up in the network tab.
+
       mapURL: computed(() => {
-        let URL = "http://maps.googleapis.com/maps/api/staticmap?key=AIzaSyATZoG7a3Rf97UDfWBnc9wFsuEB5PKkh7Q&size=800x400&center=USA&zoom=3&maptype=terrain"
+        let URL = `http://maps.googleapis.com/maps/api/staticmap?key=${googleApiKey}&size=800x400&center=USA&zoom=3&maptype=terrain`
         let markers = ``
         AppState.parks.forEach(p => {
           markers += `&markers=color:green|size:mid|label:${p.name[0]}|${p.latitude},${p.longitude}`
         })
         URL += markers
-        logger.log('[URL]', URL)
         return URL
       }),
+
+      // async getMap() {
+      //   await mapsService.getMap()
+      // },
 
       deletePermissions(tripGoerAccountId) {
         const userId = AppState.account?.id
@@ -323,11 +277,20 @@ export default {
         }
       },
 
+
+
       async toggleArchiveTrip() {
         try {
-          if (await Pop.confirm("Are you sure you'd like to archive this trip?", "You'll no longer be able to edit its details", "Yes, I'm sure", "warning")) {
-            const tripId = route.params.tripId
-            await tripsService.toggleArchiveTrip(tripId)
+          if (AppState.activeTrip.isArchived == false) {
+            if (await Pop.confirm("Are you sure you'd like to archive this trip?", "You'll no longer be able to edit its details", "Yes, I'm sure", "warning")) {
+              const tripId = route.params.tripId
+              await tripsService.toggleArchiveTrip(tripId)
+            }
+          } else if (AppState.activeTrip.isArchived == true) {
+            if (await Pop.confirm("Are you sure you'd like to re-activate this trip?", "It will once again be open for editing", "Yes, I'm sure", "warning")) {
+              const tripId = route.params.tripId
+              await tripsService.toggleArchiveTrip(tripId)
+            }
           }
         } catch (error) {
           logger.log(error)
@@ -355,6 +318,14 @@ export default {
 
 .addBtn {
   background-image: linear-gradient(rgb(150, 207, 36) 0%, #006838 100%);
+  border: 0;
+  color: white;
+  border-radius: 10px;
+  padding: 1vh;
+}
+
+.archiveBtn {
+  background-image: linear-gradient(rgb(224, 116, 97) 0%, #cf0606 100%);
   border: 0;
   color: white;
   border-radius: 10px;
