@@ -150,6 +150,10 @@ export default {
       }
     }
 
+    onBeforeUnmount(() => {
+      AppState.parks = []
+    })
+
     onMounted(() => {
       getParks();
       // getParkByParkCode();
