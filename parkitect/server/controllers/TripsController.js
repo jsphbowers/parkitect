@@ -10,19 +10,23 @@ export class TripsController extends BaseController {
     super("/trips");
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .post('', this.createTrip)
-      .post('/:tripId/tripParks', this.addTripPark)
-      .post('/:tripId/tripThingsToDo', this.addTripThingToDo)
-      .post('/:tripId/tripGoers', this.addTripGoer)
-      .get('/:tripId', this.getTripById)
-      .get('/:tripId/tripParks', this.getTripParks)
-      .get('/:tripId/tripThingsToDo', this.getTripThingsToDo)
-      .get('/:tripId/tripGoers', this.getTripGoers)
-      .put('/:tripId', this.editTrip)
-      .delete('/:tripId', this.toggleArchiveTrip)
-      .delete('/:tripId/tripParks/:tripParkId', this.deleteTripPark)
-      .delete('/:tripId/tripThingsToDo/:tripThingToDoId', this.deleteTripThingToDo)
-      .delete('/:tripId/tripGoers/:tripGoerId', this.deleteTripGoer)
+      .post("", this.createTrip)
+      .post("/:tripId/tripParks", this.addTripPark)
+      .post("/:tripId/tripThingsToDo", this.addTripThingToDo)
+      .post("/:tripId/tripGoers", this.addTripGoer)
+      .get("/:tripId", this.getTripById)
+      .get("/:tripId/tripParks", this.getTripParks)
+      .get("/:tripId/tripThingsToDo", this.getTripThingsToDo)
+      .get("/:tripId/tripGoers", this.getTripGoers)
+      .get("/join/:tripCode", this.getTripByTripCode)
+      .put("/:tripId", this.editTrip)
+      .delete("/:tripId", this.toggleArchiveTrip)
+      .delete("/:tripId/tripParks/:tripParkId", this.deleteTripPark)
+      .delete(
+        "/:tripId/tripThingsToDo/:tripThingToDoId",
+        this.deleteTripThingToDo
+      )
+      .delete("/:tripId/tripGoers/:tripGoerId", this.deleteTripGoer);
   }
 
   // SECTION trips
@@ -74,6 +78,16 @@ export class TripsController extends BaseController {
       const userId = req.userInfo.id;
       const trip = await tripsService.toggleArchiveTrip(tripId, userId);
       res.send(trip);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getTripByTripCode(req, res, next) {
+    try {
+      const joinCode = req.params.tripCode
+      const trip = await tripsService.getTripByTripCode(joinCode)
+      res.send(trip)
     } catch (error) {
       next(error);
     }
