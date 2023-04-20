@@ -76,7 +76,7 @@
     <section class="row mt-5">
       <div class="col-12 px-md-5 bg-color">
         <router-link :to="{ name: 'About' }">
-          <h2 class="text-center selectable text-dark">About Us</h2>
+          <h2 class="text-center text-dark" title="Click here to see more"><span class="selectable">About Us</span></h2>
         </router-link>
         <p class="p-2">
           The Park Rangers: a group dedicated to hard work, powerful insights and a love for the outdoors and adventure.

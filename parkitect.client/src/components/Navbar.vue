@@ -9,29 +9,6 @@
             <img alt="logo" src="../assets/img/Logo.png" height="55" />
           </div>
         </router-link>
-        <!-- <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarText"
-      aria-controls="navbarText"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-   </button> -->
-        <!-- <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto"> -->
-        <!-- <li>
-          <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
-            About
-          </router-link>
-        </li> -->
-        <!-- </ul> -->
-        <!-- LOGIN COMPONENT HERE -->
-        <!-- <Login /> -->
-        <!-- </div> -->
-        <!-- <span class="navbar-text"> -->
         <button
           class="btn selectable text-dark text-uppercase my-2 my-lg-0"
           @click="login"
@@ -49,7 +26,6 @@
           >
             <span class="navbar-toggler-icon"></span>
           </button>
-
           <div
             class="bg-light offcanvas offcanvas-end shadow"
             tabindex="-1"
@@ -93,6 +69,39 @@
                   </button>
                 </div>
                 <hr />
+                <div>
+                  <button
+                    class="btn btn-underline selectable w-75"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseExample"
+                    aria-expanded="false"
+                    aria-controls="collapseExample"
+                  >
+                    Join Code
+                  </button>
+                  <div class="collapse" id="collapseExample">
+
+                    <form @submit.prevent="joinTrip()">
+                      <div class="d-flex">
+                      <input
+                        type="text"
+                        name="code"
+                        class="form-control inline-input"
+                        id="code"
+                        placeholder="Your join trip code here"
+                      />
+                        <button
+                          class="btn btn-success inline-btn"
+                          type="submit"
+                        >
+                          <i class="mdi mdi-plus"></i>
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <hr />
                 <li class="text-danger selectable py-2" @click="logout">
                   <i class="mdi mdi-logout"></i>
                   logout
@@ -100,30 +109,7 @@
               </ul>
             </div>
           </div>
-
-          <!-- <div class="dropdown dropstart my-2 my-lg-0">
-        <div type="button" class=" border-0 selectable no-select" data-bs-toggle="dropdown"
-          aria-expanded="false">
-          <div v-if="account.picture || user.picture">
-            <img :src="account.picture || user.picture" alt="account photo" height="40" class="rounded" />
-          </div>
         </div>
-        <div class="dropdown-menu dropdown-menu-lg-left p-0" aria-labelledby="authDropdown">
-          <div class="list-group">
-            <router-link :to="{ name: 'Account' }">
-              <div class="list-group-item dropdown-item list-group-item-action">
-                Manage Account
-              </div>
-            </router-link>
-            <div class="list-group-item dropdown-item list-group-item-action text-danger selectable" @click="logout">
-              <i class="mdi mdi-logout"></i>
-              logout
-            </div>
-          </div>
-        </div>
-      </div> -->
-        </div>
-        <!-- </span> -->
       </div>
     </nav>
   </div>
@@ -144,10 +130,12 @@ import { AppState } from "../AppState";
 import { AuthService } from "../services/AuthService";
 import SmallModalVue from "../components/SmallModal.vue";
 import CreateTripForm from "../components/CreateTripForm.vue";
-// import bootstrap from "bootstrap";
 import { Offcanvas } from "bootstrap";
+
 export default {
   setup() {
+
+    
     return {
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
@@ -169,13 +157,6 @@ export default {
   },
   components: { SmallModalVue, CreateTripForm },
 };
-// import Login from './Login.vue'
-// export default {
-//   setup() {
-//     return {}
-//   },
-//   components: { Login }
-// }
 </script>
 
 <style scoped>
@@ -190,12 +171,6 @@ a:hover {
   font-size: 18px;
 }
 
-/* .navbar-nav .router-link-exact-active {
-  border-bottom: 2px solid var(--bs-success);
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-} */
-
 .sidebar-nav .offcanvas {
   width: 270px;
 }
@@ -206,6 +181,20 @@ a:hover {
   color: white;
   border-radius: 10px;
   padding: 1vh;
+}
+
+.btn-underline {
+  text-decoration: underline;
+  border: none;
+}
+
+.inline-input {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px
+}
+.inline-btn {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px
 }
 
 @media screen and (max-width: 768px) {

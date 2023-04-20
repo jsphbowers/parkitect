@@ -41,6 +41,7 @@ footer {
   display: grid;
   place-content: center;
   height: 4em;
-  background-image: linear-gradient(to right, #064b06ad , #3ecd2a);
+  background-image: linear-gradient(to right, #142800 , #487043);
 }
 </style>
+142800
