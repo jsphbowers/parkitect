@@ -21,6 +21,7 @@
       <div class="col-md-11 text-center trip-details-card">
         <h1>{{ trip?.name }}</h1>
         <h5>{{ trip?.description }}</h5>
+        <h5>Join Code: <span class="text-info">{{ trip?.joinCode }}</span></h5>
         <h6 v-if="archived" class="archiveBanner px-0 mx-0">
           This trip has been archived!
         </h6>

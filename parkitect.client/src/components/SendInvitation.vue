@@ -1,5 +1,5 @@
 <template>
-  <form id="invitation-form" ref="form" @submit.prevent="sendEmail()">
+  <form ref="form" @submit.prevent="sendEmail()">
     <div class="form-floating mb-3">
       <input
         type="text"
@@ -12,7 +12,7 @@
         minlength="3"
         maxlength="25"
       />
-      <label for="name">Name</label>
+      <label for="name">From Name</label>
     </div>
     <div class="form-floating mb-3">
       <input
@@ -25,7 +25,7 @@
         required
         minlength="5"
       />
-      <label for="email">Email</label>
+      <label for="email">To Email</label>
     </div>
     <div class="form-floating mb-3">
       <textarea
@@ -40,7 +40,20 @@
         maxlength="1000"
       ></textarea>
 
-      <label for="message">Message</label>
+      <label for="message">Your Message</label>
+    </div>
+        <div v-if="trip" class="form-floating mb-3">
+      <input
+      readonly
+        type="text"
+        :value="trip?.joinCode"
+        name="code"
+        class="form-control"
+        id="code"
+        required
+        placeholder="Your code"
+      />
+      <label for="code">Join Trip Code</label>
     </div>
     <div class="my-3 text-end">
       <!-- <input type="submit" value="Send"> -->
@@ -52,10 +65,11 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import emailjs from "emailjs-com";
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
+import { AppState } from "../AppState";
 
 export default {
   setup() {
@@ -63,13 +77,12 @@ export default {
     const inputFieldReset = ref(null);
 
     const sendEmail = () => {
-      //  const formData = new FormData(form.value);
       emailjs
         .sendForm(
-          "service_me2qvqm",
-          "template_4w9u10q",
-          '#invitation-form',
-          "conHZtLsbEMo7rKCJ"
+          "service_8r6r2ud",
+          "template_9pibufu",
+          form.value,
+          "c33CMPv6fB8wD_DtO"
         )
         .then(
           function (response) {
@@ -88,38 +101,11 @@ export default {
       form,
       inputFieldReset,
       sendEmail,
+      trip: computed(() => AppState.activeTrip),
     };
   },
 };
-// name: 'ContactUs',
-// data() {
-//   return {
-//     name: '',
-//     email: '',
-//     message: ''
-//   }
-// },
-// methods: {
-//   sendEmail(e) {
-//     try {
-//       emailjs.sendForm('service_me2qvqm', 'template_4w9u10q', e.target, 'conHZtLsbEMo7rKCJ', {
-//         name: this.name,
-//         email: this.email,
-//         message: this.meessage
-//       })
-//     } catch (err) {
-//          if (err instanceof ReferenceError) {
-//           alert( "JSON Error: " + err.message );
-//          } else {
-//           throw err; // rethrow
-//          }
-//     }
-//     // Reset form field
-//     this.name = ''
-//     this.email = ''
-//     this.message = ''
-//   },
-// }
+
 </script>
 
 <style lang="scss" scoped></style>
