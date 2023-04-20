@@ -126,6 +126,12 @@ export default {
       getTripGoerByAccountId()
     })
 
+    onMounted(() => {
+      if (AppState.clickedMyPassport == true) {
+        window.scrollTo(0, 2300)
+      }
+    })
+
     return {
       coverImages,
       icons,

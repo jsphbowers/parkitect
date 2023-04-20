@@ -38,11 +38,11 @@
                   </div>
                   <hr />
                   <div @click="closeOffcanvas()">
-                    <router-link :to="{ name: 'Account', params: '#myPassport' }">
-                      <li class="text-decoration-none text-dark selectable py-2">
-                        My Passport
-                      </li>
-                    </router-link>
+
+                    <li class="text-decoration-none text-dark selectable py-2" @click="pushToPassport()">
+                      My Passport
+                    </li>
+
                   </div>
                   <hr />
                   <div @click="closeOffcanvas()">
@@ -147,6 +147,11 @@ export default {
         if (offcanvas) {
           offcanvas.hide();
         }
+      },
+
+      pushToPassport() {
+        AppState.clickedMyPassport = true
+        router.push({ name: 'Account' })
       },
 
       async joinTrip() {
