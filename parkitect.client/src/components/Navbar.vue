@@ -92,7 +92,7 @@
                         id="code"
                         placeholder="Your join trip code here"
                       />
-                        <button
+                        <button title="Join trip"
                           class="btn btn-success inline-btn"
                           type="submit"
                         >
