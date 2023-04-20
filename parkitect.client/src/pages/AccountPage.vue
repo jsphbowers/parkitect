@@ -40,7 +40,7 @@
     <!-- SECTION Calendar -->
     <section class="row justify-content-center">
       <div class="col-10">
-        <Calendar />
+        <Calendar :trips="myTrips" />
       </div>
     </section>
 
@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref, onMounted, watchEffect } from 'vue'
 import { AppState } from '../AppState'
 import { accountService } from "../services/AccountService.js"
 import { tripGoersService } from "../services/TripGoersService.js"
@@ -136,6 +136,7 @@ export default {
     return {
       coverImages,
       icons,
+      myTrips: computed(() => AppState.trips),
       account: computed(() => AppState.account),
       tripGoers: computed(() => AppState.tripGoers),
       parksVisited: computed(() => AppState.parksVisited),
@@ -346,14 +347,14 @@ export default {
     justify-content: center;
   }
 
-  .addBtn {
+  // .addBtn {
     //   background-image: linear-gradient(rgb(150, 207, 36) 0%, #006838 100%);
     //   border: 0;
     //   color: white;
     //   border-radius: 10px;
     //   padding: 1vh;
     //   max-width: 25vw;
-  }
+  // }
 
   .noShow {
     display: none;

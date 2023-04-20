@@ -8,7 +8,7 @@ import { tripGoersService } from "./TripGoersService.js";
 
 class TripsService {
   async createTrip(tripData) {
-    // logger.log(tripData)
+    logger.log(tripData)
     const res = await api.post('/trips', tripData)
     logger.log('creating trip', res.data)
     AppState.trips.push(new Trip(res.data));

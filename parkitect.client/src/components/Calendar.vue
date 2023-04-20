@@ -4,40 +4,31 @@
 
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, watchEffect } from 'vue'
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { computed } from "@vue/reactivity"
 import { AppState } from "../AppState.js"
-// import { INITIAL_EVENTS, createEventId } from './event-utils'
+import { INITIAL_EVENTS } from "../utils/CalendarEventsLoader.js"
 
 export default defineComponent({
   components: {
     FullCalendar,
   },
+  props: {
+    trips: { type: Object, required: true }
+  },
   data() {
-    // let eventGuid = 0
-    // let todayStr = new Date().toISOString().replace(/T.*$/, '') // YYYY-MM-DD of today
-    // const INITIAL_EVENTS = [
-    //   {
-    //     id: createEventId(),
-    //     title: 'All-day event',
-    //     start: todayStr
-    //   },
-    //   {
-    //     id: createEventId(),
-    //     title: 'Timed event',
-    //     start: todayStr + 'T12:00:00'
-    //   }
-    // ]
-    // function createEventId() {
-    //   return String(eventGuid++)
-    // }
+
+
+    watchEffect(() => {
+      this.trips
+    })
 
     return {
-      trips: computed(() => AppState.tripGoers),
+
       calendarOptions: {
         plugins: [
           dayGridPlugin,
@@ -50,7 +41,22 @@ export default defineComponent({
           right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
         initialView: 'dayGridMonth',
-        // initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+        // initialEvents:
+        events: computed(() => this.trips.map(t => {
+          // if (t.includes(t.id)) {
+          let trip = {
+            id: t.id,
+            title: t.name,
+            start: t.start,
+            end: t.end,
+            allDay: t.allDay,
+            // display: t.display
+            display: 'block'
+          }
+          return trip
+          // }
+        })),
+        // alternatively, use the `events` setting to fetch from a feed
         editable: true,
         selectable: true,
         selectMirror: true,
