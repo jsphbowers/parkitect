@@ -39,6 +39,14 @@
                   </div>
                   <hr />
                   <div @click="closeOffcanvas()">
+                    <router-link :to="{ name: 'Account', params: '#myPassport' }">
+                      <li class="text-decoration-none text-dark selectable py-2">
+                        My Passport
+                      </li>
+                    </router-link>
+                  </div>
+                  <hr />
+                  <div @click="closeOffcanvas()">
                     <button class="btn create-btn selectable py-2" data-bs-toggle="modal" data-bs-target="#tripModal">
                       Create a Trip
                     </button>
