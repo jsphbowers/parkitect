@@ -31,7 +31,7 @@
 
     <section class="my-5 row">
       <div class=" col-xl-3 col-md-6 col-lg-4 trip-sizing d-flex justify-content-center" v-for="t in tripGoers"
-        :key="t?.id">
+        :key="t.id">
         <MyTripCard :tripGoer="t" />
       </div>
 

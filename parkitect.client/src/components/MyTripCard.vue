@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'TripDetails', params: { tripId: tripGoer?.tripId } }">
+  <router-link :to="{ name: 'TripDetails', params: { tripId: tripGoer.tripId } }">
     <section v-if="tripGoer.trip.isArchived == false">
       <div class="create-trip test-trip justify-content-center align-items-center d-flex selectable"
         :style="{ backgroundImage: `url(${tripGoer.trip.coverImg})`, backgroundPosition: 'center', backgroundSize: 'cover' }"
