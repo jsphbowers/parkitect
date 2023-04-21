@@ -58,17 +58,21 @@
     <section class="row">
       <div class="col-12 d-flex justify-content-between my-3 px-4">
         <h4>Popular Activities</h4>
-        <div class="dropdown" v-if="account?.id">
-          <button class="btn addParkBtn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Add Park To Trip
-          </button>
-          <ul class="dropdown-menu">
-            <div v-for="trip in myTrips" :key="trip.id">
-              <TripListItem :tripName="trip" />
-            </div>
-            <li><a class="dropdown-item selectable" data-bs-toggle="modal" data-bs-target="#tripModal">Create Trip</a>
-            </li>
-          </ul>
+        <div class="d-flex">
+          <button class="btn btn-outline-dark me-3" title="View Park on Map" data-bs-toggle="modal"
+            data-bs-target="#mapModal"><i class="mdi mdi-map-marker"></i></button>
+          <div class="dropdown" v-if="account?.id">
+            <button class="btn addParkBtn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Add Park To Trip
+            </button>
+            <ul class="dropdown-menu">
+              <div v-for="trip in myTrips" :key="trip.id">
+                <TripListItem :tripName="trip" />
+              </div>
+              <li><a class="dropdown-item selectable" data-bs-toggle="modal" data-bs-target="#tripModal">Create Trip</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -209,6 +213,15 @@
       <CreateTripForm />
     </template>
   </SmallModal>
+
+  <SmallModal id="mapModal" v-if="park">
+    <template #header>
+      <h5>{{ park.name }}</h5>
+    </template>
+    <template #body>
+      <img :src="mapURL" alt="a map showing the park location">
+    </template>
+  </SmallModal>
 </template>
 
 
@@ -224,6 +237,7 @@ import { tripsService } from "../services/TripsService.js"
 import SmallModal from "../components/SmallModal.vue";
 import CreateTripForm from "../components/CreateTripForm.vue";
 import TripListItem from "../components/TripListItem.vue";
+import { googleApiKey } from "../../.variables"
 
 
 export default {
@@ -287,6 +301,14 @@ export default {
             }
           }
         })
+      }),
+      mapURL: computed(() => {
+        let URL = `http://maps.googleapis.com/maps/api/staticmap?key=${googleApiKey}&size=470x400&zoom=4&maptype=terrain`
+        let marker = ``
+        marker += `&markers=color:green|size:mid|label:${AppState.activePark.name}|${AppState.activePark.latitude},${AppState.activePark.longitude}`
+        URL += marker
+        logger.log('[URL]', URL)
+        return URL
       }),
       activities: computed(() => {
         if (!filterType.value) {

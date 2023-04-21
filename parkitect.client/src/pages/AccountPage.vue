@@ -39,7 +39,7 @@
 
     <!-- SECTION Calendar -->
     <section class="row justify-content-center">
-      <div class="col-10">
+      <div class="col-8 cal-size">
         <Calendar :trips="myTrips" />
       </div>
     </section>
@@ -221,6 +221,10 @@ export default {
   bottom: -7vh;
   left: 6vw;
   border: 3px solid white;
+}
+
+.cal-size {
+  height: 100;
 }
 
 .edit-account-btn {

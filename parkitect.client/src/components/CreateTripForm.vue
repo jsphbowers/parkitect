@@ -8,12 +8,13 @@
 
     <div class="form-floating mb-3">
       <!-- FIXME add required back to date inputs and set minimum date to current date -->
-      <input type="date" class="form-control" id="start" placeholder="Start Date" name="start" v-model="editable.start"
-        min="2023-04-20" />
+      <input type="date" class="form-control" id="start" placeholder="Start Date" name="start" required
+        v-model="editable.start" :min="today" />
       <label for="start">Start Date</label>
     </div>
     <div class="form-floating mb-3">
-      <input type="date" class="form-control" id="end" placeholder="End Date" name="end" v-model="editable.end" />
+      <input type="date" class="form-control" id="end" placeholder="End Date" name="end" required v-model="editable.end"
+        :min="editable.start" />
       <label for="end">End Date</label>
     </div>
 
@@ -43,20 +44,31 @@ import { useRoute, useRouter } from "vue-router";
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
 import { tripsService } from "../services/TripsService.js";
+// import { Console } from "console";
 
 export default {
   setup() {
     const router = useRouter();
     const editable = ref({});
     const imagePreview = ref(null);
+    const date = new Date();
+    let today = date.toJSON().slice(0, 10)
+    // let day = date.getDate()
+    // let month = date.getMonth()
+    // let year = date.getFullYear()
+    // let fullDat
 
     return {
+      today,
       editable,
       imagePreview,
       async createTrip() {
         try {
           const tripData = editable.value;
-          logger.log('[TRIP DATA CALENDAR TEST]', editable.value)
+          logger.log('[TRIP DATA CALENDAR TEST]', tripData);
+          // let newDate = tripData.start
+          // newDate.setDate(newDate.getDate() + 1)
+          // logger.log(newDate)
           const trip = await tripsService.createTrip(tripData);
           // router.push({ name: "TripDetails", params: { tripId: trip.id } });
           Pop.toast('Successfully created a trip', 'success', 'top')

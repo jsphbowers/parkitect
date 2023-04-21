@@ -11,7 +11,7 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { computed } from "@vue/reactivity"
 import { AppState } from "../AppState.js"
-import { INITIAL_EVENTS } from "../utils/CalendarEventsLoader.js"
+import { logger } from "../utils/Logger.js"
 
 export default defineComponent({
   components: {
@@ -41,22 +41,28 @@ export default defineComponent({
           right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
         initialView: 'dayGridMonth',
+        height: 700,
         timezone: 'local',
         themeSystem: 'standard',
         eventBackgroundColor: 'rgb(91, 122, 88)',
         events: computed(() => this.trips.map(t => {
           // if (t.includes(t.id)) {
+
           let trip = {
             id: t.id,
             title: t.name,
-            start: t.start,
-            end: t.end,
+            start: t.start.slice(0, 10),
+            end: t.end.slice(0, 10),
             allDay: t.allDay,
-
             description: t.description,
             display: t.display
             // display: 'block'
           }
+
+          let x = new Date(trip.end)
+          x.setDate(x.getDate() + 2)
+          trip.end = x
+
           return trip
           // }
         })),
