@@ -36,7 +36,7 @@
               <div class="py-2" v-if="activity?.season.length != 0">
                 <h5>Seasons:</h5>
                 <h6>
-                  <img class="m-3 iconbg" v-for="season in seasons" :src="season" alt="">
+                  <img class="m-3 iconbg" v-for="season in seasons" :src="season.img" :alt="season" :title="season.name">
                 </h6>
               </div>
               <div class="py-2" v-if="activity?.timeOfDay.length != 0">
@@ -77,16 +77,28 @@ export default {
       myTrips: computed(() => AppState.trips),
       seasons: computed(() => AppState.activeThingToDo?.season.map(at => {
         if (at == 'Winter') {
-          return ('https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/winter-recreation-area-black-22.svg')
+          return ({
+            img: 'https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/winter-recreation-area-black-22.svg',
+            name: 'Winter'
+          })
         }
         if (at == 'Spring') {
-          return ("https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/flower-viewing-black-22.svg")
+          return ({
+            img: "https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/flower-viewing-black-22.svg",
+            name: 'Spring'
+          })
         }
         if (at == 'Summer') {
-          return ("https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/sunny-black-22.svg")
+          return ({
+            img: "https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/sunny-black-22.svg",
+            name: 'Summer'
+          })
         }
         if (at == 'Fall') {
-          return ("https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/wilderness-black-22.svg")
+          return ({
+            img: "https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/wilderness-black-22.svg",
+            name: 'Fall'
+          })
         }
 
       })),
