@@ -15,3 +15,10 @@ export const TripSchema = new Schema({
   display: { type: String, required: true, default: 'auto' },
   defaultTime: { type: TimeRanges }
 }, { timestamps: true, toJSON: { virtuals: true } })
+
+TripSchema.virtual("tripCreator", {
+  localField: "creatorId",
+  ref: "Account",
+  foreignField: "_id",
+  justOne: true
+})
