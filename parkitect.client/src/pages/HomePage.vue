@@ -156,7 +156,7 @@ export default {
     onMounted(() => {
       getParks();
       // getParkByParkCode();
-
+      window.scrollTo(0, 0);
       onBeforeUnmount(() => {
         AppState.parks = []
       })

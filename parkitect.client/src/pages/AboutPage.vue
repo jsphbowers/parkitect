@@ -61,9 +61,9 @@
             <h5 class="m-0">Elizabeth Keyes</h5>
 
             <div>
-              <a href="https://www.linkedin.com/in/elizabeth-k-6385b1183/"><i
+              <a href="https://www.linkedin.com/in/elizabeth-k-6385b1183/"><i title="Linkedin"
                   class="mdi mdi-linkedin fs-2 text-dark"></i></a>
-              <a href="https://github.com/ElizabethKeyes"><i class="mdi mdi-github fs-2 text-dark"></i></a>
+              <a href="https://github.com/ElizabethKeyes"><i title='GitHub'  class="mdi mdi-github fs-2 text-dark"></i></a>
             </div>
 
           </div>
@@ -79,9 +79,9 @@
           <div class="col-6">
             <h5 class="m-0">Alex Quan</h5>
             <div>
-              <a href="https://www.linkedin.com/in/alex-quan-34944a105/"><i
+              <a href="https://www.linkedin.com/in/alex-quan-34944a105/"><i title="Linkedin"
                   class="mdi mdi-linkedin fs-2 text-dark"></i></a>
-              <a href="https://github.com/Alexmquan"><i class="mdi mdi-github fs-2 text-dark"></i></a>
+              <a href="https://github.com/Alexmquan"><i title='GitHub'  class="mdi mdi-github fs-2 text-dark"></i></a>
             </div>
 
           </div>
@@ -97,9 +97,9 @@
           <div class="col-6">
             <h5 class="m-0">Anastasiia Shaynyuk</h5>
             <div>
-              <a href="https://www.linkedin.com/in/anastasiia-shaynyuk/"><i
+              <a href="https://www.linkedin.com/in/anastasiia-shaynyuk/"><i title="Linkedin"
                   class="mdi mdi-linkedin fs-2 text-dark"></i></a>
-              <a href="https://github.com/AnastasiiaShaynyuk"><i class="mdi mdi-github fs-2 text-dark"></i></a>
+              <a href="https://github.com/AnastasiiaShaynyuk"><i  title='GitHub'  class="mdi mdi-github fs-2 text-dark"></i></a>
             </div>
 
           </div>
@@ -116,9 +116,9 @@
           <div class="col-6">
             <h5 class="m-0">Joseph Bowers</h5>
             <div>
-              <a href="https://www.linkedin.com/in/joseph-bowers-3a3aa05a/"><i
+              <a href="https://www.linkedin.com/in/joseph-bowers-3a3aa05a/"><i title="Linkedin"
                   class="mdi mdi-linkedin fs-2 text-dark"></i></a>
-              <a href="https://github.com/jsphbowers"><i class="mdi mdi-github fs-2 text-dark"></i></a>
+              <a href="https://github.com/jsphbowers"><i title='GitHub' class="mdi mdi-github fs-2 text-dark"></i></a>
             </div>
 
           </div>

@@ -20,7 +20,7 @@
     <div class="form-floating mb-3">
       <input type="url" class="form-control" id="mgUrl" placeholder="ImgUrl" name="imgUrl" v-model="editable.coverImg"
         @input="previewImage" />
-      <label for="imgUrl">ImgUrl</label>
+      <label for="imgUrl">Trip Cover Photo</label>
       <br />
       <img :src="imagePreview" v-if="imagePreview" style="max-width: 100%" />
     </div>
