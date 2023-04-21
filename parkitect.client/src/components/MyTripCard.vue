@@ -5,6 +5,7 @@
         :style="{ backgroundImage: `url(${tripGoer.trip.coverImg})`, backgroundPosition: 'center', backgroundSize: 'cover' }"
         :title="tripGoer.trip.description">
         <h3 class="ms-2 mt-2 trip-text text-center">{{ tripGoer.trip.name }}</h3>
+        <img class="creatorPic elevation-2" :src="account?.picture" alt="">
       </div>
     </section>
     <section v-if="tripGoer.trip.isArchived == true" class="positioning">
@@ -15,21 +16,29 @@
       </div>
       <img class="archivedStamp"
         src="src\assets\img\archives-text-on-red-round-grungy-texture-stamp-2F1ER4R-removebg-preview.png" alt="Archived">
+      <img class="creatorPic elevation-2" :src="account?.picture" alt="">
     </section>
   </router-link>
 </template>
 
 
 <script>
+import { computed } from "vue";
+import { AppState } from "../AppState.js";
 import { Trip } from "../models/Trip.js";
 import { TripGoer } from "../models/TripGoer.js";
+import { logger } from "../utils/Logger.js";
 
 export default {
   props: {
     tripGoer: { type: TripGoer, required: true }
   },
-  setup() {
-    return {}
+  setup(props) {
+    logger.log('[THIS IS THE APPSTATES TRIPGOERS]', AppState.tripGoers)
+    return {
+      creator: computed(() => AppState.tripGoers.find(tg => tg.id == props.tripGoer.trip.creatorId)),
+      account: computed(() => AppState.account)
+    }
   }
 }
 </script>
@@ -75,6 +84,19 @@ export default {
   backdrop-filter: blur(4px);
   background-color: black;
   border-radius: 50%;
+}
+
+.creatorPic {
+  height: 5vh;
+  width: 5vh;
+  position: absolute;
+  backdrop-filter: blur(4px);
+  border-radius: 50%;
+  bottom: 4%;
+  left: 4%;
+  border: 2px black solid;
+  object-fit: cover;
+  object-position: center;
 }
 
 @media(max-width:992px) {
