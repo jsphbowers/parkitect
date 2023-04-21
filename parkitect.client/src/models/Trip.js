@@ -11,5 +11,6 @@ export class Trip {
     this.end = data.end
     this.allDay = data.allDay
     this.display = data.display
+    this.tripCreator = data.tripCreator
   }
 }

@@ -5,7 +5,8 @@
         :style="{ backgroundImage: `url(${tripGoer.trip.coverImg})`, backgroundPosition: 'center', backgroundSize: 'cover' }"
         :title="tripGoer.trip.description">
         <h3 class="ms-2 mt-2 trip-text text-center">{{ tripGoer.trip.name }}</h3>
-        <img class="creatorPic elevation-2" :src="account?.picture" alt="">
+        <img class="creatorPic elevation-2" :src="tripGoer.trip.tripCreator.picture"
+          :alt="tripGoer.trip.tripCreator.name">
       </div>
     </section>
     <section v-if="tripGoer.trip.isArchived == true" class="positioning">
@@ -16,7 +17,7 @@
       </div>
       <img class="archivedStamp"
         src="src\assets\img\archives-text-on-red-round-grungy-texture-stamp-2F1ER4R-removebg-preview.png" alt="Archived">
-      <img class="creatorPic elevation-2" :src="account?.picture" alt="">
+      <img class="creatorPic elevation-2" :src="tripGoer.trip.tripCreator.picture" :alt="tripGoer.trip.tripCreator.name">
     </section>
   </router-link>
 </template>
