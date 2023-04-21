@@ -12,6 +12,8 @@ export const npsApi = Axios.create({
 });
 
 export const weatherApi = Axios.create({
-  baseURL: "https://bcw-sandbox.herokuapp.com/weather",
+  baseURL: "https://api.openweathermap.org/data/2.5",
   timeout: 8000,
+  params: { appid: "848a6b2c94878d512fd6355824bba59e" },
+  // NOTE THIS IS HOW TO USE THE API => lat={lat}&lon={lon}&appid={API key}
 })

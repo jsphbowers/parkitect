@@ -40,5 +40,6 @@ export const AppState = reactive({
   searchPageChange: false,
   regionPageChange: false,
   clickedMyPassport: false,
-  locations: []
+  locations: [],
+  activeParkWeather: {},
 });

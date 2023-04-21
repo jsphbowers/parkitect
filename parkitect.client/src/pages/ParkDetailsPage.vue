@@ -2,8 +2,13 @@
   <div class="container-fluid">
     <!-- SECTION Cover Photo with title  -->
     <section class="row px-0">
-      <div class="col-12 px-0">
-        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+      <div class="col-12 px-0 parent">
+        <div id="carouselExampleCaptions" class="carousel slide parent" data-bs-ride="carousel">
+          <div class="weatherWidget" :title="weather.description">
+            <h4>{{ weather.mainf }} °F</h4>
+            <h5>{{ weather.weather }}</h5>
+            <img :src="weather.icon" :alt="weather.description" :title="weather.description">
+          </div>
           <!-- <div class="carousel-inner">
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
               aria-current="true" aria-label="Slide 1"></button>
@@ -270,12 +275,29 @@ export default {
       try {
         const parkCode = route.params.parkCode;
         await parksService.getParkByParkCode(parkCode);
+        const parkCoordinates = {
+          lon: AppState.activePark?.longitude,
+          lat: AppState.activePark?.latitude
+        }
+        await parksService.getParkWeather(parkCoordinates);
       }
       catch (error) {
         Pop.error(error.message);
         logger.error(error.message);
       }
     }
+    // async function getParkWeather() {
+    //   try {
+    //     const parkCoordinates = {
+    //       lon: AppState.activePark?.longitude,
+    //       lat: AppState.activePark?.latitude
+    //     }
+    //     await parksService.getParkWeather(parkCoordinates);
+    //   } catch (error) {
+    //     Pop.error(error.message)
+    //     logger.error(error.message)
+    //   }
+    // }
     onMounted(() => {
       getThingsToDo();
       getActivePark();
@@ -290,6 +312,7 @@ export default {
       park: computed(() => AppState.activePark),
       account: computed(() => AppState.account),
       myTrips: computed(() => AppState.trips),
+      weather: computed(() => AppState.activeParkWeather),
       filteredActivities: computed(() => {
         return Object.keys(keywords).map(fo => {
           for (let i = 0; i < keywords[fo].length; i++) {
@@ -345,6 +368,13 @@ export default {
   transition: all 0.3s ease-in-out;
 }
 
+.weatherWidget {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  backdrop-filter: blur(4px);
+  z-index: 1;
+}
 
 .filter-img:hover {
   transform: scale(1.1);
@@ -386,6 +416,10 @@ export default {
 @media screen and (max-width: 820px) {
   .carousel-img {
     height: 40vh;
+  }
+
+  .parent {
+    position: relative;
   }
 
   .media-scroll {
