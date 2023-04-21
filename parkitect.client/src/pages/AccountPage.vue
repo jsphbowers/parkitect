@@ -50,11 +50,18 @@
       <div class="col-12 mt-5 text-center title-bg">
         <h2 class=""><b>Build your National Park passport!</b></h2>
       </div>
-      <div v-if="parksVisited">
-        <button @click="showYourParks()" class="btn addBtn icon-button ms-4 mt-3">Show your parks</button>
-      </div>
-      <div v-if="!parksVisited">
-        <button @click="showYourParks()" class="btn addBtn icon-button ms-4 mt-3">Show all parks</button>
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <div v-if="parksVisited">
+            <button @click="showYourParks()" class="btn addBtn icon-button ms-4 mt-3">Show your parks</button>
+          </div>
+          <div v-if="!parksVisited">
+            <button @click="showYourParks()" class="btn addBtn icon-button ms-4 mt-3">Show all parks</button>
+          </div>
+        </div>
+        <div class="me-4 mt-3">
+          <h5>You've visited {{ parkPassportCount }}/63 Parks! </h5>
+        </div>
       </div>
 
       <div class=" col-12 icon-bg">
@@ -137,6 +144,7 @@ export default {
       coverImages,
       icons,
       myTrips: computed(() => AppState.trips),
+      parkPassportCount: computed(() => AppState.parkPassportCount),
       account: computed(() => AppState.account),
       tripGoers: computed(() => AppState.tripGoers),
       parksVisited: computed(() => AppState.parksVisited),
@@ -146,10 +154,16 @@ export default {
       }),
 
       hasVisited(parkCode) {
+        const grayScale = document.querySelectorAll('.grayscale')
+        AppState.parkPassportCount = (63 - grayScale.length)
         return AppState.account.parksVisited?.includes(parkCode) ? '' : 'grayscale'
+
+
       },
 
       displayYourParks(parkCode) {
+        const grayScale = document.querySelectorAll('.grayscale')
+        AppState.parkPassportCount = (63 - grayScale.length)
         return AppState.account.parksVisited?.includes(parkCode) ? '' : 'noDisplay'
       },
 
