@@ -4,7 +4,7 @@
     <section class="row px-0">
       <div class="col-12 px-0 parent">
         <div id="carouselExampleCaptions" class="carousel slide parent" data-bs-ride="carousel">
-          <div class="weatherWidget" :title="weather.description">
+          <div class="weatherWidget text-light" :title="weather.description">
             <h4>{{ weather.mainf }} °F</h4>
             <h5>{{ weather.weather }}</h5>
             <img :src="weather.icon" :alt="weather.description" :title="weather.description">
@@ -374,6 +374,8 @@ export default {
   right: 2%;
   backdrop-filter: blur(4px);
   z-index: 1;
+  padding: 1vh;
+  border-radius: 10%;
 }
 
 .filter-img:hover {
