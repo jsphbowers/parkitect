@@ -3,6 +3,7 @@
     :to="{ name: 'ParkDetails', params: { parkCode: park.parkCode } }"
   >
     <div class="my-2 card-shadow cardImg">
+      <!-- <div class="blurhash" :style="{ backgroundImage: `url('data:image/svg+xml;utf8,${blurhash}')` }"></div> -->
       <img class="" :src="park.images[0].url" :alt="park.name" />
       <div class="card-content">
         <h5 class="ps-2 mb-3">{{ park.name }}</h5>
@@ -17,15 +18,36 @@
 <script>
 import { computed, onMounted } from "vue";
 import { Park } from "../models/Park.js";
+// import { encode } from "blurhash";
 
 export default {
   props: {
     park: { type: Park, required: true },
   },
 
-  setup() {
+  setup(props) {
+
+    // const blurhash = computed(() => {
+    //   const image = new Image();
+    //   image.onload = () => {
+    //     const canvas = document.createElement('canvas');
+    //     const ctx = canvas.getContext('2d');
+    //     canvas.width = 32;
+    //     canvas.height = 32;
+    //     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    //     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    //     return encode(imageData.data, canvas.width, canvas.height, 1, 1);
+    //   };
+    //   image.src = props.park.images[0].url;
+    // });
+
+
     onMounted(() => {});
-    return {};
+    return {
+
+            // blurhash,
+
+    };
   },
 };
 </script>
