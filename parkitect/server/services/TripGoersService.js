@@ -41,7 +41,15 @@ class TripGoersService {
   }
 
   async getMyTripGoers(userId) {
-    const tripGoers = await dbContext.TripGoers.find({ accountId: userId }).populate('account').populate('trip')
+    const tripGoers = await dbContext.TripGoers.find({ accountId: userId })
+      .populate('account')
+      .populate({
+        path: "trip",
+        populate: {
+          path: "tripCreator",
+          select: "name picture"
+        }
+      })
     return tripGoers
   }
 }

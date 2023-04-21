@@ -77,7 +77,7 @@ export default {
 <style lang="scss" scoped>
 .cardImg {
   width: 100%;
-  height: 30vh;
+  height: 40vh;
   object-fit: cover;
   object-position: center;
 }
