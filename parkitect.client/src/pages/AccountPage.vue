@@ -68,7 +68,8 @@
         <!-- add back in below     v-if="parksVisited"  -->
         <div v-if="parksVisited" class="justify-content-evenly d-flex flex-wrap my-2 py-5" id="myPassport">
           <img v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style grow mb-3 selectable"
-            :src="`/icons/${parkCode}.png`" alt="" :class="hasVisited(parkCode)">
+            :src="`/icons/${parkCode}.png`" alt="" :class="hasVisited(parkCode)"
+            :title="parkCode + ' national park icon'">
         </div>
         <div v-if="!parksVisited" class="justify-content-evenly d-flex flex-wrap my-2 py-5">
           <img v-for="parkCode in icons" @click="visitPark(parkCode)" class="icon-style grow mb-3 selectable"

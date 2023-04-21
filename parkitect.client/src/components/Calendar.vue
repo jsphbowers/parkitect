@@ -41,7 +41,9 @@ export default defineComponent({
           right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
         initialView: 'dayGridMonth',
-        // initialEvents:
+        timezone: 'local',
+        themeSystem: 'standard',
+        eventBackgroundColor: 'rgb(91, 122, 88)',
         events: computed(() => this.trips.map(t => {
           // if (t.includes(t.id)) {
           let trip = {
@@ -50,14 +52,16 @@ export default defineComponent({
             start: t.start,
             end: t.end,
             allDay: t.allDay,
-            // display: t.display
-            display: 'block'
+
+            description: t.description,
+            display: t.display
+            // display: 'block'
           }
           return trip
           // }
         })),
         // alternatively, use the `events` setting to fetch from a feed
-        editable: true,
+        // editable: true,
         selectable: true,
         selectMirror: true,
         dayMaxEvents: true,
