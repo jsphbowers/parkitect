@@ -9,7 +9,7 @@
     <div class="form-floating mb-3">
       <!-- FIXME add required back to date inputs and set minimum date to current date -->
       <input type="date" class="form-control" id="start" placeholder="Start Date" name="start" required
-        v-model="editable.start" min="2023-04-20" />
+        v-model="editable.start" min="today" />
       <label for="start">Start Date</label>
     </div>
     <div class="form-floating mb-3">
@@ -50,13 +50,14 @@ export default {
     const router = useRouter();
     const editable = ref({});
     const imagePreview = ref(null);
-    const date = new Date();
-    let day = date.getDate()
-    let month = date.getMonth()
-    let year = date.getFullYear()
-    let fullDat
+    const today = new Date();
+    // let day = date.getDate()
+    // let month = date.getMonth()
+    // let year = date.getFullYear()
+    // let fullDat
 
     return {
+      today,
       editable,
       imagePreview,
       async createTrip() {

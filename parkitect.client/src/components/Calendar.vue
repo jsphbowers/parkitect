@@ -49,7 +49,7 @@ export default defineComponent({
           let trip = {
             id: t.id,
             title: t.name,
-            start: t.start.slice(0, 10),
+            start: t.start,
             end: t.end,
             allDay: t.allDay,
 
