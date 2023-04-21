@@ -12,6 +12,5 @@ export const TripSchema = new Schema({
   start: { type: Date, required: true, },
   end: { type: Date, required: true },
   allDay: { type: Boolean, required: true, default: true },
-  display: { type: String, required: true, default: 'auto' },
-  defaultTime: { type: TimeRanges }
+  display: { type: String, required: true, default: 'auto' }
 }, { timestamps: true, toJSON: { virtuals: true } })
