@@ -31,15 +31,25 @@
             Filter by region
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" @click="changeByRegion(['WA,OR,ID,MT,WY'])" href="#">Northwest</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['CA,SW,AZ,NV,NM'])" href="#">Southwest</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['CO,MO,KY'])" href="#">Central</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['ND,SD,MN,IN,MI,OH'])" href="#">Northern</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['TX,AR,TN'])" href="#">Southern</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['ME,WV,VA'])" href="#">NorthEast</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['SC,NC,FL'])" href="#">SouthEast</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['AK'])" href="#">Alaska</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['HI,VI,AS'])" href="#">Islands</a></li>
+            <li><a class="dropdown-item"
+                @click="changeByRegion(['WA,OR,ID,AK,CA,AZ,NV,MT,WY,UT,CO,ND,SD,MN,NE,KS,MO,IA,WI,IL,OH,MI,TX,NM,OK,AR,LA,PA,WV,VA,MD,NJ,DE,MS,TN,KY,GA,SC,NC,FL,HI,VI,AS,NY,VT,NH,ME,RI,CT,MA'])"
+                href="#">All Parks</a>
+            </li>
+            <li><a class="dropdown-item" @click="changeByRegion(['NY,VT,NH,ME,RI,CT,MA'])" href="#">North Atlantic
+                Region</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['PA,WV,VA,MD,NJ,DE'])" href="#">Mid-Atlantic Region</a>
+            </li>
+            <li><a class="dropdown-item" @click="changeByRegion(['MS,TN,KY,GA,SC,NC,FL,VI'])" href="#">Southeast
+                Region</a>
+            </li>
+            <li><a class="dropdown-item" @click="changeByRegion(['MN,NE,KS,MO,IA,WI,IL,OH,MI'])" href="#">Midwest
+                Region</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['TX,NM,OK,AR,LA'])" href="#">Southwest Region</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['MT,WY,UT,CO,ND,SD'])" href="#">Rocky Mountain Region</a>
+            </li>
+            <li><a class="dropdown-item" @click="changeByRegion(['CA,AZ,NV,HI,AS'])" href="#">Western Region</a></li>
+            <li><a class="dropdown-item" @click="changeByRegion(['WA,OR,ID,AK'])" href="#">Pacific Northwest & Alaska</a>
+            </li>
           </ul>
         </div>
       </div>
