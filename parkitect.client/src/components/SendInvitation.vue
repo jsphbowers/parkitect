@@ -52,6 +52,8 @@
         id="code"
         required
         placeholder="Your code"
+        maxlength="1000"
+
       />
       <!-- <label for="code">Join Trip Code</label> -->
     </div>
