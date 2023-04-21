@@ -42,7 +42,6 @@ export default defineComponent({
         },
         initialView: 'dayGridMonth',
         height: 700,
-        timezone: 'local',
         themeSystem: 'standard',
         eventBackgroundColor: 'rgb(91, 122, 88)',
         events: computed(() => this.trips.map(t => {
