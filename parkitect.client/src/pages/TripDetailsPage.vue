@@ -48,7 +48,7 @@
       <div class="col-md-11 parks-area draggable">
         <section class="row mb-4" :class="{ 'archivedImg': archived }" v-for="t in tripParks" :key="t.id">
           <div class="col-md-7">
-            <router-link :to="{ name: 'ParkDetails', params: { parkCode: t.parkCode } }">
+            <router-link v-if="parks.length > 0" :to="{ name: 'ParkDetails', params: { parkCode: t.parkCode } }">
               <h1 class="text-dark">{{ t.fullName }}</h1>
               <img :src="t.image" :alt="'a photo of ' + t.fullName" class="park-img">
             </router-link>
@@ -69,7 +69,7 @@
 
       <!-- SECTION map -->
       <h3 class="mb-3" v-if="parks.length > 0">Let's see where we're going!</h3>
-      <div class="col-11">
+      <div class="col-11 mb-3">
         <MapContainer />
       </div>
       <div class="d-flex justify-content-end">

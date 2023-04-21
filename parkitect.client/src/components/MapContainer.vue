@@ -2,7 +2,7 @@
   <GoogleMap api-key="AIzaSyATZoG7a3Rf97UDfWBnc9wFsuEB5PKkh7Q" style="width: 100%; height: 500px" :center="center"
     :zoom="4">
     <MarkerCluster>
-      <Marker v-for="location in locations" :key="location" :options="{ position: location }" />
+      <Marker v-if="locations" v-for="location in locations" :key="location" :options="{ position: location }" />
     </MarkerCluster>
   </GoogleMap>
 </template>
