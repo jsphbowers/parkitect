@@ -33,7 +33,7 @@
         name="message"
         class="form-control"
         style="height: 100px"
-        placeholder="Your Message with Link"
+        placeholder="Your Message"
         id="message"
         required
         minlength="5"
@@ -42,7 +42,7 @@
 
       <label for="message">Your Message</label>
     </div>
-        <div v-if="trip" class="form-floating mb-3">
+        <div v-if="trip" class="form-floating mb-3 ">
       <input
       readonly
         type="text"
@@ -53,7 +53,7 @@
         required
         placeholder="Your code"
       />
-      <label for="code">Join Trip Code</label>
+      <!-- <label for="code">Join Trip Code</label> -->
     </div>
     <div class="my-3 text-end">
       <button data-bs-dismiss="modal" class="btn btn-success" type="submit">
@@ -107,4 +107,8 @@ export default {
 
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#code {
+  display: none;
+}
+</style>
