@@ -329,7 +329,12 @@ export default {
       mapURL: computed(() => {
         let URL = `http://maps.googleapis.com/maps/api/staticmap?key=${googleApiKey}&size=470x400&zoom=4&maptype=terrain`
         let marker = ``
-        marker += `&markers=color:green|size:mid|label:${AppState.activePark.name}|${AppState.activePark.latitude},${AppState.activePark.longitude}`
+        let parkName = AppState.activePark.name
+        if (parkName.includes('&')) {
+          parkName = parkName.replace('&', 'and')
+          logger.log('replacing &', parkName)
+        }
+        marker += `&markers=color:green|size:mid|label:${parkName}|${AppState.activePark.latitude},${AppState.activePark.longitude}`
         URL += marker
         logger.log('[URL]', URL)
         return URL
