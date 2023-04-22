@@ -233,21 +233,6 @@ export default {
       parks: computed(() => AppState.parks),
       archived: computed(() => AppState.activeTrip?.isArchived),
 
-
-      // FIXME Need to call to GoogleAPI from the server side so that our API key is protected. Otherwise, it will be accessible to users via the network tab. Should probably also request a new API key.
-
-      // I started working on the fix for the above, but even if the call comes from our server side, the image tag in the HTML is still going to be populated with the image URL, which includes the API key. Even if our request going out to Google doesn't show up in the network tab.
-
-      // mapURL: computed(() => {
-      //   let URL = `http://maps.googleapis.com/maps/api/staticmap?key=${googleApiKey}&size=800x400&center=USA&zoom=3&maptype=terrain`
-      //   let markers = ``
-      //   AppState.parks.forEach(p => {
-      //     markers += `&markers=color:green|size:mid|label:${p.name[0]}|${p.latitude},${p.longitude}`
-      //   })
-      //   URL += markers
-      //   return URL
-      // }),
-
       deletePermissions(tripGoerAccountId) {
         const userId = AppState.account?.id
         const tripCreatorId = AppState.activeTrip?.creatorId
