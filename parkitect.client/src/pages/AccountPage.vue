@@ -22,10 +22,10 @@
       </div>
     </div>
 
-    <div v-if="!parksArchived">
+    <div v-if="!parksArchived && archivedTrips.length > 0">
       <button @click="showArchivedParks()" class="btn addBtn icon-button ms-5 my-3">Hide archived trips</button>
     </div>
-    <div v-if="parksArchived">
+    <div v-if="parksArchived && archivedTrips.length > 0">
       <button @click="showArchivedParks()" class="btn addBtn icon-button ms-5 my-3">Show archived trips</button>
     </div>
 
@@ -165,6 +165,8 @@ export default {
         const randomIndex = Math.floor(Math.random() * coverImages.length)
         return `url(${coverImages[randomIndex]})`
       }),
+      archivedTrips: computed(() => AppState.tripGoers.filter(t => t.trip.isArchived == true)),
+
 
       hasVisited(parkCode) {
         const grayScale = document.querySelectorAll('.grayscale')
