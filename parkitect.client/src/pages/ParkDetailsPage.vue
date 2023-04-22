@@ -4,7 +4,7 @@
     <section class="row px-0">
       <div class="col-12 px-0 parent">
         <div id="carouselExampleCaptions" class="carousel slide parent" data-bs-ride="carousel">
-          <div class="weatherWidget text-light" :title="weather.description">
+          <div class="weatherWidget text-light text-center" :title="weather.description">
             <h4>{{ weather.mainf }} °F</h4>
             <h5>{{ weather.weather }}</h5>
             <img :src="weather.icon" :alt="weather.description" :title="weather.description">
@@ -243,6 +243,7 @@ import SmallModal from "../components/SmallModal.vue";
 import CreateTripForm from "../components/CreateTripForm.vue";
 import TripListItem from "../components/TripListItem.vue";
 import { googleApiKey } from "../../.variables"
+import ActivityCard from "../components/ActivityCard.vue";
 
 
 export default {
@@ -355,7 +356,7 @@ export default {
       }
     };
   },
-  components: { SmallModal, CreateTripForm, TripListItem }
+  components: { SmallModal, CreateTripForm, TripListItem, ActivityCard }
 }
 </script>
 
@@ -376,6 +377,7 @@ export default {
   z-index: 1;
   padding: 1vh;
   border-radius: 10%;
+  text-shadow: 2px 2px 1px black;
 }
 
 .filter-img:hover {
@@ -443,6 +445,7 @@ export default {
   padding: 1vh;
   margin-left: 6em !important;
   margin-right: 6em !important;
+  border-radius: 20%;
 }
 
 

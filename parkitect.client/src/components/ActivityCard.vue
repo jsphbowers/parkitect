@@ -77,11 +77,16 @@ export default {
 <style lang="scss" scoped>
 .cardImg {
   width: 100%;
-  height: 40vh;
-  object-fit: cover;
+  height: 100%;
+  object-fit: center;
   object-position: center;
 }
 
+.card {
+  --bs-card-border-width: 0px !important;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
 
 
 .activityImgBorder {
@@ -97,12 +102,15 @@ export default {
   margin-bottom: 0%;
 }
 
-.card {
-  --bs-card-border-width: 0px !important;
-  max-height: 40vh;
-}
 
 .whiteIcon {
   color: white;
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    --bs-card-border-width: 0px !important;
+    border-top-left-radius: 5px;
+  }
 }
 </style>
