@@ -64,7 +64,7 @@
       <div class="col-12 d-flex justify-content-between my-3 px-4">
         <h4>Popular Activities</h4>
         <div class="d-flex">
-          <button class="btn btn-outline-dark me-3" title="View Park on Map" data-bs-toggle="modal"
+          <button class="btn btn-outline-dark mapBtn me-3" title="View Park on Map" data-bs-toggle="modal"
             data-bs-target="#mapModal"><i class="mdi mdi-map-marker"></i></button>
           <div class="dropdown" v-if="account?.id">
             <button class="btn addParkBtn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -334,7 +334,7 @@ export default {
           parkName = parkName.replace('&', 'and')
           logger.log('replacing &', parkName)
         }
-        marker += `&markers=color:green|size:mid|label:${parkName}|${AppState.activePark.latitude},${AppState.activePark.longitude}`
+        marker += `&markers=size:mid|label:${parkName}|${AppState.activePark.latitude},${AppState.activePark.longitude}`
         URL += marker
         logger.log('[URL]', URL)
         return URL
@@ -439,6 +439,10 @@ export default {
 
   .media-scroll::-webkit-scrollbar {
     display: none;
+  }
+
+  .mapBtn {
+    max-height: 5vh;
   }
 }
 

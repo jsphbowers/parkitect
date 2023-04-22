@@ -7,34 +7,37 @@
           <img class="cardImg px-0 activityImgBorder" :src="activity?.images[0].url" alt="">
         </div>
         <div class="col-md-6">
-          <div class="row h-100 justify-content-center align-items-end">
-            <div class="p-2 col-11">
-              <h4>{{ activity.title }}</h4>
-              <h6>{{ activity.shortDescription }}</h6>
+          <div class="row h-100">
+            <div class="col-11 d-flex justify-content-between flex-column">
+              <div class="p-2">
+                <h4 class="pb-3 pt-2">{{ activity.title }}</h4>
+                <h6>{{ newDesc(activity.shortDescription) }}</h6>
+              </div>
+              <div class=" d-flex p-2 pb-4">
+                <h5 class="iconbg mx-2" v-if="activity.arePetsPermitted == 'true'" title="Pets permitted">
+                  <img
+                    src="https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/pets-off-leash-black-22.svg"
+                    alt="Pets permitted">
+                </h5>
+                <h5 class="iconbg mx-2" v-if="activity.arePetsPermittedWithRestrictions == 'true'"
+                  title="Pets permitted with restrictions">
+                  <img
+                    src="https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/pets-on-leash-black-22.svg"
+                    alt="Pets permitted with restrictions">
+                </h5>
+                <h5 class="iconbg mx-2" v-if="activity.doFeesApply == 'true'" title="Passes and Fees">
+                  <img
+                    src="https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/passes-and-fees-black-22.svg"
+                    alt="Passes and Fees">
+                </h5>
+                <h5 class="iconbg mx-2" v-if="activity.isReservationRequired == 'true'" title="Reservation Required">
+                  <img
+                    src="https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/reservations-black-22.svg"
+                    alt="Reservation required">
+                </h5>
+              </div>
             </div>
-            <div class="d-flex col-11 p-2">
-              <h5 class="iconbg mx-2" v-if="activity.arePetsPermitted == 'true'" title="Pets permitted">
-                <img
-                  src="https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/pets-off-leash-black-22.svg"
-                  alt="Pets permitted">
-              </h5>
-              <h5 class="iconbg mx-2" v-if="activity.arePetsPermittedWithRestrictions == 'true'"
-                title="Pets permitted with restrictions">
-                <img
-                  src="https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/pets-on-leash-black-22.svg"
-                  alt="Pets permitted with restrictions">
-              </h5>
-              <h5 class="iconbg mx-2" v-if="activity.doFeesApply == 'true'" title="Passes and Fees">
-                <img
-                  src="https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/passes-and-fees-black-22.svg"
-                  alt="Passes and Fees">
-              </h5>
-              <h5 class="iconbg mx-2" v-if="activity.isReservationRequired == 'true'" title="Reservation Required">
-                <img
-                  src="https://raw.githubusercontent.com/nationalparkservice/symbol-library/gh-pages/src/standalone/reservations-black-22.svg"
-                  alt="Reservation required">
-              </h5>
-            </div>
+
           </div>
         </div>
       </div>
@@ -45,6 +48,7 @@
 
 
 <script>
+import { computed } from "@vue/reactivity";
 import { ThingToDo } from "../models/ThingToDo.js";
 import { parksService } from "../services/ParksServices.js";
 import { logger } from "../utils/Logger.js";
@@ -57,7 +61,13 @@ export default {
   },
   setup() {
     return {
-
+      newDesc(text) {
+        let textLimit = 280
+        if (text.length > textLimit) {
+          text = text.substring(0, textLimit) + "\u2026"
+        }
+        return text
+      },
       async setActiveActivity(activityId) {
         try {
           // logger.log(activityId)
@@ -77,8 +87,8 @@ export default {
 <style lang="scss" scoped>
 .cardImg {
   width: 100%;
-  height: 100%;
-  object-fit: center;
+  height: 33vh;
+  object-fit: cover;
   object-position: center;
 }
 
