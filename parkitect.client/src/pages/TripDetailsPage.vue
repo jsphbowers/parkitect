@@ -70,7 +70,7 @@
       <!-- SECTION map -->
       <h3 class="mb-3" v-if="parks.length > 0">Let's see where we're going!</h3>
       <div class="col-11 mb-3">
-        <MapContainer />
+        <MapContainer :class="{ 'archivedImg': archived }" />
       </div>
       <div class="d-flex justify-content-end">
         <button v-if="trip?.creatorId == account?.id" class="btn archiveBtn mb-2" @click="toggleArchiveTrip()"><span
