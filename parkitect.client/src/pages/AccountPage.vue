@@ -46,7 +46,7 @@
     <!-- SECTION Calendar -->
     <section class="row justify-content-center no-show-mobile">
       <div class="col-8 cal-size">
-        <Calendar :trips="myTrips" />
+        <Calendar :tripGoer="myTripGoer" />
       </div>
     </section>
 
@@ -153,7 +153,7 @@ export default {
     return {
       coverImages,
       icons,
-      myTrips: computed(() => AppState.trips),
+      myTripGoer: computed(() => AppState.tripGoers),
       parksArchived: computed(() => AppState.parksArchived),
       parkPassportCount: computed(() => AppState.parkPassportCount),
       account: computed(() => AppState.account),

@@ -18,7 +18,7 @@ export default defineComponent({
     FullCalendar,
   },
   props: {
-    trips: { type: Object, required: true }
+    tripGoer: { type: Object, required: true }
   },
   data() {
 
@@ -44,17 +44,17 @@ export default defineComponent({
         height: 700,
         themeSystem: 'standard',
         eventBackgroundColor: 'rgb(91, 122, 88)',
-        events: computed(() => this.trips.map(t => {
+        events: computed(() => this.tripGoer.map(t => {
           // if (t.includes(t.id)) {
 
           let trip = {
-            id: t.id,
-            title: t.name,
-            start: t.start.slice(0, 10),
-            end: t.end.slice(0, 10),
-            allDay: t.allDay,
-            description: t.description,
-            display: t.display
+            id: t.trip.id,
+            title: t.trip.name,
+            start: t.trip.start.slice(0, 10),
+            end: t.trip.end.slice(0, 10),
+            allDay: t.trip.allDay,
+            description: t.trip.description,
+            display: t.trip.display
             // display: 'block'
           }
 
