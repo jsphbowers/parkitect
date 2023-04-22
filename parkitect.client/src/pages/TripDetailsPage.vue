@@ -204,7 +204,6 @@ export default {
     })
 
     watchEffect(() => {
-      logger.log('running watcheffect')
       if (AppState.parks.length > 0) {
         mapsService.setLocations()
       }
