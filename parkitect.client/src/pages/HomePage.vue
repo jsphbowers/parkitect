@@ -18,7 +18,9 @@
     <!-- SECTION park cards -->
     <section class="row justify-content-center px-md-5">
       <div class="col-md-4 text-center my-4">
-
+        <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Need help?
+          </button>
       </div>
       <div class="col-md-4 text-center my-4">
         <h2>
