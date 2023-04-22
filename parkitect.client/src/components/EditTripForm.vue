@@ -5,6 +5,17 @@
         v-model="editable.name">
       <label for="name">Name</label>
     </div>
+    <div class="form-floating mb-3">
+      <input type="date" class="form-control" id="start" placeholder="Start Date" name="start" required
+        v-model="editable.start" :min="today" />
+      <label for="start">Start Date</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="date" class="form-control" id="end" placeholder="End Date" name="end" required v-model="editable.end"
+        :min="editable.start" />
+      <label for="end">End Date</label>
+    </div>
+
     <div class="form-floating">
       <input type="url" name="image url" id="coverImgUrl" class="form-control mb-2" v-model="editable.coverImg"
         @input="previewImage()">
@@ -37,6 +48,8 @@ export default {
     const editable = ref({});
     const route = useRoute();
     const imagePreview = ref(null);
+    const date = new Date();
+    let today = date.toJSON().slice(0, 10)
 
 
     watchEffect(() => {

@@ -7,7 +7,6 @@
     </div>
 
     <div class="form-floating mb-3">
-      <!-- FIXME add required back to date inputs and set minimum date to current date -->
       <input type="date" class="form-control" id="start" placeholder="Start Date" name="start" required
         v-model="editable.start" :min="today" />
       <label for="start">Start Date</label>
