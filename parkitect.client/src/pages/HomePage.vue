@@ -26,7 +26,7 @@
         </h2>
       </div>
       <div class="col-md-4 d-flex jc my-4">
-        <div class="dropdown">
+        <div v-if="parks.length != 0" class="dropdown">
           <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Filter by region
           </button>
