@@ -1,8 +1,9 @@
 import { AppState } from "../AppState.js";
 import { Park } from "../models/Park.js";
 import { ThingToDo } from "../models/ThingToDo.js";
+import { Weather } from "../models/Weather.js";
 import { logger } from "../utils/Logger.js";
-import { npsApi } from "./AxiosService.js";
+import { npsApi, weatherApi } from "./AxiosService.js";
 
 let globalQuery = [];
 let globalRegion = [];
@@ -29,6 +30,13 @@ class ParksService {
     AppState.activePark = new Park(res.data.data[0]);
     // logger.log("getting park by park code from appState", AppState.activePark);
     // logger.log("active park name", AppState.activePark[0].name)
+  }
+
+  async getParkWeather(parkCoordinates) {
+    const res = await weatherApi.get(`weather?lat=${parkCoordinates.lat}&lon=${parkCoordinates.lon}`)
+    logger.log(res.data, '[DA WEATHER!!!]')
+    AppState.activeParkWeather = new Weather(res.data)
+    logger.log(AppState.activeParkWeather, '[HERES THE APPSTATE WEATHER]')
   }
 
   async searchPark(query) {

@@ -20,9 +20,15 @@
       <div class="col-12">
         <h1 class="trip-margin">My Trips</h1>
       </div>
-
-
     </div>
+
+    <div v-if="!parksArchived">
+      <button @click="showArchivedParks()" class="btn addBtn icon-button ms-5 my-3">Hide archived trips</button>
+    </div>
+    <div v-if="parksArchived">
+      <button @click="showArchivedParks()" class="btn addBtn icon-button ms-5 my-3">Show archived trips</button>
+    </div>
+
     <section class="my-5 row">
       <div class=" col-xl-3 col-md-6 col-lg-4 trip-sizing d-flex justify-content-center" v-for="t in tripGoers"
         :key="t.id">
@@ -38,7 +44,7 @@
     </section>
 
     <!-- SECTION Calendar -->
-    <section class="row justify-content-center">
+    <section class="row justify-content-center no-show-mobile">
       <div class="col-8 cal-size">
         <Calendar :trips="myTrips" />
       </div>
@@ -59,8 +65,11 @@
             <button @click="showYourParks()" class="btn addBtn icon-button ms-4 mt-3">Show all parks</button>
           </div>
         </div>
-        <div class="me-4 mt-3">
+        <div class="me-4 mt-3 no-show-mobile">
           <h5>You've visited {{ parkPassportCount }}/63 Parks! </h5>
+        </div>
+        <div class="me-4 mt-3 show-mobile">
+          <h5>{{ parkPassportCount }}/63 Parks!</h5>
         </div>
       </div>
 
@@ -145,9 +154,12 @@ export default {
       coverImages,
       icons,
       myTrips: computed(() => AppState.trips),
+      parksArchived: computed(() => AppState.parksArchived),
       parkPassportCount: computed(() => AppState.parkPassportCount),
       account: computed(() => AppState.account),
-      tripGoers: computed(() => AppState.tripGoers),
+      tripGoers: computed(() => {
+        return AppState.parksArchived ? AppState.tripGoers.filter(t => t.trip.isArchived == false) : AppState.tripGoers
+      }),
       parksVisited: computed(() => AppState.parksVisited),
       selectedImg: computed(() => {
         const randomIndex = Math.floor(Math.random() * coverImages.length)
@@ -163,7 +175,7 @@ export default {
       },
 
       displayYourParks(parkCode) {
-        const grayScale = document.querySelectorAll('.grayscale')
+        const grayScale = document.querySelectorAll('.noDisplay')
         AppState.parkPassportCount = (63 - grayScale.length)
         return AppState.account.parksVisited?.includes(parkCode) ? '' : 'noDisplay'
       },
@@ -202,6 +214,10 @@ export default {
         //     // setTimeout(function () { grayScale.forEach(g => g.classList.remove("no-display")) }, 0);
         //     AppState.parksVisited = true
         //   }
+      },
+
+      async showArchivedParks() {
+        AppState.parksArchived = !AppState.parksArchived
       }
     }
   },
@@ -319,6 +335,10 @@ export default {
     border-radius: 50%;
   }
 
+  .no-show-mobile {
+    display: none;
+  }
+
   .name-style {
     text-align: center;
     font-size: 1.5em;
@@ -388,6 +408,10 @@ export default {
     bottom: -12vh;
     left: 8vw;
     position: absolute;
+  }
+
+  .show-mobile {
+    display: none;
   }
 
   .trip-margin {

@@ -13,6 +13,7 @@ export const AppState = reactive({
   searchedParks: [],
   /** @type {import('./models/Park.js').Park|null} */
   activePark: null,
+  parksArchived: false,
   query: [],
   /** @type {import('./models/ThingToDo.js').ThingToDo[]} */
   thingsToDo: [],
@@ -40,5 +41,6 @@ export const AppState = reactive({
   searchPageChange: false,
   regionPageChange: false,
   clickedMyPassport: false,
-  locations: []
+  locations: [],
+  activeParkWeather: {},
 });
