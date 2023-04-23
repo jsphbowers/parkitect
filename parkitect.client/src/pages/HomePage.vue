@@ -25,9 +25,8 @@
       </div>
     </section>
 
-    <!-- SECTION park cards -->
     <section class="row justify-content-center px-md-5">
-      <div class="col-md-4 text-center my-4">
+      <div class="col-md-4 text-center my-4 order-md-1 order-3">
         <button
           class="btn selectable"
           type="button"
@@ -37,12 +36,12 @@
           Need help?
         </button>
       </div>
-      <div class="col-md-4 text-center my-4">
+      <div class="col-md-4 text-center my-4 order-md-2 order-2">
         <h2>
           {{ parks.length != 0 ? "Where do you want to go?" : "" }}
         </h2>
       </div>
-      <div class="col-md-4 d-flex jc my-4">
+      <div class="col-md-4 d-flex jc my-md-4 order-md-3 order-2">
         <div v-if="parks.length != 0" class="dropdown">
           <button
             class="btn dropdown-toggle"
@@ -143,7 +142,10 @@
           Back to all parks
         </button>
       </div>
+    </section>
 
+    <!-- SECTION park cards -->
+    <section class="row justify-content-center px-md-5">
       <div v-for="p in parks" :key="p.nativeId" class="col-md-4">
         <ParkCard :park="p" />
       </div>
@@ -210,21 +212,36 @@
     </template>
   </SmallModalVue>
 
-  <div data-bs-backdrop="static" data-bs-keyboard="false" class="modal fade" id="demoTrip" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div  class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Trip Creation Demo</h1>
-        <button type="button" class="btn-close" aria-label="Close" @click="closeModal()"></button>
-      </div>
-      <div class="modal-body">
+  <div
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    class="modal fade"
+    id="demoTrip"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Trip Creation Demo
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            @click="closeModal()"
+          ></button>
+        </div>
+        <div class="modal-body">
           <video controls id="myVideo" playsinline>
-            <source src="../assets/img/DemoTrip.mp4" type="video/mp4">
-        </video>
+            <source src="../assets/DemoTrip.mp4" type="video/mp4" />
+          </video>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -297,9 +314,8 @@ export default {
       total: computed(() => AppState.total),
 
       closeModal() {
-        document.getElementById('myVideo').pause()
-        Modal.getOrCreateInstance('#demoTrip').hide()
-
+        document.getElementById("myVideo").pause();
+        Modal.getOrCreateInstance("#demoTrip").hide();
       },
 
       async searchPark() {
@@ -355,7 +371,7 @@ export default {
   user-select: none;
 }
 
-#myVideo{
+#myVideo {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -455,5 +471,3 @@ export default {
   }
 }
 </style>
-
-
