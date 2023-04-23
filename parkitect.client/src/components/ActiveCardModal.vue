@@ -146,4 +146,12 @@ export default {
   object-fit: cover;
   object-position: center;
 }
+
+
+@media (max-width: 480px) {
+
+  .modalCardImg{
+    height: 35vh;
+  }
+}
 </style>

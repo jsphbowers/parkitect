@@ -3,10 +3,10 @@
     @click="setActiveActivity(activity?.nativeId)">
     <div class="card">
       <div class="row g-0">
-        <div class="col-md-6 image-fluid">
+        <div class="col-12  col-md-6 image-fluid">
           <img class="cardImg px-0 activityImgBorder " :src="activity?.images[0].url" alt="">
         </div>
-        <div class="col-md-6">
+        <div class="col-12 col-md-6">
           <div class="row h-100">
             <div class="col-11 d-flex justify-content-between flex-column">
               <div class="p-2">
@@ -121,10 +121,12 @@ export default {
   color: white;
 }
 
-@media screen and (max-width: 480px) {
+
+@media (max-width: 480px) {
   .card {
     --bs-card-border-width: 0px !important;
     border-top-left-radius: 5px;
+      height: auto;
   }
 }
 </style>
