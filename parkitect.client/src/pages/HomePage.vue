@@ -5,11 +5,21 @@
       <div class="col p-0 text-light text-center txt-shadow">
         <h1>Build your next National Park Journey!</h1>
         <form @submit.prevent="searchPark()" class="input-group mt-4">
-          <input v-model="editable" type="text" class="form-control" placeholder="Search by park or state"
-            minlength="2" />
+          <input
+            v-model="editable"
+            type="text"
+            class="form-control"
+            placeholder="Search by park or state"
+            minlength="2"
+          />
           <button type="submit" class="input-group-text btn">Search</button>
         </form>
-        <button v-if="account.id" class="btn btn-create selectable" data-bs-toggle="modal" data-bs-target="#tripModal">
+        <button
+          v-if="account.id"
+          class="btn btn-create selectable"
+          data-bs-toggle="modal"
+          data-bs-target="#tripModal"
+        >
           Create a Trip
         </button>
       </div>
@@ -18,9 +28,14 @@
     <!-- SECTION park cards -->
     <section class="row justify-content-center px-md-5">
       <div class="col-md-4 text-center my-4">
-        <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Need help?
-          </button>
+        <button
+          class="btn selectable"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#demoTrip"
+        >
+          Need help?
+        </button>
       </div>
       <div class="col-md-4 text-center my-4">
         <h2>
@@ -29,33 +44,98 @@
       </div>
       <div class="col-md-4 d-flex jc my-4">
         <div v-if="parks.length != 0" class="dropdown">
-          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <button
+            class="btn dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             Filter by region
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item"
-                @click="changeByRegion(['WA,OR,ID,AK,CA,AZ,NV,MT,WY,UT,CO,ND,SD,MN,NE,KS,MO,IA,WI,IL,OH,MI,TX,NM,OK,AR,LA,PA,WV,VA,MD,NJ,DE,MS,TN,KY,GA,SC,NC,FL,HI,VI,AS,NY,VT,NH,ME,RI,CT,MA'])"
-                href="#">All Parks</a>
+            <li>
+              <a
+                class="dropdown-item"
+                @click="
+                  changeByRegion([
+                    'WA,OR,ID,AK,CA,AZ,NV,MT,WY,UT,CO,ND,SD,MN,NE,KS,MO,IA,WI,IL,OH,MI,TX,NM,OK,AR,LA,PA,WV,VA,MD,NJ,DE,MS,TN,KY,GA,SC,NC,FL,HI,VI,AS,NY,VT,NH,ME,RI,CT,MA',
+                  ])
+                "
+                href="#"
+                >All Parks</a
+              >
             </li>
-            <li><a class="dropdown-item" @click="changeByRegion(['NY,VT,NH,ME,RI,CT,MA'])" href="#">North Atlantic
-                Region</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['PA,WV,VA,MD,NJ,DE'])" href="#">Mid-Atlantic Region</a>
+            <li>
+              <a
+                class="dropdown-item"
+                @click="changeByRegion(['NY,VT,NH,ME,RI,CT,MA'])"
+                href="#"
+                >North Atlantic Region</a
+              >
             </li>
-            <li><a class="dropdown-item" @click="changeByRegion(['MS,TN,KY,GA,SC,NC,FL,VI'])" href="#">Southeast
-                Region</a>
+            <li>
+              <a
+                class="dropdown-item"
+                @click="changeByRegion(['PA,WV,VA,MD,NJ,DE'])"
+                href="#"
+                >Mid-Atlantic Region</a
+              >
             </li>
-            <li><a class="dropdown-item" @click="changeByRegion(['MN,NE,KS,MO,IA,WI,IL,OH,MI'])" href="#">Midwest
-                Region</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['TX,NM,OK,AR,LA'])" href="#">Southwest Region</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['MT,WY,UT,CO,ND,SD'])" href="#">Rocky Mountain Region</a>
+            <li>
+              <a
+                class="dropdown-item"
+                @click="changeByRegion(['MS,TN,KY,GA,SC,NC,FL,VI'])"
+                href="#"
+                >Southeast Region</a
+              >
             </li>
-            <li><a class="dropdown-item" @click="changeByRegion(['CA,AZ,NV,HI,AS'])" href="#">Western Region</a></li>
-            <li><a class="dropdown-item" @click="changeByRegion(['WA,OR,ID,AK'])" href="#">Pacific Northwest & Alaska</a>
+            <li>
+              <a
+                class="dropdown-item"
+                @click="changeByRegion(['MN,NE,KS,MO,IA,WI,IL,OH,MI'])"
+                href="#"
+                >Midwest Region</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                @click="changeByRegion(['TX,NM,OK,AR,LA'])"
+                href="#"
+                >Southwest Region</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                @click="changeByRegion(['MT,WY,UT,CO,ND,SD'])"
+                href="#"
+                >Rocky Mountain Region</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                @click="changeByRegion(['CA,AZ,NV,HI,AS'])"
+                href="#"
+                >Western Region</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                @click="changeByRegion(['WA,OR,ID,AK'])"
+                href="#"
+                >Pacific Northwest & Alaska</a
+              >
             </li>
           </ul>
         </div>
       </div>
-      <div v-if="parks.length == 0 && !loading.parks" class="text-center no-results-guy">
+      <div
+        v-if="parks.length == 0 && !loading.parks"
+        class="text-center no-results-guy"
+      >
         <h2>We are sorry, but there are no search results</h2>
         <h1>¯\_(ツ)_/¯</h1>
         <br />
@@ -73,12 +153,20 @@
 
     <section v-if="parks.length != 0" class="row justify-content-between pt-4">
       <div class="col-md-3 col-6">
-        <button class="btn btn-underline selectable" :disabled="currentPage == 0" @click="changePage('decrease')">
+        <button
+          class="btn btn-underline selectable"
+          :disabled="currentPage == 0"
+          @click="changePage('decrease')"
+        >
           Previous Page
         </button>
       </div>
       <div class="col-md-3 col-6 text-end">
-        <button class="btn btn-underline selectable" :disabled="parks.length === 8" @click="changePage('increase')">
+        <button
+          class="btn btn-underline selectable"
+          :disabled="parks.length === 8"
+          @click="changePage('increase')"
+        >
           Next Page
         </button>
       </div>
@@ -88,22 +176,26 @@
     <section class="row mt-5">
       <div class="col-12 px-md-5 bg-color">
         <router-link :to="{ name: 'About' }">
-          <h2 class="text-center text-dark" title="Click here to see more"><span class="selectable">About Us</span></h2>
+          <h2 class="text-center text-dark" title="Click here to see more">
+            <span class="selectable">About Us</span>
+          </h2>
         </router-link>
         <p class="p-2">
-          The Park Rangers: a group dedicated to hard work, powerful insights and a love for the outdoors and adventure.
-          The great outdoors and the incredible national parks inspired us to create an application where users can go to
-          plan out their next epic journey.
-          <br><br>
-          Creating trips and adding parks and activities to do was an idea that brought us
-          back to our childhoods, loading up in the car with the family and heading out to these incredible destinations.
-          We wanted to create a place where you can take in the beautiful scenery and feel the inspiration we felt to
-          start a new journey.
-          <br><br>
+          The Park Rangers: a group dedicated to hard work, powerful insights
+          and a love for the outdoors and adventure. The great outdoors and the
+          incredible national parks inspired us to create an application where
+          users can go to plan out their next epic journey.
+          <br /><br />
+          Creating trips and adding parks and activities to do was an idea that
+          brought us back to our childhoods, loading up in the car with the
+          family and heading out to these incredible destinations. We wanted to
+          create a place where you can take in the beautiful scenery and feel
+          the inspiration we felt to start a new journey.
+          <br /><br />
           <router-link :to="{ name: 'About' }">
-            Learn more about this incredible team and our passion for web development.
+            Learn more about this incredible team and our passion for web
+            development.
           </router-link>
-
         </p>
       </div>
     </section>
@@ -117,6 +209,22 @@
       <CreateTripForm />
     </template>
   </SmallModalVue>
+
+  <div data-bs-backdrop="static" data-bs-keyboard="false" class="modal fade" id="demoTrip" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div  class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Trip Creation Demo</h1>
+        <button type="button" class="btn-close" aria-label="Close" @click="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+          <video controls id="myVideo" playsinline>
+            <source src="../assets/img/DemoTrip.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
@@ -129,6 +237,7 @@ import { AppState } from "../AppState.js";
 import { useRoute } from "vue-router";
 import SmallModalVue from "../components/SmallModal.vue";
 import CreateTripForm from "../components/CreateTripForm.vue";
+import { Modal } from "bootstrap";
 
 export default {
   setup() {
@@ -147,9 +256,9 @@ export default {
     async function getParks() {
       try {
         // logger.log('getting all parks')
-        AppState.allPageChange = true
-        AppState.searchPageChange = false
-        AppState.regionPageChange = false
+        AppState.allPageChange = true;
+        AppState.searchPageChange = false;
+        AppState.regionPageChange = false;
         await parksService.getParks();
       } catch (error) {
         Pop.error(error);
@@ -170,9 +279,8 @@ export default {
       // getParkByParkCode();
       window.scrollTo(0, 0);
       onBeforeUnmount(() => {
-        AppState.parks = []
-      })
-
+        AppState.parks = [];
+      });
     });
     return {
       getParks,
@@ -188,11 +296,17 @@ export default {
       currentPage: computed(() => AppState.currentPage),
       total: computed(() => AppState.total),
 
+      closeModal() {
+        document.getElementById('myVideo').pause()
+        Modal.getOrCreateInstance('#demoTrip').hide()
+
+      },
+
       async searchPark() {
         try {
-          AppState.allPageChange = false
-          AppState.searchPageChange = true
-          AppState.regionPageChange = false
+          AppState.allPageChange = false;
+          AppState.searchPageChange = true;
+          AppState.regionPageChange = false;
           const query = editable.value;
           // logger.log(query);
           await parksService.searchPark(query);
@@ -218,14 +332,14 @@ export default {
 
       async changeByRegion(region) {
         try {
-          AppState.allPageChange = false
-          AppState.searchPageChange = false
-          AppState.regionPageChange = true
-          await parksService.changeByRegion(region)
+          AppState.allPageChange = false;
+          AppState.searchPageChange = false;
+          AppState.regionPageChange = true;
+          await parksService.changeByRegion(region);
         } catch (error) {
-          logger.error(error)
+          logger.error(error);
         }
-      }
+      },
     };
   },
   components: { ParkCard, SmallModalVue, CreateTripForm },
@@ -239,6 +353,12 @@ export default {
   place-content: center;
   text-align: center;
   user-select: none;
+}
+
+#myVideo{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .search-bg {
@@ -335,3 +455,5 @@ export default {
   }
 }
 </style>
+
+

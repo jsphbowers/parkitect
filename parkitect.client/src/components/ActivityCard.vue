@@ -3,8 +3,8 @@
     @click="setActiveActivity(activity?.nativeId)">
     <div class="card">
       <div class="row g-0">
-        <div class="col-md-6">
-          <img class="cardImg px-0 activityImgBorder" :src="activity?.images[0].url" alt="">
+        <div class="col-md-6 image-fluid">
+          <img class="cardImg px-0 activityImgBorder " :src="activity?.images[0].url" alt="">
         </div>
         <div class="col-md-6">
           <div class="row h-100">
@@ -62,7 +62,7 @@ export default {
   setup() {
     return {
       newDesc(text) {
-        let textLimit = 280
+        let textLimit = 230
         if (text.length > textLimit) {
           text = text.substring(0, textLimit) + "\u2026"
         }
@@ -87,17 +87,21 @@ export default {
 <style lang="scss" scoped>
 .cardImg {
   width: 100%;
-  height: 33vh;
+  height: 100%;
   object-fit: cover;
   object-position: center;
 }
 
 .card {
+  width: 100%;
+  height: 300px;
   --bs-card-border-width: 0px !important;
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
 }
-
+.image-fluid {
+  height: 300px; 
+}
 
 .activityImgBorder {
   border-bottom-left-radius: 5px;
