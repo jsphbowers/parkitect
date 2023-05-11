@@ -16,7 +16,7 @@
         <h3 class="ms-2 mt-2 trip-text text-center">{{ tripGoer.trip.name }}</h3>
       </div>
       <img class="archivedStamp"
-        src="src\assets\img\archives-text-on-red-round-grungy-texture-stamp-2F1ER4R-removebg-preview.png" alt="Archived">
+        src="public\img\archives-text-on-red-round-grungy-texture-stamp-2F1ER4R-removebg-preview.png" alt="Archived">
       <img class="creatorPic elevation-2" :src="tripGoer?.trip.tripCreator?.picture"
         :alt="tripGoer?.trip.tripCreator?.name">
     </section>
