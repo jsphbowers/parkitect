@@ -5,21 +5,11 @@
       <div class="col p-0 text-light text-center txt-shadow">
         <h1>Build your next National Park Journey!</h1>
         <form @submit.prevent="searchPark()" class="input-group mt-4">
-          <input
-            v-model="editable"
-            type="text"
-            class="form-control"
-            placeholder="Search by park or state"
-            minlength="2"
-          />
+          <input v-model="editable" type="text" class="form-control" placeholder="Search by park or state"
+            minlength="2" />
           <button type="submit" class="input-group-text btn">Search</button>
         </form>
-        <button
-          v-if="account.id"
-          class="btn btn-create selectable"
-          data-bs-toggle="modal"
-          data-bs-target="#tripModal"
-        >
+        <button v-if="account.id" class="btn btn-create selectable" data-bs-toggle="modal" data-bs-target="#tripModal">
           Create a Trip
         </button>
       </div>
@@ -27,12 +17,7 @@
 
     <section class="row justify-content-center px-md-5">
       <div class="col-md-4 text-center my-4 order-md-1 order-3">
-        <button
-          class="btn selectable"
-          type="button"
-          data-bs-toggle="modal"
-          data-bs-target="#demoTrip"
-        >
+        <button class="btn selectable" type="button" data-bs-toggle="modal" data-bs-target="#demoTrip">
           Need help?
         </button>
       </div>
@@ -43,98 +28,46 @@
       </div>
       <div class="col-md-4 d-flex jc my-md-4 order-md-3 order-2">
         <div v-if="parks.length != 0" class="dropdown">
-          <button
-            class="btn dropdown-toggle"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
+          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Filter by region
           </button>
           <ul class="dropdown-menu">
             <li>
-              <a
-                class="dropdown-item"
-                @click="
-                  changeByRegion([
-                    'WA,OR,ID,AK,CA,AZ,NV,MT,WY,UT,CO,ND,SD,MN,NE,KS,MO,IA,WI,IL,OH,MI,TX,NM,OK,AR,LA,PA,WV,VA,MD,NJ,DE,MS,TN,KY,GA,SC,NC,FL,HI,VI,AS,NY,VT,NH,ME,RI,CT,MA',
-                  ])
-                "
-                href="#"
-                >All Parks</a
-              >
+              <a class="dropdown-item" @click="
+                changeByRegion([
+                  'WA,OR,ID,AK,CA,AZ,NV,MT,WY,UT,CO,ND,SD,MN,NE,KS,MO,IA,WI,IL,OH,MI,TX,NM,OK,AR,LA,PA,WV,VA,MD,NJ,DE,MS,TN,KY,GA,SC,NC,FL,HI,VI,AS,NY,VT,NH,ME,RI,CT,MA',
+                ])
+                " href="#">All Parks</a>
             </li>
             <li>
-              <a
-                class="dropdown-item"
-                @click="changeByRegion(['NY,VT,NH,ME,RI,CT,MA'])"
-                href="#"
-                >North Atlantic Region</a
-              >
+              <a class="dropdown-item" @click="changeByRegion(['NY,VT,NH,ME,RI,CT,MA'])" href="#">North Atlantic
+                Region</a>
             </li>
             <li>
-              <a
-                class="dropdown-item"
-                @click="changeByRegion(['PA,WV,VA,MD,NJ,DE'])"
-                href="#"
-                >Mid-Atlantic Region</a
-              >
+              <a class="dropdown-item" @click="changeByRegion(['PA,WV,VA,MD,NJ,DE'])" href="#">Mid-Atlantic Region</a>
             </li>
             <li>
-              <a
-                class="dropdown-item"
-                @click="changeByRegion(['MS,TN,KY,GA,SC,NC,FL,VI'])"
-                href="#"
-                >Southeast Region</a
-              >
+              <a class="dropdown-item" @click="changeByRegion(['MS,TN,KY,GA,SC,NC,FL,VI'])" href="#">Southeast Region</a>
             </li>
             <li>
-              <a
-                class="dropdown-item"
-                @click="changeByRegion(['MN,NE,KS,MO,IA,WI,IL,OH,MI'])"
-                href="#"
-                >Midwest Region</a
-              >
+              <a class="dropdown-item" @click="changeByRegion(['MN,NE,KS,MO,IA,WI,IL,OH,MI'])" href="#">Midwest Region</a>
             </li>
             <li>
-              <a
-                class="dropdown-item"
-                @click="changeByRegion(['TX,NM,OK,AR,LA'])"
-                href="#"
-                >Southwest Region</a
-              >
+              <a class="dropdown-item" @click="changeByRegion(['TX,NM,OK,AR,LA'])" href="#">Southwest Region</a>
             </li>
             <li>
-              <a
-                class="dropdown-item"
-                @click="changeByRegion(['MT,WY,UT,CO,ND,SD'])"
-                href="#"
-                >Rocky Mountain Region</a
-              >
+              <a class="dropdown-item" @click="changeByRegion(['MT,WY,UT,CO,ND,SD'])" href="#">Rocky Mountain Region</a>
             </li>
             <li>
-              <a
-                class="dropdown-item"
-                @click="changeByRegion(['CA,AZ,NV,HI,AS'])"
-                href="#"
-                >Western Region</a
-              >
+              <a class="dropdown-item" @click="changeByRegion(['CA,AZ,NV,HI,AS'])" href="#">Western Region</a>
             </li>
             <li>
-              <a
-                class="dropdown-item"
-                @click="changeByRegion(['WA,OR,ID,AK'])"
-                href="#"
-                >Pacific Northwest & Alaska</a
-              >
+              <a class="dropdown-item" @click="changeByRegion(['WA,OR,ID,AK'])" href="#">Pacific Northwest & Alaska</a>
             </li>
           </ul>
         </div>
       </div>
-      <div
-        v-if="parks.length == 0 && !loading.parks"
-        class="text-center no-results-guy"
-      >
+      <div v-if="parks.length == 0 && !loading.parks" class="text-center no-results-guy">
         <h2>We are sorry, but there are no search results</h2>
         <h1>¯\_(ツ)_/¯</h1>
         <br />
@@ -155,20 +88,12 @@
 
     <section v-if="parks.length != 0" class="row justify-content-between pt-4">
       <div class="col-md-3 col-6">
-        <button
-          class="btn btn-underline selectable"
-          :disabled="currentPage == 0"
-          @click="changePage('decrease')"
-        >
+        <button class="btn btn-underline selectable" :disabled="currentPage == 0" @click="changePage('decrease')">
           Previous Page
         </button>
       </div>
       <div class="col-md-3 col-6 text-end">
-        <button
-          class="btn btn-underline selectable"
-          :disabled="parks.length === 8"
-          @click="changePage('increase')"
-        >
+        <button class="btn btn-underline selectable" :disabled="parks.length === 8" @click="changePage('increase')">
           Next Page
         </button>
       </div>
@@ -212,27 +137,15 @@
     </template>
   </SmallModalVue>
 
-  <div
-    data-bs-backdrop="static"
-    data-bs-keyboard="false"
-    class="modal fade"
-    id="demoTrip"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+  <div data-bs-backdrop="static" data-bs-keyboard="false" class="modal fade" id="demoTrip" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">
             Trip Creation Demo
           </h1>
-          <button
-            type="button"
-            class="btn-close"
-            aria-label="Close"
-            @click="closeModal()"
-          ></button>
+          <button type="button" class="btn-close" aria-label="Close" @click="closeModal()"></button>
         </div>
         <div class="modal-body">
           <video controls id="myVideo" playsinline>
@@ -262,13 +175,13 @@ export default {
     const editable = ref("");
 
     const coverImages = [
-      "src/assets/img/HomePagePics/picture1.jpg",
-      "src/assets/img/HomePagePics/picture2.jpg",
-      "src/assets/img/HomePagePics/picture3.jpg",
-      "src/assets/img/HomePagePics/picture4.jpg",
-      "src/assets/img/HomePagePics/picture5.jpg",
-      "src/assets/img/HomePagePics/picture6.jpg",
-      "src/assets/img/HomePagePics/picture7.jpg",
+      "public/img/HomePagePics/picture1.jpg",
+      "public/img/HomePagePics/picture2.jpg",
+      "public/img/HomePagePics/picture3.jpg",
+      "public/img/HomePagePics/picture4.jpg",
+      "public/img/HomePagePics/picture5.jpg",
+      "public/img/HomePagePics/picture6.jpg",
+      "public/img/HomePagePics/picture7.jpg",
     ];
     async function getParks() {
       try {

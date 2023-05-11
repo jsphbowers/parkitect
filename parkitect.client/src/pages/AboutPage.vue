@@ -13,16 +13,15 @@
           </div> -->
         <div class="carousel-inner">
           <div class="carousel-item active text-center">
-            <img src="src\assets\img\HikingPhoto.JPG" class="carousel-img d-block w-100 our-picture mb-3 p-0" alt="...">
+            <img src="public\img\HikingPhoto.JPG" class="carousel-img d-block w-100 our-picture mb-3 p-0" alt="...">
 
           </div>
           <div class="carousel-item">
-            <img src="src\assets\img\JumpingPhoto.JPG" class="carousel-img d-block w-100 our-picture-jump mb-3 p-0"
-              alt="...">
+            <img src="public\img\JumpingPhoto.JPG" class="carousel-img d-block w-100 our-picture-jump mb-3 p-0" alt="...">
 
           </div>
           <div class="carousel-item">
-            <img src="src\assets\img\StandingPhoto.JPG" class="carousel-img d-block w-100 our-picture mb-3 p-0" alt="...">
+            <img src="public\img\StandingPhoto.JPG" class="carousel-img d-block w-100 our-picture mb-3 p-0" alt="...">
           </div>
         </div>
 
@@ -63,7 +62,7 @@
             <div>
               <a href="https://www.linkedin.com/in/elizabeth-k-6385b1183/"><i title="Linkedin"
                   class="mdi mdi-linkedin fs-2 text-dark"></i></a>
-              <a href="https://github.com/ElizabethKeyes"><i title='GitHub'  class="mdi mdi-github fs-2 text-dark"></i></a>
+              <a href="https://github.com/ElizabethKeyes"><i title='GitHub' class="mdi mdi-github fs-2 text-dark"></i></a>
             </div>
 
           </div>
@@ -81,7 +80,7 @@
             <div>
               <a href="https://www.linkedin.com/in/alex-quan-34944a105/"><i title="Linkedin"
                   class="mdi mdi-linkedin fs-2 text-dark"></i></a>
-              <a href="https://github.com/Alexmquan"><i title='GitHub'  class="mdi mdi-github fs-2 text-dark"></i></a>
+              <a href="https://github.com/Alexmquan"><i title='GitHub' class="mdi mdi-github fs-2 text-dark"></i></a>
             </div>
 
           </div>
@@ -99,7 +98,8 @@
             <div>
               <a href="https://www.linkedin.com/in/anastasiia-shaynyuk/"><i title="Linkedin"
                   class="mdi mdi-linkedin fs-2 text-dark"></i></a>
-              <a href="https://github.com/AnastasiiaShaynyuk"><i  title='GitHub'  class="mdi mdi-github fs-2 text-dark"></i></a>
+              <a href="https://github.com/AnastasiiaShaynyuk"><i title='GitHub'
+                  class="mdi mdi-github fs-2 text-dark"></i></a>
             </div>
 
           </div>
