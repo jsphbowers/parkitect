@@ -175,13 +175,13 @@ export default {
     const editable = ref("");
 
     const coverImages = [
-      "public/img/HomePagePics/picture1.jpg",
-      "public/img/HomePagePics/picture2.jpg",
-      "public/img/HomePagePics/picture3.jpg",
-      "public/img/HomePagePics/picture4.jpg",
-      "public/img/HomePagePics/picture5.jpg",
-      "public/img/HomePagePics/picture6.jpg",
-      "public/img/HomePagePics/picture7.jpg",
+      "img/HomePagePics/picture1.jpg",
+      "img/HomePagePics/picture2.jpg",
+      "img/HomePagePics/picture3.jpg",
+      "img/HomePagePics/picture4.jpg",
+      "img/HomePagePics/picture5.jpg",
+      "img/HomePagePics/picture6.jpg",
+      "img/HomePagePics/picture7.jpg",
     ];
     async function getParks() {
       try {

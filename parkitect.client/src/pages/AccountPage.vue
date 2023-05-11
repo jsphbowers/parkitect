@@ -124,7 +124,7 @@ import Calendar from "../components/Calendar.vue";
 
 export default {
   setup() {
-    const coverImages = ['public/img/HomePagePics/picture1.jpg', 'public/img/HomePagePics/picture2.jpg', 'public/img/HomePagePics/picture3.jpg', 'public/img/HomePagePics/picture4.jpg', 'public/img/HomePagePics/picture5.jpg', 'public/img/HomePagePics/picture6.jpg', 'public/img/HomePagePics/picture7.jpg']
+    const coverImages = ['img/HomePagePics/picture1.jpg', 'img/HomePagePics/picture2.jpg', 'img/HomePagePics/picture3.jpg', 'img/HomePagePics/picture4.jpg', 'img/HomePagePics/picture5.jpg', 'img/HomePagePics/picture6.jpg', 'img/HomePagePics/picture7.jpg']
 
     const icons = ref([
       "acad", "arch", "badl", "bibe", "bisc", "blca", "brca", "cany", "care", "cave", "chis", "cong", "crla", "cuva", "dena", "deva", "drto", "ever", "gaar", "glac", "glba", "grba", "grca", "grsa", "grsm", "grte", "gumo", "hale", "havo", "hosp", "indu", "isro", "jeff", "jotr", "katm", "kefj", "kica", "kova", "lacl", "lavo", "maca", "meve", "mora", "neri", "noca", "npsa", "olym", "pefo", "pinn", "redw", "romo", "sagu", "seqa", "shen", "thro", "viis", "voya", "whsa", "wica", "wrst", "yell", "yose", "zion",
