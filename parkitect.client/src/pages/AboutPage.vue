@@ -13,15 +13,15 @@
           </div> -->
         <div class="carousel-inner">
           <div class="carousel-item active text-center">
-            <img src="public\img\HikingPhoto.JPG" class="carousel-img d-block w-100 our-picture mb-3 p-0" alt="...">
+            <img src="/img/HikingPhoto.jpg" class="carousel-img d-block w-100 our-picture mb-3 p-0" alt="...">
 
           </div>
           <div class="carousel-item">
-            <img src="public\img\JumpingPhoto.JPG" class="carousel-img d-block w-100 our-picture-jump mb-3 p-0" alt="...">
+            <img src="/img/JumpingPhoto.jpg" class="carousel-img d-block w-100 our-picture-jump mb-3 p-0" alt="...">
 
           </div>
           <div class="carousel-item">
-            <img src="public\img\StandingPhoto.JPG" class="carousel-img d-block w-100 our-picture mb-3 p-0" alt="...">
+            <img src="/img/StandingPhoto.jpg" class="carousel-img d-block w-100 our-picture mb-3 p-0" alt="...">
           </div>
         </div>
 
