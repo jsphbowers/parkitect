@@ -18,7 +18,7 @@
     </div>
 
     <div class="form-floating mb-3">
-      <input type="url" class="form-control" id="mgUrl" placeholder="ImgUrl" name="imgUrl" v-model="editable.coverImg"
+      <input type="url" class="form-control" id="imgUrl" placeholder="ImgUrl" name="imgUrl" v-model="editable.coverImg"
         @input="previewImage" />
       <label for="imgUrl">Trip Cover Photo</label>
       <br />
