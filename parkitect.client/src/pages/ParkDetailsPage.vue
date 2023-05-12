@@ -142,7 +142,7 @@
     </section>
     <!-- SECTION footer -->
     <section class="temp row justify-content-center">
-      <div class="col-md-6 px-0 col-lg-4" v-for="a in activities" :key="a.nativeId">
+      <div class="col-md-6 px-0" v-for="a in activities" :key="a.nativeId">
         <ActivityCard :activity="a" />
       </div>
     </section>
