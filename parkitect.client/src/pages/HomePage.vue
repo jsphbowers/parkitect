@@ -148,9 +148,7 @@
           <button type="button" class="btn-close" aria-label="Close" @click="closeModal()"></button>
         </div>
         <div class="modal-body">
-          <video controls id="myVideo" playsinline>
-            <source src="../assets/DemoTrip.mp4" type="video/mp4" />
-          </video>
+            <iframe id="myVideo" height="650" src="https://www.youtube.com/embed/SLRFK9hy-1E" ></iframe>
         </div>
       </div>
     </div>
@@ -286,7 +284,7 @@ export default {
 
 #myVideo {
   width: 100%;
-  height: 100%;
+  // height: 100%;
   object-fit: cover;
 }
 
