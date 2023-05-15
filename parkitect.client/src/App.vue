@@ -33,7 +33,7 @@ export default {
 }
 main {
   background-color: #F1F1F1;
-  padding-top: 4em;
+  padding-top: 3em;
 }
 
 

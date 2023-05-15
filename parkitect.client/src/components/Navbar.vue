@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
           <div class="d-flex">
-            <img alt="logo" src="../assets/img/Logo.png" height="55" />
+            <img class="logo" alt="logo" src="../assets/img/Logo.png" height="55" />
           </div>
         </router-link>
         <button class="btn selectable text-dark text-uppercase my-2 my-lg-0" @click="login" v-if="!user.isAuthenticated">
@@ -227,6 +227,10 @@ a:hover {
   .offcanvas-body img {
     height: 5em;
     width: 5em;
+  }
+
+  .logo {
+    height: 50px;
   }
 }
 </style>
