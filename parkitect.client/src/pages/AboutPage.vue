@@ -53,7 +53,7 @@
         <div class="row py-3 justify-content-center elevation-2 m-2">
           <div class="col-md-2 col-4">
             <img class="avatar rounded-circle"
-              src="https://media.licdn.com/dms/image/C5603AQGrQXpuC7G5IQ/profile-displayphoto-shrink_800_800/0/1662666178780?e=1687392000&v=beta&t=J_XzI2O8eZutBv6NPQeDsWfQB4AfJKgIUxK9Cm1p8SE"
+              src="https://media.licdn.com/dms/image/D5603AQFTZMtT7hSbCA/profile-displayphoto-shrink_400_400/0/1682740481970?e=1689206400&v=beta&t=B8iX8N7kAVbwJ_v5kRf51bPl5O_o81Gt-qDzDgMAWQ0"
               alt="">
           </div>
           <div class="col-6">
@@ -110,7 +110,7 @@
         <div class="row py-3 justify-content-center elevation-2 m-2">
           <div class="col-md-2 col-4">
             <img class="avatar rounded-circle"
-              src="https://media.licdn.com/dms/image/C5603AQE0GEM1LR-njw/profile-displayphoto-shrink_800_800/0/1588621647751?e=1687392000&v=beta&t=RZOQAY_D4wNE3l-mt5yKEiGwQVnsFQ6J2M04cx2SHI8"
+              src="https://media.licdn.com/dms/image/D5603AQHv-K2XWwpb-g/profile-displayphoto-shrink_400_400/0/1683824149732?e=1689206400&v=beta&t=6xGGH90YluecNLE4HRysxay-XjZV3J_OsY8H-i7vHgw"
               alt="Joseph Bowers">
           </div>
           <div class="col-6">

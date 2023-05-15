@@ -148,7 +148,7 @@
           <button type="button" class="btn-close" aria-label="Close" @click="closeModal()"></button>
         </div>
         <div class="modal-body">
-            <iframe id="myVideo" height="650" src="https://www.youtube.com/embed/SLRFK9hy-1E" ></iframe>
+          <iframe id="myVideo" height="650" src="https://www.youtube.com/embed/SLRFK9hy-1E"></iframe>
         </div>
       </div>
     </div>
@@ -173,13 +173,13 @@ export default {
     const editable = ref("");
 
     const coverImages = [
-      "img/HomePagePics/picture1.jpg",
-      "img/HomePagePics/picture2.jpg",
-      "img/HomePagePics/picture3.jpg",
-      "img/HomePagePics/picture4.jpg",
-      "img/HomePagePics/picture5.jpg",
-      "img/HomePagePics/picture6.jpg",
-      "img/HomePagePics/picture7.jpg",
+      "/img/HomePagePics/picture1.jpg",
+      "/img/HomePagePics/picture2.jpg",
+      "/img/HomePagePics/picture3.jpg",
+      "/img/HomePagePics/picture4.jpg",
+      "/img/HomePagePics/picture5.jpg",
+      "/img/HomePagePics/picture6.jpg",
+      "/img/HomePagePics/picture7.jpg",
     ];
     async function getParks() {
       try {
