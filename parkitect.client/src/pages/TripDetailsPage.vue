@@ -315,6 +315,14 @@ export default {
   padding: 1vh;
 }
 
+.archiveBanner {
+  background-color: #ff4646;
+  height: 4vh;
+  font-size: larger;
+  font-weight: bold;
+  padding: 4vh;
+}
+
 .archiveBtn {
   background-image: linear-gradient(rgb(224, 116, 97) 0%, #cf0606 100%);
   border: 0;
@@ -383,7 +391,7 @@ export default {
   background-color: rgb(255, 87, 87);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 450px) {
   .map {
     width: 100%;
     margin-bottom: .5em;
@@ -407,7 +415,7 @@ export default {
   height: 4vh;
   font-size: larger;
   font-weight: bold;
-  padding-top: 1vh;
+  padding: 0vh;
 }
 
 .archivedProfile-pic {
