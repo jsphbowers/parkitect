@@ -456,6 +456,10 @@ export default {
   .search-bg {
     min-height: 50vh;
   }
+
+  iframe {
+    height: 30vh !important;
+  }
 }
 
 .jc {

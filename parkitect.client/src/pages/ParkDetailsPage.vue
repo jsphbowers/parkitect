@@ -224,7 +224,7 @@
       <h5>{{ park.name }}</h5>
     </template>
     <template #body>
-      <img :src="mapURL" alt="a map showing the park location">
+      <img class="img-fluid" :src="mapURL" alt="a map showing the park location">
     </template>
   </SmallModal>
 </template>
