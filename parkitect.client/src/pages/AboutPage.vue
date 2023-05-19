@@ -60,7 +60,7 @@
             <h5 class="m-0">Elizabeth Keyes</h5>
 
             <div>
-              <a href="https://www.linkedin.com/in/elizabeth-k-6385b1183/"><i title="Linkedin"
+              <a href="https://www.linkedin.com/in/elizabethskeyes/"><i title="Linkedin"
                   class="mdi mdi-linkedin fs-2 text-dark"></i></a>
               <a href="https://github.com/ElizabethKeyes"><i title='GitHub' class="mdi mdi-github fs-2 text-dark"></i></a>
             </div>
@@ -90,7 +90,7 @@
         <div class="row py-3 justify-content-center elevation-2 m-2">
           <div class="col-md-2 col-4">
             <img class="avatar rounded-circle"
-              src="https://media.licdn.com/dms/image/D4D03AQFqZ_TvuQ9dqg/profile-displayphoto-shrink_800_800/0/1665601597588?e=1687392000&v=beta&t=vatoPg_XD08ZAIseK1IRAIUFk9_1d5p_fG0dDgFTbm8"
+              src="https://media.licdn.com/dms/image/D5603AQFe5OVfFyPgKA/profile-displayphoto-shrink_800_800/0/1684377093699?e=1689811200&v=beta&t=2QHXAdDxKphjgHURpEltfV4RnFkjx1h96DdZB0J9EfA"
               alt="Anastasiia Shaynyuk">
           </div>
           <div class="col-6">

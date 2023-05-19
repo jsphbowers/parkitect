@@ -62,7 +62,7 @@ export default {
   setup() {
     return {
       newDesc(text) {
-        let textLimit = 230
+        let textLimit = 180
         if (text.length > textLimit) {
           text = text.substring(0, textLimit) + "\u2026"
         }
