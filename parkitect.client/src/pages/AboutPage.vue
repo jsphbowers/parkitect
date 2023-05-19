@@ -78,7 +78,7 @@
           <div class="col-6">
             <h5 class="m-0">Alex Quan</h5>
             <div>
-              <a href="https://www.linkedin.com/in/alex-quan-34944a105/"><i title="Linkedin"
+              <a href="https://www.linkedin.com/in/alexmquan/"><i title="Linkedin"
                   class="mdi mdi-linkedin fs-2 text-dark"></i></a>
               <a href="https://github.com/Alexmquan"><i title='GitHub' class="mdi mdi-github fs-2 text-dark"></i></a>
             </div>
@@ -116,7 +116,7 @@
           <div class="col-6">
             <h5 class="m-0">Joseph Bowers</h5>
             <div>
-              <a href="https://www.linkedin.com/in/joseph-bowers-3a3aa05a/"><i title="Linkedin"
+              <a href="https://www.linkedin.com/in/jjhbowers/"><i title="Linkedin"
                   class="mdi mdi-linkedin fs-2 text-dark"></i></a>
               <a href="https://github.com/jsphbowers"><i title='GitHub' class="mdi mdi-github fs-2 text-dark"></i></a>
             </div>
